@@ -8,7 +8,7 @@ export default authMiddleware({
 	publicRoutes: ["/"],
 
 	// An array of routes to be ignored by the authentication middleware.
-	ignoredRoutes: ["/"],
+	ignoredRoutes: [],
 });
 
 export const config = {

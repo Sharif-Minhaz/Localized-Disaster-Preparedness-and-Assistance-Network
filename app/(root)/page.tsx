@@ -1,3 +1,10 @@
+import { Navbar } from "@/components/shared";
+
 export default function Page() {
-	return <div>Home</div>;
+	return (
+		<div>
+			<Navbar />
+			<p>Home start</p>
+		</div>
+	);
 }
