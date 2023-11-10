@@ -75,3 +75,8 @@
 		@apply bg-background text-foreground;
 	}
 }
+
+/* ------------- hide clerk profile's signout button ----------- */
+.cl-userButtonPopoverActionButton.cl-userButtonPopoverActionButton__signOut {
+	display: none;
+}
