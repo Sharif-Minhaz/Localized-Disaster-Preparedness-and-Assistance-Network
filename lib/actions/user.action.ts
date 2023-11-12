@@ -13,7 +13,6 @@ interface Props {
 
 export async function createUser({ userId, name, username, email, imageUrl }: Props) {
 	try {
-		console.log("database section.------------------------------");
 		connectToDB();
 
 		const newUser = await User.create({
@@ -26,6 +25,36 @@ export async function createUser({ userId, name, username, email, imageUrl }: Pr
 		});
 
 		return newUser;
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+export async function updateUser({ userId, username, imageUrl }: Props) {
+	try {
+		connectToDB();
+
+		const updatedUser = await User.findOneAndUpdate(
+			{ userId },
+			{
+				username,
+				imageUrl,
+			}
+		);
+
+		return updatedUser;
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+export async function deleteUser(userId: string) {
+	try {
+		connectToDB();
+
+		const deletedUser = await User.findOneAndDelete({ userId });
+
+		return deletedUser;
 	} catch (error) {
 		console.error(error);
 	}

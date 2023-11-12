@@ -10,7 +10,7 @@ import { headers } from "next/headers";
 import { IncomingHttpHeaders } from "http";
 
 import { NextResponse } from "next/server";
-import { createUser } from "@/lib/actions/user.action";
+import { createUser, deleteUser, updateUser } from "@/lib/actions/user.action";
 
 // Resource: https://clerk.com/docs/integration/webhooks#supported-events
 // Above document lists the supported events
@@ -53,35 +53,68 @@ export const POST = async (request: Request) => {
 		return NextResponse.json({ message: err }, { status: 400 });
 	}
 
-	console.log(evnt);
-
 	const eventType: EventType = evnt?.type!;
 
 	// Listen organization creation event
 	if (eventType === "user.created") {
 		// Resource: https://clerk.com/docs/reference/backend-api/tag/Organizations#operation/CreateOrganization
 		// Show what evnt?.data sends from above resource
-		console.log(evnt?.data);
 
 		const { id, first_name, last_name, username, email_addresses, profile_image_url } =
 			evnt?.data ?? {};
 
 		const userData = {
 			userId: id,
-			name: first_name?.toString()?.concat(last_name?.toString()),
+			name: `${first_name} ${last_name}`,
 			username,
 			//@ts-ignore
 			email: email_addresses?.[0]?.email_address,
 			imageUrl: profile_image_url,
 		};
 
-		console.log("user-data: ", userData);
-
 		try {
 			//@ts-ignore
 			await createUser(userData);
 
 			return NextResponse.json({ message: "User created" }, { status: 201 });
+		} catch (err) {
+			console.log(err);
+			return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+		}
+	}
+
+	if (eventType === "user.updated") {
+		const { id, username, profile_image_url } = evnt?.data ?? {};
+
+		const userData = {
+			userId: id,
+			username,
+			imageUrl: profile_image_url,
+		};
+
+		try {
+			//@ts-ignore
+			await updateUser(userData);
+
+			return NextResponse.json({ message: "User updated" }, { status: 200 });
+		} catch (err) {
+			console.log(err);
+			return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+		}
+	}
+
+	if (eventType === "user.deleted") {
+		const { id, deleted } = evnt?.data ?? {};
+
+		if (!deleted) {
+			throw new Error("User deletion failed");
+		}
+
+		try {
+			//@ts-ignore
+			await deleteUser(id);
+
+			return NextResponse.json({ message: "User deleted" }, { status: 200 });
 		} catch (err) {
 			console.log(err);
 			return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
