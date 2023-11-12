@@ -1,10 +1,30 @@
 "use server";
 
+import User from "../models/UserModel";
 import { connectToDB } from "../mongoose";
 
-export async function createUser() {
+interface Props {
+	userId: string;
+	name: string;
+	username: string;
+	email: string;
+	imageUrl: string;
+}
+
+export async function createUser({ userId, name, username, email, imageUrl }: Props) {
 	try {
 		connectToDB();
+
+		const newUser = await User.create({
+			userId,
+			name,
+			username,
+			email,
+			imageUrl,
+			user_type: "user",
+		});
+
+		return newUser;
 	} catch (error) {
 		console.error(error);
 	}

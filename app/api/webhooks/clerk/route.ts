@@ -53,10 +53,13 @@ export const POST = async (request: Request) => {
 	if (eventType === "user.created") {
 		// Resource: https://clerk.com/docs/reference/backend-api/tag/Organizations#operation/CreateOrganization
 		// Show what evnt?.data sends from above resource
-		const { id, name, slug, logo_url, image_url, created_by } = evnt?.data ?? {};
+		const { userId, name, username, email, imageUrl } = evnt?.data ?? {};
 
 		try {
-			await createUser();
+			await createUser(
+				// @ts-ignore
+				{ userId, name, username, email, imageUrl }
+			);
 
 			return NextResponse.json({ message: "User created" }, { status: 201 });
 		} catch (err) {
