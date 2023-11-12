@@ -32,9 +32,15 @@ export const POST = async (request: Request) => {
 		"svix-signature": header.get("svix-signature"),
 	};
 
+	const WEBHOOK_SECRET = process.env.NEXT_CLERK_WEBHOOK_SECRET;
+
+	if (!WEBHOOK_SECRET) {
+		throw new Error("Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local");
+	}
+
 	// Activitate Webhook in the Clerk Dashboard.
 	// After adding the endpoint, you'll see the secret on the right side.
-	const wh = new Webhook(process.env.NEXT_CLERK_WEBHOOK_SECRET || "");
+	const wh = new Webhook(WEBHOOK_SECRET);
 
 	let evnt: Event | null = null;
 
@@ -47,19 +53,33 @@ export const POST = async (request: Request) => {
 		return NextResponse.json({ message: err }, { status: 400 });
 	}
 
+	console.log(evnt);
+
 	const eventType: EventType = evnt?.type!;
 
 	// Listen organization creation event
 	if (eventType === "user.created") {
 		// Resource: https://clerk.com/docs/reference/backend-api/tag/Organizations#operation/CreateOrganization
 		// Show what evnt?.data sends from above resource
-		const { userId, name, username, email, imageUrl } = evnt?.data ?? {};
+		console.log(evnt?.data);
+
+		const { id, first_name, last_name, username, email_addresses, profile_image_url } =
+			evnt?.data ?? {};
+
+		const userData = {
+			userId: id,
+			name: first_name?.toString()?.concat(last_name?.toString()),
+			username,
+			//@ts-ignore
+			email: email_addresses?.[0]?.email_address,
+			imageUrl: profile_image_url,
+		};
+
+		console.log("user-data: ", userData);
 
 		try {
-			await createUser(
-				// @ts-ignore
-				{ userId, name, username, email, imageUrl }
-			);
+			//@ts-ignore
+			await createUser(userData);
 
 			return NextResponse.json({ message: "User created" }, { status: 201 });
 		} catch (err) {

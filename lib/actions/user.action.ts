@@ -8,11 +8,12 @@ interface Props {
 	name: string;
 	username: string;
 	email: string;
-	imageUrl: string;
+	imageUrl?: string;
 }
 
 export async function createUser({ userId, name, username, email, imageUrl }: Props) {
 	try {
+		console.log("database section.------------------------------");
 		connectToDB();
 
 		const newUser = await User.create({
