@@ -55,9 +55,8 @@ export const POST = async (request: Request) => {
 
 	const eventType: EventType = evnt?.type!;
 
-	// Listen organization creation event
+	// Listen user creation event
 	if (eventType === "user.created") {
-		// Resource: https://clerk.com/docs/reference/backend-api/tag/Organizations#operation/CreateOrganization
 		// Show what evnt?.data sends from above resource
 
 		const { id, first_name, last_name, username, email_addresses, profile_image_url } =
@@ -65,7 +64,7 @@ export const POST = async (request: Request) => {
 
 		const userData = {
 			userId: id,
-			name: `${first_name} ${last_name}`,
+			name: first_name + " " + last_name,
 			username,
 			//@ts-ignore
 			email: email_addresses?.[0]?.email_address,
@@ -84,15 +83,16 @@ export const POST = async (request: Request) => {
 	}
 
 	if (eventType === "user.updated") {
-		const { id, username, profile_image_url } = evnt?.data ?? {};
-
-		const userData = {
-			userId: id,
-			username,
-			imageUrl: profile_image_url,
-		};
-
 		try {
+			const { id, username, profile_image_url } = evnt?.data ?? {};
+
+			console.log(evnt?.data);
+
+			const userData = {
+				userId: id,
+				username,
+				imageUrl: profile_image_url,
+			};
 			//@ts-ignore
 			await updateUser(userData);
 
@@ -104,13 +104,12 @@ export const POST = async (request: Request) => {
 	}
 
 	if (eventType === "user.deleted") {
-		const { id, deleted } = evnt?.data ?? {};
-
-		if (!deleted) {
-			throw new Error("User deletion failed");
-		}
-
 		try {
+			const { id, deleted } = evnt?.data ?? {};
+			console.log(evnt?.data);
+			if (!deleted) {
+				throw new Error("User deletion failed");
+			}
 			//@ts-ignore
 			await deleteUser(id);
 
@@ -120,4 +119,6 @@ export const POST = async (request: Request) => {
 			return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
 		}
 	}
+
+	console.log(evnt);
 };

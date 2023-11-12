@@ -33,7 +33,7 @@ export async function createUser({ userId, name, username, email, imageUrl }: Pr
 export async function updateUser({ userId, username, imageUrl }: Props) {
 	try {
 		connectToDB();
-
+		console.log("in update user");
 		const updatedUser = await User.findOneAndUpdate(
 			{ userId },
 			{
@@ -51,6 +51,7 @@ export async function updateUser({ userId, username, imageUrl }: Props) {
 export async function deleteUser(userId: string) {
 	try {
 		connectToDB();
+		console.log("in update user");
 
 		const deletedUser = await User.findOneAndDelete({ userId });
 
