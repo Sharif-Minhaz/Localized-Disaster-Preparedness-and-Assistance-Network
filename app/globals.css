@@ -80,3 +80,8 @@
 .cl-userButtonPopoverActionButton.cl-userButtonPopoverActionButton__signOut {
 	display: none;
 }
+
+/* hide clerk label in forms */
+:is(.cl-footer, .cl-scrollBox)+div[class^="cl-internal"] {
+	display: none;
+}
