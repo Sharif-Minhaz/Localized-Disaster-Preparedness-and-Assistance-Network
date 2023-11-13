@@ -82,6 +82,6 @@
 }
 
 /* hide clerk label in forms */
-/* :is(.cl-footer, .cl-scrollBox)+div[class^="cl-internal"] {
+:is(.cl-footer, .cl-scrollBox, .cl-scrollBox)+div[class^="cl-internal"] {
 	display: none;
-} */
+}

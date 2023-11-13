@@ -149,7 +149,7 @@ export async function addMemberToCommunity(communityId: string, memberId: string
 		await community.save();
 
 		// Add the community's _id to the communities array in the user
-		user.communities.push(community._id);
+		user.communities.addToSet(community._id);
 		await user.save();
 
 		return community;
