@@ -175,17 +175,18 @@ export async function removeUserFromCommunity(userId: string, communityId: strin
 			throw new Error("Community not found");
 		}
 
-		// Remove the user's _id from the members array in the community
-		await Community.updateOne(
-			{ _id: communityIdObject._id },
-			{ $pull: { members: userIdObject._id } }
-		);
-
-		// Remove the community's _id from the communities array in the user
-		await User.updateOne(
-			{ _id: userIdObject._id },
-			{ $pull: { communities: communityIdObject._id } }
-		);
+		await Promise.all([
+			// Remove the user's _id from the members array in the community
+			Community.updateOne(
+				{ _id: communityIdObject._id },
+				{ $pull: { members: userIdObject._id } }
+			),
+			// Remove the community's _id from the communities array in the user
+			User.updateOne(
+				{ _id: userIdObject._id },
+				{ $pull: { communities: communityIdObject._id } }
+			),
+		]);
 
 		return { success: true };
 	} catch (error) {
@@ -226,15 +227,6 @@ export async function deleteCommunity(communityId: string) {
 	try {
 		connectToDB();
 
-		// Find the community by its ID and delete it
-		const deletedCommunity = await Community.findOneAndDelete({
-			id: communityId,
-		});
-
-		if (!deletedCommunity) {
-			throw new Error("Community not found");
-		}
-
 		// Find all users who are part of the community
 		const communityUsers = await User.find({ communities: communityId });
 
@@ -243,6 +235,15 @@ export async function deleteCommunity(communityId: string) {
 			user.communities.pull(communityId);
 			return user.save();
 		});
+
+		// Find the community by its ID and delete it
+		const deletedCommunity = await Community.findOneAndDelete({
+			id: communityId,
+		});
+
+		if (!deletedCommunity) {
+			throw new Error("Community not found");
+		}
 
 		await Promise.all(updateUserPromises);
 
