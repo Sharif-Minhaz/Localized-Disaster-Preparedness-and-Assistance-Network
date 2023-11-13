@@ -133,7 +133,7 @@ export async function addMemberToCommunity(communityId: string, memberId: string
 		}
 
 		// Find the user by their unique id
-		const user = await User.findOne({ id: memberId });
+		const user = await User.findOne({ userId: memberId });
 
 		if (!user) {
 			throw new Error("User not found");
@@ -164,7 +164,7 @@ export async function removeUserFromCommunity(userId: string, communityId: strin
 	try {
 		connectToDB();
 
-		const userIdObject = await User.findOne({ id: userId }, { _id: 1 });
+		const userIdObject = await User.findOne({ userId }, { _id: 1 });
 		const communityIdObject = await Community.findOne({ id: communityId }, { _id: 1 });
 
 		if (!userIdObject) {

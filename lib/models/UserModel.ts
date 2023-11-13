@@ -19,6 +19,7 @@ const userSchema = new Schema(
 			default: "user",
 		},
 		mobile: String,
+		communities: [{ type: Schema.Types.ObjectId, ref: "Community" }],
 	},
 	{ timestamps: true }
 );

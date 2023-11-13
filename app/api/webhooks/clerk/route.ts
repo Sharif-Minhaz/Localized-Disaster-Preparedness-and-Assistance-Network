@@ -142,7 +142,7 @@ export const POST = async (request: Request) => {
 				name,
 				slug,
 				logo_url || image_url,
-				"org bio",
+				"Your trusted source for disaster preparedness resources. We're committed to helping you prepare for, respond to, and recover from disasters and emergencies. Explore our guides and expert advice to build resilience and reduce the impact of crises. Join us in creating a safer, more secure future.",
 				created_by
 			);
 
