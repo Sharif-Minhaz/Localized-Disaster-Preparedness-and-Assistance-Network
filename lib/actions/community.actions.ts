@@ -226,7 +226,6 @@ export async function updateCommunityInfo(
 export async function deleteCommunity(communityId: string) {
 	try {
 		connectToDB();
-
 		// Find the community by its ID and delete it
 		const deletedCommunity = await Community.findOneAndDelete({
 			id: communityId,
@@ -238,8 +237,8 @@ export async function deleteCommunity(communityId: string) {
 
 		// Find all users who are part of the community and pull the community id from them
 		await User.updateMany(
-			{ communities: communityId },
-			{ $pull: { communities: communityId } }
+			{ communities: deletedCommunity._id },
+			{ $pull: { communities: deletedCommunity._id } }
 		);
 
 		return deletedCommunity;
