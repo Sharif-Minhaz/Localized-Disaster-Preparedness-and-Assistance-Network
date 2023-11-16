@@ -1,0 +1,54 @@
+interface DictionaryEntry {
+	home: string;
+	aboutUs: string;
+	projects: string;
+	organizations: string;
+	"news&Events": string;
+	fieldStories: string;
+	auditReports: string;
+	disasterSituations: string;
+	disasterForecast: string;
+	donate: string;
+	gallery: string;
+	publicTicket: string;
+	resources: string;
+	disasterMap: string;
+	contactUs: string;
+}
+
+export const dictionary: Record<string, DictionaryEntry> = {
+	en: {
+		home: "Home",
+		aboutUs: "About us",
+		projects: "Projects",
+		organizations: "Organizations",
+		"news&Events": "News & Events",
+		fieldStories: "Field Stories",
+		auditReports: "Audio Reports",
+		disasterSituations: "Disaster Situations",
+		disasterForecast: "Disaster Forecast",
+		donate: "Donate",
+		gallery: "Gallery",
+		publicTicket: "Public Ticket",
+		resources: "Resources",
+		disasterMap: "Disaster Map",
+		contactUs: "Contact Us",
+	},
+	bn: {
+		home: "হোম",
+		aboutUs: "আমাদের বিষয়",
+		projects: "কার্যক্রমসমূহ",
+		organizations: "সংঘটনসমূহ",
+		"news&Events": "সংবাদ & কর্মসূচি",
+		fieldStories: "ফিল্ড স্টোর",
+		auditReports: "হিসাবপরীক্ষা প্রতিবেদন",
+		disasterSituations: "দুর্যোগ ব্যবস্থাপনা",
+		disasterForecast: "দুর্যোগ পূর্বাভাস",
+		donate: "দান",
+		gallery: "গ্যালারি",
+		publicTicket: "পাবলিক টিকিট",
+		resources: "সম্পদ",
+		disasterMap: "দুর্যোগ মানচিত্র",
+		contactUs: "যোগাযোগ",
+	},
+};

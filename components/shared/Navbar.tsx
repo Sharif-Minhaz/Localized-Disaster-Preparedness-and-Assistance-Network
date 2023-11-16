@@ -1,18 +1,19 @@
-import {
-	OrganizationSwitcher,
-	SignOutButton,
-	SignedIn,
-	SignedOut,
-	UserButton,
-} from "@clerk/nextjs";
+"use client";
+
+import { SignOutButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Languages } from "lucide-react";
 
 export default function Navbar() {
 	return (
 		<nav>
 			Initial Navbar information:
-			<div>
+			<div className="flex">
+				<Button variant="outline" size="icon">
+					<Languages />
+				</Button>
 				<SignedIn>
 					<SignOutButton>
 						<div className="flex cursor-pointer">
@@ -27,13 +28,6 @@ export default function Navbar() {
 					</SignOutButton>
 
 					<UserButton />
-					<OrganizationSwitcher
-						appearance={{
-							elements: {
-								organizationSwitcherTrigger: "py-2 px-4",
-							},
-						}}
-					/>
 				</SignedIn>
 				<SignedOut>
 					<Link href="/sign-in">Login</Link>
