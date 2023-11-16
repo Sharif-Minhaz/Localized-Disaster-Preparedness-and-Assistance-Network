@@ -20,7 +20,7 @@ export default function Sidebar() {
 						<li key={menu.title}>
 							<a href={menu.url}>
 								<div>
-									<Icon color="red" />
+									<Icon />
 									{/* @ts-ignore */}
 									<span>{selectedLangEntry[menu.title]}</span>
 								</div>
