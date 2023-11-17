@@ -1,8 +1,14 @@
+"use client";
+
 import { sideMenuData } from "@/constants";
+import { MainContext } from "@/contexts/MainContext";
 import { dictionary } from "@/locales/contents";
 import { OrganizationSwitcher } from "@clerk/nextjs";
+import { useContext } from "react";
 
 export default function Sidebar() {
+	const { lang } = useContext(MainContext);
+
 	return (
 		<aside>
 			<OrganizationSwitcher
@@ -15,7 +21,7 @@ export default function Sidebar() {
 			<ul>
 				{sideMenuData.map((menu) => {
 					const { Icon } = menu;
-					const selectedLangEntry = dictionary.en;
+					const selectedLangEntry = dictionary[lang];
 					return (
 						<li key={menu.title}>
 							<a href={menu.url}>
