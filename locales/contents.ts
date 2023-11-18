@@ -14,6 +14,8 @@ interface DictionaryEntry {
 	resources: string;
 	disasterMap: string;
 	contactUs: string;
+	logout: string;
+	darkMode: string;
 }
 
 export const dictionary: Record<string, DictionaryEntry> = {
@@ -33,6 +35,8 @@ export const dictionary: Record<string, DictionaryEntry> = {
 		resources: "Resources",
 		disasterMap: "Disaster Map",
 		contactUs: "Contact Us",
+		logout: "Logout",
+		darkMode: "Dark Mode",
 	},
 	bn: {
 		home: "হোম",
@@ -41,7 +45,7 @@ export const dictionary: Record<string, DictionaryEntry> = {
 		organizations: "সংঘটনসমূহ",
 		"news&Events": "সংবাদ & কর্মসূচি",
 		fieldStories: "ফিল্ড স্টোর",
-		auditReports: "হিসাবপরীক্ষা প্রতিবেদন",
+		auditReports: "হিসাব প্রতিবেদন",
 		disasterSituations: "দুর্যোগ ব্যবস্থাপনা",
 		disasterForecast: "দুর্যোগ পূর্বাভাস",
 		donate: "দান",
@@ -50,5 +54,7 @@ export const dictionary: Record<string, DictionaryEntry> = {
 		resources: "সম্পদ",
 		disasterMap: "দুর্যোগ মানচিত্র",
 		contactUs: "যোগাযোগ",
+		logout: "লগআউট",
+		darkMode: "কালো থিম",
 	},
 };

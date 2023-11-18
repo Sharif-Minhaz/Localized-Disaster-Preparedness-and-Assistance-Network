@@ -3,10 +3,11 @@
 import { SignOutButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
-import { Languages } from "lucide-react";
+import { Languages, Bell } from "lucide-react";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
+	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuRadioGroup,
 	DropdownMenuRadioItem,
@@ -41,17 +42,32 @@ export default function Navbar() {
 				</DropdownMenu>
 
 				<SignedIn>
-					<SignOutButton>
-						<div className="flex cursor-pointer">
-							<Image
-								src="/assets/icons/logout.svg"
-								alt="logout"
-								width={24}
-								height={24}
-								className="invert brightness-100"
-							/>
-						</div>
-					</SignOutButton>
+					<DropdownMenu>
+						<DropdownMenuTrigger>
+							<Bell />
+						</DropdownMenuTrigger>
+						<DropdownMenuContent>
+							<DropdownMenuLabel>Notifications</DropdownMenuLabel>
+							<DropdownMenuSeparator />
+							<DropdownMenuItem>Notification 1</DropdownMenuItem>
+							<DropdownMenuItem>Notification 2</DropdownMenuItem>
+							<DropdownMenuItem>Notification 3</DropdownMenuItem>
+						</DropdownMenuContent>
+					</DropdownMenu>
+					{/* hide logout button in the biggest screens */}
+					<div className="md:hidden">
+						<SignOutButton>
+							<div className="flex cursor-pointer">
+								<Image
+									src="/assets/icons/logout.svg"
+									alt="logout"
+									width={24}
+									height={24}
+									className="invert brightness-100"
+								/>
+							</div>
+						</SignOutButton>
+					</div>
 
 					<UserButton />
 				</SignedIn>
