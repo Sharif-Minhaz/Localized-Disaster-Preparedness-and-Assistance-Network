@@ -26,7 +26,7 @@ export const dictionary: Record<string, DictionaryEntry> = {
 		organizations: "Organizations",
 		"news&Events": "News & Events",
 		fieldStories: "Field Stories",
-		auditReports: "Audio Reports",
+		auditReports: "Audit Reports",
 		disasterSituations: "Disaster Situations",
 		disasterForecast: "Disaster Forecast",
 		donate: "Donate",

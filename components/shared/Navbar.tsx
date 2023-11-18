@@ -14,22 +14,22 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "../ui/button";
 import { useContext } from "react";
 import { MainContext } from "@/contexts/MainContext";
+import { SearchBar } from ".";
 
 export default function Navbar() {
 	const { handleLang, lang } = useContext(MainContext);
 
 	return (
-		<nav>
-			Initial Navbar information:
-			<div className="flex">
+		<nav className="sticky z-10 flex top-0 w-full items-center justify-between pl-1 py-1 pr-5 bg-white dark:bg-slate-950 shadow-md dark:shadow-slate-900">
+			<SearchBar routeType="" />
+			<div className="flex gap-6">
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
-						<Button variant="outline">
-							<Languages />
-						</Button>
+						<span className="border rounded-full inline-flex p-2 cursor-pointer">
+							<Languages size={18} />
+						</span>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent className="w-56">
 						<DropdownMenuLabel>Translation</DropdownMenuLabel>
@@ -72,7 +72,9 @@ export default function Navbar() {
 					<UserButton />
 				</SignedIn>
 				<SignedOut>
-					<Link href="/sign-in">Login</Link>
+					<div className="flex items-center gap-2 text-blue-900">
+						<Link href="/sign-in">Sign In</Link>/<Link href="/sign-up">Sign Up</Link>
+					</div>
 				</SignedOut>
 			</div>
 		</nav>

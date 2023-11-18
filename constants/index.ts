@@ -19,7 +19,7 @@ import {
 interface MenuItem {
 	title: string;
 	url: string;
-	Icon: React.ElementType; // Adjust this based on what Lucide-React expects
+	Icon: React.ElementType;
 }
 
 export const sideMenuData: MenuItem[] = [

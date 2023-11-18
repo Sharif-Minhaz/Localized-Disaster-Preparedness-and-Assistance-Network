@@ -59,6 +59,34 @@
 	}
 }
 
+/* -----------------scrollbar------------------ */
+/* width */
+::-webkit-scrollbar {
+	width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px rgb(157, 149, 231);
+	height: 10px;
+	border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #d1cfff;
+	border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #a8aed6;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
 /* ------------- hide clerk profile's signout button ----------- */
 .cl-userButtonPopoverActionButton.cl-userButtonPopoverActionButton__signOut {
 	display: none;
@@ -67,4 +95,26 @@
 /* hide clerk label in forms */
 :is(.cl-footer, .cl-scrollBox, .cl-scrollBox)+div[class^="cl-internal"] {
 	display: none;
+}
+
+/* clerk user button custom design */
+.cl-rootBox.cl-userButton-root {
+	display: flex;
+	align-items: center;
+}
+
+/* clerk organization switcher button custom design */
+.cl-organizationSwitcherTrigger {
+	width: 100%;
+}
+
+.cl-rootBox.cl-organizationSwitcher-root {
+	background-color: #efedff;
+	width: 100%;
+	border-radius: 8px;
+}
+
+.dark .cl-rootBox.cl-organizationSwitcher-root {
+	background-color: rgb(29, 28, 28);
+	color: whitesmoke;
 }

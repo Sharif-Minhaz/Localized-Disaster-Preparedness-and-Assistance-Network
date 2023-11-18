@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "../globals.css";
 import { MainContextProvider } from "@/contexts/MainContext";
 import ClerkThemeProvider from "@/lib/providers/ClerkThemeProvider";
+import { Navbar, Sidebar } from "@/components/shared";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +18,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<MainContextProvider>
 			<ClerkThemeProvider>
 				<html lang="en">
-					<body className={inter.className}>{children}</body>
+					<body className={inter.className}>
+						<Sidebar />
+						<main className="ml-[255px]">
+							<Navbar />
+							<div className="p-5">{children}</div>
+						</main>
+					</body>
 				</html>
 			</ClerkThemeProvider>
 		</MainContextProvider>
