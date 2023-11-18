@@ -2,9 +2,14 @@
 
 import { createContext, useEffect, useState } from "react";
 
-export const MainContext = createContext();
+export const MainContext = createContext({
+	lang: "",
+	handleLang: () => {},
+	changeTheme: () => {},
+	theme: "",
+});
 
-export const MainContextProvider = ({ children }) => {
+export const MainContextProvider = ({ children }: { children: React.ReactNode }) => {
 	const [lang, setLang] = useState("en");
 	const [theme, setTheme] = useState("light");
 
