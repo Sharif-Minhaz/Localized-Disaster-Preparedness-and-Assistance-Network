@@ -12,6 +12,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import OutsideClickHandler from "react-outside-click-handler";
+import { motion } from "framer-motion";
+
+const fadeInAnimationVariants = {
+	initial: {
+		opacity: 0,
+		y: -20,
+	},
+	animate: (index: number) => ({
+		opacity: 1,
+		y: 0,
+		transition: {
+			delay: 0.05 * index,
+		},
+	}),
+};
 
 export default function Sidebar() {
 	const { lang, theme, sidebarOpen, closeSidebar, changeTheme } = useContext(MainContext);
@@ -54,14 +69,21 @@ export default function Sidebar() {
 					</div>
 
 					<ul>
-						{sideMenuData.map((menu) => {
+						{sideMenuData.map((menu, index) => {
 							const { Icon } = menu;
 							const selectedLangEntry = dictionary?.[lang];
 							const isActive =
 								pathname.includes(menu.url) &&
 								(menu.url.length > 1 || pathname === menu.url);
 							return (
-								<li key={menu.title} className="px-4 py-1">
+								<motion.li
+									variants={fadeInAnimationVariants}
+									initial="initial"
+									animate="animate"
+									custom={index}
+									key={menu.title}
+									className="px-4 py-1"
+								>
 									<Link
 										href={menu.url}
 										className={`flex px-4 py-3 gap-2 rounded-[8px] ${
@@ -72,7 +94,7 @@ export default function Sidebar() {
 										{/* @ts-ignore */}
 										<span>{selectedLangEntry?.[menu?.title]}</span>
 									</Link>
-								</li>
+								</motion.li>
 							);
 						})}
 					</ul>
