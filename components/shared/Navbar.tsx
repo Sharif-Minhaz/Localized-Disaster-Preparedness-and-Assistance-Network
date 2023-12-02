@@ -3,7 +3,7 @@
 import { SignOutButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
-import { Languages, Bell } from "lucide-react";
+import { Languages, Bell, AlignLeft } from "lucide-react";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -19,12 +19,17 @@ import { MainContext } from "@/contexts/MainContext";
 import { SearchBar } from ".";
 
 export default function Navbar() {
-	const { handleLang, lang } = useContext(MainContext);
+	const { handleLang, lang, openSidebar } = useContext(MainContext);
 
 	return (
-		<nav className="sticky z-10 flex top-0 w-full items-center justify-between pl-1 py-1 pr-5 bg-white dark:bg-slate-950 shadow-md dark:shadow-slate-900">
-			<SearchBar routeType="" />
-			<div className="flex gap-6">
+		<nav className="sticky z-10 flex top-0 w-full items-center justify-between lg:pl-1 pl-4 py-3 sm:py-1 lg:pr-5 pr-4 bg-white dark:bg-slate-950 shadow dark:shadow-slate-900">
+			<div className="flex gap-2 items-center">
+				<span className="cursor-pointer lg:hidden inline-flex" onClick={openSidebar}>
+					<AlignLeft />
+				</span>
+				<SearchBar routeType="" />
+			</div>
+			<div className="flex gap-4 md:gap-5">
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
 						<span className="border rounded-full inline-flex p-2 cursor-pointer">
@@ -42,34 +47,36 @@ export default function Navbar() {
 				</DropdownMenu>
 
 				<SignedIn>
-					<DropdownMenu>
-						<DropdownMenuTrigger>
-							<Bell />
-						</DropdownMenuTrigger>
-						<DropdownMenuContent>
-							<DropdownMenuLabel>Notifications</DropdownMenuLabel>
-							<DropdownMenuSeparator />
-							<DropdownMenuItem>Notification 1</DropdownMenuItem>
-							<DropdownMenuItem>Notification 2</DropdownMenuItem>
-							<DropdownMenuItem>Notification 3</DropdownMenuItem>
-						</DropdownMenuContent>
-					</DropdownMenu>
-					{/* hide logout button in the biggest screens */}
-					<div className="md:hidden">
-						<SignOutButton>
-							<div className="flex cursor-pointer">
-								<Image
-									src="/assets/icons/logout.svg"
-									alt="logout"
-									width={24}
-									height={24}
-									className="invert brightness-100"
-								/>
-							</div>
-						</SignOutButton>
-					</div>
+					<div className="flex items-center gap-4 md:gap-5">
+						<DropdownMenu>
+							<DropdownMenuTrigger>
+								<Bell />
+							</DropdownMenuTrigger>
+							<DropdownMenuContent>
+								<DropdownMenuLabel>Notifications</DropdownMenuLabel>
+								<DropdownMenuSeparator />
+								<DropdownMenuItem>Notification 1</DropdownMenuItem>
+								<DropdownMenuItem>Notification 2</DropdownMenuItem>
+								<DropdownMenuItem>Notification 3</DropdownMenuItem>
+							</DropdownMenuContent>
+						</DropdownMenu>
+						{/* hide logout button in the biggest screens */}
+						<div className="md:hidden">
+							<SignOutButton>
+								<div className="flex cursor-pointer">
+									<Image
+										src="/assets/icons/logout.svg"
+										alt="logout"
+										width={24}
+										height={24}
+										className="invert brightness-100 dark:brightness-0"
+									/>
+								</div>
+							</SignOutButton>
+						</div>
 
-					<UserButton />
+						<UserButton />
+					</div>
 				</SignedIn>
 				<SignedOut>
 					<div className="flex items-center gap-2 text-blue-900">

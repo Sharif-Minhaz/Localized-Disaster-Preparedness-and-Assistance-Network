@@ -4,14 +4,18 @@ import { createContext, useEffect, useState } from "react";
 
 export const MainContext = createContext({
 	lang: "",
+	theme: "",
+	sidebarOpen: false,
 	handleLang: () => {},
 	changeTheme: () => {},
-	theme: "",
+	closeSidebar: () => {},
+	openSidebar: () => {},
 });
 
 export const MainContextProvider = ({ children }: { children: React.ReactNode }) => {
 	const [lang, setLang] = useState("en");
 	const [theme, setTheme] = useState("light");
+	const [sidebarOpen, setSidebarOpen] = useState(false);
 
 	useEffect(() => {
 		const savedTheme = localStorage.getItem("theme");
@@ -43,8 +47,26 @@ export const MainContextProvider = ({ children }: { children: React.ReactNode })
 		setTheme(theme === "light" ? "dark" : "light");
 	};
 
+	const openSidebar = () => {
+		setSidebarOpen(true);
+	};
+
+	const closeSidebar = () => {
+		setSidebarOpen(false);
+	};
+
 	return (
-		<MainContext.Provider value={{ lang, handleLang, changeTheme, theme }}>
+		<MainContext.Provider
+			value={{
+				lang,
+				theme,
+				sidebarOpen,
+				handleLang,
+				openSidebar,
+				changeTheme,
+				closeSidebar,
+			}}
+		>
 			{children}
 		</MainContext.Provider>
 	);
