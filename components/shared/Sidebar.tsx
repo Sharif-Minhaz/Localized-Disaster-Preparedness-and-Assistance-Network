@@ -58,7 +58,7 @@ export default function Sidebar() {
 						</div>
 					</div>
 
-					<div className="px-4 py-2">
+					<div className="px-4 py-2 h-[65px]">
 						<OrganizationSwitcher
 							appearance={{
 								elements: {
