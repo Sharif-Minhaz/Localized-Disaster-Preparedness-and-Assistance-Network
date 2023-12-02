@@ -86,7 +86,7 @@ export default function Sidebar() {
 								>
 									<Link
 										href={menu.url}
-										className={`flex px-4 py-3 gap-2 rounded-[8px] ${
+										className={`flex px-4 py-3 gap-2 rounded-[8px] dark:text-white ${
 											isActive ? "text-slate-200 bg-[#2563eb]" : "text-black"
 										}`}
 									>
