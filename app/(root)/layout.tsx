@@ -1,9 +1,13 @@
+import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import { MainContextProvider } from "@/contexts/MainContext";
-import ClerkThemeProvider from "@/lib/providers/ClerkThemeProvider";
-import { MainLayout, Sidebar } from "@/components/shared";
+import { Navbar, Sidebar } from "@/components/shared";
+
+const ClerkThemeProvider = dynamic(() => import("@/lib/providers/ClerkThemeProvider"), {
+	ssr: false,
+});
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,14 +20,17 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<MainContextProvider>
-			<ClerkThemeProvider>
-				<html lang="en">
+			<html lang="en">
+				<ClerkThemeProvider>
 					<body className={inter.className}>
 						<Sidebar />
-						<MainLayout>{children}</MainLayout>
+						<main className="ml-0 lg:ml-[255px]">
+							<Navbar />
+							<div className="p-5">{children}</div>
+						</main>
 					</body>
-				</html>
-			</ClerkThemeProvider>
+				</ClerkThemeProvider>
+			</html>
 		</MainContextProvider>
 	);
 }

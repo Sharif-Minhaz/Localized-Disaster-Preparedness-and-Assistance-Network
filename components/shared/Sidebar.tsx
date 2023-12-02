@@ -3,7 +3,7 @@
 import { sideMenuData } from "@/constants";
 import { MainContext } from "@/contexts/MainContext";
 import { dictionary } from "@/locales/contents";
-import { OrganizationSwitcher, SignOutButton } from "@clerk/nextjs";
+import { OrganizationSwitcher, SignOutButton, SignedIn } from "@clerk/nextjs";
 import { Switch } from "../ui/switch";
 import { LogOut, Moon, AlignRight } from "lucide-react";
 import { useContext } from "react";
@@ -87,7 +87,7 @@ export default function Sidebar() {
 									<Link
 										href={menu.url}
 										className={`flex px-4 py-3 gap-2 rounded-[8px] ${
-											isActive && "text-slate-200 bg-[#2563eb]"
+											isActive ? "text-slate-200 bg-[#2563eb]" : "text-black"
 										}`}
 									>
 										<Icon />
@@ -100,15 +100,17 @@ export default function Sidebar() {
 					</ul>
 					<hr className="my-3" />
 					<div className="px-4">
-						<div className="mb-3 md:block hidden">
-							<SignOutButton>
-								<div className="flex cursor-pointer px-4 py-3 gap-2">
-									<LogOut />
-									<span>{dictionary[lang]?.["logout"]}</span>
-								</div>
-							</SignOutButton>
-						</div>
-						<div className="flex gap-2 px-4 py-3 dark:bg-[#19191a] bg-white rounded-lg">
+						<SignedIn>
+							<div className="mb-3 md:block hidden">
+								<SignOutButton>
+									<div className="flex cursor-pointer px-4 py-3 gap-2">
+										<LogOut />
+										<span>{dictionary[lang]?.["logout"]}</span>
+									</div>
+								</SignOutButton>
+							</div>
+						</SignedIn>
+						<div className="flex gap-2 px-4 py-3 mb-10 dark:bg-[#19191a] bg-white rounded-lg">
 							<Moon />
 							<div className="flex items-center justify-between space-x-2 w-full">
 								<Label className="cursor-pointer" htmlFor="dark-mode">

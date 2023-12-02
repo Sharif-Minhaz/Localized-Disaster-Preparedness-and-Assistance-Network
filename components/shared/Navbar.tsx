@@ -61,19 +61,21 @@ export default function Navbar() {
 							</DropdownMenuContent>
 						</DropdownMenu>
 						{/* hide logout button in the biggest screens */}
-						<div className="md:hidden">
-							<SignOutButton>
-								<div className="flex cursor-pointer">
-									<Image
-										src="/assets/icons/logout.svg"
-										alt="logout"
-										width={24}
-										height={24}
-										className="invert brightness-100 dark:brightness-0"
-									/>
-								</div>
-							</SignOutButton>
-						</div>
+						<SignedIn>
+							<div className="md:hidden">
+								<SignOutButton>
+									<div className="flex cursor-pointer">
+										<Image
+											src="/assets/icons/logout.svg"
+											alt="logout"
+											width={24}
+											height={24}
+											className="invert brightness-100 dark:brightness-0"
+										/>
+									</div>
+								</SignOutButton>
+							</div>
+						</SignedIn>
 
 						<UserButton />
 					</div>
