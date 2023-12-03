@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<MainContextProvider>
 			<ClerkThemeProvider>
 				<html lang="en">
-					<body className={inter.className}>
+					<body className={`${inter.className}`}>
 						<Sidebar />
 						<main className="ml-0 lg:ml-[255px]">
 							<Navbar />

@@ -22,7 +22,7 @@ export default function Navbar() {
 	const { handleLang, lang, openSidebar } = useContext(MainContext);
 
 	return (
-		<nav className="sticky z-10 flex top-0 w-full items-center justify-between lg:pl-1 pl-4 py-3 sm:py-1 lg:pr-5 pr-4 bg-white dark:bg-slate-950 shadow dark:shadow-slate-900">
+		<nav className="sticky z-10 flex top-0 w-full bg-opacity-30 dark:bg-opacity-40 backdrop-filter backdrop-blur-lg items-center justify-between lg:pl-1 pl-4 py-3 sm:py-1 lg:pr-5 pr-4 bg-white dark:bg-slate-950 shadow dark:shadow-slate-900">
 			<div className="flex gap-2 items-center">
 				<span className="cursor-pointer lg:hidden inline-flex" onClick={openSidebar}>
 					<AlignLeft />

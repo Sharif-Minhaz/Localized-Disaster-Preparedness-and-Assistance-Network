@@ -14,6 +14,7 @@ import {
 	ShoppingBasket,
 	MapPinned,
 	Contact,
+	ShieldAlert,
 } from "lucide-react";
 
 interface MenuItem {
@@ -32,6 +33,11 @@ export const sideMenuData: MenuItem[] = [
 		title: "aboutUs",
 		url: "/about",
 		Icon: BadgeInfo,
+	},
+	{
+		title: "threats",
+		url: "/threats",
+		Icon: ShieldAlert,
 	},
 	{
 		title: "projects",
@@ -97,5 +103,44 @@ export const sideMenuData: MenuItem[] = [
 		title: "contactUs",
 		url: "/contact",
 		Icon: Contact,
+	},
+];
+
+interface HeroCounts {
+	title: string;
+	count: number;
+}
+
+export const heroCounts: HeroCounts[] = [
+	{ title: "Donors", count: 100 },
+	{ title: "Resources", count: 450 },
+	{ title: "Communities", count: 20 },
+];
+
+interface HeroThreats {
+	title: string;
+	description: string;
+	img: string;
+	route: string;
+}
+
+export const heroThreats: HeroThreats[] = [
+	{
+		title: "Cyclone",
+		description: "Rotating storm, powerful winds",
+		img: "/assets/images/cyclone.jpeg",
+		route: "/threats",
+	},
+	{
+		title: "Earthquake",
+		description: "Sudden ground shaking event",
+		img: "/assets/images/earthquake.jpeg",
+		route: "/threats",
+	},
+	{
+		title: "Flood",
+		description: "Rising water engulfs areas",
+		img: "/assets/images/flood.jpeg",
+		route: "/threats",
 	},
 ];

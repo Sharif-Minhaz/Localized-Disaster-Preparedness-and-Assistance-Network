@@ -3,6 +3,7 @@ interface DictionaryEntry {
 	aboutUs: string;
 	projects: string;
 	organizations: string;
+	threats: string;
 	"news&Events": string;
 	fieldStories: string;
 	auditReports: string;
@@ -24,6 +25,7 @@ export const dictionary: Record<string, DictionaryEntry> = {
 		aboutUs: "About us",
 		projects: "Projects",
 		organizations: "Organizations",
+		threats: "Threats",
 		"news&Events": "News & Events",
 		fieldStories: "Field Stories",
 		auditReports: "Audit Reports",
@@ -43,6 +45,7 @@ export const dictionary: Record<string, DictionaryEntry> = {
 		aboutUs: "আমাদের বিষয়",
 		projects: "কার্যক্রমসমূহ",
 		organizations: "সংঘটনসমূহ",
+		threats: "হুমকিসমূহ",
 		"news&Events": "সংবাদ & কর্মসূচি",
 		fieldStories: "ফিল্ড স্টোর",
 		auditReports: "হিসাব প্রতিবেদন",
