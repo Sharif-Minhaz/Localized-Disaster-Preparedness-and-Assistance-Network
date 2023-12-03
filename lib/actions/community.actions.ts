@@ -237,7 +237,9 @@ export async function deleteCommunity(communityId: string) {
 
 		// Find all users who are part of the community and pull the community id from them
 		await User.updateMany(
+			// @ts-ignore
 			{ communities: deletedCommunity._id },
+			// @ts-ignore
 			{ $pull: { communities: deletedCommunity._id } }
 		);
 
