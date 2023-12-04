@@ -26,7 +26,7 @@ export default function HeroCarousel() {
 			<Image
 				draggable={false}
 				src={heroCarousel[index].img}
-				className="object-cover rounded-md"
+				className="object-cover rounded-md group-hover:scale-105 transition-all"
 				fill
 				alt={heroCarousel[index].text}
 			/>

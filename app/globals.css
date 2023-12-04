@@ -60,6 +60,23 @@
 	}
 }
 
+/* custom css applied */
+.bg-bluish {
+	@apply bg-gradient-to-r from-blue-500 to-green-400
+}
+
+.bg-bluish-inverse {
+	@apply bg-gradient-to-r to-blue-500 from-green-400
+}
+
+.text-bluish {
+	@apply bg-gradient-to-r from-blue-500 to-green-400 text-transparent bg-clip-text
+}
+
+.text-bluish-inverse {
+	@apply bg-gradient-to-r to-blue-500 from-green-400 text-transparent bg-clip-text
+}
+
 /* -----------------scrollbar------------------ */
 /* width */
 ::-webkit-scrollbar {
