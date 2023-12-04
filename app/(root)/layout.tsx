@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 						<Sidebar />
 						<main className="ml-0 lg:ml-[255px]">
 							<Navbar />
-							<div className="p-5">{children}</div>
+							<div className="sm:p-5 p-4">{children}</div>
 						</main>
 					</body>
 				</html>

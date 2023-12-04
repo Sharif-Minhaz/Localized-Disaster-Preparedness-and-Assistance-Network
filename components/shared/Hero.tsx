@@ -1,73 +1,121 @@
+"use client";
+
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { Mail, Phone } from "lucide-react";
 import Link from "next/link";
 import { heroCounts, heroThreats } from "@/constants";
+import { Countup, HeroCarousel } from ".";
+import { motion } from "framer-motion";
 
 export default function Hero() {
 	return (
 		<div className="flex md:flex-row flex-col gap-5 md:p-5 p-4 shadow rounded-md border">
 			<div className="md:block hidden">
-				<div className="w-[242px] h-full relative">
-					<Image
-						draggable={false}
-						src="/assets/images/disaster.jpeg"
-						className="object-cover rounded-md"
-						fill
-						alt="disaster"
-					/>
-				</div>
+				<motion.div
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					className="w-[242px] h-full relative overflow-hidden"
+				>
+					<div className="absolute bg-blue-500/40 z-10 inset-0 rounded-md" />
+					<HeroCarousel />
+				</motion.div>
 			</div>
 			<div className="flex flex-col">
-				<div className="flex sm:flex-row flex-col gap-5">
+				<div className="flex sm:flex-row flex-col gap-4 sm:gap-5">
 					<div>
-						<div className="flex gap-3 mb-2">
-							<small className="flex items-center text-[14px] gap-1">
+						<div className="flex sm:gap-3 gap-2 mb-2">
+							<motion.small
+								initial={{ y: -30, opacity: 0 }}
+								animate={{ y: 0, opacity: 1 }}
+								className="flex items-center text-[14px] gap-1"
+							>
 								<Phone className="text-blue-600" size={16} />
 								<span>+880 1122 323264</span>
-							</small>
-							<small className="flex items-center text-[14px] gap-1">
+							</motion.small>
+							<motion.small
+								initial={{ y: -30, opacity: 0 }}
+								animate={{ y: 0, opacity: 1 }}
+								transition={{ delay: 0.1 }}
+								className="flex items-center text-[14px] gap-1"
+							>
 								<Mail className="text-blue-600" size={16} />
 								<span>ldpan@gmail.com</span>
-							</small>
+							</motion.small>
 						</div>
-						<h1 className="text-[30px] sm:text-[32px] md:text-[35px] lg:text-[40px] text-slate-700 dark:text-slate-100 uppercase font-sans font-semibold tracking-tight leading-[48px]">
+						<motion.h1
+							initial={{ y: -30, opacity: 0 }}
+							animate={{ y: 0, opacity: 1 }}
+							transition={{ delay: 0.15, duration: 0.2 }}
+							className="text-[30px] sm:text-[32px] md:text-[35px] lg:text-[40px] text-slate-600/95 dark:text-slate-100 uppercase font-roboto font-medium tracking-normal leading-[53px]"
+						>
 							Together, We Build a <span className="text-blue-700">Future</span>{" "}
 							Rooted in Resilience
-						</h1>
-						<p className="my-7 text-slate-800 dark:text-slate-300">
+						</motion.h1>
+						<motion.p
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ delay: 0.18 }}
+							className="mt-4 mb-7 text-slate-800 dark:text-slate-300"
+						>
 							Stand with us to provide swift disaster relief. Your donation ensures
 							immediate aid and lasting support for those in crisis.Your generosity
 							enables us to respond rapidly to emergencies, offering vital resources,
 							shelter, and comfort to those affected. Make a difference now.
-						</p>
-						<div className="flex gap-6 items-center">
-							<Button className="text-xs px-8 h-[35px]">Donate Now</Button>
-							<Link href="/about-us" className="text-blue-600 text-sm">
+						</motion.p>
+						<motion.div
+							initial={{ x: -10, opacity: 0 }}
+							animate={{ x: 0, opacity: 1 }}
+							transition={{ delay: 0.2 }}
+							className="flex gap-6 items-center"
+						>
+							<Button asChild className="text-xs px-8 h-[35px]">
+								<Link href="/donate">Donate Now</Link>
+							</Button>
+							<Link href="/about" className="text-blue-600 text-sm">
 								Learn More {"->"}{" "}
 							</Link>
-						</div>
+						</motion.div>
 					</div>
 
 					<div className="sm:text-right text-center justify-center flex sm:flex-col flex-row gap-8 mt-10 sm:pl-6">
-						{heroCounts.map((data) => (
-							<div key={data.title} className="flex flex-col gap-1.5 leading-none">
-								<h1 className="text-[26px] font-semibold text-blue-600">
-									{data.count}+
+						{heroCounts.map((data, index) => (
+							<motion.div
+								initial={{ x: 10, opacity: 0 }}
+								animate={{ x: 0, opacity: 1 }}
+								transition={{ delay: 0.22 * index }}
+								key={data.title}
+								className="flex flex-col gap-1.5 leading-none"
+							>
+								<h1 className="text-[30px] font-roboto font-medium text-blue-600">
+									<Countup end={data.count} delay={index} />+
 								</h1>
 								<p className="text-[15px]">{data.title}</p>
-							</div>
+							</motion.div>
 						))}
 					</div>
 				</div>
 
 				{/* ------------ items ---------- */}
 				<div className="mt-8">
-					<h1 className="uppercase font-semibold mb-4">Threats</h1>
+					<motion.h1
+						initial={{ y: -10, opacity: 0 }}
+						animate={{ y: 0, opacity: 1 }}
+						transition={{ delay: 0.1 }}
+						className="uppercase font-roboto font-medium mb-4"
+					>
+						Threats
+					</motion.h1>
 					<div className="flex sm:flex-row flex-col gap-4">
-						{heroThreats.map((data) => (
-							<Link href={data.route} key={data.title}>
-								<article className="flex gap-3 p-2 shadow-sm hover:shadow transition-all w-full rounded-md border relative">
+						{heroThreats.map((data, index) => (
+							<motion.article
+								key={data.title}
+								initial={{ y: -20, opacity: 0 }}
+								animate={{ y: 0, opacity: 1 }}
+								transition={{ delay: 0.1 * index, duration: 0.2 }}
+								className="p-2 shadow-sm hover:shadow transition-all w-full rounded-md border relative"
+							>
+								<Link className="w-full flex gap-3" href={data.route}>
 									<div className="flex items-center">
 										<Image
 											src={data.img}
@@ -78,13 +126,13 @@ export default function Hero() {
 										/>
 									</div>
 									<div className="flex justify-center flex-col gap-1.5">
-										<h1 className="font-[500]">{data.title}</h1>
+										<h1 className="font-roboto font-medium">{data.title}</h1>
 										<p className="text-[13px] dark:text-slate-300 text-slate-600">
 											{data.description}
 										</p>
 									</div>
-								</article>
-							</Link>
+								</Link>
+							</motion.article>
 						))}
 					</div>
 				</div>

@@ -144,3 +144,14 @@ export const heroThreats: HeroThreats[] = [
 		route: "/threats",
 	},
 ];
+
+interface HeroCarousel {
+	text: string;
+	img: string;
+}
+
+export const heroCarousel: HeroCarousel[] = [
+	{ text: "tornado", img: "/assets/images/tornado.png" },
+	{ text: "wild-fire", img: "/assets/images/wild-fire.png" },
+	{ text: "cyclone", img: "/assets/images/cyclone.png" },
+];
