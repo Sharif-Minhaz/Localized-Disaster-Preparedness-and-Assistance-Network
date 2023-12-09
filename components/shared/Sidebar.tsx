@@ -3,16 +3,17 @@
 import { sideMenuData } from "@/constants";
 import { MainContext } from "@/contexts/MainContext";
 import { dictionary } from "@/locales/contents";
-import { OrganizationSwitcher, SignOutButton, SignedIn } from "@clerk/nextjs";
+import { OrganizationSwitcher, SignOutButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import { Switch } from "../ui/switch";
 import { LogOut, Moon, AlignRight } from "lucide-react";
 import { useContext } from "react";
 import { Label } from "../ui/label";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import OutsideClickHandler from "react-outside-click-handler";
 import { motion } from "framer-motion";
+import { Button } from "../ui/button";
 
 const fadeInAnimationVariants = {
 	initial: {
@@ -31,6 +32,7 @@ const fadeInAnimationVariants = {
 export default function Sidebar() {
 	const { lang, theme, sidebarOpen, closeSidebar, changeTheme } = useContext(MainContext);
 	const pathname = usePathname();
+	const router = useRouter();
 
 	return (
 		<OutsideClickHandler onOutsideClick={closeSidebar}>
@@ -59,13 +61,23 @@ export default function Sidebar() {
 					</div>
 
 					<div className="px-4 py-2 h-[65px]">
-						<OrganizationSwitcher
-							appearance={{
-								elements: {
-									organizationSwitcherTrigger: "py-2 px-4",
-								},
-							}}
-						/>
+						<SignedIn>
+							<OrganizationSwitcher
+								appearance={{
+									elements: {
+										organizationSwitcherTrigger: "py-2 px-4",
+									},
+								}}
+							/>
+						</SignedIn>
+						<SignedOut>
+							<Button
+								onClick={() => router.push("/sign-in")}
+								className="w-full rounded-[8px] bg-bluish"
+							>
+								Login for org. profile
+							</Button>
+						</SignedOut>
 					</div>
 
 					<ul>

@@ -155,3 +155,51 @@ export const heroCarousel: HeroCarousel[] = [
 	{ text: "wild-fire", img: "/assets/images/wild-fire.png" },
 	{ text: "cyclone", img: "/assets/images/cyclone.png" },
 ];
+
+interface News {
+	heading: string;
+	description: string;
+	img: string;
+}
+
+export const demoProjects: News[] = [
+	{
+		heading: "Project-1",
+		description:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores velit, cumque expedita veniam tempora optio deleniti quam omnis, ut rerum voluptas nesciunt sit et quisquam enim amet sint laudantium id.",
+		img: "/assets/images/news.jpg",
+	},
+	{
+		heading: "Project-2",
+		description:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores velit, cumque expedita veniam tempora optio deleniti quam omnis, ut rerum voluptas nesciunt sit et quisquam enim amet sint laudantium id.",
+		img: "/assets/images/news-2.png",
+	},
+	{
+		heading: "Project-3",
+		description:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores velit, cumque expedita veniam tempora optio deleniti quam omnis, ut rerum voluptas nesciunt sit et quisquam enim amet sint laudantium id.",
+		img: "/assets/images/news-3.jpg",
+	},
+];
+
+export const demoNews: News[] = [
+	{
+		heading: "News-1",
+		description:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores velit, cumque expedita veniam tempora optio deleniti quam omnis, ut rerum voluptas nesciunt sit et quisquam enim amet sint laudantium id.",
+		img: "/assets/images/news-2.png",
+	},
+	{
+		heading: "News-2",
+		description:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores velit, cumque expedita veniam tempora optio deleniti quam omnis, ut rerum voluptas nesciunt sit et quisquam enim amet sint laudantium id.",
+		img: "/assets/images/news-3.jpg",
+	},
+	{
+		heading: "News-3",
+		description:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores velit, cumque expedita veniam tempora optio deleniti quam omnis, ut rerum voluptas nesciunt sit et quisquam enim amet sint laudantium id.",
+		img: "/assets/images/news.jpg",
+	},
+];
