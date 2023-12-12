@@ -1,4 +1,10 @@
-import { Banner, Hero, ShortListedNews, ShortListedProjects } from "@/components/shared";
+import {
+	Banner,
+	Hero,
+	ShortListedNews,
+	ShortListedProjects,
+	WeatherReport,
+} from "@/components/shared";
 
 export default async function HomePage() {
 	return (
@@ -14,6 +20,9 @@ export default async function HomePage() {
 			</section>
 			<section className="py-3">
 				<Banner />
+			</section>
+			<section>
+				<WeatherReport />
 			</section>
 		</section>
 	);

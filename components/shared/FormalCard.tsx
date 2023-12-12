@@ -12,7 +12,7 @@ export default function FormalCard({ heading, description, image }: Props) {
 	return (
 		<article className="relative border p-4 rounded-lg shadow">
 			<div className="h-[170px] w-full relative">
-				<Image src={image} className="rounded-t-lg" alt="disaster news" fill />
+				<Image src={image} className="rounded-t-lg object-cover" alt="disaster news" fill />
 			</div>
 			<div>
 				<h2 className="text-lg text-slate-800 dark:text-slate-200 py-1.5">{heading}</h2>

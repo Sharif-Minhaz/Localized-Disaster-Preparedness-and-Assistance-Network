@@ -8,6 +8,7 @@ import FormalCard from "./FormalCard";
 import ShortListedProjects from "./ShortListedProjects";
 import ShortListedNews from "./ShortListedNews";
 import Banner from "./Banner";
+import WeatherReport from "./WeatherReport";
 
 export {
 	Navbar,
@@ -20,4 +21,5 @@ export {
 	ShortListedProjects,
 	ShortListedNews,
 	Banner,
+	WeatherReport,
 };
