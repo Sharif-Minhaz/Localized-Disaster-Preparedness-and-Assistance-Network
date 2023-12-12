@@ -7,6 +7,7 @@ import HeroCarousel from "./HeroCarousel";
 import FormalCard from "./FormalCard";
 import ShortListedProjects from "./ShortListedProjects";
 import ShortListedNews from "./ShortListedNews";
+import Banner from "./Banner";
 
 export {
 	Navbar,
@@ -18,4 +19,5 @@ export {
 	FormalCard,
 	ShortListedProjects,
 	ShortListedNews,
+	Banner,
 };

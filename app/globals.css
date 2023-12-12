@@ -132,6 +132,17 @@ html {
 	border-radius: 8px;
 }
 
+.full-bleed {
+	box-shadow: 0 0 0 100vmax var(--bg-color);
+	clip-path: inset(0 -100vmax);
+}
+
+.banner-bg {
+	--bg-color: #29556a;
+	background-color: var(--bg-color);
+	color: whitesmoke;
+}
+
 .dark .cl-rootBox.cl-organizationSwitcher-root {
 	background-color: rgb(29, 28, 28);
 	color: whitesmoke;
