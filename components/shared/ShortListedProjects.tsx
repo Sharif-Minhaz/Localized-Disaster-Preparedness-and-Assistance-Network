@@ -1,8 +1,7 @@
 "use client";
 
 import { demoProjects } from "@/constants";
-import { FormalCard } from ".";
-import HeadingSection from "./HeadingSection";
+import { HeadingSection, FormalCard } from "@/components/shared";
 import { motion } from "framer-motion";
 
 export default function ShortListedProjects() {

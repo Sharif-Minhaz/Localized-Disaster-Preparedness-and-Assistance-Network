@@ -9,12 +9,16 @@ import ShortListedProjects from "./ShortListedProjects";
 import ShortListedNews from "./ShortListedNews";
 import Banner from "./Banner";
 import WeatherReport from "./WeatherReport";
+import OrganizationCard from "./OrganizationCard";
+import HeadingSection from "./HeadingSection";
+import ShortListedOrganizations from './ShortListedOrganizations';
 
 export {
 	Navbar,
 	Sidebar,
 	SearchBar,
 	Hero,
+	HeadingSection,
 	Countup,
 	HeroCarousel,
 	FormalCard,
@@ -22,4 +26,6 @@ export {
 	ShortListedNews,
 	Banner,
 	WeatherReport,
+	OrganizationCard,
+	ShortListedOrganizations
 };

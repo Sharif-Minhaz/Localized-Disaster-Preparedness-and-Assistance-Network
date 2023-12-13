@@ -2,6 +2,7 @@ import {
 	Banner,
 	Hero,
 	ShortListedNews,
+	ShortListedOrganizations,
 	ShortListedProjects,
 	WeatherReport,
 } from "@/components/shared";
@@ -23,6 +24,9 @@ export default async function HomePage() {
 			</section>
 			<section>
 				<WeatherReport />
+			</section>
+			<section>
+				<ShortListedOrganizations />
 			</section>
 		</section>
 	);

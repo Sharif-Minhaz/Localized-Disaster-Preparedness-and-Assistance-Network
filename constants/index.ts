@@ -156,13 +156,13 @@ export const heroCarousel: HeroCarousel[] = [
 	{ text: "cyclone", img: "/assets/images/cyclone.png" },
 ];
 
-interface News {
+interface Card {
 	heading: string;
 	description: string;
 	img: string;
 }
 
-export const demoProjects: News[] = [
+export const demoProjects: Card[] = [
 	{
 		heading: "Project-1",
 		description:
@@ -183,7 +183,7 @@ export const demoProjects: News[] = [
 	},
 ];
 
-export const demoNews: News[] = [
+export const demoNews: Card[] = [
 	{
 		heading: "News-1",
 		description:
@@ -201,5 +201,27 @@ export const demoNews: News[] = [
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores velit, cumque expedita veniam tempora optio deleniti quam omnis, ut rerum voluptas nesciunt sit et quisquam enim amet sint laudantium id.",
 		img: "/assets/images/news.jpg",
+	},
+];
+
+interface Org {
+	name: string;
+	bio: string;
+	username: string;
+	image: string;
+}
+
+export const demoOrganizations: Org[] = [
+	{
+		name: "Org 1",
+		username: "org-1",
+		bio: "Your trusted source for disaster preparedness resources. We're committed to helping you prepare for, respond to, and recover from disasters and emergencies. Explore our guides and expert advice to build resilience and reduce the impact of crises. Join us in creating a safer, more secure future.",
+		image: "/assets/images/org.png",
+	},
+	{
+		name: "Org 2",
+		username: "org-2",
+		bio: "Your trusted source for disaster preparedness resources. We're committed to helping you prepare for, respond to, and recover from disasters and emergencies. Explore our guides and expert advice to build resilience and reduce the impact of crises. Join us in creating a safer, more secure future.",
+		image: "/assets/images/org.png",
 	},
 ];

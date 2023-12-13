@@ -1,27 +1,28 @@
 "use client";
 
-import { demoNews } from "@/constants";
-import { HeadingSection, FormalCard } from "@/components/shared";
+import { demoOrganizations } from "@/constants";
+import { HeadingSection, OrganizationCard } from "@/components/shared";
 import { motion } from "framer-motion";
 
-export default function ShortListedNews() {
+export default function ShortListedOrganizations() {
 	return (
 		<div className="shadow rounded-md border">
-			<HeadingSection text="News" link="/news" linkText="View All" />
+			<HeadingSection text="Organizations" link="/organizations" linkText="View All" />
 
 			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 p-4 sm:p-5 ">
-				{demoNews.map((data, index) => (
+				{demoOrganizations.map((data, index) => (
 					<motion.div
-						key={data.heading}
+						key={data.name}
 						initial={{ opacity: 0, y: -100 }}
 						viewport={{ once: true }}
 						whileInView={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.4 * (index + 1) }}
 					>
-						<FormalCard
-							heading={data.heading}
-							image={data.img}
-							description={data.description}
+						<OrganizationCard
+							name={data.name}
+							username={data.username}
+							image={data.image}
+							bio={data.bio}
 						/>
 					</motion.div>
 				))}
