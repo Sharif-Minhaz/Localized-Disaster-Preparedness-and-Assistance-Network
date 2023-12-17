@@ -12,28 +12,30 @@ interface Props {
 export default function OrganizationCard({ name, username, image, bio }: Props) {
 	return (
 		<article className="border shadow p-4">
-			<div className="flex gap-4">
-				<div>
-					<Image
-						src={image}
-						alt={name}
-						width={60}
-						height={60}
-						className="rounded-full object-cover"
-					/>
+			<div className="flex gap-3 justify-between">
+				<div className="flex gap-4">
+					<div>
+						<Image
+							src={image}
+							alt={name}
+							width={60}
+							height={60}
+							className="rounded-full object-cover"
+						/>
+					</div>
+					<div>
+						<h3 className="text-lg">{name}</h3>
+						<p className="text-sm">@{username}</p>
+					</div>
 				</div>
-				<div>
-					<h3 className="text-lg">{name}</h3>
-					<p className="text-sm">@{username}</p>
-				</div>
+				<Link href={`/organizations/${username}`}>
+					<Button className="text-sm bg-bluish-inverse h-8">View</Button>
+				</Link>
 			</div>
 			<div>
 				<p className="line-clamp-4 my-4 text-sm">{bio}</p>
 			</div>
 			<div className="flex items-center justify-between gap-3">
-				<Link href={`/organizations/${username}`}>
-					<Button className="text-sm bg-bluish-inverse h-8">View</Button>
-				</Link>
 				<div className="flex gap-2 items-center">
 					<p className="text-sm">{10} Members</p>
 					<div className="relative">

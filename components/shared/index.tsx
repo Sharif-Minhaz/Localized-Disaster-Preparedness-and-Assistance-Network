@@ -11,7 +11,8 @@ import Banner from "./Banner";
 import WeatherReport from "./WeatherReport";
 import OrganizationCard from "./OrganizationCard";
 import HeadingSection from "./HeadingSection";
-import ShortListedOrganizations from './ShortListedOrganizations';
+import ShortListedOrganizations from "./ShortListedOrganizations";
+import Footer from "./Footer";
 
 export {
 	Navbar,
@@ -27,5 +28,6 @@ export {
 	Banner,
 	WeatherReport,
 	OrganizationCard,
-	ShortListedOrganizations
+	ShortListedOrganizations,
+	Footer,
 };
