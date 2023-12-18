@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import { MainContextProvider } from "@/contexts/MainContext";
-import { Navbar, Sidebar } from "@/components/shared";
+import { Footer, Navbar, Sidebar } from "@/components/shared";
 import ClerkThemeProvider from "@/lib/providers/ClerkThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,7 +22,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 						<Sidebar />
 						<main className="ml-0 lg:ml-[255px]">
 							<Navbar />
-							<div className="sm:p-5 sm:pb-0 p-4 pb-0">{children}</div>
+							<div className="sm:p-5 sm:pb-0 p-4 pb-0">
+								{children}
+								<section className="mt-8">
+									<Footer />
+								</section>
+							</div>
 						</main>
 					</body>
 				</html>

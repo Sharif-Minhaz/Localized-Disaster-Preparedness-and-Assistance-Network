@@ -1,6 +1,5 @@
 import {
 	Banner,
-	Footer,
 	Hero,
 	ShortListedNews,
 	ShortListedOrganizations,
@@ -26,10 +25,9 @@ export default async function HomePage() {
 			<section>
 				<WeatherReport />
 			</section>
-			<section className="mb-5">
+			<section>
 				<ShortListedOrganizations />
 			</section>
-			<Footer />
 		</section>
 	);
 }
