@@ -1,11 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { Button } from "../ui/button";
 import { Mail, Phone } from "lucide-react";
 import Link from "next/link";
 import { heroCounts, heroThreats } from "@/constants";
-import { Countup, HeroCarousel } from ".";
+import { Countup, HeroCarousel, ThreatCard } from ".";
 import { motion } from "framer-motion";
 
 export default function Hero() {
@@ -124,34 +123,7 @@ export default function Hero() {
 						</motion.h1>
 						<div className="flex sm:flex-row flex-col gap-4">
 							{heroThreats.map((data, index) => (
-								<motion.article
-									key={data.title}
-									initial={{ y: -20, opacity: 0 }}
-									viewport={{ once: true }}
-									whileInView={{ y: 0, opacity: 1 }}
-									transition={{ delay: 0.1 * index, duration: 0.2 }}
-									className="p-2 shadow-sm hover:shadow transition-all w-full rounded-md border relative drop-shadow-lg dark:bg-slate-900 bg-white dark:bg-opacity-40 bg-opacity-50 backdrop-blur"
-								>
-									<Link className="w-full flex gap-3" href={data.route}>
-										<div className="flex items-center">
-											<Image
-												src={data.img}
-												height={80}
-												width={80}
-												className="object-cover rounded-full"
-												alt={data.title}
-											/>
-										</div>
-										<div className="flex justify-center flex-col gap-1.5">
-											<h1 className="font-roboto font-medium">
-												{data.title}
-											</h1>
-											<p className="text-[13px] dark:text-slate-300 text-slate-800">
-												{data.description}
-											</p>
-										</div>
-									</Link>
-								</motion.article>
+								<ThreatCard key={data.title} data={data} index={index} />
 							))}
 						</div>
 					</div>

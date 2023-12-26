@@ -13,6 +13,7 @@ import OrganizationCard from "./OrganizationCard";
 import HeadingSection from "./HeadingSection";
 import ShortListedOrganizations from "./ShortListedOrganizations";
 import Footer from "./Footer";
+import ThreatCard from "./ThreatCard";
 
 export {
 	Navbar,
@@ -30,4 +31,5 @@ export {
 	OrganizationCard,
 	ShortListedOrganizations,
 	Footer,
+	ThreatCard,
 };
