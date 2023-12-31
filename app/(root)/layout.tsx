@@ -4,6 +4,8 @@ import "../globals.css";
 import { MainContextProvider } from "@/contexts/MainContext";
 import { Footer, Navbar, Sidebar } from "@/components/shared";
 import ClerkThemeProvider from "@/lib/providers/ClerkThemeProvider";
+import { Suspense } from "react";
+import MainPageFallback from "@/components/shared/MainPageFallback";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,23 +17,25 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<MainContextProvider>
-			<ClerkThemeProvider>
-				<html lang="en">
-					<body className={`${inter.className}`}>
-						<Sidebar />
-						<main className="ml-0 lg:ml-[255px]">
-							<Navbar />
-							<div className="sm:p-5 sm:pb-0 p-4 pb-0">
-								{children}
-								<section className="mt-8">
-									<Footer />
-								</section>
-							</div>
-						</main>
-					</body>
-				</html>
-			</ClerkThemeProvider>
-		</MainContextProvider>
+		<html lang="en">
+			<body className={`${inter.className}`}>
+				<MainContextProvider>
+					<Suspense fallback={<MainPageFallback />}>
+						<ClerkThemeProvider>
+							<Sidebar />
+							<main className="ml-0 lg:ml-[255px]">
+								<Navbar />
+								<div className="sm:p-5 sm:pb-0 p-4 pb-0">
+									{children}
+									<section className="mt-8">
+										<Footer />
+									</section>
+								</div>
+							</main>
+						</ClerkThemeProvider>
+					</Suspense>
+				</MainContextProvider>
+			</body>
+		</html>
 	);
 }

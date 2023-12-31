@@ -1,12 +1,21 @@
+"use client";
+
 import { HeadingSection } from "@/components/shared";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function AboutPage() {
 	return (
 		<div className="shadow rounded-md border">
 			<HeadingSection text="About Us" />
 			<div className="p-4 flex gap-8">
-				<div className="hidden sm:flex bg-[url(/assets/images/circle-scatter-about.svg)] bg-[right_10%] bg-no-repeat">
+				<motion.div
+					initial={{ opacity: 0 }}
+					viewport={{ once: true }}
+					whileInView={{ opacity: 1 }}
+					transition={{ delay: 0.3, duration: 0.2 }}
+					className="hidden sm:flex bg-[url(/assets/images/circle-scatter-about.svg)] bg-[right_10%] bg-no-repeat"
+				>
 					<div className="flex flex-col justify-center">
 						<div className="w-[170px] h-[170px] relative">
 							<Image
@@ -35,8 +44,14 @@ export default function AboutPage() {
 							/>
 						</div>
 					</div>
-				</div>
-				<div className="flex flex-col gap-4">
+				</motion.div>
+				<motion.div
+					initial={{ opacity: 0 }}
+					viewport={{ once: true }}
+					whileInView={{ opacity: 1 }}
+					transition={{ delay: 0.5, duration: 0.2 }}
+					className="flex flex-col gap-4"
+				>
 					<p>
 						Dedicated to building a resilient future, our focus is on{" "}
 						<span className="text-bluish-inverse font-bold">Bangladesh</span>.
@@ -58,7 +73,7 @@ export default function AboutPage() {
 						Together, we are creating a network of support that fosters hope, strength,
 						and the capacity to overcome the challenges posed by disasters.
 					</p>
-				</div>
+				</motion.div>
 			</div>
 		</div>
 	);
