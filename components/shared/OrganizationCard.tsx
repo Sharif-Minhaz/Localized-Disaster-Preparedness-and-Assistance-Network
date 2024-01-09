@@ -7,9 +7,10 @@ interface Props {
 	username: string;
 	image: string;
 	bio: string;
+	members: object[];
 }
 
-export default function OrganizationCard({ name, username, image, bio }: Props) {
+export default function OrganizationCard({ name, username, image, bio, members }: Props) {
 	return (
 		<article className="border shadow p-4">
 			<div className="flex gap-3 justify-between">
@@ -37,10 +38,13 @@ export default function OrganizationCard({ name, username, image, bio }: Props) 
 			</div>
 			<div className="flex items-center justify-between gap-3">
 				<div className="flex gap-2 items-center">
-					<p className="text-sm">{10} Members</p>
+					<p className="text-sm">
+						{members.length} Member{members.length > 1 ? "s" : ""}
+					</p>
 					<div className="relative">
 						<Image
-							src={"/assets/images/user.png"}
+							// @ts-ignore
+							src={members[0].imageUrl}
 							alt="user"
 							width={20}
 							height={20}

@@ -9,12 +9,6 @@ export default function ThreatPage() {
 				{heroThreats.map((data, index) => (
 					<ThreatCard key={data.title} data={data} index={index} />
 				))}
-				{heroThreats.map((data, index) => (
-					<ThreatCard key={data.title} data={data} index={index} />
-				))}
-				{heroThreats.map((data, index) => (
-					<ThreatCard key={data.title} data={data} index={index} />
-				))}
 			</div>
 		</div>
 	);

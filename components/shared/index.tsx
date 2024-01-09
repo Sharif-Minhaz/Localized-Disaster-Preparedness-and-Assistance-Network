@@ -12,6 +12,7 @@ import WeatherReport from "./WeatherReport";
 import OrganizationCard from "./OrganizationCard";
 import HeadingSection from "./HeadingSection";
 import ShortListedOrganizations from "./ShortListedOrganizations";
+import ShortListedOrgCards from "./ShortListedOrgCards";
 import Footer from "./Footer";
 import ThreatCard from "./ThreatCard";
 
@@ -30,6 +31,7 @@ export {
 	WeatherReport,
 	OrganizationCard,
 	ShortListedOrganizations,
+	ShortListedOrgCards,
 	Footer,
 	ThreatCard,
 };

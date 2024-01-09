@@ -1,3 +1,3 @@
 export default function MainPageFallback() {
-	return <div>Loading...</div>;
+	return <div className="p-3">Loading...</div>;
 }

@@ -99,17 +99,16 @@ export async function fetchCommunities({
 		// Define the sort options for the fetched communities based on createdAt field and provided sort order.
 		const sortOptions = { createdAt: sortBy };
 
-		// Create a query to fetch the communities based on the search and sort criteria.
-		const communitiesQuery = Community.find(query)
-			.sort(sortOptions)
-			.skip(skipAmount)
-			.limit(pageSize)
-			.populate("members");
-
 		// Count the total number of communities that match the search criteria (without pagination).
 		const totalCommunitiesCount = await Community.countDocuments(query);
 
-		const communities = await communitiesQuery.exec();
+		// Create a query to fetch the communities based on the search and sort criteria.
+		const communities = await Community.find(query)
+			.sort(sortOptions)
+			.skip(skipAmount)
+			.limit(pageSize)
+			.populate("members")
+			.lean();
 
 		// Check if there are more communities beyond the current page.
 		const isNext = totalCommunitiesCount > skipAmount + communities.length;

@@ -98,9 +98,9 @@ export default function Footer() {
 								viewBox="0 0 8 19"
 							>
 								<path
-									fill-rule="evenodd"
+									fillRule="evenodd"
 									d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z"
-									clip-rule="evenodd"
+									clipRule="evenodd"
 								/>
 							</svg>
 							<span className="sr-only">Facebook page</span>
@@ -113,11 +113,11 @@ export default function Footer() {
 								xmlns="http://www.w3.org/2000/svg"
 								className="w-5 h-5 icon icon-tabler icon-tabler-brand-instagram"
 								viewBox="0 0 24 24"
-								stroke-width="2"
+								strokeWidth="2"
 								stroke="currentColor"
 								fill="none"
-								stroke-linecap="round"
-								stroke-linejoin="round"
+								strokeLinecap="round"
+								strokeLinejoin="round"
 							>
 								<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 								<path d="M4 4m0 4a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z" />
@@ -134,11 +134,11 @@ export default function Footer() {
 								xmlns="http://www.w3.org/2000/svg"
 								className="w-[18px] h-[18px] icon icon-tabler icon-tabler-brand-x"
 								viewBox="0 0 24 24"
-								stroke-width="2"
+								strokeWidth="2"
 								stroke="currentColor"
 								fill="none"
-								stroke-linecap="round"
-								stroke-linejoin="round"
+								strokeLinecap="round"
+								strokeLinejoin="round"
 							>
 								<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 								<path d="M4 4l11.733 16h4.267l-11.733 -16z" />
@@ -154,11 +154,11 @@ export default function Footer() {
 								xmlns="http://www.w3.org/2000/svg"
 								className="w-5 h-5 icon icon-tabler icon-tabler-brand-linkedin"
 								viewBox="0 0 24 24"
-								stroke-width="2"
+								strokeWidth="2"
 								stroke="currentColor"
 								fill="none"
-								stroke-linecap="round"
-								stroke-linejoin="round"
+								strokeLinecap="round"
+								strokeLinejoin="round"
 							>
 								<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 								<path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />

@@ -118,10 +118,11 @@ export const heroCounts: HeroCounts[] = [
 ];
 
 interface HeroThreats {
+	slug: string;
 	title: string;
 	description: string;
 	img: string;
-	route: string;
+	details: string;
 }
 
 export const heroThreats: HeroThreats[] = [
@@ -129,19 +130,58 @@ export const heroThreats: HeroThreats[] = [
 		title: "Cyclone",
 		description: "Rotating storm, powerful winds",
 		img: "/assets/images/cyclone.jpeg",
-		route: "/threats",
+		slug: "cyclone",
+		details:
+			"Bangladesh is often hit by cyclones, especially during the monsoon season. The low-lying coastal areas are particularly vulnerable to storm surges, which can cause widespread flooding and destruction.",
 	},
 	{
 		title: "Earthquake",
 		description: "Sudden ground shaking event",
 		img: "/assets/images/earthquake.jpeg",
-		route: "/threats",
+		slug: "earthquake",
+		details:
+			"While not as frequent as in some other regions, Bangladesh is situated in a seismically active zone. Earthquakes can lead to significant damage, especially in urban areas with poorly constructed buildings.",
 	},
 	{
 		title: "Flood",
 		description: "Rising water engulfs areas",
 		img: "/assets/images/flood.jpeg",
-		route: "/threats",
+		slug: "flood",
+		details:
+			"The country experiences regular river flooding during the monsoon season, affecting both urban and rural areas. Flash floods, riverbank erosion, and monsoon rains contribute to the recurrent flooding.",
+	},
+	// ----=----
+	{
+		title: "Riverbank Erosion",
+		description: "River erosion, displacement",
+		img: "/assets/images/river-erosion.jpeg",
+		slug: "riverbank-erosion",
+		details:
+			"Bangladesh has numerous rivers, and riverbank erosion is a significant issue. It displaces communities, destroys agricultural land, and poses a threat to infrastructure.",
+	},
+	{
+		title: "Drought",
+		description: "Water scarcity, agricultural impact",
+		img: "/assets/images/drought.jpeg",
+		slug: "drought",
+		details:
+			"Certain regions of Bangladesh can experience drought conditions, affecting agriculture and water supply.",
+	},
+	{
+		title: "Tornado",
+		description: "High winds, localized damage",
+		img: "/assets/images/tornado.jpeg",
+		slug: "tornado",
+		details:
+			"Although less common than cyclones, tornadoes can occur and cause localized damage.",
+	},
+	{
+		title: "Landslide",
+		description: "Slope failure, hilly terrain",
+		img: "/assets/images/landslide.jpeg",
+		slug: "landslide",
+		details:
+			"Hilly areas in the southeastern part of the country are prone to landslides, particularly during heavy rainfall.",
 	},
 ];
 

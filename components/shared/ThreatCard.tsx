@@ -8,7 +8,8 @@ interface DataProp {
 	title: string;
 	img: string;
 	description: string;
-	route: string;
+	slug: string;
+	details: string;
 }
 
 interface Props {
@@ -19,14 +20,14 @@ interface Props {
 export default function ThreatCard({ data, index }: Props) {
 	return (
 		<motion.article
-			key={data.title}
+			key={data.slug}
 			initial={{ y: -20, opacity: 0 }}
 			viewport={{ once: true }}
 			whileInView={{ y: 0, opacity: 1 }}
 			transition={{ delay: 0.1 * index, duration: 0.2 }}
 			className="p-2 shadow-sm hover:shadow transition-all w-full rounded-md border relative drop-shadow-lg dark:bg-slate-900 bg-white dark:bg-opacity-40 bg-opacity-50 backdrop-blur"
 		>
-			<Link className="w-full flex gap-3" href={data.route}>
+			<Link className="w-full flex gap-3" href={`/threats/${data.slug}`}>
 				<div className="flex items-center">
 					<Image
 						src={data.img}

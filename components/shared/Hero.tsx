@@ -122,7 +122,7 @@ export default function Hero() {
 							Threats
 						</motion.h1>
 						<div className="flex sm:flex-row flex-col gap-4">
-							{heroThreats.map((data, index) => (
+							{[...heroThreats].slice(0, 3).map((data, index) => (
 								<ThreatCard key={data.title} data={data} index={index} />
 							))}
 						</div>
