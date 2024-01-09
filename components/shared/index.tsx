@@ -15,6 +15,7 @@ import ShortListedOrganizations from "./ShortListedOrganizations";
 import ShortListedOrgCards from "./ShortListedOrgCards";
 import Footer from "./Footer";
 import ThreatCard from "./ThreatCard";
+import Search from "./Search";
 
 export {
 	Navbar,
@@ -33,5 +34,6 @@ export {
 	ShortListedOrganizations,
 	ShortListedOrgCards,
 	Footer,
+	Search,
 	ThreatCard,
 };
