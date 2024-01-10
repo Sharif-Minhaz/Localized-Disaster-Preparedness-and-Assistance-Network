@@ -39,7 +39,7 @@ export default function OrganizationCard({ name, username, image, bio, members }
 			<div className="flex items-center justify-between gap-3">
 				<div className="flex gap-2 items-center">
 					<p className="text-sm">
-						{members.length} Member{members.length > 1 ? "s" : ""}
+						{members.length} member{members.length > 1 ? "s" : ""}
 					</p>
 					<div className="relative">
 						<Image

@@ -39,7 +39,7 @@ export default function Sidebar() {
 			<aside
 				className={`fixed bg-cover bg-[url(/assets/images/sidebar-bg.jpeg)] ${
 					sidebarOpen ? "left-0" : "lg:left-0 -left-[280px]"
-				} transition-all top-0 z-20 flex h-screen w-[255px] flex-col justify-between overflow-auto border-r`}
+				} transition-all top-0 z-30 flex h-screen w-[255px] flex-col justify-between overflow-auto border-r`}
 			>
 				<div className="flex flex-col dark:bg-black/75 bg-white/40 pb-5">
 					<div className="px-4 pt-5 pb-3">

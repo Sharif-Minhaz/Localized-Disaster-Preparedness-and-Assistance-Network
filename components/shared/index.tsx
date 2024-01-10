@@ -15,6 +15,7 @@ import ShortListedOrganizations from "./ShortListedOrganizations";
 import ShortListedOrgCards from "./ShortListedOrgCards";
 import Footer from "./Footer";
 import ThreatCard from "./ThreatCard";
+import ProjectsList from "./ProjectsList";
 import Search from "./Search";
 
 export {
@@ -36,4 +37,5 @@ export {
 	Footer,
 	Search,
 	ThreatCard,
+	ProjectsList,
 };
