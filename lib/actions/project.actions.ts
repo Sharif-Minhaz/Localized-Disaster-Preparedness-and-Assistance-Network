@@ -5,6 +5,8 @@ import { FilterQuery, SortOrder } from "mongoose";
 import Project from "../models/ProjectModel";
 import { connectToDB } from "../mongoose";
 import slugify from "slugify";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 interface Props {
 	heading: string;
@@ -40,6 +42,7 @@ export async function createProject({
 			image,
 		});
 
+		revalidatePath("/projects");
 		return newProject;
 	} catch (error) {
 		console.error(error);

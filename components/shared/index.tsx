@@ -17,6 +17,9 @@ import Footer from "./Footer";
 import ThreatCard from "./ThreatCard";
 import ProjectsList from "./ProjectsList";
 import Search from "./Search";
+import ProjectForm from "./ProjectForm";
+import DatePickerWithRange from "./DateRangePicker";
+import Tiptap from "./Tiptap";
 
 export {
 	Navbar,
@@ -38,4 +41,7 @@ export {
 	Search,
 	ThreatCard,
 	ProjectsList,
+	ProjectForm,
+	DatePickerWithRange,
+	Tiptap,
 };
