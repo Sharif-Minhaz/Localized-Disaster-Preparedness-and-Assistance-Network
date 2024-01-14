@@ -147,3 +147,12 @@ html {
 	background-color: rgb(29, 28, 28);
 	color: whitesmoke;
 }
+
+/* Custom CSS Needed for TipTap PlaceHolder */
+.ProseMirror p.is-editor-empty:first-child::before {
+	color: #adb5bd;
+	content: attr(data-placeholder);
+	float: left;
+	height: 0;
+	pointer-events: none;
+}

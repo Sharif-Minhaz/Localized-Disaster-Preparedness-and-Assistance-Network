@@ -38,7 +38,8 @@ export default function ProjectForm() {
 				<Label htmlFor="image">Project Image</Label>
 				<Input name="image" type="file" accept="image/*" />
 			</div>
-			<div>
+			<div className="flex gap-2 flex-col">
+				<Label htmlFor="image">Project Details</Label>
 				<Tiptap />
 			</div>
 			<div className="pb-5">
