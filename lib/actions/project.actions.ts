@@ -6,36 +6,33 @@ import Project from "../models/ProjectModel";
 import { connectToDB } from "../mongoose";
 import slugify from "slugify";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 interface Props {
 	heading: string;
-	projectPeriod: string;
+	from: string;
+	to: string;
 	partnerOrganizations?: string;
 	description: string;
 	details: string;
 	image: string;
 }
 
-export async function createProject({
-	heading,
-	projectPeriod,
-	partnerOrganizations,
-	description,
-	details,
-	image,
-}: Props) {
+export async function createProject(data: Props) {
 	try {
 		connectToDB();
+		// const rawFormData = Object.fromEntries(formData.entries());
 
-		const newProject = await Project.create({
-			slug: slugify(heading, {
+		const { heading, partnerOrganizations, description, from, to, details, image } = data;
+
+		const res = await Project.create({
+			slug: slugify(heading.toString(), {
 				lower: true,
 				strict: true,
 				remove: /[*+~.()'"!:@]/g,
 			}),
 			heading,
-			projectPeriod,
+			from,
+			to,
 			partnerOrganizations,
 			description,
 			details,
@@ -43,7 +40,7 @@ export async function createProject({
 		});
 
 		revalidatePath("/projects");
-		return newProject;
+		return res;
 	} catch (error) {
 		console.error(error);
 	}

@@ -6,6 +6,7 @@ import { Footer, Navbar, Sidebar } from "@/components/shared";
 import ClerkThemeProvider from "@/lib/providers/ClerkThemeProvider";
 import { Suspense } from "react";
 import MainPageFallback from "@/components/shared/MainPageFallback";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 										<Footer />
 									</section>
 								</div>
+								<Toaster />
 							</main>
 						</ClerkThemeProvider>
 					</Suspense>

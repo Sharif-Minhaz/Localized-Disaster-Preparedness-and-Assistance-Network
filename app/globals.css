@@ -156,3 +156,8 @@ html {
 	height: 0;
 	pointer-events: none;
 }
+
+p:empty::before {
+	content: '';
+	display: inline-block;
+}

@@ -1,12 +1,14 @@
 import { HeadingSection, ProjectsList, Search } from "@/components/shared";
 import MainPageFallback from "@/components/shared/MainPageFallback";
 import { Suspense } from "react";
-import { demoProjectsList } from "@/constants";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Plus } from "lucide-react";
+import { fetchProjects } from "@/lib/actions/project.actions";
+import { Project } from "@/components/shared/ProjectsList";
 
 export default async function Projects() {
+	const { projects, isNext } = await fetchProjects({});
 	return (
 		<div className="shadow rounded-md border">
 			<HeadingSection text="Projects" />
@@ -19,7 +21,7 @@ export default async function Projects() {
 				</Link>
 			</div>
 			<Suspense fallback={<MainPageFallback />}>
-				<ProjectsList projects={demoProjectsList} />
+				<ProjectsList projects={projects as Project[]} isNext={isNext} />
 			</Suspense>
 		</div>
 	);

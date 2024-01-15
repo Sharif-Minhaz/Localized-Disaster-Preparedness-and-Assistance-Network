@@ -5,22 +5,24 @@ import { BookOpenText } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-interface Projects {
+export interface Project {
 	_id: string;
 	slug: string;
 	partnerOrganizations: string;
 	image: string;
-	projectPeriod: string;
+	from: string;
+	to: string;
 	heading: string;
 	description: string;
 	details: string;
 }
 
 interface Props {
-	projects: Projects[];
+	projects: Project[];
+	isNext: boolean;
 }
 
-export default function ProjectsList({ projects }: Props) {
+export default function ProjectsList({ projects, isNext }: Props) {
 	return (
 		<div className="sm:p-5 p-4 flex flex-col gap-4 sm:gap-5">
 			{projects.map((project) => (
@@ -28,11 +30,14 @@ export default function ProjectsList({ projects }: Props) {
 					key={project._id}
 					className="p-3 flex gap-4 flex-col sm:flex-row shadow-lg rounded-lg"
 				>
-					<Image
-						src={project.image}
-						className="w-full sm:w-[300px] rounded-sm"
-						alt={project.heading}
-					/>
+					<div className="relative w-[300px] h-[175px]">
+						<Image
+							src={project.image}
+							className="w-full h-full object-cover rounded-sm"
+							alt={project.heading}
+							fill
+						/>
+					</div>
 					<div>
 						<h2 className="text-[20px] font-semibold mb-2 leading-[1.2]">
 							{project.heading}

@@ -1,5 +1,12 @@
-export default function SingleProjectPage({ params }: { params: { slug: string } }) {
-	const projectId = params.slug;
+import SinglePageProject from "@/components/shared/SinglePageProject";
+import { fetchProject } from "@/lib/actions/project.actions";
 
-	return <div>SingleProjectPage - {projectId}</div>;
+export default async function SingleProjectPage({ params }: { params: { slug: string } }) {
+	const project = await fetchProject(params.slug);
+
+	return (
+		<div>
+			<SinglePageProject project={project} />
+		</div>
+	);
 }

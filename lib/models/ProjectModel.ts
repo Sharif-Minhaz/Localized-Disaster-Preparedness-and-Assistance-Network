@@ -14,8 +14,12 @@ const projectSchema = new Schema(
 			type: String,
 			default: "N/A",
 		},
-		projectPeriod: {
-			type: String,
+		from: {
+			type: Date,
+			required: true,
+		},
+		to: {
+			type: Date,
 			required: true,
 		},
 		image: {
