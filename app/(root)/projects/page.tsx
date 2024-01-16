@@ -7,8 +7,8 @@ import { Plus } from "lucide-react";
 import { fetchProjects } from "@/lib/actions/project.actions";
 import { Project } from "@/components/shared/ProjectsList";
 
-export default async function Projects() {
-	const { projects, isNext } = await fetchProjects({});
+export default async function Projects({ searchParams }: { searchParams?: { query: string } }) {
+	const { projects, isNext } = await fetchProjects({ searchString: searchParams?.query });
 	return (
 		<div className="shadow rounded-md border">
 			<HeadingSection text="Projects" />

@@ -17,27 +17,30 @@ import { Textarea } from "../ui/textarea";
 import { addDays } from "date-fns";
 import { DateRange } from "react-day-picker";
 import { DatePickerWithRange, Tiptap } from ".";
-import { Plus } from "lucide-react";
-import { createProject } from "@/lib/actions/project.actions";
+import { CheckCircle, Plus } from "lucide-react";
+import { createProject, updateProject } from "@/lib/actions/project.actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ProjectValidation } from "@/lib/validations/project";
 import { isBase64Image } from "@/lib/utils";
 import { useUploadThing } from "@/lib/uploadthing";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useToast } from "../ui/use-toast";
+import { Project } from "./ProjectsList";
 
-export default function ProjectForm() {
+export default function ProjectForm({ project, update }: { project?: Project; update?: boolean }) {
 	const [key, setKey] = useState(Date.now());
 	const { toast } = useToast();
-	const pathname = usePathname();
 	const router = useRouter();
 	const [files, setFiles] = useState<File[]>([]);
 
+	const projectStartDate = project?.from ? new Date(project.from) : new Date(2024, 0, 20);
+	const projectEndDate = project?.to ? new Date(project.to) : addDays(new Date(2024, 0, 20), 20);
+
 	const [date, setDate] = useState<DateRange | undefined>({
-		from: new Date(2024, 0, 20),
-		to: addDays(new Date(2024, 0, 20), 20),
+		from: projectStartDate,
+		to: projectEndDate,
 	});
 
 	const { startUpload } = useUploadThing("media");
@@ -45,28 +48,28 @@ export default function ProjectForm() {
 	const form = useForm({
 		resolver: zodResolver(ProjectValidation),
 		defaultValues: {
-			heading: "",
-			from: new Date(2024, 0, 20),
-			to: addDays(new Date(2024, 0, 20), 20),
-			partnerOrganizations: "",
-			description: "",
-			details: "",
-			image: "",
+			heading: project?.heading || "",
+			from: projectStartDate,
+			to: projectEndDate,
+			partnerOrganizations: project?.partnerOrganizations || "",
+			description: project?.description || "",
+			details: project?.details || "",
+			image: project?.image || "",
 		},
 	});
 
 	async function onSubmit(values: z.infer<typeof ProjectValidation>) {
-		// const blobs = values.image;
+		const blobs = values.image;
 
-		// const hasImageChanged = isBase64Image(blobs);
+		const hasImageChanged = isBase64Image(blobs);
 
-		// if (hasImageChanged) {
-		const imgRes = await startUpload(files);
+		if (hasImageChanged) {
+			const imgRes = await startUpload(files);
 
-		if (imgRes && imgRes[0].url) {
-			values.image = imgRes[0].url;
+			if (imgRes && imgRes[0].url) {
+				values.image = imgRes[0].url;
+			}
 		}
-		// }
 
 		const data = {
 			heading: values.heading,
@@ -76,7 +79,26 @@ export default function ProjectForm() {
 			description: values.description,
 			details: values.details,
 			image: values.image,
+			slug: project?.slug,
 		};
+
+		if (update) {
+			// @ts-ignore
+			const res = await updateProject(data);
+			if (res) {
+				toast({
+					title: "Success: Project",
+					description: "Project updated successfully",
+				});
+				return router.push("/projects");
+			}
+
+			return toast({
+				variant: "destructive",
+				title: "Failed: Project updation",
+				description: "Project update failed",
+			});
+		}
 
 		// @ts-ignore
 		const res = await createProject(data);
@@ -88,10 +110,6 @@ export default function ProjectForm() {
 				title: "Success: Project",
 				description: "Project added successfully",
 			});
-		}
-
-		if (pathname !== "/projects/create") {
-			router.push("/projects");
 		}
 	}
 
@@ -223,6 +241,7 @@ export default function ProjectForm() {
 									name={field.name}
 									value={field.value}
 									onChange={field.onChange}
+									editable={!form.formState.isSubmitting}
 								/>
 							</FormControl>
 							<FormMessage />
@@ -230,12 +249,16 @@ export default function ProjectForm() {
 					)}
 				/>
 				<div className="pb-5">
-					<Button
-						disabled={form.formState.isSubmitting}
-						className="disabled:cursor-not-allowed disabled:bg-blue-300"
-						type="submit"
-					>
-						<Plus /> Add Project
+					<Button disabled={form.formState.isSubmitting} type="submit">
+						{update ? (
+							<>
+								<CheckCircle size={17} className="mr-2" /> Update Project
+							</>
+						) : (
+							<>
+								<Plus size={17} className="mr-2" /> Add Project
+							</>
+						)}
 					</Button>
 				</div>
 			</form>

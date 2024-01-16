@@ -6,6 +6,8 @@ import Project from "../models/ProjectModel";
 import { connectToDB } from "../mongoose";
 import slugify from "slugify";
 import { revalidatePath } from "next/cache";
+import { deleteUTImage } from "./helpers.action";
+import { redirect } from "next/navigation";
 
 interface Props {
 	heading: string;
@@ -15,12 +17,12 @@ interface Props {
 	description: string;
 	details: string;
 	image: string;
+	slug?: string;
 }
 
 export async function createProject(data: Props) {
 	try {
 		connectToDB();
-		// const rawFormData = Object.fromEntries(formData.entries());
 
 		const { heading, partnerOrganizations, description, from, to, details, image } = data;
 
@@ -43,6 +45,44 @@ export async function createProject(data: Props) {
 		return res;
 	} catch (error) {
 		console.error(error);
+	}
+}
+
+export async function updateProject(data: Props) {
+	try {
+		connectToDB();
+		const projectDetails: Props | null = await Project.findOne({ slug: data.slug })
+			.select("image")
+			.lean();
+
+		if (projectDetails) {
+			if (data.image !== projectDetails.image) {
+				await deleteUTImage(projectDetails.image);
+			}
+		}
+
+		const updateProject = await Project.findOneAndUpdate(
+			{ slug: data.slug },
+			{
+				...data,
+				slug: slugify(data.heading.toString(), {
+					lower: true,
+					strict: true,
+					remove: /[*+~.()'"!:@]/g,
+				}),
+			}
+		);
+
+		if (!updateProject) {
+			throw new Error("Project not found");
+		}
+
+		revalidatePath("/projects");
+		return updateProject;
+	} catch (error) {
+		// Handle any errors
+		console.error("Error updating project information:", error);
+		throw error;
 	}
 }
 
@@ -111,6 +151,32 @@ export async function fetchProjects({
 		return { projects, isNext };
 	} catch (error) {
 		console.error("Error fetching projects:", error);
+		throw error;
+	}
+}
+
+export async function deleteProject(slug: string) {
+	try {
+		connectToDB();
+		const projectDetails: Props | null = await Project.findOne({ slug }).select("image").lean();
+
+		if (projectDetails) {
+			await deleteUTImage(projectDetails.image);
+		}
+
+		// Find the project by its slug and delete it
+		const deletedProject = await Project.findOneAndDelete({
+			slug,
+		});
+
+		if (!deletedProject) {
+			throw new Error("Project not found");
+		}
+
+		revalidatePath("/projects");
+		redirect("/projects");
+	} catch (error) {
+		console.error("Error deleting projects:", error);
 		throw error;
 	}
 }

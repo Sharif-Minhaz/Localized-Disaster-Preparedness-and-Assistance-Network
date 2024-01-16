@@ -17,12 +17,15 @@ export interface Project {
 	details: string;
 }
 
-interface Props {
+export interface ProjectProps {
 	projects: Project[];
 	isNext: boolean;
 }
 
-export default function ProjectsList({ projects, isNext }: Props) {
+export default function ProjectsList({ projects, isNext }: ProjectProps) {
+	if (!projects.length) {
+		return <div className="sm:p-5 p-4">No project found.</div>;
+	}
 	return (
 		<div className="sm:p-5 p-4 flex flex-col gap-4 sm:gap-5">
 			{projects.map((project) => (

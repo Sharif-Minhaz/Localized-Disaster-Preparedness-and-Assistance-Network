@@ -10,10 +10,12 @@ const Tiptap = ({
 	name,
 	value,
 	onChange,
+	editable,
 }: {
 	name: string;
 	value: string;
 	onChange: (value: string) => void;
+	editable: boolean;
 }) => {
 	const editor = useEditor({
 		extensions: [
@@ -24,7 +26,7 @@ const Tiptap = ({
 		],
 		editorProps: {
 			attributes: {
-				class: "flex min-h-[150px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+				class: "min-h-[150px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
 			},
 		},
 		content: value, // Initialize with provided value
@@ -33,6 +35,9 @@ const Tiptap = ({
 			onChange(html); // Update value on changes
 		},
 	});
+
+	editor && editor.setEditable(editable);
+
 	return (
 		<div>
 			<TiptapHeader editor={editor} />
