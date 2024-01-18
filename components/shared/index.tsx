@@ -20,6 +20,8 @@ import Search from "./Search";
 import ProjectForm from "./ProjectForm";
 import DatePickerWithRange from "./DateRangePicker";
 import Tiptap from "./Tiptap";
+import DonateSideBox from "./DonateSideBox";
+import SinglePageProject from "./SinglePageProject";
 
 export {
 	Navbar,
@@ -41,7 +43,9 @@ export {
 	Search,
 	ThreatCard,
 	ProjectsList,
+	DonateSideBox,
 	ProjectForm,
 	DatePickerWithRange,
 	Tiptap,
+	SinglePageProject,
 };

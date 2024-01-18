@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { Project } from "./ProjectsList";
 import { format } from "date-fns";
-import DonateSideBox from "./DonateSideBox";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
 import { deleteProject } from "@/lib/actions/project.actions";
@@ -32,9 +31,6 @@ export default function SinglePageProject({ project }: { project: Project }) {
 					className="tiptap-result"
 					dangerouslySetInnerHTML={{ __html: project.details }}
 				/>
-			</div>
-			<div className="w-[350px] relative">
-				<DonateSideBox />
 			</div>
 		</div>
 	);

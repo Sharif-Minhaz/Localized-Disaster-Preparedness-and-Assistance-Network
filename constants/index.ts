@@ -18,6 +18,13 @@ import {
 } from "lucide-react";
 
 import projectImage from "@/public/assets/images/project-1.jpg";
+import threatCyclone from "@/public/assets/images/threat-cyclone.jpg";
+import threatEarthquake from "@/public/assets/images/threat-earthquake.jpg";
+import threatFlood from "@/public/assets/images/threat-flood.jpg";
+import threatRiverbankErosion from "@/public/assets/images/threat-river-bank-erosion.jpg";
+import threatDrought from "@/public/assets/images/threat-drought.jpg";
+import threatTornado from "@/public/assets/images/threat-tornado.jpg";
+import threatLandslide from "@/public/assets/images/threat-landslide.jpg";
 
 interface MenuItem {
 	title: string;
@@ -119,12 +126,16 @@ export const heroCounts: HeroCounts[] = [
 	{ title: "Communities", count: 20 },
 ];
 
-interface HeroThreats {
+export interface HeroThreats {
 	slug: string;
 	title: string;
 	description: string;
 	img: string;
+	coverImg: any;
 	details: string;
+	before: string[];
+	during: string[];
+	after: string[];
 }
 
 export const heroThreats: HeroThreats[] = [
@@ -132,7 +143,44 @@ export const heroThreats: HeroThreats[] = [
 		title: "Cyclone",
 		description: "Rotating storm, powerful winds",
 		img: "/assets/images/cyclone.jpeg",
+		coverImg: threatCyclone,
 		slug: "cyclone",
+		before: [
+			"Keep yourself updated with weather forecasts and warnings from reliable sources.",
+			"Follow local authorities, meteorological departments, and news outlets for official information.",
+			"Prepare an emergency kit with essential supplies, including water, non-perishable food, medications, flashlight, batteries, important documents, and first aid supplies.",
+			"Reinforce doors and windows to minimize damage from strong winds.",
+			"Secure outdoor objects that could become projectiles in high winds.",
+			"Know the evacuation routes and the location of nearby cyclone shelters.",
+			"Plan in advance where you and your family will go if evacuation is necessary.",
+			"Establish a communication plan with family members, ensuring everyone knows how to reach each other in case of separation.",
+		],
+		during: [
+			"Stay indoors and seek shelter well before the cyclone hits.",
+			"Stay away from windows and doors, and avoid using elevators.",
+			"Follow the instructions and advisories issued by local authorities.",
+			"Adhere to evacuation orders if they are given.",
+			"Keep your emergency kit close at hand.",
+			"Use battery-powered devices for communication and lighting.",
+			"Turn off gas and electrical appliances to reduce the risk of fire.",
+			"Unplug electrical equipment to prevent damage from power surges.",
+			"Continuously monitor weather updates and emergency broadcasts.",
+			"Be aware of storm surges and potential flooding in your area.",
+		],
+		after: [
+			"Be cautious of downed power lines, damaged buildings, and flooded areas.",
+			"Avoid going outside until authorities declare it safe.",
+			"Attend to any injuries and seek medical attention if needed.",
+			"Contact emergency services if you or others require assistance.",
+			"Assess the damage to your property but do so carefully.",
+			"Take photographs or videos of damage for insurance claims.",
+			"Wait for authorities to declare it safe before turning on utilities.",
+			"Inspect appliances for damage before using them.",
+			"Check on neighbors and offer assistance if needed.",
+			"Participate in community efforts for cleanup and recovery.",
+			"Follow instructions from local authorities regarding any ongoing emergency response efforts.",
+			"Stay updated on relief and recovery services available in your area.",
+		],
 		details:
 			"Bangladesh is often hit by cyclones, especially during the monsoon season. The low-lying coastal areas are particularly vulnerable to storm surges, which can cause widespread flooding and destruction.",
 	},
@@ -140,7 +188,39 @@ export const heroThreats: HeroThreats[] = [
 		title: "Earthquake",
 		description: "Sudden ground shaking event",
 		img: "/assets/images/earthquake.jpeg",
+		coverImg: threatEarthquake,
 		slug: "earthquake",
+		before: [
+			"Educate yourself about earthquake risks and safety measures.",
+			"Identify safe places in each room of your home, workplace, and other frequently visited locations.",
+			"Secure heavy furniture, appliances, and other items that could pose a risk during an earthquake.",
+			"Create an emergency kit with essentials like water, non-perishable food, medications, flashlight, batteries, first aid supplies, and important documents.",
+			"Develop a family emergency plan, including communication and evacuation strategies.",
+			"Know the emergency procedures at your workplace, school, and other relevant locations.",
+			"Stay informed about earthquake preparedness through official sources and community initiatives.",
+		],
+		during: [
+			"Drop, Cover, and Hold On: Drop to the ground, take cover under a sturdy piece of furniture, and hold on until the shaking stops.",
+			"Stay indoors if you are inside a building; avoid doorways and windows.",
+			"If you are outside, move to an open area away from buildings, trees, streetlights, and utility wires.",
+			"If you are in a vehicle, pull over to a safe location away from overpasses, bridges, and tall structures.",
+			"If you are in bed, stay there and protect your head and neck with a pillow.",
+			"Be prepared for aftershocks, which may follow the initial earthquake.",
+		],
+		after: [
+			"Check yourself and others for injuries; provide first aid as needed.",
+			"Be cautious of potential hazards, such as damaged buildings, fallen debris, and broken glass.",
+			"Avoid using elevators, and use stairs cautiously.",
+			"Listen to emergency broadcasts for information and instructions.",
+			"Assess your surroundings and evacuate the building if it is deemed unsafe.",
+			"Contact loved ones to let them know you are safe and inquire about their well-being.",
+			"Follow the guidance of emergency responders and authorities.",
+			"Check for gas leaks and turn off the gas supply if you smell gas.",
+			"Inspect your home for structural damage before reentering.",
+			"Help neighbors who may need assistance, especially the elderly or those with disabilities.",
+			"Document damage with photographs for insurance claims.",
+			"Be prepared for potential aftershocks and continue to stay informed about emergency updates.",
+		],
 		details:
 			"While not as frequent as in some other regions, Bangladesh is situated in a seismically active zone. Earthquakes can lead to significant damage, especially in urban areas with poorly constructed buildings.",
 	},
@@ -148,16 +228,76 @@ export const heroThreats: HeroThreats[] = [
 		title: "Flood",
 		description: "Rising water engulfs areas",
 		img: "/assets/images/flood.jpeg",
+		coverImg: threatFlood,
 		slug: "flood",
+		before: [
+			"Stay informed about flood risks in your area by monitoring weather forecasts and flood alerts.",
+			"Create an emergency kit containing essential supplies, including water, non-perishable food, medications, flashlight, batteries, important documents, and first aid supplies.",
+			"Know the elevation level of your property in relation to nearby water bodies and flood zones.",
+			"Develop a family emergency plan that includes evacuation routes and a communication strategy.",
+			"Secure important documents in a waterproof container.",
+			"Elevate appliances and electrical systems, such as fuse boxes, above potential flood levels.",
+			"Install check valves in plumbing to prevent floodwater from backing up into drains.",
+		],
+		during: [
+			"Listen to emergency broadcasts for up-to-date information and evacuation instructions.",
+			"If advised to evacuate, do so immediately. Follow designated evacuation routes and avoid flooded roads.",
+			"Avoid walking or driving through floodwaters. Just six inches of moving water can knock you down, and one foot of water can sweep away a vehicle.",
+			"If trapped in a building, move to the highest level but do not climb into a closed attic without an escape route.",
+			"Turn off utilities at the main power switch if instructed to do so.",
+			"Avoid contact with floodwater, as it may be contaminated or contain hidden hazards.",
+			"Follow official instructions and guidance from emergency services and authorities.",
+		],
+		after: [
+			"Wait for authorities to declare it safe before returning to your home or area.",
+			"Avoid entering flooded buildings until they have been inspected for safety.",
+			"Document the damage with photographs for insurance claims.",
+			"Dispose of contaminated food, especially if it has come into contact with floodwaters.",
+			"Check for structural damage before entering your home.",
+			"Be cautious of electrical hazards and potential gas leaks.",
+			"Clean and disinfect items that came into contact with floodwater.",
+			"Contact your insurance provider to report flood damage and begin the claims process.",
+			"Seek medical attention for injuries and illnesses, especially if you came into contact with floodwater.",
+			"Cooperate with local authorities and follow any guidance for recovery efforts in your community.",
+		],
 		details:
 			"The country experiences regular river flooding during the monsoon season, affecting both urban and rural areas. Flash floods, riverbank erosion, and monsoon rains contribute to the recurrent flooding.",
 	},
-	// ----=----
+	// // ----=----
 	{
 		title: "Riverbank Erosion",
 		description: "River erosion, displacement",
 		img: "/assets/images/river-erosion.jpeg",
+		coverImg: threatRiverbankErosion,
 		slug: "riverbank-erosion",
+		before: [
+			"Stay informed about the risk of riverbank erosion in your area through local authorities and environmental agencies.",
+			"Monitor weather forecasts and river levels to anticipate potential erosion events.",
+			"Create an emergency kit with essential supplies, including water, non-perishable food, medications, flashlight, batteries, important documents, and first aid supplies.",
+			"Know the evacuation routes and emergency shelters in case of riverbank erosion.",
+			"Secure important documents in a waterproof container and keep them easily accessible.",
+			"Stay updated on early warning systems and alerts related to riverbank erosion.",
+			"Work with local authorities and community organizations to implement preventive measures.",
+		],
+		during: [
+			"Follow evacuation orders immediately if issued by local authorities.",
+			"Move to higher ground and away from riverbanks and areas prone to erosion.",
+			"Avoid crossing or attempting to navigate through eroded riverbanks.",
+			"Listen to emergency broadcasts for up-to-date information and instructions.",
+			"Stay in contact with neighbors and community members to ensure their safety.",
+			"Be prepared for potential road closures and transportation disruptions.",
+			"Follow official instructions and guidance from emergency services and authorities.",
+		],
+		after: [
+			"Wait for authorities to declare it safe before returning to your home or area.",
+			"Assess the damage to your property but do so carefully, especially if there is instability in the area.",
+			"Document the erosion and damage with photographs for insurance claims.",
+			"Check for structural damage before entering your home.",
+			"Be cautious of unstable ground and potential hazards in the aftermath of riverbank erosion.",
+			"Contact your insurance provider to report damage and begin the claims process.",
+			"Cooperate with local authorities and follow any guidance for recovery efforts in your community.",
+			"Participate in community efforts to address the impact of riverbank erosion and support affected neighbors.",
+		],
 		details:
 			"Bangladesh has numerous rivers, and riverbank erosion is a significant issue. It displaces communities, destroys agricultural land, and poses a threat to infrastructure.",
 	},
@@ -165,6 +305,33 @@ export const heroThreats: HeroThreats[] = [
 		title: "Drought",
 		description: "Water scarcity, agricultural impact",
 		img: "/assets/images/drought.jpeg",
+		coverImg: threatDrought,
+		before: [
+			"Stay informed about drought conditions in your area through local weather forecasts, climate reports, and water agencies.",
+			"Conserve water by fixing leaks, using water-efficient appliances, and practicing water-saving habits.",
+			"Create a drought-tolerant landscape around your home by choosing water-efficient plants and implementing efficient irrigation practices.",
+			"Develop a water conservation plan for your household, including guidelines for water usage during drought conditions.",
+			"Educate yourself about local water restrictions and guidelines for water conservation.",
+			"Prepare an emergency kit with essential supplies, including non-perishable food, medications, and other necessities.",
+			"Work with local authorities and community organizations to implement water-saving initiatives.",
+		],
+		during: [
+			"Follow local water restrictions and guidelines for water conservation.",
+			"Conserve water by reducing unnecessary water usage, such as limiting lawn irrigation and taking shorter showers.",
+			"Stay informed about drought-related developments and updates from local authorities.",
+			"Implement your household water conservation plan, emphasizing responsible water usage.",
+			"Support community-wide efforts to save water and raise awareness about drought conditions.",
+			"Be mindful of water sources and participate in community initiatives to preserve water quality.",
+		],
+		after: [
+			"Continue to follow water conservation practices even after the drought period ends.",
+			"Assess and repair any water leaks or inefficiencies in your home or property.",
+			"Participate in community efforts for water conservation and sustainable water management.",
+			"Educate others about the importance of water conservation and sustainable water use.",
+			"Work with local authorities and community organizations to develop long-term strategies for drought resilience.",
+			"Consider implementing permanent changes to your landscaping and water use practices to be more drought-resistant.",
+			"Stay informed about water supply conditions and drought preparedness for future occurrences.",
+		],
 		slug: "drought",
 		details:
 			"Certain regions of Bangladesh can experience drought conditions, affecting agriculture and water supply.",
@@ -173,6 +340,35 @@ export const heroThreats: HeroThreats[] = [
 		title: "Tornado",
 		description: "High winds, localized damage",
 		img: "/assets/images/tornado.jpeg",
+		coverImg: threatTornado,
+		before: [
+			"Stay informed about tornado risks in your area through local weather forecasts and alerts.",
+			"Create and practice a tornado emergency plan with your family, including identifying safe locations within your home.",
+			"Assemble an emergency kit with essential supplies, including water, non-perishable food, medications, flashlight, batteries, important documents, and first aid supplies.",
+			"Know the location of designated tornado shelters in your community.",
+			"Secure outdoor objects that could become projectiles in high winds.",
+			"Install a NOAA Weather Radio or use a reliable weather app to receive tornado warnings.",
+			"Stay informed about tornado watches and warnings through local news and emergency broadcasts.",
+		],
+		during: [
+			"Take shelter immediately if a tornado warning is issued or if you observe threatening weather conditions.",
+			"Move to the lowest level of a sturdy building, preferably a basement, or an interior room on the lowest floor, away from windows.",
+			"Avoid windows and cover yourself with a mattress or heavy blankets for protection.",
+			"If you are in a mobile home or vehicle, abandon it and seek shelter in a nearby building or designated storm shelter.",
+			"Listen to a battery-powered weather radio or a reliable weather app for updates and instructions.",
+			"Do not attempt to outrun a tornado in your vehicle; instead, find a sturdy building for shelter.",
+		],
+		after: [
+			"Wait for authorities to declare it safe before leaving your shelter.",
+			"Be cautious of downed power lines, debris, and other hazards when assessing damage or providing assistance.",
+			"Check yourself and others for injuries and seek medical attention if needed.",
+			"Use flashlights rather than candles to avoid fire hazards when inspecting your home for damage.",
+			"Contact loved ones to let them know you are safe and inquire about their well-being.",
+			"Follow instructions from emergency responders and authorities regarding evacuation or other post-tornado actions.",
+			"Document damage with photographs for insurance claims.",
+			"Assist neighbors and community members as needed, especially those who may require help.",
+			"Stay informed about recovery efforts and community resources.",
+		],
 		slug: "tornado",
 		details:
 			"Although less common than cyclones, tornadoes can occur and cause localized damage.",
@@ -181,6 +377,35 @@ export const heroThreats: HeroThreats[] = [
 		title: "Landslide",
 		description: "Slope failure, hilly terrain",
 		img: "/assets/images/landslide.jpeg",
+		coverImg: threatLandslide,
+		before: [
+			"Stay informed about landslide risks in your area through local geological reports, weather forecasts, and alerts.",
+			"Identify and be aware of potential landslide-prone areas near your home and workplace.",
+			"Create an emergency kit with essential supplies, including water, non-perishable food, medications, flashlight, batteries, important documents, and first aid supplies.",
+			"Implement erosion control measures, such as planting vegetation and installing retaining walls, to help stabilize slopes.",
+			"Secure outdoor items and equipment that could be at risk of causing or being affected by a landslide.",
+			"Know the evacuation routes and locations of safe shelters in case of a landslide.",
+			"Stay informed about rainfall patterns and be cautious during periods of heavy or prolonged rain.",
+		],
+		during: [
+			"Evacuate immediately if you are in an area prone to landslides and receive an evacuation order.",
+			"Move to higher ground and away from the path of the landslide, avoiding river valleys and low-lying areas.",
+			"Avoid driving through areas that may be at risk of landslides, especially during heavy rain or after earthquakes.",
+			"Listen to emergency broadcasts and updates for information and instructions.",
+			"If inside a building during a landslide, move to an upper floor, the roof, or a location away from windows and doors.",
+			"Stay alert for signs of landslides, such as unusual sounds, cracking of the ground, or sudden changes in water flow.",
+		],
+		after: [
+			"Wait for authorities to declare it safe before returning to your home or the affected area.",
+			"Be cautious of additional landslides, especially during the post-event period.",
+			"Inspect your property for signs of instability, such as tilting trees or changes in the landscape.",
+			"Document damage with photographs for insurance claims.",
+			"Check yourself and others for injuries and seek medical attention if needed.",
+			"Contact loved ones to let them know you are safe and inquire about their well-being.",
+			"Cooperate with local authorities and follow any guidance for recovery efforts in your community.",
+			"Participate in community efforts for cleanup, restoration, and landslide mitigation.",
+			"Consider professional assessments and engineering solutions to reduce future landslide risks.",
+		],
 		slug: "landslide",
 		details:
 			"Hilly areas in the southeastern part of the country are prone to landslides, particularly during heavy rainfall.",
