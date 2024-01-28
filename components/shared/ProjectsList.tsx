@@ -34,13 +34,17 @@ export default function ProjectsList({ projects, isNext }: ProjectProps) {
 					key={project._id}
 					className="p-3 w-full flex gap-4 flex-col sm:flex-row shadow-lg rounded-lg"
 				>
-					<div className="relative w-full sm:w-[300px] h-[250px] sm:h-[175px]">
-						<Image
-							src={project.image}
-							className="object-cover rounded-md w-full"
-							alt={project.heading}
-							fill
-						/>
+					<div id="project-img-wrapper">
+						<div className="relative flex-grow w-full sm:w-[300px] h-[250px] sm:h-[175px]">
+							<Image
+								src={project.image}
+								className="rounded-md object-cover"
+								alt={project.heading}
+								fill
+								quality={100}
+								sizes="(max-width: 500px) 100vw"
+							/>
+						</div>
 					</div>
 					<div>
 						<h2 className="text-[20px] font-semibold mb-2 leading-[1.2]">

@@ -19,6 +19,8 @@ export default function FormalCard({ heading, description, image, slug }: Props)
 					className="rounded-t-lg object-cover"
 					alt="disaster news"
 					fill
+					quality={100}
+					sizes="100vw"
 				/>
 			</div>
 			<div>

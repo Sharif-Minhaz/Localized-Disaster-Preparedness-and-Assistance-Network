@@ -22,7 +22,6 @@ export default function SingleTreatPage({ params }: { params: { slug: string } }
 				<div className="sm:p-5 p-4 flex">
 					<div className="h-[450px] relative overflow-hidden">
 						<Image
-							placeholder="blur"
 							src={threat?.coverImg}
 							className="h-full object-cover object-top"
 							alt="threat image"

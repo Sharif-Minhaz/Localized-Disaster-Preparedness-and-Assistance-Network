@@ -22,12 +22,15 @@ export default function HeroCarousel() {
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			transition={{ duration: 2 }}
+			className="relative"
 		>
 			<Image
 				draggable={false}
 				src={heroCarousel[index].img}
 				className="object-cover rounded-md group-hover:scale-105 transition-all"
 				fill
+				quality={100}
+				sizes="100vw"
 				alt={heroCarousel[index].text}
 			/>
 		</motion.div>

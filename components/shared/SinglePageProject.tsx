@@ -14,7 +14,14 @@ export default function SinglePageProject({ project }: { project: Project }) {
 		<div className="flex gap-3">
 			<div className="w-full p-4">
 				<div className="relative h-[380px]">
-					<Image src={project.image} className="object-cover" fill alt="project image" />
+					<Image
+						src={project.image}
+						quality={100}
+						sizes="100vw"
+						className="object-cover"
+						fill
+						alt="project image"
+					/>
 				</div>
 				<h2 className="font-bold text-2xl">{project.heading}</h2>
 				<div className="flex gap-2">

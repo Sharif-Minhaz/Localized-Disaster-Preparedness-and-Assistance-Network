@@ -20,6 +20,8 @@ export default function AboutPage() {
 						<div className="w-[170px] h-[170px] relative">
 							<Image
 								src="/assets/images/about-1.png"
+								quality={100}
+								sizes="100vw"
 								fill
 								className="object-cover"
 								alt=""
@@ -28,6 +30,8 @@ export default function AboutPage() {
 						<div className="w-[170px] h-[170px] relative">
 							<Image
 								src="/assets/images/about-3.png"
+								quality={100}
+								sizes="100vw"
 								fill
 								className="object-cover"
 								alt=""
@@ -38,6 +42,8 @@ export default function AboutPage() {
 						<div className="w-[170px] h-[170px] mt-7 relative">
 							<Image
 								src="/assets/images/about-2.png"
+								quality={100}
+								sizes="100vw"
 								fill
 								className="object-cover"
 								alt=""

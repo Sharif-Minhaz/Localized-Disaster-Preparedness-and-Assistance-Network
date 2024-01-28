@@ -220,6 +220,8 @@ export default function ProjectForm({ project, update }: { project?: Project; up
 											src={field.value}
 											priority
 											alt="profile photo"
+											quality={100}
+											sizes="100vw"
 											fill
 											className="rounded-md object-cover"
 										/>
