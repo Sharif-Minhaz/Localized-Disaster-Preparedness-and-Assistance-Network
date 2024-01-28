@@ -22,7 +22,6 @@ export default function HeroCarousel() {
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			transition={{ duration: 2 }}
-			className="relative"
 		>
 			<Image
 				draggable={false}
