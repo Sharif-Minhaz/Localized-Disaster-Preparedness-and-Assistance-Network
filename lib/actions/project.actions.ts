@@ -90,7 +90,7 @@ export async function fetchProject(slug: string) {
 	try {
 		connectToDB();
 
-		const projectDetails = await Project.findOne({ slug });
+		const projectDetails = await Project.findOne({ slug }).lean();
 
 		return projectDetails;
 	} catch (error) {

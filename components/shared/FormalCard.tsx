@@ -6,9 +6,10 @@ interface Props {
 	heading: string;
 	description: string;
 	image: string;
+	slug: string;
 }
 
-export default function FormalCard({ heading, description, image }: Props) {
+export default function FormalCard({ heading, description, image, slug }: Props) {
 	return (
 		<article className="relative border p-4 rounded-lg shadow">
 			<div className="h-[170px] w-full relative">
@@ -29,7 +30,7 @@ export default function FormalCard({ heading, description, image }: Props) {
 					{description}
 				</p>
 				<div className="mt-2">
-					<Link href="/projects/123">
+					<Link href={`/projects/${slug}`}>
 						<p className="flex gap-1 text-[14px] items-center">
 							<span>More Info</span>
 							<ChevronRight size={14} color="#4befae" />

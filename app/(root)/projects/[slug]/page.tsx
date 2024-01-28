@@ -2,20 +2,25 @@ import { SinglePageProject, HeadingSection, DonateSideBox } from "@/components/s
 import { fetchProject } from "@/lib/actions/project.actions";
 import { Suspense } from "react";
 import MainPageFallback from "@/components/shared/MainPageFallback";
+import { Project } from "@/components/shared/ProjectsList";
 
 export default async function SingleProjectPage({ params }: { params: { slug: string } }) {
 	const project = await fetchProject(params.slug);
 
+	const plainData = JSON.parse(JSON.stringify(project));
+
 	return (
-		<div>
-			<div className="shadow rounded-md border">
+		<div className="flex gap-4 sm:gap-5">
+			<div className="shadow w-[800px] rounded-md border">
 				<HeadingSection text="Single Project Information" />
 				<Suspense fallback={<MainPageFallback />}>
-					<SinglePageProject project={project} />
+					<SinglePageProject project={plainData as Project} />
 				</Suspense>
 			</div>
-			<div className="w-[350px] relative">
-				<DonateSideBox />
+			<div className="relative flex-grow">
+				<div className="shadow rounded-md border w-full p-3">
+					<DonateSideBox />
+				</div>
 			</div>
 		</div>
 	);

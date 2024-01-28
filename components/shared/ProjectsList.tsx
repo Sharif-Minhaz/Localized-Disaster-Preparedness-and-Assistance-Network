@@ -26,17 +26,18 @@ export default function ProjectsList({ projects, isNext }: ProjectProps) {
 	if (!projects.length) {
 		return <div className="sm:p-5 p-4">No project found.</div>;
 	}
+
 	return (
-		<div className="sm:p-5 p-4 flex flex-col gap-4 sm:gap-5">
+		<div className="w-full sm:p-5 p-4 flex flex-col gap-4 sm:gap-5">
 			{projects.map((project) => (
 				<motion.article
 					key={project._id}
-					className="p-3 flex gap-4 flex-col sm:flex-row shadow-lg rounded-lg"
+					className="p-3 w-full flex gap-4 flex-col sm:flex-row shadow-lg rounded-lg"
 				>
-					<div className="relative w-[300px] h-[175px]">
+					<div className="relative w-full sm:w-[300px] h-[250px] sm:h-[175px]">
 						<Image
 							src={project.image}
-							className="w-full h-full object-cover rounded-sm"
+							className="object-cover rounded-md w-full"
 							alt={project.heading}
 							fill
 						/>

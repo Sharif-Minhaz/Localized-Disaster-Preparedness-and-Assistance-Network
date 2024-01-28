@@ -1,6 +1,5 @@
 "use client";
 
-import { demoProjects } from "@/constants";
 import { HeadingSection, FormalCard } from "@/components/shared";
 import { motion } from "framer-motion";
 import { ProjectProps } from "./ProjectsList";
@@ -23,6 +22,7 @@ export default function ShortListedProjects({ projects }: ProjectProps) {
 							heading={data.heading}
 							image={data.image}
 							description={data.description}
+							slug={data.slug}
 						/>
 					</motion.div>
 				))}
