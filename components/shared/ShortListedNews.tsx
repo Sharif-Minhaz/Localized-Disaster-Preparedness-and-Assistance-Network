@@ -22,6 +22,7 @@ export default function ShortListedNews() {
 							heading={data.heading}
 							image={data.img}
 							description={data.description}
+							slug={data.heading}
 						/>
 					</motion.div>
 				))}

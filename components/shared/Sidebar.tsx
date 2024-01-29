@@ -117,7 +117,7 @@ export default function Sidebar() {
 								<SignOutButton>
 									<div className="flex cursor-pointer px-4 py-3 gap-2">
 										<LogOut />
-										<span>{dictionary[lang]?.["logout"]}</span>
+										<span>{dictionary[lang]?.["signout"]}</span>
 									</div>
 								</SignOutButton>
 							</div>

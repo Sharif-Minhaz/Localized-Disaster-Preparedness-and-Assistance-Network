@@ -77,7 +77,7 @@ export default function Navbar() {
 							</div>
 						</SignedIn>
 
-						<UserButton />
+						<UserButton afterSignOutUrl="/" />
 					</div>
 				</SignedIn>
 				<SignedOut>
