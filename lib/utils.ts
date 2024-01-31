@@ -19,3 +19,7 @@ export function getImageKey(url: string) {
 
 	return filename;
 }
+
+export function convertToPlainObj(obj: any) {
+	return JSON.parse(JSON.stringify(obj));
+}

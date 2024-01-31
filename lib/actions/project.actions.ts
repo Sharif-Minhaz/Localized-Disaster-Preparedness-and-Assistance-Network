@@ -8,6 +8,7 @@ import slugify from "slugify";
 import { revalidatePath } from "next/cache";
 import { deleteUTImage } from "./helpers.action";
 import { redirect } from "next/navigation";
+import { convertToPlainObj } from "../utils";
 
 interface Props {
 	heading: string;
@@ -42,7 +43,7 @@ export async function createProject(data: Props) {
 		});
 
 		revalidatePath("/projects");
-		return res;
+		return convertToPlainObj(res);
 	} catch (error) {
 		console.error(error);
 	}
@@ -78,7 +79,7 @@ export async function updateProject(data: Props) {
 		}
 
 		revalidatePath("/projects");
-		return updateProject;
+		return convertToPlainObj(updateProject);
 	} catch (error) {
 		// Handle any errors
 		console.error("Error updating project information:", error);
@@ -92,7 +93,7 @@ export async function fetchProject(slug: string) {
 
 		const projectDetails = await Project.findOne({ slug }).lean();
 
-		return projectDetails;
+		return convertToPlainObj(projectDetails);
 	} catch (error) {
 		// Handle any errors
 		console.error("Error fetching project details:", error);
@@ -148,7 +149,7 @@ export async function fetchProjects({
 		// Check if there are more projects beyond the current page.
 		const isNext = totalCommunitiesCount > skipAmount + projects.length;
 
-		return { projects, isNext };
+		return { projects: convertToPlainObj(projects), isNext };
 	} catch (error) {
 		console.error("Error fetching projects:", error);
 		throw error;

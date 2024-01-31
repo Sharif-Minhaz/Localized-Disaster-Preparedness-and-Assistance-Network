@@ -9,7 +9,6 @@ import { Project } from "@/components/shared/ProjectsList";
 
 export default async function Projects({ searchParams }: { searchParams?: { query: string } }) {
 	const { projects, isNext } = await fetchProjects({ searchString: searchParams?.query });
-	const plainData = JSON.parse(JSON.stringify(projects));
 
 	return (
 		<div className="shadow rounded-md border">
@@ -23,7 +22,7 @@ export default async function Projects({ searchParams }: { searchParams?: { quer
 				</Link>
 			</div>
 			<Suspense fallback={<MainPageFallback />}>
-				<ProjectsList projects={plainData as Project[]} isNext={isNext} />
+				<ProjectsList projects={projects as Project[]} isNext={isNext} />
 			</Suspense>
 		</div>
 	);

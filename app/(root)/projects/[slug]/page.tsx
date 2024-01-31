@@ -7,14 +7,12 @@ import { Project } from "@/components/shared/ProjectsList";
 export default async function SingleProjectPage({ params }: { params: { slug: string } }) {
 	const project = await fetchProject(params.slug);
 
-	const plainData = JSON.parse(JSON.stringify(project));
-
 	return (
 		<div className="flex gap-4 sm:gap-5">
 			<div className="shadow w-[800px] rounded-md border">
 				<HeadingSection text="Single Project Information" />
 				<Suspense fallback={<MainPageFallback />}>
-					<SinglePageProject project={plainData as Project} />
+					<SinglePageProject project={project as Project} />
 				</Suspense>
 			</div>
 			<div className="relative flex-grow">

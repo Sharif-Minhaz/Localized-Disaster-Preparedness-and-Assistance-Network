@@ -11,7 +11,6 @@ import { fetchProjects } from "@/lib/actions/project.actions";
 
 export default async function HomePage() {
 	const { projects, isNext } = await fetchProjects({});
-	const plainData = JSON.parse(JSON.stringify(projects));
 
 	return (
 		<section className="flex flex-col gap-5">
@@ -19,7 +18,7 @@ export default async function HomePage() {
 				<Hero />
 			</section>
 			<section>
-				<ShortListedProjects projects={plainData as Project[]} isNext={isNext} />
+				<ShortListedProjects projects={projects as Project[]} isNext={isNext} />
 			</section>
 			<section>
 				<ShortListedNews />

@@ -113,7 +113,7 @@ export default function Sidebar() {
 					<hr className="my-3" />
 					<div className="px-4">
 						<SignedIn>
-							<div className="mb-3 md:block hidden">
+							<div className="mb-3">
 								<SignOutButton>
 									<div className="flex cursor-pointer px-4 py-3 gap-2">
 										<LogOut />

@@ -11,7 +11,6 @@ export default async function OrganizationsPage({
 	};
 }) {
 	const { communities, isNext } = await fetchCommunities({ searchString: searchParams?.query });
-	const plainData = JSON.parse(JSON.stringify(communities));
 
 	return (
 		<div className="shadow rounded-md border">
@@ -20,7 +19,7 @@ export default async function OrganizationsPage({
 				<Search placeholder="Search organizations..." />
 			</div>
 			<Suspense fallback={<MainPageFallback />}>
-				<ShortListedOrgCards isNext={isNext} communities={plainData} />
+				<ShortListedOrgCards isNext={isNext} communities={communities} />
 			</Suspense>
 		</div>
 	);

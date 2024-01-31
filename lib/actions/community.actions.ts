@@ -6,6 +6,7 @@ import Community from "../models/CommunityModel";
 import User from "../models/UserModel";
 
 import { connectToDB } from "../mongoose";
+import { convertToPlainObj } from "../utils";
 
 export async function createCommunity(
 	id: string,
@@ -60,7 +61,7 @@ export async function fetchCommunityDetails(id: string) {
 			},
 		]);
 
-		return communityDetails;
+		return convertToPlainObj(communityDetails);
 	} catch (error) {
 		// Handle any errors
 		console.error("Error fetching community details:", error);
@@ -113,7 +114,7 @@ export async function fetchCommunities({
 		// Check if there are more communities beyond the current page.
 		const isNext = totalCommunitiesCount > skipAmount + communities.length;
 
-		return { communities, isNext };
+		return { communities: convertToPlainObj(communities), isNext };
 	} catch (error) {
 		console.error("Error fetching communities:", error);
 		throw error;
