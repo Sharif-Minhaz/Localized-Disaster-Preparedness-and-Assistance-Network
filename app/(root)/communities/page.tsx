@@ -14,9 +14,9 @@ export default async function OrganizationsPage({
 
 	return (
 		<div className="shadow rounded-md border">
-			<HeadingSection text="Organizations" />
+			<HeadingSection text="Communities" />
 			<div className="px-4 sm:px-5 pt-4 sm:pt-5">
-				<Search placeholder="Search organizations..." />
+				<Search placeholder="Search communities..." />
 			</div>
 			<Suspense fallback={<MainPageFallback />}>
 				<ShortListedOrgCards isNext={isNext} communities={communities} />

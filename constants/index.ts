@@ -3,16 +3,11 @@ import {
 	BadgeInfo,
 	ClipboardList,
 	Building,
-	CalendarRange,
-	BookMarked,
 	FileText,
-	AlertOctagonIcon,
 	Radar,
 	HeartHandshakeIcon,
 	BookImage,
-	Ticket,
 	ShoppingBasket,
-	MapPinned,
 	Contact,
 	ShieldAlert,
 } from "lucide-react";
@@ -54,29 +49,14 @@ export const sideMenuData: MenuItem[] = [
 		Icon: ClipboardList,
 	},
 	{
-		title: "organizations",
-		url: "/organizations",
+		title: "communities",
+		url: "/communities",
 		Icon: Building,
-	},
-	{
-		title: "news&Events",
-		url: "/news-events",
-		Icon: CalendarRange,
-	},
-	{
-		title: "fieldStories",
-		url: "/field-stories",
-		Icon: BookMarked,
 	},
 	{
 		title: "auditReports",
 		url: "/audit-reports",
 		Icon: FileText,
-	},
-	{
-		title: "disasterSituations",
-		url: "/disaster-situations",
-		Icon: AlertOctagonIcon,
 	},
 	{
 		title: "disasterForecast",
@@ -94,19 +74,9 @@ export const sideMenuData: MenuItem[] = [
 		Icon: BookImage,
 	},
 	{
-		title: "publicTicket",
-		url: "/public-ticket",
-		Icon: Ticket,
-	},
-	{
 		title: "resources",
 		url: "/resources",
 		Icon: ShoppingBasket,
-	},
-	{
-		title: "disasterMap",
-		url: "/disaster-map",
-		Icon: MapPinned,
 	},
 	{
 		title: "contactUs",

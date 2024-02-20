@@ -37,11 +37,11 @@ export default function Sidebar() {
 	return (
 		<OutsideClickHandler onOutsideClick={closeSidebar}>
 			<aside
-				className={`fixed bg-cover bg-[url(/assets/images/sidebar-bg.jpeg)] ${
+				className={`fixed bg-cover bg-[url(/assets/images/sidebar-bg.jpg)] ${
 					sidebarOpen ? "left-0" : "lg:left-0 -left-[280px]"
 				} transition-all top-0 z-30 flex h-screen w-[255px] flex-col justify-between overflow-auto border-r`}
 			>
-				<div className="flex flex-col dark:bg-black/75 bg-white/40 pb-5">
+				<div className="flex flex-col dark:bg-black/75 bg-[#aecdffe6] pb-5">
 					<div className="px-4 pt-5 pb-3">
 						<div className="flex gap-3">
 							<Link href="/">
@@ -99,7 +99,9 @@ export default function Sidebar() {
 									<Link
 										href={menu.url}
 										className={`flex px-4 py-3 gap-2 rounded-[8px] dark:text-white ${
-											isActive ? "text-slate-100 bg-bluish" : "text-black"
+											isActive
+												? "text-slate-100 bg-[#2892ff] shadow-md"
+												: "text-black"
 										}`}
 									>
 										<Icon />
@@ -110,7 +112,7 @@ export default function Sidebar() {
 							);
 						})}
 					</ul>
-					<hr className="my-3" />
+					<div className="my-3 border-b border-[#bed2ff]" />
 					<div className="px-4">
 						<SignedIn>
 							<div className="mb-3">
