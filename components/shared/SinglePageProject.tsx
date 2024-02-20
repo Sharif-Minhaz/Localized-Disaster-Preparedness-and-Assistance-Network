@@ -4,7 +4,7 @@ import { format } from "date-fns";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
 import { deleteProject } from "@/lib/actions/project.actions";
-import DeleteProjectCom from "./DeleteProjectCom";
+import { DeleteProjectCom } from "@/components/shared";
 
 export default function SinglePageProject({ project }: { project: Project }) {
 	const dateTime = format(new Date(project.from), "yyyy-MM-dd");
@@ -18,18 +18,20 @@ export default function SinglePageProject({ project }: { project: Project }) {
 						src={project.image}
 						quality={100}
 						sizes="100vw"
-						className="object-cover"
+						className="object-cover rounded-xl"
 						fill
 						alt="project image"
 					/>
+					<div className="absolute right-2 top-2 flex flex-col gap-4 rounded-xl bg-white p-3 shadow-sm transition-all">
+						<Link href={`/projects/${project.slug}/update`}>
+							<Pencil className="text-purple-400" />
+						</Link>
+						<DeleteProjectCom action={deleteProjectWithSlug} />
+					</div>
 				</div>
-				<h2 className="font-bold text-2xl">{project.heading}</h2>
-				<div className="flex gap-2">
-					<Link href={`/projects/${project.slug}/update`}>
-						<Pencil />
-					</Link>
-					<DeleteProjectCom action={deleteProjectWithSlug} />
-				</div>
+				<h2 className="font-bold text-2xl my-3">{project.heading}</h2>
+
+				<div className="my-3 border-b border-[#eff4ff] dark:border-slate-700" />
 				<p>Commenced in {dateTime}</p>
 				<p>
 					<strong>Partner organization: </strong>

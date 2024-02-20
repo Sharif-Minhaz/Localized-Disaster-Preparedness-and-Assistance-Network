@@ -32,7 +32,7 @@ export default function ProjectsList({ projects, isNext }: ProjectProps) {
 			{projects.map((project) => (
 				<motion.article
 					key={project._id}
-					className="p-3 w-full flex gap-4 flex-col sm:flex-row shadow-lg rounded-lg"
+					className="p-3 w-full border flex gap-4 sm:flex-row relative flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg"
 				>
 					<div id="project-img-wrapper">
 						<div className="relative flex-grow w-full sm:w-[300px] h-[250px] sm:h-[175px]">

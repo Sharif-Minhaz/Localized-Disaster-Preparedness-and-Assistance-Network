@@ -8,7 +8,7 @@ export default async function ShortListedOrganizations() {
 
 	return (
 		<div className="shadow rounded-md border">
-			<HeadingSection text="Organizations" link="/organizations" linkText="View All" />
+			<HeadingSection text="Communities" link="/communities" linkText="View All" />
 			<Suspense fallback={<MainPageFallback />}>
 				{/* @ts-ignore */}
 				<ShortListedOrgCards isNext={isNext} communities={[...communities].slice(0, 3)} />

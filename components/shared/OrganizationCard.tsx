@@ -12,7 +12,7 @@ interface Props {
 
 export default function OrganizationCard({ name, username, image, bio, members }: Props) {
 	return (
-		<article className="border shadow p-4">
+		<article className="border p-4 relative flex w-full max-w-[400px] flex-col overflow-hidden rounded-xl shadow-md transition-all hover:shadow-lg">
 			<div className="flex gap-3 justify-between">
 				<div className="flex gap-4">
 					<div>

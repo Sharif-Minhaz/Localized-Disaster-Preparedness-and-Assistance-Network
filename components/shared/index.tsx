@@ -6,7 +6,6 @@ import Countup from "./Countup";
 import HeroCarousel from "./HeroCarousel";
 import FormalCard from "./FormalCard";
 import ShortListedProjects from "./ShortListedProjects";
-import ShortListedNews from "./ShortListedNews";
 import Banner from "./Banner";
 import WeatherReport from "./WeatherReport";
 import OrganizationCard from "./OrganizationCard";
@@ -22,6 +21,7 @@ import DatePickerWithRange from "./DateRangePicker";
 import Tiptap from "./Tiptap";
 import DonateSideBox from "./DonateSideBox";
 import SinglePageProject from "./SinglePageProject";
+import DeleteProjectCom from "./DeleteProjectCom";
 
 export {
 	Navbar,
@@ -33,7 +33,6 @@ export {
 	HeroCarousel,
 	FormalCard,
 	ShortListedProjects,
-	ShortListedNews,
 	Banner,
 	WeatherReport,
 	OrganizationCard,
@@ -48,4 +47,5 @@ export {
 	DatePickerWithRange,
 	Tiptap,
 	SinglePageProject,
+	DeleteProjectCom,
 };

@@ -1,7 +1,6 @@
 import {
 	Banner,
 	Hero,
-	ShortListedNews,
 	ShortListedOrganizations,
 	ShortListedProjects,
 	WeatherReport,
@@ -19,9 +18,6 @@ export default async function HomePage() {
 			</section>
 			<section>
 				<ShortListedProjects projects={projects as Project[]} isNext={isNext} />
-			</section>
-			<section>
-				<ShortListedNews />
 			</section>
 			<section className="py-3">
 				<Banner />
