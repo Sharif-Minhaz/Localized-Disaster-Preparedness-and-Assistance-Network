@@ -4,7 +4,7 @@ import { format } from "date-fns";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
 import { deleteProject } from "@/lib/actions/project.actions";
-import { DeleteProjectCom } from "@/components/shared";
+import { DeleteProjectCom, ManageProjectButtons } from "@/components/shared";
 
 export default function SinglePageProject({ project }: { project: Project }) {
 	const dateTime = format(new Date(project.from), "yyyy-MM-dd");
@@ -26,6 +26,7 @@ export default function SinglePageProject({ project }: { project: Project }) {
 						<Link href={`/projects/${project.slug}/update`}>
 							<Pencil size={17} className="text-purple-400" />
 						</Link>
+						<ManageProjectButtons slug={project.slug} completed={project.completed} />
 						<DeleteProjectCom action={deleteProjectWithSlug} />
 					</div>
 				</div>

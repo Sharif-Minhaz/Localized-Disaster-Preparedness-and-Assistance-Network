@@ -39,15 +39,19 @@ export default function ProjectCard({ heading, description, image, slug, complet
 				<h2 className="text-[16px] dark:text-white font-medium leading-[24px] line-clamp-2 flex-1 text-black">
 					{heading}
 				</h2>
-				{!completed && (
+				{!completed ? (
 					<div className="flex gap-2">
 						<span className="text-[12px] font-semibold leading-[20px] w-min rounded-full bg-green-100 px-4 py-1 text-green-500">
 							OPEN
 						</span>
-						<p className="text-[12px] font-semibold leading-[20px] w-min rounded-full bg-gray-200 px-4 py-1 text-gray-500 line-clamp-1">
+						<span className="text-[12px] font-semibold leading-[20px] w-min rounded-full bg-blue-100 px-4 py-1 text-blue-500 line-clamp-1">
 							DONATABLE
-						</p>
+						</span>
 					</div>
+				) : (
+					<span className="text-[12px] font-semibold leading-[20px] w-min rounded-full bg-gray-200 px-4 py-1 text-gray-500 line-clamp-1">
+						CLOSED
+					</span>
 				)}
 				<p className="text-grey-600 dark:text-slate-200 text-sm py-1 line-clamp-4">
 					{description}

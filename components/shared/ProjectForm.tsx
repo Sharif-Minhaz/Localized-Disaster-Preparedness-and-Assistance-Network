@@ -28,6 +28,7 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useToast } from "../ui/use-toast";
 import { Project } from "./ProjectsList";
+import { ToastAction } from "../ui/toast";
 
 export default function ProjectForm({ project, update }: { project?: Project; update?: boolean }) {
 	const [key, setKey] = useState(Date.now());
@@ -89,14 +90,16 @@ export default function ProjectForm({ project, update }: { project?: Project; up
 				toast({
 					title: "Success: Project",
 					description: "Project updated successfully",
+					action: <ToastAction altText="OK">OK</ToastAction>,
 				});
 				return router.push("/projects");
 			}
 
 			return toast({
 				variant: "destructive",
-				title: "Failed: Project updation",
+				title: "Failed: Project update",
 				description: "Project update failed",
+				action: <ToastAction altText="close">Close</ToastAction>,
 			});
 		}
 
@@ -109,6 +112,7 @@ export default function ProjectForm({ project, update }: { project?: Project; up
 			toast({
 				title: "Success: Project",
 				description: "Project added successfully",
+				action: <ToastAction altText="OK">OK</ToastAction>,
 			});
 		}
 	}

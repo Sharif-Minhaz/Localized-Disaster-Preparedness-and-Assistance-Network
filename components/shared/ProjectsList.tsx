@@ -39,7 +39,7 @@ export default function ProjectsList({ projects, isNext }: ProjectProps) {
 					className="p-3 w-full border flex gap-4 sm:flex-row relative flex-col overflow-hidden rounded-xl shadow-md transition-all hover:shadow-lg"
 				>
 					<div id="project-img-wrapper">
-						<div className="relative flex-grow w-full sm:w-[300px] h-[250px] sm:h-[175px]">
+						<div className="relative flex-grow w-full sm:w-[300px] h-[290px] sm:h-[175px]">
 							<Image
 								src={project.image}
 								className="rounded-xl object-cover"
@@ -57,11 +57,26 @@ export default function ProjectsList({ projects, isNext }: ProjectProps) {
 						</div>
 					</div>
 					<div>
-						<h2 className="text-[20px] font-semibold mb-2 leading-[1.2]">
+						<h2 className="text-[20px] font-semibold line-clamp-1 mb-2 leading-[1.2]">
 							{project.heading}
 						</h2>
-						<hr />
-						<p className="line-clamp-5 text-sm mt-1.5">{project.description}</p>
+						<div className="my-3">
+							{!project.completed ? (
+								<div className="flex gap-2">
+									<span className="text-[12px] font-semibold leading-[20px] w-min rounded-full bg-green-100 px-4 py-1 text-green-500">
+										OPEN
+									</span>
+									<span className="text-[12px] font-semibold leading-[20px] w-min rounded-full bg-blue-100 px-4 py-1 text-blue-500 line-clamp-1">
+										DONATABLE
+									</span>
+								</div>
+							) : (
+								<span className="text-[12px] font-semibold leading-[20px] w-min rounded-full bg-gray-200 px-4 py-1 text-gray-500 line-clamp-1">
+									CLOSED
+								</span>
+							)}
+						</div>
+						<p className="line-clamp-3 text-sm mt-1.5">{project.description}</p>
 						<div className="mt-3">
 							<Link
 								href={`/projects/${project.slug}`}

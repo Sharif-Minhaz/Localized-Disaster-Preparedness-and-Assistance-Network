@@ -181,3 +181,47 @@ export async function deleteProject(slug: string) {
 		throw error;
 	}
 }
+
+export async function completeProject(slug: string) {
+	try {
+		connectToDB();
+		const updatedProject = await Project.findOneAndUpdate(
+			{ slug },
+			{ completed: true },
+			{ new: true }
+		);
+
+		if (updatedProject.completed) {
+			revalidatePath("/");
+			revalidatePath("/projects");
+			revalidatePath(`/projects/${slug}`);
+			return { success: true };
+		}
+		return { success: false };
+	} catch (error) {
+		console.error("Error deleting projects:", error);
+		throw error;
+	}
+}
+
+export async function resumeProject(slug: string) {
+	try {
+		connectToDB();
+		const updatedProject = await Project.findOneAndUpdate(
+			{ slug },
+			{ completed: false },
+			{ new: true }
+		);
+
+		if (!updatedProject.completed) {
+			revalidatePath("/");
+			revalidatePath("/projects");
+			revalidatePath(`/projects/${slug}`);
+			return { success: true };
+		}
+		return { success: false };
+	} catch (error) {
+		console.error("Error deleting projects:", error);
+		throw error;
+	}
+}

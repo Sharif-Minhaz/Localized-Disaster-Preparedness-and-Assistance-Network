@@ -34,7 +34,10 @@ export default function ConfirmationDeleteBox({ title, description, action, chil
 				</AlertDialogHeader>
 				<AlertDialogFooter>
 					<AlertDialogCancel>Cancel</AlertDialogCancel>
-					<AlertDialogAction className="bg-red-500" onClick={handleClick}>
+					<AlertDialogAction
+						className="bg-red-500 hover:bg-red-600"
+						onClick={handleClick}
+					>
 						Delete
 					</AlertDialogAction>
 				</AlertDialogFooter>
