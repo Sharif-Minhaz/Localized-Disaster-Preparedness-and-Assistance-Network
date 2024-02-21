@@ -24,6 +24,7 @@ import SinglePageProject from "./SinglePageProject";
 import DeleteProjectCom from "./DeleteProjectCom";
 import ConfirmationDeleteBox from "./ConfirmationDeleteBox";
 import ManageProjectButtons from "./ManageProjectButtons";
+import DonationForm from "./DonationForm";
 
 export {
 	Navbar,
@@ -52,4 +53,5 @@ export {
 	DeleteProjectCom,
 	ConfirmationDeleteBox,
 	ManageProjectButtons,
+	DonationForm,
 };

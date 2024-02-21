@@ -9,7 +9,7 @@ export default async function SingleProjectPage({ params }: { params: { slug: st
 
 	return (
 		<div className="flex gap-4 sm:gap-5">
-			<div className="shadow w-[800px] rounded-xl border">
+			<div className="shadow w-[700px] rounded-xl border">
 				<HeadingSection text="Project Information" />
 				<Suspense fallback={<MainPageFallback />}>
 					<SinglePageProject project={project as Project} />
