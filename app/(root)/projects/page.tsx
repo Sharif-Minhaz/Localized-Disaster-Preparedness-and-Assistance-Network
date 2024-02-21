@@ -11,7 +11,7 @@ export default async function Projects({ searchParams }: { searchParams?: { quer
 	const { projects, isNext } = await fetchProjects({ searchString: searchParams?.query });
 
 	return (
-		<div className="shadow rounded-md border">
+		<div className="shadow rounded-xl border">
 			<HeadingSection text="Projects" />
 			<div className="px-4 sm:px-5 pt-4 sm:pt-5 flex gap-2">
 				<Search placeholder="Search projects..." />

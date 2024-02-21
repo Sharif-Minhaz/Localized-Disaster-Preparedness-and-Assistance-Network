@@ -9,14 +9,14 @@ import { motion } from "framer-motion";
 
 export default function Hero() {
 	return (
-		<div className="bg-[url('/assets/images/wave.svg')] bg-cover bg-bottom bg-no-repeat shadow rounded-md border">
+		<div className="bg-[url('/assets/images/wave.svg')] bg-cover bg-bottom bg-no-repeat shadow rounded-xl border">
 			<div className="flex md:flex-row flex-col gap-5 md:p-5 p-4 bg-[url('/assets/images/circle-scatter-2.svg')] bg-cover bg-top bg-no-repeat">
-				<div className="md:block hidden rounded-lg border-4 border-white dark:border-[#020817] bg-white dark:bg-[#020817]">
+				<div className="md:block hidden rounded-xl border-4 border-white dark:border-[#020817] bg-white dark:bg-[#020817]">
 					<motion.div
 						initial={{ opacity: 0 }}
 						viewport={{ once: true }}
 						whileInView={{ opacity: 1 }}
-						className="w-[242px] h-full group rounded-md relative overflow-hidden"
+						className="w-[242px] h-full group rounded-xl relative overflow-hidden"
 					>
 						<div className="absolute bg-gradient-to-tl from-blue-500/30 to-blue-300/30 z-10 inset-0 rounded-md" />
 						<HeroCarousel />
@@ -25,7 +25,7 @@ export default function Hero() {
 				<div className="flex flex-col">
 					<div className="flex sm:flex-row flex-col gap-4 sm:gap-5">
 						<div>
-							<div className="flex sm:gap-3 gap-2 mb-2">
+							<div className="flex flex-col xs:flex-row sm:gap-3 gap-2 mb-2">
 								<motion.small
 									initial={{ y: -30, opacity: 0 }}
 									viewport={{ once: true }}
@@ -78,7 +78,7 @@ export default function Hero() {
 							>
 								<Button
 									asChild
-									className="text-xs px-8 h-[35px] bg-gradient-to-r from-blue-500 to-green-400 hover:from-green-400 hover:to-blue-500 transition-all"
+									className="text-xs rounded-xl px-8 h-[35px] bg-gradient-to-r from-blue-500 to-green-400 hover:from-green-400 hover:to-blue-500 transition-all"
 								>
 									<Link href="/donate">Donate Now</Link>
 								</Button>

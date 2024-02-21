@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function AboutPage() {
 	return (
-		<div className="shadow rounded-md border">
+		<div className="shadow rounded-xl border">
 			<HeadingSection text="About Us" />
 			<div className="p-4 flex gap-8">
 				<motion.div

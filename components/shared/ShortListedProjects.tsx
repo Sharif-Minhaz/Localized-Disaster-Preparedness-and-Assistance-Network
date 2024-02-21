@@ -1,12 +1,12 @@
 "use client";
 
-import { HeadingSection, FormalCard } from "@/components/shared";
+import { HeadingSection, ProjectCard } from "@/components/shared";
 import { motion } from "framer-motion";
 import { ProjectProps } from "./ProjectsList";
 
 export default function ShortListedProjects({ projects }: ProjectProps) {
 	return (
-		<div className="shadow rounded-md border">
+		<div className="shadow rounded-xl border">
 			<HeadingSection text="Projects" link="/projects" linkText="View All" />
 
 			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 p-4 sm:p-5 ">
@@ -18,11 +18,12 @@ export default function ShortListedProjects({ projects }: ProjectProps) {
 						whileInView={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.4 * (index + 1) }}
 					>
-						<FormalCard
+						<ProjectCard
 							heading={data.heading}
 							image={data.image}
 							description={data.description}
 							slug={data.slug}
+							completed={data.completed}
 						/>
 					</motion.div>
 				))}

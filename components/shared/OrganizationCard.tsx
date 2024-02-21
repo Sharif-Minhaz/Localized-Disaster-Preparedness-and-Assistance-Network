@@ -29,7 +29,7 @@ export default function OrganizationCard({ name, username, image, bio, members }
 						<p className="text-sm">@{username}</p>
 					</div>
 				</div>
-				<Link href={`/organizations/${username}`}>
+				<Link href={`/communities/${username}`}>
 					<Button className="text-sm bg-bluish-inverse h-8">View</Button>
 				</Link>
 			</div>

@@ -10,10 +10,7 @@ const projectSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		partnerOrganizations: {
-			type: String,
-			default: "N/A",
-		},
+		partnerOrganizations: String,
 		from: {
 			type: Date,
 			required: true,
@@ -33,6 +30,10 @@ const projectSchema = new Schema(
 		details: {
 			type: String,
 			required: true,
+		},
+		completed: {
+			type: Boolean,
+			default: false,
 		},
 	},
 	{ timestamps: true }

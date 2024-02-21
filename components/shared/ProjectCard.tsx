@@ -10,9 +10,10 @@ interface Props {
 	description: string;
 	image: string;
 	slug: string;
+	completed: boolean;
 }
 
-export default function FormalCard({ heading, description, image, slug }: Props) {
+export default function ProjectCard({ heading, description, image, slug, completed }: Props) {
 	const deleteProjectWithSlug = deleteProject.bind(null, slug);
 
 	return (
@@ -38,7 +39,16 @@ export default function FormalCard({ heading, description, image, slug }: Props)
 				<h2 className="text-[16px] dark:text-white font-medium leading-[24px] line-clamp-2 flex-1 text-black">
 					{heading}
 				</h2>
-				<div className="w-full h-0.5 bg-[whitesmoke] dark:bg-slate-700" />
+				{!completed && (
+					<div className="flex gap-2">
+						<span className="text-[12px] font-semibold leading-[20px] w-min rounded-full bg-green-100 px-4 py-1 text-green-500">
+							OPEN
+						</span>
+						<p className="text-[12px] font-semibold leading-[20px] w-min rounded-full bg-gray-200 px-4 py-1 text-gray-500 line-clamp-1">
+							DONATABLE
+						</p>
+					</div>
+				)}
 				<p className="text-grey-600 dark:text-slate-200 text-sm py-1 line-clamp-4">
 					{description}
 				</p>

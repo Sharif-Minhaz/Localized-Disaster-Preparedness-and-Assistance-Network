@@ -28,11 +28,11 @@ export async function createProject(data: Props) {
 		const { heading, partnerOrganizations, description, from, to, details, image } = data;
 
 		const res = await Project.create({
-			slug: slugify(heading.toString(), {
+			slug: `${slugify(heading.toString(), {
 				lower: true,
 				strict: true,
 				remove: /[*+~.()'"!:@]/g,
-			}),
+			})}-${Date.now()}`,
 			heading,
 			from,
 			to,

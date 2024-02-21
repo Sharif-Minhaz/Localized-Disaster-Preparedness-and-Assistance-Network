@@ -22,9 +22,9 @@ export default function SinglePageProject({ project }: { project: Project }) {
 						fill
 						alt="project image"
 					/>
-					<div className="absolute right-2 top-2 flex flex-col gap-4 rounded-xl bg-white p-3 shadow-sm transition-all">
+					<div className="absolute right-3 items-center top-3 flex flex-col gap-4 rounded-xl bg-white p-3 shadow-sm transition-all">
 						<Link href={`/projects/${project.slug}/update`}>
-							<Pencil className="text-purple-400" />
+							<Pencil size={17} className="text-purple-400" />
 						</Link>
 						<DeleteProjectCom action={deleteProjectWithSlug} />
 					</div>
@@ -35,7 +35,11 @@ export default function SinglePageProject({ project }: { project: Project }) {
 				<p>Commenced in {dateTime}</p>
 				<p>
 					<strong>Partner organization: </strong>
-					{project.partnerOrganizations}
+					{project.partnerOrganizations ? (
+						project.partnerOrganizations
+					) : (
+						<em>No partner organization</em>
+					)}
 				</p>
 
 				<div

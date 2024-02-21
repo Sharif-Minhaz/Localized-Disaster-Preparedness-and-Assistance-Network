@@ -27,14 +27,16 @@ export default function ConfirmationDeleteBox({ title, description, action, chil
 	return (
 		<AlertDialog>
 			<AlertDialogTrigger>{children}</AlertDialogTrigger>
-			<AlertDialogContent>
+			<AlertDialogContent className="rounded-xl">
 				<AlertDialogHeader>
 					<AlertDialogTitle>{title}</AlertDialogTitle>
 					<AlertDialogDescription>{description}</AlertDialogDescription>
 				</AlertDialogHeader>
 				<AlertDialogFooter>
 					<AlertDialogCancel>Cancel</AlertDialogCancel>
-					<AlertDialogAction onClick={handleClick}>Delete</AlertDialogAction>
+					<AlertDialogAction className="bg-red-500" onClick={handleClick}>
+						Delete
+					</AlertDialogAction>
 				</AlertDialogFooter>
 			</AlertDialogContent>
 		</AlertDialog>

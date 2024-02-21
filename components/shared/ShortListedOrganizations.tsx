@@ -7,7 +7,7 @@ export default async function ShortListedOrganizations() {
 	const { communities, isNext } = await fetchCommunities({});
 
 	return (
-		<div className="shadow rounded-md border">
+		<div className="shadow rounded-xl border">
 			<HeadingSection text="Communities" link="/communities" linkText="View All" />
 			<Suspense fallback={<MainPageFallback />}>
 				{/* @ts-ignore */}

@@ -13,7 +13,7 @@ export default async function OrganizationsPage({
 	const { communities, isNext } = await fetchCommunities({ searchString: searchParams?.query });
 
 	return (
-		<div className="shadow rounded-md border">
+		<div className="shadow rounded-xl border">
 			<HeadingSection text="Communities" />
 			<div className="px-4 sm:px-5 pt-4 sm:pt-5">
 				<Search placeholder="Search communities..." />

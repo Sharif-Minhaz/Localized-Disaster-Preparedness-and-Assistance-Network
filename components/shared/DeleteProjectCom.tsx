@@ -1,7 +1,7 @@
 "use client";
 
 import { Trash2 } from "lucide-react";
-import ConfirmationDeleteBox from "./ConfirmationDeleteBox";
+import { ConfirmationDeleteBox } from "@/components/shared";
 
 export default function DeleteProjectCom({ action }: { action: () => void }) {
 	return (
