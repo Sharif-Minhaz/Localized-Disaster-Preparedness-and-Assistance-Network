@@ -1,7 +1,6 @@
 "use client";
 
 import * as z from "zod";
-import { ChangeEvent, useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import {
@@ -12,7 +11,13 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
-import { Label } from "../ui/label";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "../ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -22,17 +27,26 @@ export default function DonationForm() {
 	const form = useForm({
 		resolver: zodResolver(DonationValidation),
 		defaultValues: {
+			mobile: "",
 			note: "",
 			donationType: "",
 			donationAmount: "",
 			donationUnit: "",
-			mobile: "",
-			donationNameCourier: "",
+			shipperName: "",
 			resourceName: "",
 		},
 	});
 
-	const onSubmit = async () => {};
+	async function onSubmit(values: z.infer<typeof DonationValidation>) {
+		console.log(values);
+	}
+
+	function handleChangeHandler(value: string, filedChange: (value: string) => void) {
+		filedChange(value);
+		["donationAmount", "donationUnit", "shipperName", "resourceName"].forEach((field: any) => {
+			form.resetField(field);
+		});
+	}
 
 	return (
 		<Form {...form}>
@@ -41,8 +55,8 @@ export default function DonationForm() {
 					control={form.control}
 					name="mobile"
 					render={({ field }) => (
-						<FormItem className="flex gap-2 flex-col">
-							<FormLabel htmlFor="mobile">Mobile</FormLabel>
+						<FormItem className="flex gap-1 flex-col">
+							<FormLabel htmlFor="mobile">Mobile Number</FormLabel>
 							<FormControl>
 								<Input
 									{...field}
@@ -58,8 +72,8 @@ export default function DonationForm() {
 					control={form.control}
 					name="note"
 					render={({ field }) => (
-						<FormItem className="flex gap-2 flex-col">
-							<FormLabel htmlFor="note">Note</FormLabel>
+						<FormItem className="flex gap-1 flex-col">
+							<FormLabel htmlFor="note">Donation Note (optional)</FormLabel>
 							<FormControl>
 								<Textarea
 									{...field}
@@ -72,6 +86,112 @@ export default function DonationForm() {
 						</FormItem>
 					)}
 				/>
+				<FormField
+					control={form.control}
+					name="donationType"
+					render={({ field }) => (
+						<FormItem className="flex gap-1 flex-col">
+							<FormLabel htmlFor="donationType">Donation Type</FormLabel>
+							<FormControl>
+								<Select
+									disabled={form.formState.isSubmitting}
+									onValueChange={(value) =>
+										handleChangeHandler(value, field.onChange)
+									}
+									defaultValue={field.value}
+								>
+									<SelectTrigger className="w-full">
+										<SelectValue placeholder="Select type" />
+									</SelectTrigger>
+									<SelectContent>
+										<SelectItem value="money">Money</SelectItem>
+										<SelectItem value="resource">Resource</SelectItem>
+									</SelectContent>
+								</Select>
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				{form.watch("donationType") === "money" && (
+					<FormField
+						control={form.control}
+						name="donationAmount"
+						render={({ field }) => (
+							<FormItem className="flex gap-1 flex-col">
+								<FormLabel htmlFor="donationAmount">Donation Amount</FormLabel>
+								<FormControl>
+									<Input
+										type="number"
+										min={1}
+										{...field}
+										disabled={form.formState.isSubmitting}
+										placeholder="Enter your donation amount"
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+				)}
+				{form.watch("donationType") === "resource" && (
+					<>
+						<FormField
+							control={form.control}
+							name="resourceName"
+							render={({ field }) => (
+								<FormItem className="flex gap-1 flex-col">
+									<FormLabel htmlFor="resourceName">Resource Name</FormLabel>
+									<FormControl>
+										<Input
+											{...field}
+											disabled={form.formState.isSubmitting}
+											placeholder="Enter resource name"
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name="donationUnit"
+							render={({ field }) => (
+								<FormItem className="flex gap-1 flex-col">
+									<FormLabel htmlFor="donationUnit">Donation Unit</FormLabel>
+									<FormControl>
+										<Input
+											type="number"
+											min={1}
+											{...field}
+											disabled={form.formState.isSubmitting}
+											placeholder="Enter your donation unit"
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name="shipperName"
+							render={({ field }) => (
+								<FormItem className="flex gap-1 flex-col">
+									<FormLabel htmlFor="shipperName">Shipper&apos;s Name</FormLabel>
+									<FormControl>
+										<Input
+											{...field}
+											disabled={form.formState.isSubmitting}
+											placeholder="Enter your shipping name"
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+					</>
+				)}
+				<Button type="submit">Submit</Button>
 			</form>
 		</Form>
 	);

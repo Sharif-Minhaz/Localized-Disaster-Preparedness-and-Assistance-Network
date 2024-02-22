@@ -55,6 +55,8 @@ export default function ProjectForm({ project, update }: { project?: Project; up
 			partnerOrganizations: project?.partnerOrganizations || "",
 			description: project?.description || "",
 			details: project?.details || "",
+			location: project?.location || "",
+			courierAddress: project?.courierAddress || "",
 			image: project?.image || "",
 		},
 	});
@@ -79,6 +81,8 @@ export default function ProjectForm({ project, update }: { project?: Project; up
 			to: date?.to,
 			description: values.description,
 			details: values.details,
+			location: values.location,
+			courierAddress: values.courierAddress,
 			image: values.image,
 			slug: project?.slug,
 		};
@@ -144,7 +148,7 @@ export default function ProjectForm({ project, update }: { project?: Project; up
 					control={form.control}
 					name="heading"
 					render={({ field }) => (
-						<FormItem className="flex gap-2 flex-col">
+						<FormItem className="flex gap-1 flex-col">
 							<FormLabel htmlFor="heading">Heading</FormLabel>
 							<FormControl>
 								<Input
@@ -161,7 +165,7 @@ export default function ProjectForm({ project, update }: { project?: Project; up
 					control={form.control}
 					name="partnerOrganizations"
 					render={({ field }) => (
-						<FormItem className="flex gap-2 flex-col">
+						<FormItem className="flex gap-1 flex-col">
 							<FormLabel htmlFor="partnerOrganization">
 								Partner Organizations
 							</FormLabel>
@@ -182,9 +186,43 @@ export default function ProjectForm({ project, update }: { project?: Project; up
 				</div>
 				<FormField
 					control={form.control}
+					name="location"
+					render={({ field }) => (
+						<FormItem className="flex gap-1 flex-col">
+							<FormLabel htmlFor="location">Disaster location</FormLabel>
+							<FormControl>
+								<Input
+									{...field}
+									disabled={form.formState.isSubmitting}
+									placeholder="Enter disaster location"
+								/>
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="courierAddress"
+					render={({ field }) => (
+						<FormItem className="flex gap-1 flex-col">
+							<FormLabel htmlFor="courierAddress">Courier Address</FormLabel>
+							<FormControl>
+								<Input
+									{...field}
+									disabled={form.formState.isSubmitting}
+									placeholder="Enter courier address"
+								/>
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
 					name="description"
 					render={({ field }) => (
-						<FormItem className="flex gap-2 flex-col">
+						<FormItem className="flex gap-1 flex-col">
 							<FormLabel htmlFor="description">Project Description</FormLabel>
 							<FormControl>
 								<Textarea
@@ -203,7 +241,7 @@ export default function ProjectForm({ project, update }: { project?: Project; up
 					name="image"
 					render={({ field }) => (
 						<>
-							<FormItem className="flex gap-2 flex-col">
+							<FormItem className="flex gap-1 flex-col">
 								<FormLabel htmlFor="image">Project Image</FormLabel>
 								<FormControl>
 									<Input
@@ -239,7 +277,7 @@ export default function ProjectForm({ project, update }: { project?: Project; up
 					control={form.control}
 					name="details"
 					render={({ field }) => (
-						<FormItem className="flex gap-2 flex-col">
+						<FormItem className="flex gap-1 flex-col">
 							<FormLabel htmlFor="details">Project Details</FormLabel>
 							<FormControl>
 								<Tiptap

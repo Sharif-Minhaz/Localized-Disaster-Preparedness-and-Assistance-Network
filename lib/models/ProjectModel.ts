@@ -31,6 +31,14 @@ const projectSchema = new Schema(
 			type: String,
 			required: true,
 		},
+		location: {
+			type: String,
+			required: true,
+		},
+		courierAddress: {
+			type: String,
+			required: true,
+		},
 		completed: {
 			type: Boolean,
 			default: false,

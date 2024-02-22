@@ -33,6 +33,12 @@ export default function SinglePageProject({ project }: { project: Project }) {
 				<h2 className="font-bold text-2xl my-3">{project.heading}</h2>
 
 				<div className="my-3 border-b border-[#eff4ff] dark:border-slate-700" />
+				<p>
+					<strong>Disaster Occurence:</strong> {project.location}
+				</p>
+				<p>
+					<strong>Courier Address:</strong> {project.courierAddress}
+				</p>
 				<p>Commenced in {dateTime}</p>
 				<p>
 					<strong>Partner organization: </strong>

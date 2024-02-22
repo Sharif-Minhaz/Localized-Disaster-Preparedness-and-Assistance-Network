@@ -18,6 +18,8 @@ export interface Project {
 	heading: string;
 	description: string;
 	details: string;
+	location: string;
+	courierAddress: string;
 	completed: boolean;
 }
 

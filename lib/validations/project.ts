@@ -7,12 +7,9 @@ export const ProjectValidation = z.object({
 		.max(500, { message: "Must be 500 or fewer characters long" }),
 	from: z.date(),
 	to: z.date(),
-	// from: z.string().datetime({ message: "Invalid datetime string! Must be UTC." }),
-	// to: z.string().datetime({ message: "Invalid datetime string! Must be UTC." }),
-	partnerOrganizations: z
-		.string()
-
-		.max(500, { message: "Must be 500 or fewer characters long" }),
+	partnerOrganizations: z.string().optional(),
+	location: z.string().min(2, { message: "Location must be detailed" }),
+	courierAddress: z.string().min(2, { message: "Courier address must be detailed" }),
 	description: z
 		.string()
 		.min(3, { message: "Must be 3 or more characters long" })

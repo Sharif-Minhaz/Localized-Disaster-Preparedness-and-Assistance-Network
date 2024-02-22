@@ -48,13 +48,11 @@ const donationSchema = new Schema(
 				message: "Resource name is required.",
 			},
 		},
-		donationNameCourier: {
+		shipperName: {
 			type: String,
 			validate: {
 				validator: function (this: any) {
-					return (
-						this.donationType === "resource" && this.donationNameCourier === undefined
-					);
+					return this.donationType === "resource" && this.shipperName === undefined;
 				},
 				message: "Donation courier name is required.",
 			},
