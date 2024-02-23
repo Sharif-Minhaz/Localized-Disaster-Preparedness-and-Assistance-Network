@@ -10,6 +10,7 @@ import {
 	ShoppingBasket,
 	Contact,
 	ShieldAlert,
+	History,
 } from "lucide-react";
 
 import projectImage from "@/public/assets/images/project-1.jpg";
@@ -64,14 +65,19 @@ export const sideMenuData: MenuItem[] = [
 		Icon: Radar,
 	},
 	{
-		title: "donate",
-		url: "/donate",
+		title: "donationHistory",
+		url: "/donation-history",
 		Icon: HeartHandshakeIcon,
 	},
 	{
 		title: "gallery",
 		url: "/gallery",
 		Icon: BookImage,
+	},
+	{
+		title: "activity",
+		url: "/activity",
+		Icon: History,
 	},
 	{
 		title: "resources",

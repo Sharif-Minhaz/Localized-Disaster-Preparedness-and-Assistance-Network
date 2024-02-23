@@ -101,6 +101,20 @@ export async function fetchProject(slug: string) {
 	}
 }
 
+export async function fetchProjectById(id: string) {
+	try {
+		connectToDB();
+
+		const projectDetails = await Project.findById(id).lean();
+
+		return convertToPlainObj(projectDetails);
+	} catch (error) {
+		// Handle any errors
+		console.error("Error fetching project details:", error);
+		throw error;
+	}
+}
+
 export async function fetchProjects({
 	searchString = "",
 	pageNumber = 1,

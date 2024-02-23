@@ -2,7 +2,7 @@ import { Schema, model, models } from "mongoose";
 
 const userSchema = new Schema(
 	{
-		userId: String,
+		clerkId: String,
 		name: String,
 		username: {
 			type: String,

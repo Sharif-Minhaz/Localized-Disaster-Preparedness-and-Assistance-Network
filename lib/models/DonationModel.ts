@@ -14,6 +14,7 @@ const donationSchema = new Schema(
 			required: true,
 			immutable: true,
 		},
+		stripeId: String,
 		donationType: {
 			type: String,
 			required: true,
@@ -21,40 +22,26 @@ const donationSchema = new Schema(
 		},
 		donationAmount: {
 			type: Number,
-			min: 1,
-			validate: {
-				validator: function (this: any) {
-					return this.donationAmount !== undefined || this.donationUnit !== undefined;
-				},
-				message: "Either donationAmount or donationUnit is required.",
+			required: function () {
+				return (this as { donationType: string }).donationType === "money";
 			},
 		},
 		donationUnit: {
 			type: Number,
-			min: 1,
-			validate: {
-				validator: function (this: any) {
-					return this.donationAmount !== undefined || this.donationUnit !== undefined;
-				},
-				message: "Either donationAmount or donationUnit is required.",
+			required: function () {
+				return (this as { donationType: string }).donationType === "resource";
 			},
 		},
 		resourceName: {
 			type: String,
-			validate: {
-				validator: function (this: any) {
-					return this.donationType === "resource" && this.resourceName === undefined;
-				},
-				message: "Resource name is required.",
+			required: function () {
+				return (this as { donationType: string }).donationType === "resource";
 			},
 		},
 		shipperName: {
 			type: String,
-			validate: {
-				validator: function (this: any) {
-					return this.donationType === "resource" && this.shipperName === undefined;
-				},
-				message: "Donation courier name is required.",
+			required: function () {
+				return (this as { donationType: string }).donationType === "resource";
 			},
 		},
 		mobile: {

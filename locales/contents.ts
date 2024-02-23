@@ -6,8 +6,9 @@ interface DictionaryEntry {
 	threats: string;
 	auditReports: string;
 	disasterForecast: string;
-	donate: string;
+	donationHistory: string;
 	gallery: string;
+	activity: string;
 	resources: string;
 	contactUs: string;
 	signout: string;
@@ -23,8 +24,9 @@ export const dictionary: Record<string, DictionaryEntry> = {
 		threats: "Threats",
 		auditReports: "Audit Reports",
 		disasterForecast: "Disaster Forecast",
-		donate: "Donate",
+		donationHistory: "Donation History",
 		gallery: "Gallery",
+		activity: "Activity",
 		resources: "Resources",
 		contactUs: "Contact Us",
 		signout: "Sign out",
@@ -38,8 +40,9 @@ export const dictionary: Record<string, DictionaryEntry> = {
 		threats: "হুমকিসমূহ",
 		auditReports: "হিসাব প্রতিবেদন",
 		disasterForecast: "দুর্যোগ পূর্বাভাস",
-		donate: "দান",
+		donationHistory: "দানের ইতিহাস",
 		gallery: "গ্যালারি",
+		activity: "কর্মকাণ্ড",
 		resources: "সম্পদ",
 		contactUs: "যোগাযোগ",
 		signout: "লগআউট",

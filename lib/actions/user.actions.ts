@@ -24,7 +24,7 @@ export async function createUser({ userId, name, username, email, imageUrl }: Pr
 			user_type: "user",
 		});
 
-		return newUser;
+		return JSON.parse(JSON.stringify(newUser));
 	} catch (error) {
 		console.error(error);
 	}
@@ -42,7 +42,7 @@ export async function updateUser({ userId, username, imageUrl }: Props) {
 			}
 		);
 
-		return updatedUser;
+		return JSON.parse(JSON.stringify(updatedUser));
 	} catch (error) {
 		console.error(error);
 	}
@@ -54,7 +54,7 @@ export async function deleteUser(userId: string) {
 
 		const deletedUser = await User.findOneAndDelete({ userId });
 
-		return deletedUser;
+		return JSON.parse(JSON.stringify(deletedUser));
 	} catch (error) {
 		console.error(error);
 	}

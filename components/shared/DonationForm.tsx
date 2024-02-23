@@ -22,8 +22,30 @@ import { Textarea } from "../ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { DonationValidation } from "@/lib/validations/donation";
+import { Project } from "./ProjectsList";
+import { addDonation, checkoutDonation } from "@/lib/actions/donation.actions";
+import { useEffect } from "react";
+import { loadStripe } from "@stripe/stripe-js";
+import { useUser } from "@clerk/nextjs";
+import { toast } from "../ui/use-toast";
+import { ToastAction } from "../ui/toast";
 
-export default function DonationForm() {
+export type Donation = {
+	mobile: string;
+	note?: string;
+	donationType: string;
+	donationAmount?: string;
+	donationUnit?: string;
+	shipperName?: string;
+	resourceName?: string;
+};
+
+loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+
+export default function DonationForm({ project }: { project: Project }) {
+	const { user } = useUser();
+	const userId = user?.publicMetadata?.userId || "";
+
 	const form = useForm({
 		resolver: zodResolver(DonationValidation),
 		defaultValues: {
@@ -37,12 +59,46 @@ export default function DonationForm() {
 		},
 	});
 
+	useEffect(() => {
+		// Check to see if this is a redirect back from Checkout
+		const query = new URLSearchParams(window.location.search);
+		if (query.get("success")) {
+			console.log("Donation placed! You will receive an email confirmation.");
+		}
+
+		if (query.get("canceled")) {
+			console.log("Donation canceled, checkout when you’re ready.");
+		}
+	}, []);
+
 	async function onSubmit(values: z.infer<typeof DonationValidation>) {
-		console.log(values);
+		if (values.donationType === "money") {
+			await checkoutDonation(values, userId.toString(), project);
+		} else {
+			// execute when user select resource type
+			const res = await addDonation(values, userId.toString(), project);
+			if (res.status === "OK") {
+				// reset the whole form after submitting
+				form.reset();
+				return toast({
+					title: "Success: Donation",
+					description: "Resource donated successfully",
+					action: <ToastAction altText="OK">OK</ToastAction>,
+				});
+			}
+			// provide error toast when donation failed
+			toast({
+				title: "Failed: Donation",
+				description: "Resource donation failed, try again later",
+				action: <ToastAction altText="OK">OK</ToastAction>,
+			});
+		}
 	}
 
 	function handleChangeHandler(value: string, filedChange: (value: string) => void) {
+		// changing the donationType
 		filedChange(value);
+		// resetting some partial field when donationType is changing
 		["donationAmount", "donationUnit", "shipperName", "resourceName"].forEach((field: any) => {
 			form.resetField(field);
 		});
@@ -119,7 +175,9 @@ export default function DonationForm() {
 						name="donationAmount"
 						render={({ field }) => (
 							<FormItem className="flex gap-1 flex-col">
-								<FormLabel htmlFor="donationAmount">Donation Amount</FormLabel>
+								<FormLabel htmlFor="donationAmount">
+									Donation Amount (BDT)
+								</FormLabel>
 								<FormControl>
 									<Input
 										type="number"

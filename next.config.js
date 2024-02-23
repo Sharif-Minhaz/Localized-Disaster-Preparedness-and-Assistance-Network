@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	logging: {
-		fetches: {
-			fullUrl: true,
-		},
-	},
+	// logging: {
+	// 	fetches: {
+	// 		fullUrl: true,
+	// 	},
+	// },
 	i18n: {
 		locales: ["en", "bn"],
 		defaultLocale: "en",

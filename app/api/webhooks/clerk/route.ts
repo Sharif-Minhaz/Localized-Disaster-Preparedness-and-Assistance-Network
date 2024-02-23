@@ -18,6 +18,7 @@ import {
 	removeUserFromCommunity,
 	updateCommunityInfo,
 } from "@/lib/actions/community.actions";
+import { clerkClient } from "@clerk/nextjs";
 
 // Resource: https://clerk.com/docs/integration/webhooks#supported-events
 type EventType =
@@ -76,7 +77,7 @@ export const POST = async (request: Request) => {
 			evnt?.data ?? {};
 
 		const userData = {
-			userId: id,
+			clerkId: id,
 			name: first_name + " " + last_name,
 			username,
 			//@ts-ignore
@@ -86,11 +87,21 @@ export const POST = async (request: Request) => {
 
 		try {
 			//@ts-ignore
-			await createUser(userData);
+			const newUser = await createUser(userData);
+
+			console.log(newUser._id, id);
+
+			if (newUser) {
+				await clerkClient.users.updateUserMetadata(id.toString(), {
+					publicMetadata: {
+						userId: newUser._id,
+					},
+				});
+			}
 
 			return NextResponse.json({ message: "User created" }, { status: 201 });
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 			return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
 		}
 	}
@@ -100,7 +111,7 @@ export const POST = async (request: Request) => {
 			const { id, username, profile_image_url } = evnt?.data ?? {};
 
 			const userData = {
-				userId: id,
+				clerkId: id,
 				username,
 				imageUrl: profile_image_url,
 			};
