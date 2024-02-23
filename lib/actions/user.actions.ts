@@ -2,21 +2,22 @@
 
 import User from "../models/UserModel";
 import { connectToDB } from "../mongoose";
+import { convertToPlainObj } from "../utils";
 
 interface Props {
-	userId: string;
+	clerkId: string;
 	name: string;
 	username: string;
 	email: string;
 	imageUrl?: string;
 }
 
-export async function createUser({ userId, name, username, email, imageUrl }: Props) {
+export async function createUser({ clerkId, name, username, email, imageUrl }: Props) {
 	try {
 		connectToDB();
 
 		const newUser = await User.create({
-			userId,
+			clerkId,
 			name,
 			username,
 			email,
@@ -24,37 +25,36 @@ export async function createUser({ userId, name, username, email, imageUrl }: Pr
 			user_type: "user",
 		});
 
-		return JSON.parse(JSON.stringify(newUser));
+		return convertToPlainObj(newUser);
 	} catch (error) {
 		console.error(error);
 	}
 }
 
-export async function updateUser({ userId, username, imageUrl }: Props) {
+export async function updateUser({ clerkId, username, imageUrl }: Props) {
 	try {
 		connectToDB();
-		console.log("in update user");
 		const updatedUser = await User.findOneAndUpdate(
-			{ userId },
+			{ clerkId },
 			{
 				username,
 				imageUrl,
 			}
 		);
 
-		return JSON.parse(JSON.stringify(updatedUser));
+		return convertToPlainObj(updatedUser);
 	} catch (error) {
 		console.error(error);
 	}
 }
 
-export async function deleteUser(userId: string) {
+export async function deleteUser(clerkId: string) {
 	try {
 		connectToDB();
 
-		const deletedUser = await User.findOneAndDelete({ userId });
+		const deletedUser = await User.findOneAndDelete({ clerkId });
 
-		return JSON.parse(JSON.stringify(deletedUser));
+		return convertToPlainObj(deletedUser);
 	} catch (error) {
 		console.error(error);
 	}

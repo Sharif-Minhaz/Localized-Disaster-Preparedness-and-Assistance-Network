@@ -42,7 +42,7 @@ export const checkoutDonation = async (
 				resourceName: donation.resourceName || "",
 			},
 			mode: "payment",
-			success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/projects`,
+			success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/donation-history`,
 			cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/projects/${project.slug}`,
 		});
 

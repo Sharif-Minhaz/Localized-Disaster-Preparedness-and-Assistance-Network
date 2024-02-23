@@ -89,8 +89,6 @@ export const POST = async (request: Request) => {
 			//@ts-ignore
 			const newUser = await createUser(userData);
 
-			console.log(newUser._id, id);
-
 			if (newUser) {
 				await clerkClient.users.updateUserMetadata(id.toString(), {
 					publicMetadata: {

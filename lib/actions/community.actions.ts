@@ -20,7 +20,7 @@ export async function createCommunity(
 		connectToDB();
 
 		// Find the user with the provided unique id
-		const user = await User.findOne({ userId: createdById });
+		const user = await User.findOne({ clerkId: createdById });
 
 		if (!user) {
 			throw new Error("User not found"); // Handle the case if the user with the id is not found
@@ -133,7 +133,7 @@ export async function addMemberToCommunity(communityId: string, memberId: string
 		}
 
 		// Find the user by their unique id
-		const user = await User.findOne({ userId: memberId });
+		const user = await User.findOne({ clerkId: memberId });
 
 		if (!user) {
 			throw new Error("User not found");
@@ -160,11 +160,11 @@ export async function addMemberToCommunity(communityId: string, memberId: string
 	}
 }
 
-export async function removeUserFromCommunity(userId: string, communityId: string) {
+export async function removeUserFromCommunity(clerkId: string, communityId: string) {
 	try {
 		connectToDB();
 
-		const userIdObject = await User.findOne({ userId }, { _id: 1 });
+		const userIdObject = await User.findOne({ clerkId }, { _id: 1 });
 		const communityIdObject = await Community.findOne({ id: communityId }, { _id: 1 });
 
 		if (!userIdObject) {
