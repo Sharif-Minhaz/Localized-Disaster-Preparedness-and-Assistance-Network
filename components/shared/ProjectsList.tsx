@@ -7,24 +7,10 @@ import Link from "next/link";
 import { Pencil } from "lucide-react";
 import { deleteProject } from "@/lib/actions/project.actions";
 import { DeleteProjectCom } from "@/components/shared";
-
-export interface Project {
-	_id: string;
-	slug: string;
-	partnerOrganizations: string;
-	image: string;
-	from: string;
-	to: string;
-	heading: string;
-	description: string;
-	details: string;
-	location: string;
-	courierAddress: string;
-	completed: boolean;
-}
+import { IProject } from "@/lib/models/ProjectModel";
 
 export interface ProjectProps {
-	projects: Project[];
+	projects: IProject[];
 	isNext: boolean;
 }
 

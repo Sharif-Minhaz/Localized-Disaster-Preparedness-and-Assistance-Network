@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import { fetchProjects } from "@/lib/actions/project.actions";
-import { Project } from "@/components/shared/ProjectsList";
+import { IProject } from "@/lib/models/ProjectModel";
 
 export default async function Projects({ searchParams }: { searchParams?: { query: string } }) {
 	const { projects, isNext } = await fetchProjects({ searchString: searchParams?.query });
@@ -22,7 +22,7 @@ export default async function Projects({ searchParams }: { searchParams?: { quer
 				</Link>
 			</div>
 			<Suspense fallback={<MainPageFallback />}>
-				<ProjectsList projects={projects as Project[]} isNext={isNext} />
+				<ProjectsList projects={projects as IProject[]} isNext={isNext} />
 			</Suspense>
 		</div>
 	);

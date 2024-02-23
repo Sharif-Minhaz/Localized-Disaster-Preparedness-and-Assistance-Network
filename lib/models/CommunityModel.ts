@@ -1,5 +1,15 @@
 import { model, Schema, models } from "mongoose";
 
+export interface ICommunity {
+	id: string;
+	name: string;
+	username: string;
+	bio?: string;
+	image?: string;
+	createdBy: string;
+	members?: [string];
+}
+
 const communitySchema = new Schema({
 	id: {
 		type: String,

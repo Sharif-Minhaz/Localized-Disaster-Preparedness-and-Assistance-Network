@@ -1,6 +1,6 @@
-import { LoadingScreen } from ".";
+import { LoadingScreen } from "@/components/shared";
 
-export default function MainPageFallback() {
+export default function Loading() {
 	return (
 		<div className="w-full flex items-center justify-center h-screen">
 			<LoadingScreen />

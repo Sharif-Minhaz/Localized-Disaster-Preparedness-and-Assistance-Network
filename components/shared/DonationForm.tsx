@@ -22,13 +22,13 @@ import { Textarea } from "../ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { DonationValidation } from "@/lib/validations/donation";
-import { Project } from "./ProjectsList";
 import { addDonation, checkoutDonation } from "@/lib/actions/donation.actions";
 import { useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { useUser } from "@clerk/nextjs";
 import { toast } from "../ui/use-toast";
 import { ToastAction } from "../ui/toast";
+import { IProject } from "@/lib/models/ProjectModel";
 
 export type Donation = {
 	mobile: string;
@@ -42,7 +42,7 @@ export type Donation = {
 
 loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
-export default function DonationForm({ project }: { project: Project }) {
+export default function DonationForm({ project }: { project: IProject }) {
 	const { user } = useUser();
 	const userId = user?.publicMetadata?.userId || "";
 

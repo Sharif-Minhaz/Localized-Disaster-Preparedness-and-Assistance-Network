@@ -1,8 +1,13 @@
 import { Suspense } from "react";
-import { Project } from "@/components/shared/ProjectsList";
-import { fetchProject } from "@/lib/actions/project.actions";
+import { fetchProject, fetchProjects } from "@/lib/actions/project.actions";
 import MainPageFallback from "@/components/shared/MainPageFallback";
 import { SinglePageProject, HeadingSection, DonateSideBox } from "@/components/shared";
+import { IProject } from "@/lib/models/ProjectModel";
+
+export async function generateStaticParams() {
+	const { projects } = await fetchProjects({});
+	return projects.map((project: IProject) => ({ slug: project.slug }));
+}
 
 export default async function SingleProjectPage({ params }: { params: { slug: string } }) {
 	const project = await fetchProject(params.slug);
@@ -16,7 +21,7 @@ export default async function SingleProjectPage({ params }: { params: { slug: st
 			>
 				<HeadingSection text="Project Information" />
 				<Suspense fallback={<MainPageFallback />}>
-					<SinglePageProject project={project as Project} />
+					<SinglePageProject project={project as IProject} />
 				</Suspense>
 			</div>
 			<div className="relative flex-grow">

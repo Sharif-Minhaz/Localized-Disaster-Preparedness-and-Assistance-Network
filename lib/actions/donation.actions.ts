@@ -1,16 +1,16 @@
 "use server";
 
 import { Donation as DonationProps } from "@/components/shared/DonationForm";
-import { Project } from "@/components/shared/ProjectsList";
 import { redirect } from "next/navigation";
 import Stripe from "stripe";
 import { connectToDB } from "../mongoose";
 import Donation from "../models/DonationModel";
+import { IProject } from "../models/ProjectModel";
 
 export const checkoutDonation = async (
 	donation: DonationProps,
 	userId: string,
-	project: Project
+	project: IProject
 ) => {
 	const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
@@ -52,7 +52,7 @@ export const checkoutDonation = async (
 	}
 };
 
-export const addDonation = async (donation: DonationProps, userId: string, project: Project) => {
+export const addDonation = async (donation: DonationProps, userId: string, project: IProject) => {
 	try {
 		connectToDB();
 		const saveDonation = await Donation.create({

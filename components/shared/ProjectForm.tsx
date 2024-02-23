@@ -27,10 +27,10 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useToast } from "../ui/use-toast";
-import { Project } from "./ProjectsList";
 import { ToastAction } from "../ui/toast";
+import { IProject } from "@/lib/models/ProjectModel";
 
-export default function ProjectForm({ project, update }: { project?: Project; update?: boolean }) {
+export default function ProjectForm({ project, update }: { project?: IProject; update?: boolean }) {
 	const [key, setKey] = useState(Date.now());
 	const { toast } = useToast();
 	const router = useRouter();

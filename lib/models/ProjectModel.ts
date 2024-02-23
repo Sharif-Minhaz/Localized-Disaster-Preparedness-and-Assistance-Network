@@ -1,5 +1,20 @@
 import { Schema, model, models } from "mongoose";
 
+export interface IProject {
+	_id: string;
+	slug: string;
+	partnerOrganizations: string;
+	image: string;
+	from: string;
+	to: string;
+	heading: string;
+	description: string;
+	details: string;
+	location: string;
+	courierAddress: string;
+	completed: boolean;
+}
+
 const projectSchema = new Schema(
 	{
 		createdBy: {

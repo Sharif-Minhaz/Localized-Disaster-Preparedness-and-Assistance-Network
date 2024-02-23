@@ -1,6 +1,12 @@
 import { ProjectForm } from "@/components/shared";
-import { fetchProject } from "@/lib/actions/project.actions";
+import { fetchProject, fetchProjects } from "@/lib/actions/project.actions";
 import { HeadingSection } from "@/components/shared";
+import { IProject } from "@/lib/models/ProjectModel";
+
+export async function generateStaticParams() {
+	const { projects } = await fetchProjects({});
+	return projects.map((project: IProject) => ({ slug: project.slug }));
+}
 
 export default async function Page({ params }: { params: { slug: string } }) {
 	const project = await fetchProject(params.slug);

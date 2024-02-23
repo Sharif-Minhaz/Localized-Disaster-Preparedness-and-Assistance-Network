@@ -5,8 +5,8 @@ import {
 	ShortListedProjects,
 	WeatherReport,
 } from "@/components/shared";
-import { Project } from "@/components/shared/ProjectsList";
 import { fetchProjects } from "@/lib/actions/project.actions";
+import { IProject } from "@/lib/models/ProjectModel";
 
 export default async function HomePage() {
 	const { projects, isNext } = await fetchProjects({});
@@ -17,7 +17,7 @@ export default async function HomePage() {
 				<Hero />
 			</section>
 			<section>
-				<ShortListedProjects projects={projects as Project[]} isNext={isNext} />
+				<ShortListedProjects projects={projects as IProject[]} isNext={isNext} />
 			</section>
 			<section className="py-3">
 				<Banner />

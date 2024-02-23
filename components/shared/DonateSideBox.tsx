@@ -1,7 +1,7 @@
 import { DonationForm } from "@/components/shared";
-import { Project } from "./ProjectsList";
+import { IProject } from "@/lib/models/ProjectModel";
 
-export default function DonateSideBox({ project }: { project: Project }) {
+export default function DonateSideBox({ project }: { project: IProject }) {
 	return (
 		<div>
 			<h2 className="text-[20px] uppercase">

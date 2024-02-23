@@ -1,12 +1,12 @@
 import Image from "next/image";
-import { Project } from "./ProjectsList";
 import { format } from "date-fns";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
 import { deleteProject } from "@/lib/actions/project.actions";
 import { DeleteProjectCom, ManageProjectButtons } from "@/components/shared";
+import { IProject } from "@/lib/models/ProjectModel";
 
-export default function SinglePageProject({ project }: { project: Project }) {
+export default function SinglePageProject({ project }: { project: IProject }) {
 	const dateTime = format(new Date(project.from), "yyyy-MM-dd");
 	const deleteProjectWithSlug = deleteProject.bind(null, project.slug);
 
