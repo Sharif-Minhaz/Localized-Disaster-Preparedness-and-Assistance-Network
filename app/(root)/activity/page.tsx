@@ -1,27 +1,29 @@
-import { DonationActivityCard, HeadingSection } from "@/components/shared";
+import { ActivityList, DonationActivityCard, HeadingSection, Search } from "@/components/shared";
 import { getDonationActivity } from "@/lib/actions/donation.actions";
 import { IDonation } from "@/lib/models/DonationModel";
 import { currentUser } from "@clerk/nextjs";
 
-export default async function DonationActivity() {
+export default async function DonationActivity({
+	searchParams,
+}: {
+	searchParams?: { query: string };
+}) {
 	const user = await currentUser();
 
 	if (!user) {
 		return <p>Not logged in, login first.</p>;
 	}
 
-	const donations = await getDonationActivity();
+	const { donations, isNext } = await getDonationActivity({
+		searchString: searchParams?.query || "",
+	});
 
 	return (
 		<div className="shadow rounded-xl border">
 			<HeadingSection text="Donation Activity" />
 			<div className="px-4 py-4 flex flex-col gap-4">
-				{!donations.length && (
-					<p className="p-4">No donation activity available. No donation yet.</p>
-				)}
-				{donations.map((history: IDonation, index: number) => (
-					<DonationActivityCard key={index} history={history} />
-				))}
+				<Search placeholder="Search activity..." />
+				<ActivityList donations={donations as IDonation[]} isNext={isNext} />
 			</div>
 		</div>
 	);

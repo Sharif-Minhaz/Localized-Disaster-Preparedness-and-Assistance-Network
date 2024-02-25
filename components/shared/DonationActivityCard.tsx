@@ -1,5 +1,4 @@
 import { IDonation } from "@/lib/models/DonationModel";
-import { IUser } from "@/lib/models/UserModel";
 import { addCommasToNumber, formatDate } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -56,6 +55,10 @@ export default function DonationActivityCard({ history }: Props) {
 						<p className="mt-2 text-sm">
 							<strong>Donation Note: </strong>
 							{history.note ? history.note : <em>Not provided.</em>}
+						</p>
+						<p className="mt-2 text-sm">
+							<strong>Mobile Number: </strong>
+							{history.mobile}
 						</p>
 					</div>
 					<div className="flex xs:flex-row flex-col gap-4 justify-between border-t border-slate-100 dark:border-slate-700 pt-4">

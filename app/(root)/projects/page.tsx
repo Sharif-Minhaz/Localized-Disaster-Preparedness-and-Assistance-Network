@@ -1,6 +1,4 @@
 import { HeadingSection, ProjectsList, Search } from "@/components/shared";
-import MainPageFallback from "@/components/shared/MainPageFallback";
-import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Plus } from "lucide-react";
@@ -21,9 +19,7 @@ export default async function Projects({ searchParams }: { searchParams?: { quer
 					</Button>
 				</Link>
 			</div>
-			<Suspense fallback={<MainPageFallback />}>
-				<ProjectsList projects={projects as IProject[]} isNext={isNext} />
-			</Suspense>
+			<ProjectsList projects={projects as IProject[]} isNext={isNext} />
 		</div>
 	);
 }

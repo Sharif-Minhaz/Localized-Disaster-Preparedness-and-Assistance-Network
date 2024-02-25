@@ -27,6 +27,7 @@ import ManageProjectButtons from "./ManageProjectButtons";
 import DonationForm from "./DonationForm";
 import LoadingScreen from "./LoadingScreen";
 import DonationActivityCard from "./DonationActivityCard";
+import ActivityList from "./ActivityList";
 
 export {
 	Navbar,
@@ -58,4 +59,5 @@ export {
 	DonationForm,
 	LoadingScreen,
 	DonationActivityCard,
+	ActivityList,
 };
