@@ -23,3 +23,26 @@ export function getImageKey(url: string) {
 export function convertToPlainObj(obj: any) {
 	return JSON.parse(JSON.stringify(obj));
 }
+
+export function formatDate(date: string) {
+	const actualDate = new Date(date);
+
+	const options = {
+		year: "numeric" as const,
+		month: "short" as const,
+		day: "2-digit" as const,
+		hour: "2-digit" as const,
+		minute: "2-digit" as const,
+		second: "2-digit" as const,
+		hour12: false,
+		timeZone: "UTC",
+	};
+
+	const formattedDate = actualDate.toLocaleString("en-US", options);
+
+	return formattedDate;
+}
+
+export function addCommasToNumber(number: number) {
+	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

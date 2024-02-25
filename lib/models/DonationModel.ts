@@ -1,4 +1,23 @@
 import { Schema, model, models } from "mongoose";
+import { IUser } from "./UserModel";
+import { IProject } from "./ProjectModel";
+
+export interface IDonation {
+	_id: string;
+	donatedBy: string | IUser;
+	projectId: string | IProject;
+	stripeId?: string;
+	donationType: "money" | "resource";
+	donationAmount?: number;
+	donationUnit?: number;
+	resourceName?: string;
+	shipperName?: string;
+	mobile: string;
+	note?: string;
+	__v: number;
+	createdAt: string;
+	updatedAt: string;
+}
 
 const donationSchema = new Schema(
 	{

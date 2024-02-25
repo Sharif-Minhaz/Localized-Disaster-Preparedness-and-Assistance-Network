@@ -6,6 +6,9 @@ import Stripe from "stripe";
 import { connectToDB } from "../mongoose";
 import Donation from "../models/DonationModel";
 import { IProject } from "../models/ProjectModel";
+import User, { IUser } from "../models/UserModel";
+import { convertToPlainObj } from "../utils";
+import { revalidatePath } from "next/cache";
 
 export const checkoutDonation = async (
 	donation: DonationProps,
@@ -59,15 +62,49 @@ export const addDonation = async (donation: DonationProps, userId: string, proje
 			...donation,
 			projectId: project._id,
 			donatedBy: userId,
-			donationAmount: Number(donation.donationAmount),
+			donationAmount: Number(donation.donationAmount) / 100,
 			donationUnit: Number(donation.donationUnit),
 		});
 
 		if (saveDonation) {
+			revalidatePath("/donation-history");
 			return { status: "OK", code: 201 };
 		}
 		return { status: "ERROR", code: 500 };
 	} catch (error) {
+		console.error(error);
+		throw error;
+	}
+};
+
+export const getUserDonationHistory = async (clerkId: string) => {
+	try {
+		connectToDB();
+		const user: IUser | null = await User.findOne({ clerkId }).select("_id").lean();
+		let donations;
+
+		if (user) {
+			donations = await Donation.find({ donatedBy: user._id })
+				.populate("donatedBy projectId")
+				.lean();
+		}
+
+		return convertToPlainObj(donations);
+	} catch (error) {
+		console.error(error);
+		throw error;
+	}
+};
+
+export const getDonationActivity = async () => {
+	try {
+		connectToDB();
+
+		const donations = await Donation.find().populate("donatedBy projectId").lean();
+
+		return convertToPlainObj(donations);
+	} catch (error) {
+		console.error(error);
 		throw error;
 	}
 };

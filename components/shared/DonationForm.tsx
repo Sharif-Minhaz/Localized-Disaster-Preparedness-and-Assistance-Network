@@ -181,7 +181,7 @@ export default function DonationForm({ project }: { project: IProject }) {
 								<FormControl>
 									<Input
 										type="number"
-										min={1}
+										min={100}
 										{...field}
 										disabled={form.formState.isSubmitting}
 										placeholder="Enter your donation amount"
@@ -249,7 +249,13 @@ export default function DonationForm({ project }: { project: IProject }) {
 						/>
 					</>
 				)}
-				<Button type="submit">Submit</Button>
+				<Button
+					className="disabled:cursor-not-allowed"
+					disabled={form.formState.isSubmitting}
+					type="submit"
+				>
+					Submit
+				</Button>
 			</form>
 		</Form>
 	);
