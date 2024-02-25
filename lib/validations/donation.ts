@@ -4,7 +4,7 @@ const phoneRegex = new RegExp(/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[
 
 export const DonationValidation = z
 	.object({
-		note: z.string().optional(),
+		note: z.string().max(500, { message: "Note must be 500 character or less" }).optional(),
 		donationType: z.string().min(1, { message: "Must be select one of the type" }),
 		donationAmount: z.string(),
 		donationUnit: z.string(),

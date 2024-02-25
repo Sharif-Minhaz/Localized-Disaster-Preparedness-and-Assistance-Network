@@ -67,7 +67,10 @@ const donationSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		note: String,
+		note: {
+			type: String,
+			maxLength: 500,
+		},
 	},
 	{ timestamps: true }
 );

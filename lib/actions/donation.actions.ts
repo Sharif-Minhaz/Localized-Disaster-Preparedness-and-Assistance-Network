@@ -58,6 +58,7 @@ export const checkoutDonation = async (
 export const addDonation = async (donation: DonationProps, userId: string, project: IProject) => {
 	try {
 		connectToDB();
+
 		const saveDonation = await Donation.create({
 			...donation,
 			projectId: project._id,
@@ -68,6 +69,7 @@ export const addDonation = async (donation: DonationProps, userId: string, proje
 
 		if (saveDonation) {
 			revalidatePath("/donation-history");
+			revalidatePath("/activity");
 			return { status: "OK", code: 201 };
 		}
 		return { status: "ERROR", code: 500 };
@@ -80,12 +82,14 @@ export const addDonation = async (donation: DonationProps, userId: string, proje
 export const getUserDonationHistory = async (clerkId: string) => {
 	try {
 		connectToDB();
+
 		const user: IUser | null = await User.findOne({ clerkId }).select("_id").lean();
 		let donations;
 
 		if (user) {
 			donations = await Donation.find({ donatedBy: user._id })
 				.populate("donatedBy projectId")
+				.sort({ createdAt: -1 })
 				.lean();
 		}
 
@@ -100,7 +104,10 @@ export const getDonationActivity = async () => {
 	try {
 		connectToDB();
 
-		const donations = await Donation.find().populate("donatedBy projectId").lean();
+		const donations = await Donation.find()
+			.populate("donatedBy projectId")
+			.sort({ createdAt: -1 })
+			.lean();
 
 		return convertToPlainObj(donations);
 	} catch (error) {

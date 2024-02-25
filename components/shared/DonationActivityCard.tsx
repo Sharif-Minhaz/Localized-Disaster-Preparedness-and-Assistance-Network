@@ -42,19 +42,23 @@ export default function DonationActivityCard({ history }: Props) {
 									: history.projectId.slug
 							}`}
 						>
-							<h3 className="text-gray-900 dark:text-gray-300 font-bold text-xl mb-2 line-clamp-1 hover:underline hover:decoration-dotted">
+							<h3 className="text-gray-900 dark:text-gray-300 font-bold text-xl mb-1 line-clamp-1 hover:underline hover:decoration-dotted">
 								{typeof history.projectId === "string"
 									? history.projectId
 									: history.projectId.heading}
 							</h3>
 						</Link>
-						<p className="text-gray-700 dark:text-gray-300 text-base line-clamp-3">
+						<p className="text-gray-700 dark:text-gray-300 text-base line-clamp-2">
 							{typeof history.projectId === "string"
 								? history.projectId
 								: history.projectId.description}
 						</p>
+						<p className="mt-2 text-sm">
+							<strong>Donation Note: </strong>
+							{history.note ? history.note : <em>Not provided.</em>}
+						</p>
 					</div>
-					<div className="flex justify-between border-t border-slate-100 dark:border-slate-700 pt-4">
+					<div className="flex xs:flex-row flex-col gap-4 justify-between border-t border-slate-100 dark:border-slate-700 pt-4">
 						<div className="flex items-center">
 							<Image
 								height={40}
@@ -78,9 +82,19 @@ export default function DonationActivityCard({ history }: Props) {
 								</p>
 							</div>
 						</div>
-						<p className="font-semibold text-gray-600 dark:text-gray-300 text-[22px]">
-							৳ {addCommasToNumber(history.donationAmount || 0)}
-						</p>
+						{history.donationType === "money" ? (
+							<p className="font-semibold text-gray-600 dark:text-gray-300 text-[22px]">
+								৳ {addCommasToNumber(history.donationAmount || 0)}
+							</p>
+						) : (
+							<div>
+								<p>
+									<span className="font-semibold">{history.resourceName}</span> -{" "}
+									<span className="text-sm">{history.donationUnit}x</span>
+								</p>
+								<p>{history.shipperName}</p>
+							</div>
+						)}
 					</div>
 				</div>
 			</div>
