@@ -43,6 +43,14 @@ export function formatDate(date: string) {
 	return formattedDate;
 }
 
-export function addCommasToNumber(number: number) {
-	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+export function formatToShortDate(msDate: number) {
+	const date = new Date(msDate);
+	const options = {
+		year: "numeric",
+		month: "short",
+		day: "numeric",
+	};
+	// @ts-ignore
+	const formatter = new Intl.DateTimeFormat("en-US", options);
+	return formatter.format(date);
 }

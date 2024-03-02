@@ -3,7 +3,7 @@
 import { sideMenuData } from "@/constants";
 import { MainContext } from "@/contexts/MainContext";
 import { dictionary } from "@/locales/contents";
-import { OrganizationSwitcher, SignOutButton, SignedIn, SignedOut } from "@clerk/nextjs";
+import { SignOutButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import { Switch } from "../ui/switch";
 import { LogOut, Moon, AlignRight } from "lucide-react";
 import { useContext } from "react";
@@ -14,6 +14,7 @@ import { usePathname, useRouter } from "next/navigation";
 import OutsideClickHandler from "react-outside-click-handler";
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
+import { formatToShortDate } from "@/lib/utils";
 
 const fadeInAnimationVariants = {
 	initial: {
@@ -29,7 +30,15 @@ const fadeInAnimationVariants = {
 	}),
 };
 
-export default function Sidebar() {
+interface Props {
+	userInfo: {
+		imageUrl?: string;
+		username?: string | null;
+		createdAt?: number;
+	};
+}
+
+export default function Sidebar({ userInfo }: Props) {
 	const { lang, theme, sidebarOpen, closeSidebar, changeTheme } = useContext(MainContext);
 	const pathname = usePathname();
 	const router = useRouter();
@@ -62,25 +71,38 @@ export default function Sidebar() {
 
 					<div className="px-4 py-2 h-[65px]">
 						<SignedIn>
-							<OrganizationSwitcher
-								appearance={{
-									elements: {
-										organizationSwitcherTrigger: "py-2 px-4",
-									},
-								}}
-							/>
+							<div className="flex items-center gap-4 rounded-[8px] dark:bg-slate-800 bg-slate-100 border px-3 py-2">
+								<div className="relative">
+									<Image
+										draggable={false}
+										width={32}
+										height={32}
+										src={userInfo?.imageUrl || ""}
+										className="rounded"
+										alt="profile_image"
+									/>
+									<span className="absolute bottom-0 left-6 transform translate-y-1/4 w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+								</div>
+								<div className="font-medium dark:text-white">
+									<div className="text-sm">{userInfo.username}</div>
+									<div className="text-[12px] text-gray-500 dark:text-gray-400">
+										Joined in{" "}
+										{formatToShortDate(userInfo?.createdAt || Date.now())}
+									</div>
+								</div>
+							</div>
 						</SignedIn>
 						<SignedOut>
 							<Button
 								onClick={() => router.push("/sign-in")}
-								className="w-full rounded-[8px] bg-bluish"
+								className="flex w-full dark:hover:bg-slate-900 hover:bg-slate-300 dark:text-slate-100 text-slate-800 h-full items-center gap-4 rounded-[8px] dark:bg-slate-800 bg-slate-100 border px-3 py-2"
 							>
-								Login for org. profile
+								Sign in now
 							</Button>
 						</SignedOut>
 					</div>
 
-					<ul>
+					<ul className="mt-1">
 						{sideMenuData.map((menu, index) => {
 							const { Icon } = menu;
 							const selectedLangEntry = dictionary?.[lang];

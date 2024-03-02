@@ -28,6 +28,7 @@ import DonationForm from "./DonationForm";
 import LoadingScreen from "./LoadingScreen";
 import DonationActivityCard from "./DonationActivityCard";
 import ActivityList from "./ActivityList";
+import CommunityForm from "./CommunityForm";
 
 export {
 	Navbar,
@@ -60,4 +61,5 @@ export {
 	LoadingScreen,
 	DonationActivityCard,
 	ActivityList,
+	CommunityForm,
 };

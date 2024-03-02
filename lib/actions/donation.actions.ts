@@ -113,7 +113,6 @@ export const getDonationActivity = async ({
 	sortBy?: SortOrder;
 }) => {
 	try {
-		console.log(searchString);
 		connectToDB();
 
 		// Calculate the number of projects to skip based on the page number and page size.
@@ -148,8 +147,6 @@ export const getDonationActivity = async ({
 			.skip(skipAmount)
 			.limit(pageSize)
 			.lean();
-
-		console.log(donations.map((donation) => donation.note));
 
 		// Check if there are more projects beyond the current page.
 		const isNext = totalDonationsCount > skipAmount + donations.length;

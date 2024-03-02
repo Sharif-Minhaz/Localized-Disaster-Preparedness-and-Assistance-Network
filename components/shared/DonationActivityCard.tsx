@@ -1,5 +1,5 @@
 import { IDonation } from "@/lib/models/DonationModel";
-import { addCommasToNumber, formatDate } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -86,8 +86,12 @@ export default function DonationActivityCard({ history }: Props) {
 							</div>
 						</div>
 						{history.donationType === "money" ? (
-							<p className="font-semibold text-gray-600 dark:text-gray-300 text-[22px]">
-								৳ {addCommasToNumber(history.donationAmount || 0)}
+							<p className="font-semibold text-gray-600 dark:text-gray-300 text-[25px]">
+								{/* Currency representation */}
+								{new Intl.NumberFormat("bn-BD", {
+									style: "currency",
+									currency: "BDT",
+								}).format(history.donationAmount || 0)}
 							</p>
 						) : (
 							<div>

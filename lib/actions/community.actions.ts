@@ -7,11 +7,10 @@ import User from "../models/UserModel";
 
 import { connectToDB } from "../mongoose";
 import { convertToPlainObj } from "../utils";
+import slugify from "slugify";
 
 export async function createCommunity(
-	id: string,
 	name: string,
-	username: string,
 	image: string,
 	bio: string,
 	createdById: string // Change the parameter name to reflect it's an id
@@ -27,9 +26,12 @@ export async function createCommunity(
 		}
 
 		const newCommunity = new Community({
-			id,
 			name,
-			username,
+			slug: `${slugify(name.toString(), {
+				lower: true,
+				strict: true,
+				remove: /[*+~.()'"!:@]/g,
+			})}-${Date.now()}`,
 			image,
 			bio,
 			createdBy: user._id, // Use the mongoose ID of the user
@@ -49,11 +51,11 @@ export async function createCommunity(
 	}
 }
 
-export async function fetchCommunityDetails(id: string) {
+export async function fetchCommunityDetails(slug: string) {
 	try {
 		connectToDB();
 
-		const communityDetails = await Community.findOne({ id }).populate([
+		const communityDetails = await Community.findOne({ slug }).populate([
 			"createdBy",
 			{
 				path: "members",
@@ -94,7 +96,7 @@ export async function fetchCommunities({
 
 		// If the search string is not empty, add the $or operator to match either username or name fields.
 		if (searchString.trim() !== "") {
-			query.$or = [{ username: { $regex: regex } }, { name: { $regex: regex } }];
+			query.$or = [{ name: { $regex: regex } }, { bio: { $regex: regex } }];
 		}
 
 		// Define the sort options for the fetched communities based on createdAt field and provided sort order.
@@ -121,12 +123,12 @@ export async function fetchCommunities({
 	}
 }
 
-export async function addMemberToCommunity(communityId: string, memberId: string) {
+export async function addMemberToCommunity(slug: string, memberId: string) {
 	try {
 		connectToDB();
 
 		// Find the community by its unique id
-		const community = await Community.findOne({ id: communityId });
+		const community = await Community.findOne({ slug });
 
 		if (!community) {
 			throw new Error("Community not found");
@@ -160,12 +162,12 @@ export async function addMemberToCommunity(communityId: string, memberId: string
 	}
 }
 
-export async function removeUserFromCommunity(clerkId: string, communityId: string) {
+export async function removeUserFromCommunity(clerkId: string, slug: string) {
 	try {
 		connectToDB();
 
 		const userIdObject = await User.findOne({ clerkId }, { _id: 1 });
-		const communityIdObject = await Community.findOne({ id: communityId }, { _id: 1 });
+		const communityIdObject = await Community.findOne({ slug }, { _id: 1 });
 
 		if (!userIdObject) {
 			throw new Error("User not found");
@@ -196,19 +198,30 @@ export async function removeUserFromCommunity(clerkId: string, communityId: stri
 	}
 }
 
-export async function updateCommunityInfo(
-	communityId: string,
-	name: string,
-	username: string,
-	image: string
-) {
+interface IUpdateComProps {
+	communityId: string;
+	name: string;
+	bio: string;
+	image: string;
+}
+
+export async function updateCommunityInfo({ communityId, name, bio, image }: IUpdateComProps) {
 	try {
 		connectToDB();
 
 		// Find the community by its _id and update the information
 		const updatedCommunity = await Community.findOneAndUpdate(
 			{ id: communityId },
-			{ name, username, image }
+			{
+				name,
+				bio,
+				image,
+				slug: `${slugify(name, {
+					lower: true,
+					strict: true,
+					remove: /[*+~.()'"!:@]/g,
+				})}-${Date.now()}`,
+			}
 		);
 
 		if (!updatedCommunity) {
@@ -228,7 +241,7 @@ export async function deleteCommunity(communityId: string) {
 		connectToDB();
 		// Find the community by its ID and delete it
 		const deletedCommunity = await Community.findOneAndDelete({
-			id: communityId,
+			_id: communityId,
 		});
 
 		if (!deletedCommunity) {
