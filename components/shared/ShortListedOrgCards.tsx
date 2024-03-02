@@ -2,27 +2,16 @@
 
 import { motion } from "framer-motion";
 import { OrganizationCard } from ".";
-
-interface Community {
-	_id?: string;
-	id: string;
-	name: string;
-	username: string;
-	bio: string;
-	image: string;
-	createdBy?: string;
-	members: object[];
-	__v?: number;
-}
+import { ICommunity } from "@/lib/models/CommunityModel";
 
 interface ShortListedOrgCardsProps {
-	communities: Community[];
+	communities: ICommunity[];
 	isNext: boolean;
 }
 
 export default function ShortListedOrgCards({ communities, isNext }: ShortListedOrgCardsProps) {
 	if (!communities.length) {
-		return <div className="sm:p-5 p-4">No organization found.</div>;
+		return <div className="sm:p-5 p-4">No community found.</div>;
 	}
 	return (
 		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 p-4 sm:p-5 ">
@@ -36,7 +25,7 @@ export default function ShortListedOrgCards({ communities, isNext }: ShortListed
 				>
 					<OrganizationCard
 						name={data.name}
-						username={data.username}
+						slug={data.slug}
 						image={data.image}
 						bio={data.bio}
 						members={data.members}

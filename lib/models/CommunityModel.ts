@@ -7,9 +7,9 @@ export interface ICommunity {
 	bio?: string;
 	image?: string;
 	createdBy: string;
-	members?: [string];
-	createdAt: string;
-	updatedAt: string;
+	members: [string];
+	createdAt?: string;
+	updatedAt?: string;
 }
 
 const communitySchema = new Schema(

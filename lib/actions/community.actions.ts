@@ -8,18 +8,24 @@ import User from "../models/UserModel";
 import { connectToDB } from "../mongoose";
 import { convertToPlainObj } from "../utils";
 import slugify from "slugify";
+import { revalidatePath } from "next/cache";
 
-export async function createCommunity(
-	name: string,
-	image: string,
-	bio: string,
-	createdById: string // Change the parameter name to reflect it's an id
-) {
+export async function createCommunity({
+	name,
+	image,
+	bio,
+	createdBy,
+}: {
+	name: string;
+	image: string;
+	bio: string;
+	createdBy: string;
+}) {
 	try {
 		connectToDB();
 
 		// Find the user with the provided unique id
-		const user = await User.findOne({ clerkId: createdById });
+		const user = await User.findOne({ clerkId: createdBy });
 
 		if (!user) {
 			throw new Error("User not found"); // Handle the case if the user with the id is not found
@@ -34,7 +40,8 @@ export async function createCommunity(
 			})}-${Date.now()}`,
 			image,
 			bio,
-			createdBy: user._id, // Use the mongoose ID of the user
+			createdBy: user._id,
+			members: [user._id],
 		});
 
 		const createdCommunity = await newCommunity.save();
@@ -43,7 +50,9 @@ export async function createCommunity(
 		user.communities.push(createdCommunity._id);
 		await user.save();
 
-		return createdCommunity;
+		revalidatePath("/communities");
+		revalidatePath("/");
+		return convertToPlainObj(createdCommunity);
 	} catch (error) {
 		// Handle any errors
 		console.error("Error creating community:", error);
@@ -67,6 +76,18 @@ export async function fetchCommunityDetails(slug: string) {
 	} catch (error) {
 		// Handle any errors
 		console.error("Error fetching community details:", error);
+		throw error;
+	}
+}
+
+export async function fetchCommunity(slug: string) {
+	try {
+		connectToDB();
+		const community = await Community.findOne({ slug }).populate("members").lean();
+
+		return convertToPlainObj(community);
+	} catch (error) {
+		console.error("Error fetching community:", error);
 		throw error;
 	}
 }
@@ -154,7 +175,7 @@ export async function addMemberToCommunity(slug: string, memberId: string) {
 		user.communities.addToSet(community._id);
 		await user.save();
 
-		return community;
+		return convertToPlainObj(community);
 	} catch (error) {
 		// Handle any errors
 		console.error("Error adding member to community:", error);
@@ -221,14 +242,17 @@ export async function updateCommunityInfo({ communityId, name, bio, image }: IUp
 					strict: true,
 					remove: /[*+~.()'"!:@]/g,
 				})}-${Date.now()}`,
-			}
+			},
+			{ new: true }
 		);
 
 		if (!updatedCommunity) {
 			throw new Error("Community not found");
 		}
 
-		return updatedCommunity;
+		revalidatePath("/communities");
+		revalidatePath("/");
+		return convertToPlainObj(updatedCommunity);
 	} catch (error) {
 		// Handle any errors
 		console.error("Error updating community information:", error);
@@ -236,12 +260,12 @@ export async function updateCommunityInfo({ communityId, name, bio, image }: IUp
 	}
 }
 
-export async function deleteCommunity(communityId: string) {
+export async function deleteCommunity(slug: string) {
 	try {
 		connectToDB();
 		// Find the community by its ID and delete it
 		const deletedCommunity = await Community.findOneAndDelete({
-			_id: communityId,
+			slug,
 		});
 
 		if (!deletedCommunity) {
@@ -255,8 +279,9 @@ export async function deleteCommunity(communityId: string) {
 			// @ts-ignore
 			{ $pull: { communities: deletedCommunity._id } }
 		);
-
-		return deletedCommunity;
+		revalidatePath("/communities");
+		revalidatePath("/");
+		return convertToPlainObj(deletedCommunity);
 	} catch (error) {
 		console.error("Error deleting community: ", error);
 		throw error;

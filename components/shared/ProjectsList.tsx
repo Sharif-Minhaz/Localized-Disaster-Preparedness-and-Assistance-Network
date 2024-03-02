@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
 import { deleteProject } from "@/lib/actions/project.actions";
-import { DeleteProjectCom } from "@/components/shared";
+import { DeleteConfirmationBox } from "@/components/shared";
 import { IProject } from "@/lib/models/ProjectModel";
 
 export interface ProjectProps {
@@ -40,7 +40,9 @@ export default function ProjectsList({ projects, isNext }: ProjectProps) {
 								<Link href={`/projects/${project.slug}/update`}>
 									<Pencil className="text-purple-400 w-5 h-5" />
 								</Link>
-								<DeleteProjectCom action={deleteProject.bind(null, project.slug)} />
+								<DeleteConfirmationBox
+									action={deleteProject.bind(null, project.slug)}
+								/>
 							</div>
 						</div>
 					</div>

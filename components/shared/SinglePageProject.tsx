@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
 import { deleteProject } from "@/lib/actions/project.actions";
-import { DeleteProjectCom, ManageProjectButtons } from "@/components/shared";
+import { DeleteConfirmationBox, ManageProjectButtons } from "@/components/shared";
 import { IProject } from "@/lib/models/ProjectModel";
 
 export default function SinglePageProject({ project }: { project: IProject }) {
@@ -27,7 +27,7 @@ export default function SinglePageProject({ project }: { project: IProject }) {
 							<Pencil size={17} className="text-purple-400" />
 						</Link>
 						<ManageProjectButtons slug={project.slug} completed={project.completed} />
-						<DeleteProjectCom action={deleteProjectWithSlug} />
+						<DeleteConfirmationBox action={deleteProjectWithSlug} />
 					</div>
 				</div>
 				<h2 className="font-bold text-2xl my-3">{project.heading}</h2>

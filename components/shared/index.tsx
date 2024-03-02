@@ -21,7 +21,7 @@ import DatePickerWithRange from "./DateRangePicker";
 import Tiptap from "./Tiptap";
 import DonateSideBox from "./DonateSideBox";
 import SinglePageProject from "./SinglePageProject";
-import DeleteProjectCom from "./DeleteProjectCom";
+import DeleteConfirmationBox from "./DeleteConfirmationBox";
 import ConfirmationDeleteBox from "./ConfirmationDeleteBox";
 import ManageProjectButtons from "./ManageProjectButtons";
 import DonationForm from "./DonationForm";
@@ -54,7 +54,7 @@ export {
 	DatePickerWithRange,
 	Tiptap,
 	SinglePageProject,
-	DeleteProjectCom,
+	DeleteConfirmationBox,
 	ConfirmationDeleteBox,
 	ManageProjectButtons,
 	DonationForm,

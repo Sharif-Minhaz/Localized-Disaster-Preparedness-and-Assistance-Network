@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
 import { deleteProject } from "@/lib/actions/project.actions";
-import { DeleteProjectCom } from "@/components/shared";
+import { DeleteConfirmationBox } from "@/components/shared";
 
 interface Props {
 	heading: string;
@@ -32,7 +32,7 @@ export default function ProjectCard({ heading, description, image, slug, complet
 					<Link href={`/projects/${slug}/update`}>
 						<Pencil className="text-purple-400 w-5 h-5" />
 					</Link>
-					<DeleteProjectCom action={deleteProjectWithSlug} />
+					<DeleteConfirmationBox action={deleteProjectWithSlug} />
 				</div>
 			</div>
 			<div className="flex min-h-[200px] flex-col gap-3 p-4 md:gap-3">
