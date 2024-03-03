@@ -62,17 +62,7 @@ export async function updateProject(data: Props) {
 			}
 		}
 
-		const updateProject = await Project.findOneAndUpdate(
-			{ slug: data.slug },
-			{
-				...data,
-				slug: slugify(data.heading.toString(), {
-					lower: true,
-					strict: true,
-					remove: /[*+~.()'"!:@]/g,
-				}),
-			}
-		);
+		const updateProject = await Project.findOneAndUpdate({ slug: data.slug }, data);
 
 		if (!updateProject) {
 			throw new Error("Project not found");

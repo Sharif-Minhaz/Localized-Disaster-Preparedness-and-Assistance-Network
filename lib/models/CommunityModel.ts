@@ -21,6 +21,8 @@ const communitySchema = new Schema(
 		slug: {
 			type: String,
 			required: true,
+			unique: true,
+			immutable: true,
 		},
 		bio: String,
 		image: String,

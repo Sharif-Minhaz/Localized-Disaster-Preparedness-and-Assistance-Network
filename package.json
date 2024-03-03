@@ -32,7 +32,7 @@
 		"clsx": "^2.0.0",
 		"date-fns": "^3.2.0",
 		"framer-motion": "^10.16.12",
-		"lucide-react": "^0.294.0",
+		"lucide-react": "^0.344.0",
 		"mongoose": "^8.0.2",
 		"next": "^14.1.0",
 		"react": "^18",

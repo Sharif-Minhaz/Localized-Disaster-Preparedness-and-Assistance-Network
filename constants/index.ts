@@ -11,6 +11,7 @@ import {
 	Contact,
 	ShieldAlert,
 	History,
+	FilePenIcon,
 } from "lucide-react";
 
 import projectImage from "@/public/assets/images/project-1.jpg";
@@ -53,6 +54,11 @@ export const sideMenuData: MenuItem[] = [
 		title: "communities",
 		url: "/communities",
 		Icon: Building,
+	},
+	{
+		title: "my_posts",
+		url: "/my_posts",
+		Icon: FilePenIcon,
 	},
 	{
 		title: "auditReports",

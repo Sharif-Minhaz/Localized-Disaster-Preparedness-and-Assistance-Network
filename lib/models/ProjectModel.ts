@@ -29,6 +29,8 @@ const projectSchema = new Schema(
 		slug: {
 			type: String,
 			required: true,
+			unique: true,
+			immutable: true,
 		},
 		partnerOrganizations: String,
 		from: {

@@ -16,9 +16,9 @@ interface Props {
 export default function OrganizationCard({ name, slug, image, bio, members }: Props) {
 	const deleteProjectWithSlug = deleteCommunity.bind(null, slug);
 	return (
-		<article className="border p-4 relative flex w-full max-w-[400px] flex-col overflow-hidden rounded-xl shadow-md transition-all hover:shadow-lg">
-			<div className="flex gap-3 justify-between items-center">
-				<div className="flex gap-4 items-center">
+		<article className="border relative flex w-full max-w-[400px] flex-col overflow-hidden rounded-xl shadow-md transition-all hover:shadow-lg">
+			<div className="flex pt-4 px-4 pb-4 gap-3 justify-between items-center bg-[#ecedef]">
+				<div className="flex gap-3 items-center">
 					<div>
 						<Image
 							src={image || ""}
@@ -29,7 +29,7 @@ export default function OrganizationCard({ name, slug, image, bio, members }: Pr
 						/>
 					</div>
 					<div>
-						<h3 className="text-lg">{name}</h3>
+						<h3 className="text-lg line-clamp-1">{name}</h3>
 						<h5 className="text-sm">Visit to join with us</h5>
 					</div>
 				</div>
@@ -37,10 +37,10 @@ export default function OrganizationCard({ name, slug, image, bio, members }: Pr
 					<Button className="text-sm rounded-xl bg-bluish-inverse h-8">Visit</Button>
 				</Link>
 			</div>
-			<div>
+			<div className="px-4">
 				<p className="line-clamp-4 my-4 text-sm">{bio}</p>
 			</div>
-			<div className="flex items-center justify-between gap-3">
+			<div className="flex items-center justify-between gap-3 px-4 pb-4">
 				<div className="flex gap-2 items-center">
 					<p className="text-sm">
 						{members.length} member{members.length > 1 ? "s" : ""}

@@ -16,7 +16,7 @@ export default async function OrganizationsPage({
 	const { communities, isNext } = await fetchCommunities({ searchString: searchParams?.query });
 
 	return (
-		<div className="shadow rounded-xl border">
+		<section className="shadow rounded-xl border">
 			<HeadingSection text="Communities" />
 			<div className="px-4 sm:px-5 pt-4 sm:pt-5 flex gap-2">
 				<Search placeholder="Search communities..." />
@@ -29,6 +29,6 @@ export default async function OrganizationsPage({
 			<Suspense fallback={<MainPageFallback />}>
 				<ShortListedOrgCards isNext={isNext} communities={communities} />
 			</Suspense>
-		</div>
+		</section>
 	);
 }

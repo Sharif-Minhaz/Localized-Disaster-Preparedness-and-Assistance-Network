@@ -29,6 +29,9 @@ import LoadingScreen from "./LoadingScreen";
 import DonationActivityCard from "./DonationActivityCard";
 import ActivityList from "./ActivityList";
 import CommunityForm from "./CommunityForm";
+import CommunityPage from "./CommunityPage";
+import Posts from "./Posts";
+import Post from "./Post";
 
 export {
 	Navbar,
@@ -62,4 +65,7 @@ export {
 	DonationActivityCard,
 	ActivityList,
 	CommunityForm,
+	CommunityPage,
+	Posts,
+	Post,
 };

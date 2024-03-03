@@ -237,11 +237,6 @@ export async function updateCommunityInfo({ communityId, name, bio, image }: IUp
 				name,
 				bio,
 				image,
-				slug: `${slugify(name, {
-					lower: true,
-					strict: true,
-					remove: /[*+~.()'"!:@]/g,
-				})}-${Date.now()}`,
 			},
 			{ new: true }
 		);
