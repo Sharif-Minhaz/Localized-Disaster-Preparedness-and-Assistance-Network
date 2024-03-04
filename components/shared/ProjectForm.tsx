@@ -30,7 +30,15 @@ import { useToast } from "../ui/use-toast";
 import { ToastAction } from "../ui/toast";
 import { IProject } from "@/lib/models/ProjectModel";
 
-export default function ProjectForm({ project, update }: { project?: IProject; update?: boolean }) {
+export default function ProjectForm({
+	adminId,
+	project,
+	update,
+}: {
+	adminId?: string;
+	project?: IProject;
+	update?: boolean;
+}) {
 	const [key, setKey] = useState(Date.now());
 	const { toast } = useToast();
 	const router = useRouter();
@@ -62,60 +70,70 @@ export default function ProjectForm({ project, update }: { project?: IProject; u
 	});
 
 	async function onSubmit(values: z.infer<typeof ProjectValidation>) {
-		const blobs = values.image;
+		try {
+			const blobs = values.image;
 
-		const hasImageChanged = isBase64Image(blobs);
+			const hasImageChanged = isBase64Image(blobs);
 
-		if (hasImageChanged) {
-			const imgRes = await startUpload(files);
+			if (hasImageChanged) {
+				const imgRes = await startUpload(files);
 
-			if (imgRes && imgRes[0].url) {
-				values.image = imgRes[0].url;
+				if (imgRes && imgRes[0].url) {
+					values.image = imgRes[0].url;
+				}
 			}
-		}
 
-		const data = {
-			heading: values.heading,
-			partnerOrganizations: values.partnerOrganizations,
-			from: date?.from,
-			to: date?.to,
-			description: values.description,
-			details: values.details,
-			location: values.location,
-			courierAddress: values.courierAddress,
-			image: values.image,
-			slug: project?.slug,
-		};
+			const data = {
+				createdBy: adminId,
+				heading: values.heading,
+				partnerOrganizations: values.partnerOrganizations,
+				from: date?.from,
+				to: date?.to,
+				description: values.description,
+				details: values.details,
+				location: values.location,
+				courierAddress: values.courierAddress,
+				image: values.image,
+				slug: project?.slug,
+			};
 
-		if (update) {
-			// @ts-ignore
-			const res = await updateProject(data);
+			if (update) {
+				// update project
+				const res = await updateProject(data);
+				if (res) {
+					toast({
+						title: "Success: Project",
+						description: "Project updated successfully",
+						action: <ToastAction altText="OK">OK</ToastAction>,
+					});
+					return router.push("/projects");
+				}
+
+				return toast({
+					variant: "destructive",
+					title: "Failed: Project update",
+					description: "Project update failed",
+					action: <ToastAction altText="close">Close</ToastAction>,
+				});
+			}
+
+			// create a new project
+			const res = await createProject(data);
+
 			if (res) {
+				form.reset();
+				setKey(Date.now());
 				toast({
 					title: "Success: Project",
-					description: "Project updated successfully",
+					description: "Project added successfully",
 					action: <ToastAction altText="OK">OK</ToastAction>,
 				});
-				return router.push("/projects");
 			}
-
-			return toast({
-				variant: "destructive",
-				title: "Failed: Project update",
-				description: "Project update failed",
-				action: <ToastAction altText="close">Close</ToastAction>,
-			});
-		}
-
-		// @ts-ignore
-		const res = await createProject(data);
-
-		if (res) {
-			form.reset();
-			setKey(Date.now());
+		} catch (error: any) {
 			toast({
-				title: "Success: Project",
-				description: "Project added successfully",
+				variant: "destructive",
+				title: error.message,
+				description: "Project creation failed",
 				action: <ToastAction altText="OK">OK</ToastAction>,
 			});
 		}

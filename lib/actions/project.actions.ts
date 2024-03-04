@@ -9,25 +9,43 @@ import { revalidatePath } from "next/cache";
 import { deleteUTImage } from "./helpers.action";
 import { redirect } from "next/navigation";
 import { convertToPlainObj } from "../utils";
+import User from "../models/UserModel";
 
 interface Props {
 	heading: string;
-	from: string;
-	to: string;
+	from?: Date;
+	to?: Date;
 	partnerOrganizations?: string;
 	description: string;
 	details: string;
 	image: string;
 	slug?: string;
+	createdBy?: string;
+	courierAddress: string;
+	location: string;
 }
 
 export async function createProject(data: Props) {
 	try {
 		connectToDB();
 
-		const { heading, partnerOrganizations, description, from, to, details, image } = data;
+		const {
+			createdBy,
+			heading,
+			partnerOrganizations,
+			location,
+			courierAddress,
+			description,
+			from,
+			to,
+			details,
+			image,
+		} = data;
+
+		const user = await User.findOne({ clerkId: createdBy }).select("_id");
 
 		const res = await Project.create({
+			createdBy: user._id,
 			slug: `${slugify(heading.toString(), {
 				lower: true,
 				strict: true,
@@ -40,12 +58,15 @@ export async function createProject(data: Props) {
 			description,
 			details,
 			image,
+			location,
+			courierAddress,
 		});
 
 		revalidatePath("/projects");
 		return convertToPlainObj(res);
 	} catch (error) {
 		console.error(error);
+		throw new Error("Project creation failed");
 	}
 }
 
