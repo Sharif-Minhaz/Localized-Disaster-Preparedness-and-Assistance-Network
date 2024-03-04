@@ -1,8 +1,10 @@
 import { Schema, model, models } from "mongoose";
+import { IUser } from "./UserModel";
 
 export interface IProject {
 	_id: string;
 	slug: string;
+	createdBy: string | IUser;
 	partnerOrganizations: string;
 	image: string;
 	from: string;
