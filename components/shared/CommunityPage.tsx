@@ -1,7 +1,7 @@
 import { ICommunity } from "@/lib/models/CommunityModel";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { Pencil, Users } from "lucide-react";
+import { Pencil, Plus, Users } from "lucide-react";
 import Link from "next/link";
 import { Posts } from ".";
 
@@ -37,11 +37,16 @@ export default function CommunityPage({ community }: { community: ICommunity }) 
 					</div>
 				</div>
 				<hr />
-				<p className="text-center p-4 text-sm">{community.bio}</p>
+				<p className="text-center py-4 px-4 sm:px-8 md:px-16 text-sm">{community.bio}</p>
 			</section>
 			<section className="shadow rounded-xl border mt-5 max-w-3xl mx-auto">
 				<Posts />
 			</section>
+			<Link href={`/communities/${community.slug}/post/create`}>
+				<div className="bg-blue-600 text-white shadow w-14 h-14 rounded-full fixed z-10 bottom-4 right-4 flex justify-center items-center">
+					<Plus />
+				</div>
+			</Link>
 		</>
 	);
 }
