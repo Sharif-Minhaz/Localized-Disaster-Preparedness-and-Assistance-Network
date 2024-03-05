@@ -17,7 +17,10 @@ export interface IUser {
 
 const userSchema = new Schema(
 	{
-		clerkId: String,
+		clerkId: {
+			type: String,
+			required: true,
+		},
 		name: String,
 		username: {
 			type: String,

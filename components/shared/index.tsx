@@ -32,6 +32,12 @@ import CommunityForm from "./CommunityForm";
 import CommunityPage from "./CommunityPage";
 import Posts from "./Posts";
 import Post from "./Post";
+import PostForm from "./PostForm";
+import Author from "./Author";
+import Like from "./Like";
+import CommentForm from "./CommentForm";
+import CommentBody from "./CommentBody";
+import PostActionButtons from "./PostActionButtons";
 
 export {
 	Navbar,
@@ -68,4 +74,10 @@ export {
 	CommunityPage,
 	Posts,
 	Post,
+	PostForm,
+	Author,
+	Like,
+	CommentForm,
+	CommentBody,
+	PostActionButtons,
 };

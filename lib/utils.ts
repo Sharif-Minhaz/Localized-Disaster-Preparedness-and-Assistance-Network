@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from "clsx";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -53,4 +54,28 @@ export function formatToShortDate(msDate: number) {
 	// @ts-ignore
 	const formatter = new Intl.DateTimeFormat("en-US", options);
 	return formatter.format(date);
+}
+
+export function handleImage(
+	e: ChangeEvent<HTMLInputElement>,
+	fieldChange: (value: string) => void,
+	setFiles: Dispatch<SetStateAction<File[]>>
+) {
+	e.preventDefault();
+
+	const fileReader = new FileReader();
+
+	if (e.target.files && e.target.files.length > 0) {
+		const file = e.target.files[0];
+		setFiles(Array.from(e.target.files));
+
+		if (!file.type.includes("image")) return;
+
+		fileReader.onload = async (event) => {
+			const imageDataUrl = event.target?.result?.toString() || "";
+			fieldChange(imageDataUrl);
+		};
+
+		fileReader.readAsDataURL(file);
+	}
 }

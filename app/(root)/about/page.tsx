@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-static";
+
 import { HeadingSection } from "@/components/shared";
 import Image from "next/image";
 import { motion } from "framer-motion";

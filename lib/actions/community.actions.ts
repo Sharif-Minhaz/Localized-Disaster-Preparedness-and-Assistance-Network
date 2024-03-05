@@ -231,8 +231,8 @@ export async function updateCommunityInfo({ communityId, name, bio, image }: IUp
 		connectToDB();
 
 		// Find the community by its _id and update the information
-		const updatedCommunity = await Community.findOneAndUpdate(
-			{ id: communityId },
+		const updatedCommunity = await Community.findByIdAndUpdate(
+			communityId,
 			{
 				name,
 				bio,

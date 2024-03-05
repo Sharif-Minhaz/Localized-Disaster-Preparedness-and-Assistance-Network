@@ -21,7 +21,7 @@ import { CheckCircle, Plus } from "lucide-react";
 import { createProject, updateProject } from "@/lib/actions/project.actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ProjectValidation } from "@/lib/validations/project";
-import { isBase64Image } from "@/lib/utils";
+import { handleImage, isBase64Image } from "@/lib/utils";
 import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -127,26 +127,6 @@ export default function ProjectForm({
 				description: "Project added successfully",
 				action: <ToastAction altText="OK">OK</ToastAction>,
 			});
-		}
-	}
-
-	function handleImage(e: ChangeEvent<HTMLInputElement>, fieldChange: (value: string) => void) {
-		e.preventDefault();
-
-		const fileReader = new FileReader();
-
-		if (e.target.files && e.target.files.length > 0) {
-			const file = e.target.files[0];
-			setFiles(Array.from(e.target.files));
-
-			if (!file.type.includes("image")) return;
-
-			fileReader.onload = async (event) => {
-				const imageDataUrl = event.target?.result?.toString() || "";
-				fieldChange(imageDataUrl);
-			};
-
-			fileReader.readAsDataURL(file);
 		}
 	}
 
@@ -256,7 +236,7 @@ export default function ProjectForm({
 									<Input
 										key={key}
 										placeholder="Upload a photo"
-										onChange={(e) => handleImage(e, field.onChange)}
+										onChange={(e) => handleImage(e, field.onChange, setFiles)}
 										disabled={form.formState.isSubmitting}
 										type="file"
 										accept="image/*"
