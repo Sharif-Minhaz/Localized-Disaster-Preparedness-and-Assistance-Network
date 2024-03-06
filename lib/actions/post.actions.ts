@@ -1,7 +1,7 @@
 "use server";
 
 import Community from "../models/CommunityModel";
-import User from "../models/UserModel";
+import User, { IUser } from "../models/UserModel";
 
 import { connectToDB } from "../mongoose";
 import { convertToPlainObj } from "../utils";
@@ -67,6 +67,25 @@ export async function fetchPost(id: string) {
 	}
 }
 
+export async function fetchAllUserPosts(clerkId?: string) {
+	if (!clerkId) throw new Error("UserId required");
+
+	try {
+		const userInfo: IUser | null = await User.findOne({ clerkId }).select("_id").lean();
+		if (!userInfo) {
+			throw new Error("user not found");
+		}
+		const posts = await Post.find({ createdBy: userInfo._id })
+			.populate("createdBy communityId")
+			.lean();
+
+		return convertToPlainObj(posts);
+	} catch (error) {
+		console.error("Error fetching posts:", error);
+		throw error;
+	}
+}
+
 export async function fetchAllInAllPosts() {
 	try {
 		connectToDB();
@@ -80,7 +99,9 @@ export async function fetchAllInAllPosts() {
 	}
 }
 
-export async function fetchPosts({ communityId }: { communityId: string }) {
+export async function fetchPosts({ communityId }: { communityId?: string }) {
+	if (!communityId) throw new Error("CommunityId required");
+
 	try {
 		connectToDB();
 

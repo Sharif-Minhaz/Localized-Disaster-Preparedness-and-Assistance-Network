@@ -1,9 +1,17 @@
-import { fetchPosts } from "@/lib/actions/post.actions";
+import { fetchAllUserPosts, fetchPosts } from "@/lib/actions/post.actions";
 import { Post } from ".";
 import { IPost } from "@/lib/models/PostModel";
 
-export default async function Posts({ communityId }: { communityId: string }) {
-	const posts = await fetchPosts({ communityId });
+export default async function Posts({
+	personal,
+	clerkId,
+	communityId,
+}: {
+	personal?: boolean;
+	clerkId?: string;
+	communityId?: string;
+}) {
+	const posts = personal ? await fetchAllUserPosts(clerkId) : await fetchPosts({ communityId });
 
 	if (!posts.length) {
 		return (

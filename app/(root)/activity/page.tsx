@@ -1,4 +1,4 @@
-import { ActivityList, DonationActivityCard, HeadingSection, Search } from "@/components/shared";
+import { ActivityList, HeadingSection, Search } from "@/components/shared";
 import { getDonationActivity } from "@/lib/actions/donation.actions";
 import { IDonation } from "@/lib/models/DonationModel";
 import { currentUser } from "@clerk/nextjs";
