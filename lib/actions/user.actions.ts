@@ -12,6 +12,19 @@ interface Props {
 	imageUrl?: string;
 }
 
+export async function fetchUser(clerkId: string) {
+	try {
+		const user = await User.findOne({ clerkId }).lean();
+
+		if (!user) throw new Error("No user found");
+
+		return convertToPlainObj(user);
+	} catch (error: any) {
+		console.error(error);
+		throw new Error(error.message);
+	}
+}
+
 export async function createUser({ clerkId, name, username, email, imageUrl }: Props) {
 	try {
 		connectToDB();
@@ -26,8 +39,9 @@ export async function createUser({ clerkId, name, username, email, imageUrl }: P
 		});
 
 		return convertToPlainObj(newUser);
-	} catch (error) {
+	} catch (error: any) {
 		console.error(error);
+		throw new Error(error.message);
 	}
 }
 
@@ -43,8 +57,9 @@ export async function updateUser({ clerkId, username, imageUrl }: Props) {
 		);
 
 		return convertToPlainObj(updatedUser);
-	} catch (error) {
+	} catch (error: any) {
 		console.error(error);
+		throw new Error(error.message);
 	}
 }
 
@@ -55,7 +70,8 @@ export async function deleteUser(clerkId: string) {
 		const deletedUser = await User.findOneAndDelete({ clerkId });
 
 		return convertToPlainObj(deletedUser);
-	} catch (error) {
+	} catch (error: any) {
 		console.error(error);
+		throw new Error(error.message);
 	}
 }

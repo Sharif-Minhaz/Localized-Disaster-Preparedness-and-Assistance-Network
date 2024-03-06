@@ -156,7 +156,9 @@ export async function addMemberToCommunity(slug: string, memberId: string) {
 		user.communities.addToSet(community._id);
 		await user.save();
 
-		return convertToPlainObj(community);
+		revalidatePath(`/communities/${community.slug}`);
+
+		return { success: true };
 	} catch (error) {
 		// Handle any errors
 		console.error("Error adding member to community:", error);
@@ -169,7 +171,7 @@ export async function removeUserFromCommunity(clerkId: string, slug: string) {
 		connectToDB();
 
 		const userIdObject = await User.findOne({ clerkId }, { _id: 1 });
-		const communityIdObject = await Community.findOne({ slug }, { _id: 1 });
+		const communityIdObject = await Community.findOne({ slug }, { _id: 1, slug: 1 });
 
 		if (!userIdObject) {
 			throw new Error("User not found");
@@ -191,6 +193,8 @@ export async function removeUserFromCommunity(clerkId: string, slug: string) {
 				{ $pull: { communities: communityIdObject._id } }
 			),
 		]);
+
+		revalidatePath(`/communities/${communityIdObject.slug}`);
 
 		return { success: true };
 	} catch (error) {

@@ -7,7 +7,7 @@ export interface IUser {
 	name?: string;
 	email: string;
 	imageUrl: string;
-	user_type: "admin" | "user";
+	user_type: "admin" | "user" | "volunteer";
 	mobile: string;
 	communities: string[];
 	__v: number;
@@ -33,7 +33,7 @@ const userSchema = new Schema(
 		imageUrl: String,
 		user_type: {
 			type: String,
-			enum: ["admin", "user"],
+			enum: ["admin", "user", "volunteer"],
 			default: "user",
 		},
 		mobile: String,

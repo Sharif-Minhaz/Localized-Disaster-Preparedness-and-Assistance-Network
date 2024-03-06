@@ -30,7 +30,7 @@ export default function OrganizationCard({ name, slug, image, bio, members }: Pr
 					</div>
 					<div>
 						<h3 className="text-lg line-clamp-1">{name}</h3>
-						<h5 className="text-sm">Visit to join with us</h5>
+						<h5 className="text-sm">Visit to join us</h5>
 					</div>
 				</div>
 				<Link href={`/communities/${slug}`}>
