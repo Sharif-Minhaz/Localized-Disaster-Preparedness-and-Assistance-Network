@@ -11,11 +11,11 @@ export default function Post({ post }: { post: IPost }) {
 	const params = useParams<{ slug: string }>();
 
 	return (
-		<article className="border rounded-lg">
+		<article className="border shadow-md rounded-xl">
 			<div className="h-[170px] w-full relative">
 				<Image
 					fill
-					className="rounded-t-lg object-cover"
+					className="rounded-t-xl object-cover"
 					src={post.image || "/dummy.png"}
 					alt="post image"
 				/>
@@ -23,8 +23,8 @@ export default function Post({ post }: { post: IPost }) {
 			<div className="p-3">
 				<Author imgSize={40} userInfo={post.createdBy} creationDate={post.createdAt} />
 			</div>
-			<p className="px-3 pb-3 line-clamp-2">{post.description}</p>
-			<div className="px-3 pb-3 flex justify-between items-center mt-2">
+			<p className="px-3 line-clamp-2 text-sm">{post.description}</p>
+			<div className="p-3 flex border-t justify-between items-center mt-5">
 				<div className="flex gap-2">
 					{/* -------- like post --------- */}
 					<Like />

@@ -9,6 +9,7 @@ import { revalidatePath } from "next/cache";
 import Post, { IPost } from "../models/PostModel";
 import { redirect } from "next/navigation";
 import Comment from "../models/CommentModel";
+import { deleteUTImage } from "./helpers.action";
 
 export async function createPost({
 	communityId,
@@ -102,6 +103,14 @@ export async function updatePostInfo({ postId, description, image }: IUpdatePost
 	try {
 		connectToDB();
 
+		const postDetails: IPost | null = await Post.findById(postId).select("image").lean();
+
+		if (postDetails?.image) {
+			if (image !== postDetails.image) {
+				await deleteUTImage(postDetails.image);
+			}
+		}
+
 		// Find the community by its _id and update the information
 		const updatedPost: IPost | null = await Post.findOneAndUpdate(
 			{ _id: postId },
@@ -127,19 +136,28 @@ export async function updatePostInfo({ postId, description, image }: IUpdatePost
 	}
 }
 
-export async function deletePost(id: string) {
+export async function deletePost(id: string, communitySlug: string) {
 	try {
 		connectToDB();
-		// Find the community by its ID and delete it
-		const deletedPost = await Community.findByIdAndDelete(id);
+
+		const community = await Community.findOne({ slug: communitySlug }).select("_id");
+
+		const deletedPost = await Post.findOneAndDelete({
+			_id: id,
+			communityId: community._id,
+		});
 
 		if (!deletedPost) {
 			throw new Error("Post not found");
 		}
 
-		revalidatePath(`/communities/${3}`); // TODO: SLUG
+		if (deletedPost.image) {
+			await deleteUTImage(deletedPost.image);
+		}
+
+		revalidatePath(`/communities/${communitySlug}`);
 		revalidatePath("/my_posts");
-		return convertToPlainObj(deletedPost);
+		redirect(`/communities/${communitySlug}`);
 	} catch (error) {
 		console.error("Error deleting post: ", error);
 		throw error;

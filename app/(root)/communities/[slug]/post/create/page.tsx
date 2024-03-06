@@ -20,7 +20,11 @@ export default async function CreateCommunityPage({ params }: { params: { slug: 
 		<div className="shadow rounded-xl border">
 			<HeadingSection text="Create Post" />
 			<div className="px-4 sm:px-5 pt-4 sm:pt-5">
-				<PostForm userId={user.id} communityId={community._id} />
+				<PostForm
+					userId={user.id}
+					communitySlug={community.slug}
+					communityId={community._id}
+				/>
 			</div>
 		</div>
 	);

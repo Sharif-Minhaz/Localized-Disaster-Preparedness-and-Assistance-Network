@@ -29,11 +29,13 @@ import { PostValidation } from "@/lib/validations/post";
 export default function PostForm({
 	userId,
 	communityId,
+	communitySlug,
 	post,
 	update,
 }: {
 	userId: string;
 	communityId: string;
+	communitySlug: string;
 	post?: IPost;
 	update?: boolean;
 }) {
@@ -77,7 +79,7 @@ export default function PostForm({
 					description: "Community updated successfully",
 					action: <ToastAction altText="OK">OK</ToastAction>,
 				});
-				return router.push("/communities");
+				return router.push(`/communities/${communitySlug}/post/${post._id}`);
 			}
 
 			return toast({

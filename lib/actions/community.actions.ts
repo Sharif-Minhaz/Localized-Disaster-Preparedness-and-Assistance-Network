@@ -2,13 +2,14 @@
 
 import { FilterQuery, SortOrder } from "mongoose";
 
-import Community from "../models/CommunityModel";
+import Community, { ICommunity } from "../models/CommunityModel";
 import User from "../models/UserModel";
 
 import { connectToDB } from "../mongoose";
 import { convertToPlainObj } from "../utils";
 import slugify from "slugify";
 import { revalidatePath } from "next/cache";
+import { deleteUTImage } from "./helpers.action";
 
 export async function createCommunity({
 	name,
@@ -56,26 +57,6 @@ export async function createCommunity({
 	} catch (error) {
 		// Handle any errors
 		console.error("Error creating community:", error);
-		throw error;
-	}
-}
-
-export async function fetchCommunityDetails(slug: string) {
-	try {
-		connectToDB();
-
-		const communityDetails = await Community.findOne({ slug }).populate([
-			"createdBy",
-			{
-				path: "members",
-				model: User,
-			},
-		]);
-
-		return convertToPlainObj(communityDetails);
-	} catch (error) {
-		// Handle any errors
-		console.error("Error fetching community details:", error);
 		throw error;
 	}
 }
@@ -230,6 +211,16 @@ export async function updateCommunityInfo({ communityId, name, bio, image }: IUp
 	try {
 		connectToDB();
 
+		const communityDetails: ICommunity | null = await Community.findById(communityId)
+			.select("image")
+			.lean();
+
+		if (communityDetails?.image) {
+			if (image !== communityDetails.image) {
+				await deleteUTImage(communityDetails.image);
+			}
+		}
+
 		// Find the community by its _id and update the information
 		const updatedCommunity = await Community.findByIdAndUpdate(
 			communityId,
@@ -259,12 +250,17 @@ export async function deleteCommunity(slug: string) {
 	try {
 		connectToDB();
 		// Find the community by its ID and delete it
-		const deletedCommunity = await Community.findOneAndDelete({
+		const deletedCommunity: ICommunity | null = await Community.findOneAndDelete({
 			slug,
 		});
 
 		if (!deletedCommunity) {
 			throw new Error("Community not found");
+		}
+
+		// delete community image
+		if (deletedCommunity?.image) {
+			await deleteUTImage(deletedCommunity.image);
 		}
 
 		// Find all users who are part of the community and pull the community id from them

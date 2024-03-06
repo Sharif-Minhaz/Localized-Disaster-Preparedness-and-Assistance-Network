@@ -36,7 +36,13 @@ export default async function UpdatePostPage({ params }: { params: { id: string;
 		<div className="shadow rounded-xl border">
 			<HeadingSection text="Update Post" />
 			<div className="px-4 sm:px-5 pt-4 sm:pt-5">
-				<PostForm update post={post} userId={user.id} communityId={community._id} />
+				<PostForm
+					update
+					post={post}
+					userId={user.id}
+					communitySlug={community.slug}
+					communityId={community._id}
+				/>
 			</div>
 		</div>
 	);
