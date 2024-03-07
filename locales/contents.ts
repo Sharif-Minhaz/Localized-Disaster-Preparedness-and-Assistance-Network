@@ -8,6 +8,7 @@ interface DictionaryEntry {
 	auditReports: string;
 	disasterForecast: string;
 	donationHistory: string;
+	voluntary: string;
 	gallery: string;
 	activity: string;
 	resources: string;
@@ -27,6 +28,7 @@ export const dictionary: Record<string, DictionaryEntry> = {
 		auditReports: "Audit Reports",
 		disasterForecast: "Disaster Forecast",
 		donationHistory: "Donation History",
+		voluntary: "Voluntary",
 		gallery: "Gallery",
 		activity: "Activity",
 		resources: "Resources",
@@ -44,6 +46,7 @@ export const dictionary: Record<string, DictionaryEntry> = {
 		auditReports: "হিসাব প্রতিবেদন",
 		disasterForecast: "দুর্যোগ পূর্বাভাস",
 		donationHistory: "দানের ইতিহাস",
+		voluntary: "স্বেচ্ছাসেবা",
 		gallery: "গ্যালারি",
 		activity: "কর্মকাণ্ড",
 		resources: "সম্পদ",

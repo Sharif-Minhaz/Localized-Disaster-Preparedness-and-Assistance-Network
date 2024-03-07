@@ -58,7 +58,7 @@ export const checkoutDonation = async (
 
 export const addDonation = async (donation: DonationProps, userId: string, project: IProject) => {
 	try {
-		connectToDB();
+		await connectToDB();
 
 		const saveDonation = await Donation.create({
 			...donation,
@@ -82,7 +82,7 @@ export const addDonation = async (donation: DonationProps, userId: string, proje
 
 export const getUserDonationHistory = async (clerkId: string) => {
 	try {
-		connectToDB();
+		await connectToDB();
 
 		const user: IUser | null = await User.findOne({ clerkId }).select("_id").lean();
 		let donations;
@@ -113,7 +113,7 @@ export const getDonationActivity = async ({
 	sortBy?: SortOrder;
 }) => {
 	try {
-		connectToDB();
+		await connectToDB();
 
 		// Calculate the number of projects to skip based on the page number and page size.
 		const skipAmount = (pageNumber - 1) * pageSize;

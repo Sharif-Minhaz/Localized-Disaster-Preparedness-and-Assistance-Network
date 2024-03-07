@@ -38,6 +38,7 @@ import Like from "./Like";
 import CommentForm from "./CommentForm";
 import CommentBody from "./CommentBody";
 import PostActionButtons from "./PostActionButtons";
+import UserStatus from "./UserStatus";
 
 export {
 	Navbar,
@@ -80,4 +81,5 @@ export {
 	CommentForm,
 	CommentBody,
 	PostActionButtons,
+	UserStatus,
 };

@@ -14,7 +14,7 @@ import { usePathname, useRouter } from "next/navigation";
 import OutsideClickHandler from "react-outside-click-handler";
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
-import { formatToShortDate } from "@/lib/utils";
+import { UserStatus } from ".";
 
 const fadeInAnimationVariants = {
 	initial: {
@@ -30,15 +30,7 @@ const fadeInAnimationVariants = {
 	}),
 };
 
-interface Props {
-	userInfo: {
-		imageUrl?: string;
-		username?: string | null;
-		createdAt?: number;
-	};
-}
-
-export default function Sidebar({ userInfo }: Props) {
+export default function Sidebar() {
 	const { lang, theme, sidebarOpen, closeSidebar, changeTheme } = useContext(MainContext);
 	const pathname = usePathname();
 	const router = useRouter();
@@ -71,26 +63,7 @@ export default function Sidebar({ userInfo }: Props) {
 
 					<div className="px-4 py-2 h-[65px]">
 						<SignedIn>
-							<div className="flex items-center gap-4 rounded-[8px] dark:bg-slate-800 bg-slate-100 border px-3 py-2">
-								<div className="relative">
-									<Image
-										draggable={false}
-										width={32}
-										height={32}
-										src={userInfo?.imageUrl || ""}
-										className="rounded"
-										alt="profile_image"
-									/>
-									<span className="absolute bottom-0 left-6 transform translate-y-1/4 w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
-								</div>
-								<div className="font-medium dark:text-white">
-									<div className="text-sm">{userInfo.username}</div>
-									<div className="text-[12px] text-gray-500 dark:text-gray-400">
-										Joined in{" "}
-										{formatToShortDate(userInfo?.createdAt || Date.now())}
-									</div>
-								</div>
-							</div>
+							<UserStatus />
 						</SignedIn>
 						<SignedOut>
 							<Button

@@ -27,7 +27,7 @@ export async function fetchUser(clerkId: string) {
 
 export async function createUser({ clerkId, name, username, email, imageUrl }: Props) {
 	try {
-		connectToDB();
+		await connectToDB();
 
 		const newUser = await User.create({
 			clerkId,
@@ -47,7 +47,7 @@ export async function createUser({ clerkId, name, username, email, imageUrl }: P
 
 export async function updateUser({ clerkId, username, imageUrl }: Props) {
 	try {
-		connectToDB();
+		await connectToDB();
 		const updatedUser = await User.findOneAndUpdate(
 			{ clerkId },
 			{
@@ -65,7 +65,7 @@ export async function updateUser({ clerkId, username, imageUrl }: Props) {
 
 export async function deleteUser(clerkId: string) {
 	try {
-		connectToDB();
+		await connectToDB();
 
 		const deletedUser = await User.findOneAndDelete({ clerkId });
 

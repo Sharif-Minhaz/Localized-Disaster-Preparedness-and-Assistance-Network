@@ -12,6 +12,7 @@ import {
 	ShieldAlert,
 	History,
 	FilePenIcon,
+	PersonStanding,
 } from "lucide-react";
 
 import projectImage from "@/public/assets/images/project-1.jpg";
@@ -74,6 +75,11 @@ export const sideMenuData: MenuItem[] = [
 		title: "donationHistory",
 		url: "/donation-history",
 		Icon: HeartHandshakeIcon,
+	},
+	{
+		title: "voluntary",
+		url: "/voluntary",
+		Icon: PersonStanding,
 	},
 	{
 		title: "gallery",

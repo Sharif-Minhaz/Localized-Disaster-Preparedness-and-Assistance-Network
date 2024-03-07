@@ -27,7 +27,7 @@ interface Props {
 
 export async function createProject(data: Props) {
 	try {
-		connectToDB();
+		await connectToDB();
 
 		const {
 			createdBy,
@@ -72,7 +72,7 @@ export async function createProject(data: Props) {
 
 export async function updateProject(data: Props) {
 	try {
-		connectToDB();
+		await connectToDB();
 		const projectDetails: Props | null = await Project.findOne({ slug: data.slug })
 			.select("image")
 			.lean();
@@ -100,7 +100,7 @@ export async function updateProject(data: Props) {
 
 export async function fetchProject(slug: string) {
 	try {
-		connectToDB();
+		await connectToDB();
 
 		const projectDetails = await Project.findOne({ slug }).lean();
 
@@ -114,7 +114,7 @@ export async function fetchProject(slug: string) {
 
 export async function fetchProjectById(id: string) {
 	try {
-		connectToDB();
+		await connectToDB();
 
 		const projectDetails = await Project.findById(id).lean();
 
@@ -138,7 +138,7 @@ export async function fetchProjects({
 	sortBy?: SortOrder;
 }) {
 	try {
-		connectToDB();
+		await connectToDB();
 
 		// Calculate the number of projects to skip based on the page number and page size.
 		const skipAmount = (pageNumber - 1) * pageSize;
@@ -183,7 +183,7 @@ export async function fetchProjects({
 
 export async function deleteProject(slug: string) {
 	try {
-		connectToDB();
+		await connectToDB();
 		const projectDetails: Props | null = await Project.findOne({ slug }).select("image").lean();
 
 		if (projectDetails) {
@@ -209,7 +209,7 @@ export async function deleteProject(slug: string) {
 
 export async function completeProject(slug: string) {
 	try {
-		connectToDB();
+		await connectToDB();
 		const updatedProject = await Project.findOneAndUpdate(
 			{ slug },
 			{ completed: true },
@@ -231,7 +231,7 @@ export async function completeProject(slug: string) {
 
 export async function resumeProject(slug: string) {
 	try {
-		connectToDB();
+		await connectToDB();
 		const updatedProject = await Project.findOneAndUpdate(
 			{ slug },
 			{ completed: false },

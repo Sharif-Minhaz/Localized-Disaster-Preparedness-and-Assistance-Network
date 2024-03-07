@@ -44,8 +44,8 @@ export function formatDate(date: string) {
 	return formattedDate;
 }
 
-export function formatToShortDate(msDate: number) {
-	const date = new Date(msDate);
+export function formatToShortDate(msDate: number | Date | null) {
+	const date = new Date(msDate || Date.now());
 	const options = {
 		year: "numeric",
 		month: "short",

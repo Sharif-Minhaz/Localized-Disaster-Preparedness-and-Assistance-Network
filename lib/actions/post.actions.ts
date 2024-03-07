@@ -23,7 +23,7 @@ export async function createPost({
 	createdBy: string;
 }) {
 	try {
-		connectToDB();
+		await connectToDB();
 
 		// Find the user with the provided unique id
 		const [user, community] = await Promise.all([
@@ -57,7 +57,7 @@ export async function createPost({
 
 export async function fetchPost(id: string) {
 	try {
-		connectToDB();
+		await connectToDB();
 		const post = await Post.findById(id).populate("createdBy").lean();
 
 		return convertToPlainObj(post);
@@ -88,7 +88,7 @@ export async function fetchAllUserPosts(clerkId?: string) {
 
 export async function fetchAllInAllPosts() {
 	try {
-		connectToDB();
+		await connectToDB();
 
 		const posts = await Post.find().populate("createdBy communityId").lean();
 
@@ -103,7 +103,7 @@ export async function fetchPosts({ communityId }: { communityId?: string }) {
 	if (!communityId) throw new Error("CommunityId required");
 
 	try {
-		connectToDB();
+		await connectToDB();
 
 		const posts = await Post.find({ communityId }).populate("createdBy communityId").lean();
 
@@ -122,7 +122,7 @@ interface IUpdatePostProps {
 
 export async function updatePostInfo({ postId, description, image }: IUpdatePostProps) {
 	try {
-		connectToDB();
+		await connectToDB();
 
 		const postDetails: IPost | null = await Post.findById(postId).select("image").lean();
 
@@ -159,7 +159,7 @@ export async function updatePostInfo({ postId, description, image }: IUpdatePost
 
 export async function deletePost(id: string, communitySlug: string) {
 	try {
-		connectToDB();
+		await connectToDB();
 
 		const community = await Community.findOne({ slug: communitySlug }).select("_id");
 
@@ -187,7 +187,7 @@ export async function deletePost(id: string, communitySlug: string) {
 
 export async function addCommentToPost({ comment }: { comment: string }) {
 	try {
-		connectToDB(); // TODO: COMMENT FACILITY
+		await connectToDB(); // TODO: COMMENT FACILITY
 		return true;
 	} catch (error) {
 		console.error("Error commenting post: ", error);
@@ -197,7 +197,7 @@ export async function addCommentToPost({ comment }: { comment: string }) {
 
 export async function fetchPostComments(postId: string) {
 	try {
-		connectToDB();
+		await connectToDB();
 		const comments = await Comment.find({ postId }).populate("commentedBy");
 		return convertToPlainObj(comments);
 	} catch (error) {

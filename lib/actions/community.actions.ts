@@ -23,7 +23,7 @@ export async function createCommunity({
 	createdBy: string;
 }) {
 	try {
-		connectToDB();
+		await connectToDB();
 
 		// Find the user with the provided unique id
 		const user = await User.findOne({ clerkId: createdBy });
@@ -63,7 +63,7 @@ export async function createCommunity({
 
 export async function fetchCommunity(slug: string) {
 	try {
-		connectToDB();
+		await connectToDB();
 		const community = await Community.findOne({ slug }).populate("members").lean();
 
 		return convertToPlainObj(community);
@@ -85,7 +85,7 @@ export async function fetchCommunities({
 	sortBy?: SortOrder;
 }) {
 	try {
-		connectToDB();
+		await connectToDB();
 
 		// Calculate the number of communities to skip based on the page number and page size.
 		const skipAmount = (pageNumber - 1) * pageSize;
@@ -127,7 +127,7 @@ export async function fetchCommunities({
 
 export async function addMemberToCommunity(slug: string, memberId: string) {
 	try {
-		connectToDB();
+		await connectToDB();
 
 		// Find the community by its unique id
 		const community = await Community.findOne({ slug });
@@ -168,7 +168,7 @@ export async function addMemberToCommunity(slug: string, memberId: string) {
 
 export async function removeUserFromCommunity(clerkId: string, slug: string) {
 	try {
-		connectToDB();
+		await connectToDB();
 
 		const userIdObject = await User.findOne({ clerkId }, { _id: 1 });
 		const communityIdObject = await Community.findOne({ slug }, { _id: 1, slug: 1 });
@@ -213,7 +213,7 @@ interface IUpdateComProps {
 
 export async function updateCommunityInfo({ communityId, name, bio, image }: IUpdateComProps) {
 	try {
-		connectToDB();
+		await connectToDB();
 
 		const communityDetails: ICommunity | null = await Community.findById(communityId)
 			.select("image")
@@ -252,7 +252,7 @@ export async function updateCommunityInfo({ communityId, name, bio, image }: IUp
 
 export async function deleteCommunity(slug: string) {
 	try {
-		connectToDB();
+		await connectToDB();
 		// Find the community by its ID and delete it
 		const deletedCommunity: ICommunity | null = await Community.findOneAndDelete({
 			slug,
