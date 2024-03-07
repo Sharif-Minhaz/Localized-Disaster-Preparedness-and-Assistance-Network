@@ -3,11 +3,10 @@
 import { SignOutButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
-import { Languages, Bell, AlignLeft } from "lucide-react";
+import { Languages, AlignLeft } from "lucide-react";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
-	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuRadioGroup,
 	DropdownMenuRadioItem,
@@ -16,7 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useContext } from "react";
 import { MainContext } from "@/contexts/MainContext";
-import { SearchBar } from ".";
+import { Notification, SearchBar } from ".";
 
 export default function Navbar() {
 	const { handleLang, lang, openSidebar } = useContext(MainContext);
@@ -48,18 +47,7 @@ export default function Navbar() {
 
 				<SignedIn>
 					<div className="flex items-center gap-4 md:gap-5">
-						<DropdownMenu>
-							<DropdownMenuTrigger>
-								<Bell />
-							</DropdownMenuTrigger>
-							<DropdownMenuContent>
-								<DropdownMenuLabel>Notifications</DropdownMenuLabel>
-								<DropdownMenuSeparator />
-								<DropdownMenuItem>Notification 1</DropdownMenuItem>
-								<DropdownMenuItem>Notification 2</DropdownMenuItem>
-								<DropdownMenuItem>Notification 3</DropdownMenuItem>
-							</DropdownMenuContent>
-						</DropdownMenu>
+						<Notification />
 						{/* hide logout button in the biggest screens */}
 						<SignedIn>
 							<div className="md:hidden">

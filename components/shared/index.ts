@@ -39,6 +39,11 @@ import CommentForm from "./CommentForm";
 import CommentBody from "./CommentBody";
 import PostActionButtons from "./PostActionButtons";
 import UserStatus from "./UserStatus";
+import VolunteerForm from "./VolunteerForm";
+import Notification from "./Notification";
+import VolunteerApplications from "./VolunteerApplications";
+import SingleApplication from "./SingleApplication";
+import CommunityMemberAvatars from "./CommunityMemberAvatars";
 
 export {
 	Navbar,
@@ -82,4 +87,9 @@ export {
 	CommentBody,
 	PostActionButtons,
 	UserStatus,
+	VolunteerForm,
+	Notification,
+	VolunteerApplications,
+	SingleApplication,
+	CommunityMemberAvatars,
 };

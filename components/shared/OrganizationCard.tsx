@@ -3,9 +3,10 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { deleteCommunity } from "@/lib/actions/community.actions";
 import { Pencil } from "lucide-react";
-import { DeleteConfirmationBox } from ".";
+import { CommunityMemberAvatars, DeleteConfirmationBox } from ".";
 
 interface Props {
+	isUserCommunityCreator: boolean;
 	name: string;
 	slug: string;
 	image?: string;
@@ -13,7 +14,14 @@ interface Props {
 	members: any;
 }
 
-export default function OrganizationCard({ name, slug, image, bio, members }: Props) {
+export default function OrganizationCard({
+	isUserCommunityCreator,
+	name,
+	slug,
+	image,
+	bio,
+	members,
+}: Props) {
 	const deleteProjectWithSlug = deleteCommunity.bind(null, slug);
 	return (
 		<article className="border relative flex w-full max-w-[400px] flex-col overflow-hidden rounded-xl shadow-md transition-all hover:shadow-lg">
@@ -45,22 +53,16 @@ export default function OrganizationCard({ name, slug, image, bio, members }: Pr
 					<p className="text-sm">
 						{members.length} member{members.length > 1 ? "s" : ""}
 					</p>
-					<div className="relative">
-						<Image
-							src={members[0]?.imageUrl}
-							alt="user image"
-							width={20}
-							height={20}
-							className="rounded-full"
-						/>
+					<CommunityMemberAvatars members={members} />
+				</div>
+				{isUserCommunityCreator && (
+					<div className="flex gap-2 rounded-xl bg-white shadow px-2 py-1 transition-all">
+						<Link href={`/communities/${slug}/update`}>
+							<Pencil className="text-purple-400 w-5 h-5" />
+						</Link>
+						<DeleteConfirmationBox action={deleteProjectWithSlug} />
 					</div>
-				</div>
-				<div className="flex gap-2 rounded-xl bg-white shadow px-2 py-1 transition-all">
-					<Link href={`/communities/${slug}/update`}>
-						<Pencil className="text-purple-400 w-5 h-5" />
-					</Link>
-					<DeleteConfirmationBox action={deleteProjectWithSlug} />
-				</div>
+				)}
 			</div>
 		</article>
 	);

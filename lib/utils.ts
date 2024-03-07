@@ -25,8 +25,8 @@ export function convertToPlainObj(obj: any) {
 	return JSON.parse(JSON.stringify(obj));
 }
 
-export function formatDate(date: string) {
-	const actualDate = new Date(date);
+export function formatDate(date?: string) {
+	const actualDate = new Date(date || Date.now());
 
 	const options = {
 		year: "numeric" as const,

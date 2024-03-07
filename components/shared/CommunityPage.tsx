@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { Pencil, Plus, Users, View } from "lucide-react";
 import Link from "next/link";
-import { HeadingSection, Posts } from ".";
+import { CommunityMemberAvatars, HeadingSection, Posts } from ".";
 import { currentUser } from "@clerk/nextjs";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
@@ -36,9 +36,11 @@ export default async function CommunityPage({ community }: { community: ICommuni
 				</div>
 				<div className="mt-14 mb-5 text-center">
 					<h2 className="text-2xl font-bold">{community.name}</h2>
-					<p className="text-sm">
+					<div className="text-sm flex gap-2 items-center justify-center">
 						{community.members.length} member{community.members.length > 1 ? "s" : ""}
-					</p>
+						{/* @ts-ignore */}
+						<CommunityMemberAvatars members={community.members} />
+					</div>
 					<div className="flex gap-2 justify-center mt-4">
 						{alreadyJoined ? (
 							<>
