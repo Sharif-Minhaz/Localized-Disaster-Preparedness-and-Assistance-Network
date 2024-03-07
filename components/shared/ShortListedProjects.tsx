@@ -1,10 +1,16 @@
 "use client";
 
 import { HeadingSection, ProjectCard } from "@/components/shared";
+import { IProject } from "@/lib/models/ProjectModel";
 import { motion } from "framer-motion";
-import { ProjectProps } from "./ProjectsList";
 
-export default function ShortListedProjects({ projects }: ProjectProps) {
+interface ProjectProps {
+	userType: string;
+	projects: IProject[];
+	isNext: boolean;
+}
+
+export default function ShortListedProjects({ userType, projects }: ProjectProps) {
 	return (
 		<div className="shadow rounded-xl border">
 			<HeadingSection text="Projects" link="/projects" linkText="View All" />
@@ -19,6 +25,7 @@ export default function ShortListedProjects({ projects }: ProjectProps) {
 						transition={{ duration: 0.4 * (index + 1) }}
 					>
 						<ProjectCard
+							userType={userType}
 							heading={data.heading}
 							image={data.image}
 							description={data.description}

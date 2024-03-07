@@ -4,8 +4,15 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import { fetchProjects } from "@/lib/actions/project.actions";
 import { IProject } from "@/lib/models/ProjectModel";
+import { currentUser } from "@clerk/nextjs";
+import { fetchUser } from "@/lib/actions/user.actions";
 
 export default async function Projects({ searchParams }: { searchParams?: { query: string } }) {
+	const user = await currentUser();
+	let userInfo;
+	if (user) {
+		userInfo = await fetchUser(user?.id || "");
+	}
 	const { projects, isNext } = await fetchProjects({ searchString: searchParams?.query });
 
 	return (
@@ -19,7 +26,11 @@ export default async function Projects({ searchParams }: { searchParams?: { quer
 					</Button>
 				</Link>
 			</div>
-			<ProjectsList projects={projects as IProject[]} isNext={isNext} />
+			<ProjectsList
+				userType={userInfo.user_type}
+				projects={projects as IProject[]}
+				isNext={isNext}
+			/>
 		</div>
 	);
 }

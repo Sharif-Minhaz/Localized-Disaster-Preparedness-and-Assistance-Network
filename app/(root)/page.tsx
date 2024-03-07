@@ -6,9 +6,16 @@ import {
 	WeatherReport,
 } from "@/components/shared";
 import { fetchProjects } from "@/lib/actions/project.actions";
+import { fetchUser } from "@/lib/actions/user.actions";
 import { IProject } from "@/lib/models/ProjectModel";
+import { currentUser } from "@clerk/nextjs";
 
 export default async function HomePage() {
+	const user = await currentUser();
+	let userInfo;
+	if (user) {
+		userInfo = await fetchUser(user?.id || "");
+	}
 	const { projects, isNext } = await fetchProjects({});
 
 	return (
@@ -17,7 +24,11 @@ export default async function HomePage() {
 				<Hero />
 			</section>
 			<section>
-				<ShortListedProjects projects={projects as IProject[]} isNext={isNext} />
+				<ShortListedProjects
+					userType={userInfo?.user_type}
+					projects={projects as IProject[]}
+					isNext={isNext}
+				/>
 			</section>
 			<section className="py-3">
 				<Banner />

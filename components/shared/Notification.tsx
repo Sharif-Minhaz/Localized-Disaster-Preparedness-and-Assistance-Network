@@ -32,9 +32,11 @@ export default function Notification() {
 			<DropdownMenuTrigger className="flex items-center">
 				<span className="inline-flex relative">
 					<Bell />
-					<span className="absolute inline-flex items-center justify-center w-5 h-5 text-[9px] font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
-						{notifications.length}
-					</span>
+					{notifications.length > 0 && (
+						<span className="absolute inline-flex items-center justify-center w-5 h-5 text-[9px] font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
+							{notifications.length}
+						</span>
+					)}
 				</span>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="mr-4">

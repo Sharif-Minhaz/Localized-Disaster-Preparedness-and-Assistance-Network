@@ -10,11 +10,12 @@ import { DeleteConfirmationBox } from "@/components/shared";
 import { IProject } from "@/lib/models/ProjectModel";
 
 export interface ProjectProps {
+	userType: string;
 	projects: IProject[];
 	isNext: boolean;
 }
 
-export default function ProjectsList({ projects, isNext }: ProjectProps) {
+export default function ProjectsList({ userType, projects, isNext }: ProjectProps) {
 	if (!projects.length) {
 		return <div className="sm:p-5 p-4">No project found.</div>;
 	}
@@ -36,14 +37,16 @@ export default function ProjectsList({ projects, isNext }: ProjectProps) {
 								quality={100}
 								sizes="(max-width: 500px) 100vw"
 							/>
-							<div className="absolute right-2 top-2 flex flex-col gap-4 rounded-xl bg-white p-3 shadow-sm transition-all">
-								<Link href={`/projects/${project.slug}/update`}>
-									<Pencil className="text-purple-400 w-5 h-5" />
-								</Link>
-								<DeleteConfirmationBox
-									action={deleteProject.bind(null, project.slug)}
-								/>
-							</div>
+							{userType === "admin" && (
+								<div className="absolute right-2 top-2 flex flex-col gap-4 rounded-xl bg-white p-3 shadow-sm transition-all">
+									<Link href={`/projects/${project.slug}/update`}>
+										<Pencil className="text-purple-400 w-5 h-5" />
+									</Link>
+									<DeleteConfirmationBox
+										action={deleteProject.bind(null, project.slug)}
+									/>
+								</div>
+							)}
 						</div>
 					</div>
 					<div>

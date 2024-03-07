@@ -6,7 +6,13 @@ import { deleteProject } from "@/lib/actions/project.actions";
 import { DeleteConfirmationBox, ManageProjectButtons } from "@/components/shared";
 import { IProject } from "@/lib/models/ProjectModel";
 
-export default function SinglePageProject({ project }: { project: IProject }) {
+export default function SinglePageProject({
+	userType,
+	project,
+}: {
+	userType: string;
+	project: IProject;
+}) {
 	const dateTime = format(new Date(project.from), "yyyy-MM-dd");
 	const deleteProjectWithSlug = deleteProject.bind(null, project.slug);
 
@@ -22,13 +28,18 @@ export default function SinglePageProject({ project }: { project: IProject }) {
 						fill
 						alt="project image"
 					/>
-					<div className="absolute right-3 items-center top-3 flex flex-col gap-4 rounded-xl bg-white p-3 shadow-sm transition-all">
-						<Link href={`/projects/${project.slug}/update`}>
-							<Pencil size={17} className="text-purple-400" />
-						</Link>
-						<ManageProjectButtons slug={project.slug} completed={project.completed} />
-						<DeleteConfirmationBox action={deleteProjectWithSlug} />
-					</div>
+					{userType === "admin" && (
+						<div className="absolute right-3 items-center top-3 flex flex-col gap-4 rounded-xl bg-white p-3 shadow-sm transition-all">
+							<Link href={`/projects/${project.slug}/update`}>
+								<Pencil size={17} className="text-purple-400" />
+							</Link>
+							<ManageProjectButtons
+								slug={project.slug}
+								completed={project.completed}
+							/>
+							<DeleteConfirmationBox action={deleteProjectWithSlug} />
+						</div>
+					)}
 				</div>
 				<h2 className="font-bold text-2xl my-3">{project.heading}</h2>
 

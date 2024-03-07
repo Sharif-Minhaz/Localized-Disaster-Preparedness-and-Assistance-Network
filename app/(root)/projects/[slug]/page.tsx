@@ -3,6 +3,8 @@ import { fetchProject, fetchProjects } from "@/lib/actions/project.actions";
 import MainPageFallback from "@/components/shared/MainPageFallback";
 import { SinglePageProject, HeadingSection, DonateSideBox } from "@/components/shared";
 import { IProject } from "@/lib/models/ProjectModel";
+import { currentUser } from "@clerk/nextjs";
+import { fetchUser } from "@/lib/actions/user.actions";
 
 export async function generateStaticParams() {
 	const { projects } = await fetchProjects({});
@@ -10,6 +12,11 @@ export async function generateStaticParams() {
 }
 
 export default async function SingleProjectPage({ params }: { params: { slug: string } }) {
+	const user = await currentUser();
+	let userInfo;
+	if (user) {
+		userInfo = await fetchUser(user?.id || "");
+	}
 	const project = await fetchProject(params.slug);
 
 	return (
@@ -21,7 +28,10 @@ export default async function SingleProjectPage({ params }: { params: { slug: st
 			>
 				<HeadingSection text="Project Information" />
 				<Suspense fallback={<MainPageFallback />}>
-					<SinglePageProject project={project as IProject} />
+					<SinglePageProject
+						userType={userInfo.user_type}
+						project={project as IProject}
+					/>
 				</Suspense>
 			</div>
 			<div className="relative flex-grow">

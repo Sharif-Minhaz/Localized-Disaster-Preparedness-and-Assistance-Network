@@ -11,7 +11,13 @@ export default async function Posts({
 	clerkId?: string;
 	communityId?: string;
 }) {
-	const posts = personal ? await fetchAllUserPosts(clerkId) : await fetchPosts({ communityId });
+	let posts;
+
+	if (personal) {
+		posts = await fetchAllUserPosts(clerkId);
+	} else {
+		posts = await fetchPosts({ communityId });
+	}
 
 	if (!posts.length) {
 		return (
