@@ -25,7 +25,7 @@ export default function OrganizationCard({
 	const deleteProjectWithSlug = deleteCommunity.bind(null, slug);
 	return (
 		<article className="border relative flex w-full max-w-[400px] flex-col overflow-hidden rounded-xl shadow-md transition-all hover:shadow-lg">
-			<div className="flex pt-4 px-4 pb-4 gap-3 justify-between items-center bg-[#f9f9f9]">
+			<div className="flex pt-4 px-4 pb-4 gap-3 justify-between items-center dark:bg-slate-900 bg-[#f9f9f9]">
 				<div className="flex gap-3 items-center">
 					<div>
 						<Image

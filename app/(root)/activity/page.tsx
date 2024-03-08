@@ -1,7 +1,9 @@
 import { ActivityList, HeadingSection, Search } from "@/components/shared";
 import { getDonationActivity } from "@/lib/actions/donation.actions";
+import { fetchUser } from "@/lib/actions/user.actions";
 import { IDonation } from "@/lib/models/DonationModel";
 import { currentUser } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
 export default async function DonationActivity({
 	searchParams,
@@ -13,6 +15,10 @@ export default async function DonationActivity({
 	if (!user) {
 		return <p>Not logged in, login first.</p>;
 	}
+
+	const userInfo = await fetchUser(user.id);
+
+	if (userInfo.user_type !== "admin") return redirect("/");
 
 	const { donations, isNext } = await getDonationActivity({
 		searchString: searchParams?.query || "",

@@ -14,7 +14,7 @@ export default async function MyPostPage() {
 			</section>
 			<section className="shadow rounded-xl border mt-5">
 				<HeadingSection text="Bookmarked Posts" />
-				<p className="p-4">You have no bookmarked post</p>
+				<Posts bookmarked clerkId={user.id} />
 			</section>
 		</>
 	);

@@ -69,16 +69,17 @@ function AwarenessSection({
 	type: "after" | "before" | "during";
 }) {
 	return (
-		<div>
-			<h2 className="font-bold">
-				<span className="capitalize">
-					{type} {threat?.title}
-				</span>
+		<div className="border rounded-xl py-4">
+			<h2 className="font-bold border-b capitalize px-4 pb-3">
+				{type} {threat?.title}
 			</h2>
-			<ul>
+			<ul className="px-4 pt-4">
 				{threat?.[type].map((step, index) => (
-					<li key={index}>
-						{index + 1}. {step}
+					<li key={index} className="mb-2">
+						<span className="inline-flex mr-2 text-sm font-semibold items-center justify-center size-[22px] rounded-full dark:border-slate-800 border-slate-300 border">
+							{index + 1}
+						</span>
+						{step}
 					</li>
 				))}
 			</ul>

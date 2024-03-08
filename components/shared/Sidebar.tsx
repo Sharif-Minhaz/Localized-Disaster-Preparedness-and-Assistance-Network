@@ -119,7 +119,7 @@ export default function Sidebar() {
 								</SignOutButton>
 							</div>
 						</SignedIn>
-						<div className="flex gap-2 px-4 py-3 mb-10 dark:bg-[#19191a] bg-white rounded-lg">
+						<div className="flex gap-2 px-4 py-3 mb-10 border dark:bg-slate-900 bg-slate-100 rounded-xl">
 							<Moon />
 							<div className="flex items-center justify-between space-x-2 w-full">
 								<Label className="cursor-pointer" htmlFor="dark-mode">

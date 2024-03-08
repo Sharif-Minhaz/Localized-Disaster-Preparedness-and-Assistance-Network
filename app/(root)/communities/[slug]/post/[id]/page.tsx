@@ -1,5 +1,6 @@
 import { Author, CommentBody, CommentForm, Like, PostActionButtons } from "@/components/shared";
 import { fetchAllInAllPosts, fetchPost, fetchPostComments } from "@/lib/actions/post.actions";
+import { fetchUser } from "@/lib/actions/user.actions";
 import { IComment } from "@/lib/models/CommentModel";
 import { IPost } from "@/lib/models/PostModel";
 import { currentUser } from "@clerk/nextjs";
@@ -24,7 +25,11 @@ export async function generateStaticParams() {
 
 export default async function SinglePostPage({ params }: { params: { slug: string; id: string } }) {
 	const post: IPost = await fetchPost(params.id);
+
 	const user = await currentUser();
+	if (!user) return redirect("/");
+	const userInfo = await fetchUser(user.id);
+
 	const comments: IComment[] = await fetchPostComments(params.id);
 
 	if (!post || !user) return redirect("/organization");
@@ -33,7 +38,16 @@ export default async function SinglePostPage({ params }: { params: { slug: strin
 		<article className="max-w-[650px] mx-auto border rounded-xl shadow">
 			<div className="flex justify-between p-4">
 				<Author creationDate={post.createdAt} imgSize={40} userInfo={post.createdBy} />
-				<PostActionButtons postId={params.id} communitySlug={params.slug} />
+				<PostActionButtons
+					userId={userInfo?._id}
+					createdBy={
+						typeof post.createdBy === "string" ? post.createdBy : post.createdBy._id
+					}
+					userType={userInfo.user_type}
+					postId={params.id}
+					postBookmarked={post.bookmarked}
+					communitySlug={params.slug}
+				/>
 			</div>
 			<div className="relative h-[300px] w-full">
 				<Image

@@ -20,11 +20,13 @@ export default async function Projects({ searchParams }: { searchParams?: { quer
 			<HeadingSection text="Projects" />
 			<div className="px-4 sm:px-5 pt-4 sm:pt-5 flex gap-2">
 				<Search placeholder="Search projects..." />
-				<Link href="/projects/create">
-					<Button>
-						<Plus />
-					</Button>
-				</Link>
+				{userInfo.user_type === "admin" && (
+					<Link href="/projects/create">
+						<Button>
+							<Plus />
+						</Button>
+					</Link>
+				)}
 			</div>
 			<ProjectsList
 				userType={userInfo.user_type}

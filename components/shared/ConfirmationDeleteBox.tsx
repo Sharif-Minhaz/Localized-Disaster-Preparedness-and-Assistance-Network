@@ -26,7 +26,7 @@ export default function ConfirmationDeleteBox({ title, description, action, chil
 
 	return (
 		<AlertDialog>
-			<AlertDialogTrigger>{children}</AlertDialogTrigger>
+			<AlertDialogTrigger className="flex items-center">{children}</AlertDialogTrigger>
 			<AlertDialogContent className="rounded-xl">
 				<AlertDialogHeader>
 					<AlertDialogTitle>{title}</AlertDialogTitle>

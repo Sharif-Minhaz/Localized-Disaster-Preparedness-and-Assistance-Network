@@ -58,6 +58,7 @@ export async function createPost({
 export async function fetchPost(id: string) {
 	try {
 		await connectToDB();
+
 		const post = await Post.findById(id).populate("createdBy").lean();
 
 		return convertToPlainObj(post);
@@ -71,6 +72,8 @@ export async function fetchAllUserPosts(clerkId?: string) {
 	if (!clerkId) throw new Error("UserId required");
 
 	try {
+		await connectToDB();
+
 		const userInfo: IUser | null = await User.findOne({ clerkId }).select("_id").lean();
 		if (!userInfo) {
 			throw new Error("user not found");
@@ -202,6 +205,102 @@ export async function fetchPostComments(postId: string) {
 		return convertToPlainObj(comments);
 	} catch (error) {
 		console.error("Error fetching comments: ", error);
+		throw error;
+	}
+}
+
+export async function removeLikeFromPost(userId: string) {
+	try {
+		await connectToDB();
+	} catch (error) {
+		console.error("Error disliking post: ", error);
+		throw error;
+	}
+}
+
+export async function addLikeToPost(userId: string) {
+	try {
+		await connectToDB();
+	} catch (error) {
+		console.error("Error liking post: ", error);
+		throw error;
+	}
+}
+
+export async function addBookmarkToPost(userId: string, postId: string) {
+	try {
+		await connectToDB();
+
+		const post: IPost | null = await Post.findById(postId).lean();
+
+		if (!post) {
+			throw new Error("Post not found");
+		}
+
+		const isAlreadyBookmarked = post.bookmarked.includes(userId);
+
+		if (isAlreadyBookmarked) {
+			throw new Error("Already bookmarked by the user.");
+		}
+
+		const postInfo = await Post.findByIdAndUpdate(
+			postId,
+			{ $addToSet: { bookmarked: userId } },
+			{ new: true }
+		);
+
+		if (postInfo) {
+			revalidatePath("/my_posts");
+			return { success: true };
+		}
+		return { success: false };
+	} catch (error) {
+		console.error("Error bookmarking post: ", error);
+		throw error;
+	}
+}
+
+export async function removeBookmarkFromPost(userId: string, postId: string) {
+	try {
+		await connectToDB();
+
+		const post: IPost | null = await Post.findById(postId).lean();
+
+		if (!post) {
+			throw new Error("Post not found");
+		}
+
+		const postInfo = await Post.findByIdAndUpdate(
+			postId,
+			{ $pull: { bookmarked: userId } },
+			{ new: true }
+		);
+
+		if (postInfo) {
+			revalidatePath("/my_posts");
+			return { success: true };
+		}
+		return { success: false };
+	} catch (error) {
+		console.error("Error removing bookmarking post: ", error);
+		throw error;
+	}
+}
+
+export async function fetchUserBookmarkedPosts(clerkId?: string) {
+	try {
+		await connectToDB();
+		const user: IUser | null = await User.findOne({ clerkId }).lean();
+
+		if (!user) throw new Error("User not found");
+
+		const posts: IPost[] | null = await Post.find({ bookmarked: { $in: [user._id] } }).populate(
+			"createdBy communityId"
+		);
+
+		return convertToPlainObj(posts);
+	} catch (error) {
+		console.error("Error fetching posts: ", error);
 		throw error;
 	}
 }

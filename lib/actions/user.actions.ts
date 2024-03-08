@@ -14,6 +14,8 @@ interface Props {
 
 export async function fetchUser(clerkId: string) {
 	try {
+		await connectToDB();
+
 		const user = await User.findOne({ clerkId }).lean();
 
 		if (!user) throw new Error("No user found");

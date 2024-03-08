@@ -9,6 +9,7 @@ export interface IPost {
 	image?: string;
 	createdBy: string | IUser;
 	likes: [string];
+	bookmarked: [string];
 	createdAt: string;
 	updatedAt: string;
 }
@@ -27,6 +28,7 @@ const postSchema = new Schema(
 			required: true,
 		},
 		likes: [{ type: Schema.Types.ObjectId, ref: "User" }],
+		bookmarked: [{ type: Schema.Types.ObjectId, ref: "User" }],
 	},
 	{ timestamps: true }
 );

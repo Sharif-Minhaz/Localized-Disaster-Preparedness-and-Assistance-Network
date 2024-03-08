@@ -73,6 +73,7 @@ export async function createProject(data: Props) {
 export async function updateProject(data: Props) {
 	try {
 		await connectToDB();
+
 		const projectDetails: Props | null = await Project.findOne({ slug: data.slug })
 			.select("image")
 			.lean();
@@ -184,6 +185,7 @@ export async function fetchProjects({
 export async function deleteProject(slug: string) {
 	try {
 		await connectToDB();
+
 		const projectDetails: Props | null = await Project.findOne({ slug }).select("image").lean();
 
 		if (projectDetails) {
@@ -210,6 +212,7 @@ export async function deleteProject(slug: string) {
 export async function completeProject(slug: string) {
 	try {
 		await connectToDB();
+
 		const updatedProject = await Project.findOneAndUpdate(
 			{ slug },
 			{ completed: true },
@@ -232,6 +235,7 @@ export async function completeProject(slug: string) {
 export async function resumeProject(slug: string) {
 	try {
 		await connectToDB();
+
 		const updatedProject = await Project.findOneAndUpdate(
 			{ slug },
 			{ completed: false },

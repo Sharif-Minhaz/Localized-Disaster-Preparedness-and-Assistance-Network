@@ -1,12 +1,18 @@
-import { fetchAllUserPosts, fetchPosts } from "@/lib/actions/post.actions";
+import {
+	fetchAllUserPosts,
+	fetchPosts,
+	fetchUserBookmarkedPosts,
+} from "@/lib/actions/post.actions";
 import { Post } from ".";
 import { IPost } from "@/lib/models/PostModel";
 
 export default async function Posts({
+	bookmarked,
 	personal,
 	clerkId,
 	communityId,
 }: {
+	bookmarked?: boolean;
 	personal?: boolean;
 	clerkId?: string;
 	communityId?: string;
@@ -15,6 +21,8 @@ export default async function Posts({
 
 	if (personal) {
 		posts = await fetchAllUserPosts(clerkId);
+	} else if (bookmarked) {
+		posts = await fetchUserBookmarkedPosts(clerkId);
 	} else {
 		posts = await fetchPosts({ communityId });
 	}
