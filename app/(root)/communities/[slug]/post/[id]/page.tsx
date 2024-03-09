@@ -39,7 +39,7 @@ export default async function SinglePostPage({ params }: { params: { slug: strin
 	const likeable = userInfo ? !post.likes.includes(userInfo?._id) : true;
 
 	return (
-		<article className="max-w-[650px] mx-auto border rounded-xl shadow">
+		<article className="max-w-[650px] mx-auto border rounded-xl shadow pb-5">
 			<div className="flex justify-between p-4">
 				<Author creationDate={post.createdAt} imgSize={40} userInfo={post.createdBy} />
 				<PostActionButtons
@@ -71,7 +71,7 @@ export default async function SinglePostPage({ params }: { params: { slug: strin
 					likeCount={post.likes.length}
 				/>
 			</div>
-			<div className="border-b border-slate-200" />
+			<div className="border-b border-slate-200 dark:border-slate-900" />
 			{/* -------------=- comment -=--------------- */}
 			<div className="p-4">
 				<CommentForm
@@ -81,8 +81,8 @@ export default async function SinglePostPage({ params }: { params: { slug: strin
 					userId={userInfo._id}
 				/>
 			</div>
-			<div className="border-t border-slate-200" />
-			<div className="p-4 flex flex-col gap-4">
+			<div className="border-t border-slate-200 dark:border-slate-900" />
+			<div className="p-4 flex flex-col gap-5">
 				{comments.map((comment: IComment) => (
 					<CommentBody comment={comment} key={comment._id} />
 				))}
