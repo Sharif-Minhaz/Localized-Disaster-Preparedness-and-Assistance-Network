@@ -1,4 +1,7 @@
+"use client";
+
 import { addLikeToPost, removeLikeFromPost } from "@/lib/actions/post.actions";
+import { useOptimistic, useState } from "react";
 
 export default function Like({
 	likeable,
@@ -14,10 +17,33 @@ export default function Like({
 	const addLike = addLikeToPost.bind(null, userId, postId);
 	const removeLike = removeLikeFromPost.bind(null, userId, postId);
 
+	const [like, setLike] = useState({ likeable, likeCount });
+	const [optimisticLike, setOptimisticLike] = useOptimistic(like);
+
+	const handleLike = async () => {
+		setOptimisticLike((prev) => ({ likeable: false, likeCount: prev.likeCount + 1 }));
+		const res = await addLike();
+		setLike((prev) => {
+			return res.success
+				? { likeable: false, likeCount: prev.likeCount + 1 }
+				: { likeable: true, likeCount: prev.likeCount - 1 };
+		});
+	};
+
+	const handleDislike = async () => {
+		setOptimisticLike((prev) => ({ likeable: true, likeCount: prev.likeCount - 1 }));
+		const res = await removeLike();
+		setLike((prev) => {
+			return res.success
+				? { likeable: true, likeCount: prev.likeCount - 1 }
+				: { likeable: false, likeCount: prev.likeCount + 1 };
+		});
+	};
+
 	return (
 		<div className="flex gap-1 items-center">
-			{likeable ? (
-				<form action={addLike}>
+			{optimisticLike.likeable ? (
+				<form action={handleLike}>
 					<button type="submit">
 						<svg
 							width="24px"
@@ -43,7 +69,7 @@ export default function Like({
 					</button>
 				</form>
 			) : (
-				<form action={removeLike}>
+				<form action={handleDislike}>
 					<button type="submit">
 						<svg
 							fill="#ff006f"
@@ -68,7 +94,7 @@ export default function Like({
 				</form>
 			)}
 
-			<span className="text-sm">{likeCount || "0"}</span>
+			<span className="text-sm">{optimisticLike.likeCount || "0"}</span>
 		</div>
 	);
 }

@@ -1,8 +1,11 @@
-import { Bookmark, BookmarkCheck, Pencil, Trash2 } from "lucide-react";
+"use client";
+
+import { Bookmark, BookmarkCheck, Pencil } from "lucide-react";
 import Link from "next/link";
 import { DeleteConfirmationBox } from ".";
 import { addBookmarkToPost, deletePost, removeBookmarkFromPost } from "@/lib/actions/post.actions";
 import { Button } from "../ui/button";
+import { useOptimistic, useState } from "react";
 
 export default function PostActionButtons({
 	userId,
@@ -23,6 +26,21 @@ export default function PostActionButtons({
 	const bookmarkPost = addBookmarkToPost.bind(null, userId, postId);
 	const remBookmarkPost = removeBookmarkFromPost.bind(null, userId, postId);
 
+	const [isBookmarked, setIsBookmarked] = useState(postBookmarked.includes(userId));
+	const [bookmarkOptimisticState, addBookmarkOptimistic] = useOptimistic(isBookmarked);
+
+	const handleRemBookmark = async () => {
+		addBookmarkOptimistic(false);
+		const res = await remBookmarkPost();
+		setIsBookmarked(res.success ? false : true);
+	};
+
+	const handleBookmark = async () => {
+		addBookmarkOptimistic(true);
+		const res = await bookmarkPost();
+		setIsBookmarked(res.success ? true : false);
+	};
+
 	return (
 		<>
 			{userId === createdBy || userType === "admin" ? (
@@ -34,8 +52,8 @@ export default function PostActionButtons({
 				</div>
 			) : (
 				<>
-					{postBookmarked.includes(userId) ? (
-						<form action={remBookmarkPost}>
+					{bookmarkOptimisticState ? (
+						<form action={handleRemBookmark}>
 							<Button
 								className="rounded-[10px]"
 								variant="outline"
@@ -46,7 +64,7 @@ export default function PostActionButtons({
 							</Button>
 						</form>
 					) : (
-						<form action={bookmarkPost}>
+						<form action={handleBookmark}>
 							<Button
 								className="rounded-[10px]"
 								variant="outline"
