@@ -27,7 +27,7 @@ export default function PostActionButtons({
 	const remBookmarkPost = removeBookmarkFromPost.bind(null, userId, postId);
 
 	const [isBookmarked, setIsBookmarked] = useState(postBookmarked.includes(userId));
-	const [bookmarkOptimisticState, addBookmarkOptimistic] = useOptimistic(isBookmarked);
+	const [bookmarkOptimisticState, addBookmarkOptimistic] = useOptimistic(isBookmarked); //TODO: can be used a reducer pattern with cleaner code
 
 	const handleRemBookmark = async () => {
 		addBookmarkOptimistic(false);

@@ -1,9 +1,10 @@
 import { model, Schema, models } from "mongoose";
+import { IUser } from "./UserModel";
 
 export interface IComment {
 	_id: string;
-	text: string;
-	commentedBy: string;
+	comment: string;
+	commentedBy: string | IUser;
 	postId: string;
 	createdAt?: string;
 	updatedAt?: string;
@@ -11,7 +12,7 @@ export interface IComment {
 
 const commentSchema = new Schema(
 	{
-		text: {
+		comment: {
 			type: String,
 			required: true,
 		},

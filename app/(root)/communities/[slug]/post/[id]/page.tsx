@@ -1,3 +1,5 @@
+export const revalidate = 600; // revalidate in every 10 min
+
 import { Author, CommentBody, CommentForm, Like, PostActionButtons } from "@/components/shared";
 import { fetchAllInAllPosts, fetchPost, fetchPostComments } from "@/lib/actions/post.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
@@ -72,9 +74,15 @@ export default async function SinglePostPage({ params }: { params: { slug: strin
 			<div className="border-b border-slate-200" />
 			{/* -------------=- comment -=--------------- */}
 			<div className="p-4">
-				<CommentForm userImg={user.imageUrl} userId={user.id} />
+				<CommentForm
+					communitySlug={params.slug}
+					postId={post._id}
+					userImg={user.imageUrl}
+					userId={userInfo._id}
+				/>
 			</div>
-			<div className="p-4">
+			<div className="border-t border-slate-200" />
+			<div className="p-4 flex flex-col gap-4">
 				{comments.map((comment: IComment) => (
 					<CommentBody comment={comment} key={comment._id} />
 				))}

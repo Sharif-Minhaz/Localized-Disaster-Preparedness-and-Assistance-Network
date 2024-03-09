@@ -9,9 +9,9 @@ export default function Author({
 }: {
 	userInfo: string | IUser;
 	imgSize: number;
-	creationDate: string;
+	creationDate?: string;
 }) {
-	const parsedDate = parseISO(creationDate);
+	const parsedDate = parseISO(creationDate || "");
 	const distanceString = formatDistanceToNow(parsedDate, { addSuffix: true });
 
 	return (

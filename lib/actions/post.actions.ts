@@ -188,10 +188,23 @@ export async function deletePost(id: string, communitySlug: string) {
 	}
 }
 
-export async function addCommentToPost({ comment }: { comment: string }) {
+export async function addCommentToPost({
+	postId,
+	commentedBy,
+	comment,
+	communitySlug,
+}: {
+	postId: string;
+	commentedBy: string;
+	comment: string;
+	communitySlug: string;
+}) {
 	try {
-		await connectToDB(); // TODO: COMMENT FACILITY
-		return true;
+		await connectToDB();
+		const newComment = await Comment.create({ postId, commentedBy, comment });
+
+		revalidatePath(`/communities/${communitySlug}/post/${postId}`);
+		return convertToPlainObj(newComment);
 	} catch (error) {
 		console.error("Error commenting post: ", error);
 		throw error;

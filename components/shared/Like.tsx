@@ -18,7 +18,7 @@ export default function Like({
 	const removeLike = removeLikeFromPost.bind(null, userId, postId);
 
 	const [like, setLike] = useState({ likeable, likeCount });
-	const [optimisticLike, setOptimisticLike] = useOptimistic(like);
+	const [optimisticLike, setOptimisticLike] = useOptimistic(like); //TODO: can be used a reducer pattern with cleaner code
 
 	const handleLike = async () => {
 		setOptimisticLike((prev) => ({ likeable: false, likeCount: prev.likeCount + 1 }));
