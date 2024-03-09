@@ -7,7 +7,15 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { ChevronRight, MessageCircle } from "lucide-react";
 
-export default function Post({ post }: { post: IPost }) {
+export default function Post({
+	likeable,
+	userId,
+	post,
+}: {
+	likeable: boolean;
+	userId?: string;
+	post: IPost;
+}) {
 	const params = useParams<{ slug: string }>();
 
 	return (
@@ -27,7 +35,12 @@ export default function Post({ post }: { post: IPost }) {
 			<div className="p-3 flex border-t justify-between items-center mt-5">
 				<div className="flex gap-2">
 					{/* -------- like post --------- */}
-					<Like />
+					<Like
+						postId={post._id}
+						likeable={likeable}
+						userId={userId}
+						likeCount={post.likes.length}
+					/>
 					<Link href={`/communities/${params.slug}/post/${post._id}`}>
 						<MessageCircle color="#1c274c" size={24} />
 					</Link>

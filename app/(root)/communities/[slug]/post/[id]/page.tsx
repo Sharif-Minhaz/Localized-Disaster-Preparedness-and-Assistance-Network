@@ -34,6 +34,8 @@ export default async function SinglePostPage({ params }: { params: { slug: strin
 
 	if (!post || !user) return redirect("/organization");
 
+	const likeable = userInfo ? !post.likes.includes(userInfo?._id) : true;
+
 	return (
 		<article className="max-w-[650px] mx-auto border rounded-xl shadow">
 			<div className="flex justify-between p-4">
@@ -60,7 +62,12 @@ export default async function SinglePostPage({ params }: { params: { slug: strin
 			<div className="p-4">{post.description}</div>
 			{/* --------------- like post -------------- */}
 			<div className="p-4">
-				<Like />
+				<Like
+					postId={post._id}
+					likeable={likeable}
+					userId={userInfo._id}
+					likeCount={post.likes.length}
+				/>
 			</div>
 			<div className="border-b border-slate-200" />
 			{/* -------------=- comment -=--------------- */}

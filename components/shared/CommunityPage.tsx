@@ -104,7 +104,7 @@ export default async function CommunityPage({ community }: { community: ICommuni
 			{/* ----- available posts ----- */}
 			<section id="posts" className="shadow rounded-xl border mt-5">
 				<HeadingSection text="Available Posts" />
-				<Posts communityId={community._id} />
+				<Posts clerkId={user.id} communityId={community._id} />
 			</section>
 			{/* ------ create post -------- */}
 			{alreadyJoined && (

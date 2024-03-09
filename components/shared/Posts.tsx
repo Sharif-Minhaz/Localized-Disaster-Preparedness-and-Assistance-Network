@@ -5,6 +5,8 @@ import {
 } from "@/lib/actions/post.actions";
 import { Post } from ".";
 import { IPost } from "@/lib/models/PostModel";
+import { fetchUser } from "@/lib/actions/user.actions";
+import { IUser } from "@/lib/models/UserModel";
 
 export default async function Posts({
 	bookmarked,
@@ -17,6 +19,7 @@ export default async function Posts({
 	clerkId?: string;
 	communityId?: string;
 }) {
+	const userInfo: IUser | null = await fetchUser(clerkId);
 	let posts;
 
 	if (personal) {
@@ -37,9 +40,12 @@ export default async function Posts({
 
 	return (
 		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 p-4 sm:p-5">
-			{posts.map((post: IPost) => (
-				<Post key={post._id} post={post} />
-			))}
+			{posts.map((post: IPost) => {
+				const likeable = userInfo ? !post.likes.includes(userInfo?._id) : true;
+				return (
+					<Post likeable={likeable} userId={userInfo?._id} key={post._id} post={post} />
+				);
+			})}
 		</div>
 	);
 }

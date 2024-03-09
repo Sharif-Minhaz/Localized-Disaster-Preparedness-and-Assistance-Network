@@ -12,7 +12,8 @@ interface Props {
 	imageUrl?: string;
 }
 
-export async function fetchUser(clerkId: string) {
+export async function fetchUser(clerkId?: string) {
+	if (!clerkId) throw new Error("No clerkId provided");
 	try {
 		await connectToDB();
 

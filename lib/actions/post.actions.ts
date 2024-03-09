@@ -209,20 +209,58 @@ export async function fetchPostComments(postId: string) {
 	}
 }
 
-export async function removeLikeFromPost(userId: string) {
+export async function removeLikeFromPost(userId?: string, postId?: string) {
 	try {
 		await connectToDB();
+
+		if (!userId || !postId) throw new Error("User Id and Post Id both required");
+
+		const post: IPost | null = await Post.findById(postId).lean();
+
+		if (!post) {
+			throw new Error("Post not found");
+		}
+
+		const postInfo = await Post.findByIdAndUpdate(
+			postId,
+			{ $pull: { likes: userId } },
+			{ new: true }
+		);
+
+		return postInfo ? { success: true } : { success: false };
 	} catch (error) {
 		console.error("Error disliking post: ", error);
 		throw error;
 	}
 }
 
-export async function addLikeToPost(userId: string) {
+export async function addLikeToPost(userId?: string, postId?: string) {
 	try {
 		await connectToDB();
+
+		const post: IPost | null = await Post.findById(postId).lean();
+
+		if (!post) {
+			throw new Error("Post not found");
+		}
+
+		if (!userId) throw new Error("User id required");
+
+		const isAlreadyLiked = post.likes.includes(userId);
+
+		if (isAlreadyLiked) {
+			throw new Error("Already liked by the user.");
+		}
+
+		const postInfo = await Post.findByIdAndUpdate(
+			postId,
+			{ $addToSet: { likes: userId } },
+			{ new: true }
+		);
+
+		return postInfo ? { success: true } : { success: false };
 	} catch (error) {
-		console.error("Error liking post: ", error);
+		console.error("Error liking the post: ", error);
 		throw error;
 	}
 }
