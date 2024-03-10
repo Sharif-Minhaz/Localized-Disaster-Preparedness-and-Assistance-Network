@@ -1,8 +1,8 @@
 "use client";
 
 import * as z from "zod";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+import { Button } from "../../ui/button";
+import { Input } from "../../ui/input";
 import {
 	Form,
 	FormControl,
@@ -18,7 +18,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { Textarea } from "../ui/textarea";
+import { Textarea } from "../../ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { DonationValidation } from "@/lib/validations/donation";
@@ -26,8 +26,8 @@ import { addDonation, checkoutDonation } from "@/lib/actions/donation.actions";
 import { useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { useUser } from "@clerk/nextjs";
-import { toast } from "../ui/use-toast";
-import { ToastAction } from "../ui/toast";
+import { toast } from "../../ui/use-toast";
+import { ToastAction } from "../../ui/toast";
 import { IProject } from "@/lib/models/ProjectModel";
 
 export type Donation = {

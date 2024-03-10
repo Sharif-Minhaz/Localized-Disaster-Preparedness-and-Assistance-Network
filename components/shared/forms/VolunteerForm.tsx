@@ -2,8 +2,8 @@
 
 import * as z from "zod";
 import { useState } from "react";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+import { Button } from "../../ui/button";
+import { Input } from "../../ui/input";
 import {
 	Form,
 	FormControl,
@@ -12,7 +12,7 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
-import { Textarea } from "../ui/textarea";
+import { Textarea } from "../../ui/textarea";
 import { Plus } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { handleImage, isBase64Image } from "@/lib/utils";
@@ -20,8 +20,8 @@ import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
-import { useToast } from "../ui/use-toast";
-import { ToastAction } from "../ui/toast";
+import { useToast } from "../../ui/use-toast";
+import { ToastAction } from "../../ui/toast";
 import { ApplicationValidation } from "@/lib/validations/application";
 import { createApplication } from "@/lib/actions/application.actions";
 import { useUser } from "@clerk/nextjs";

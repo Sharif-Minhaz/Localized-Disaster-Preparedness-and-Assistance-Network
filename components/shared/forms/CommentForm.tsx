@@ -2,10 +2,10 @@
 
 import z from "zod";
 import Image from "next/image";
-import { Input } from "../ui/input";
+import { Input } from "../../ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "../ui/form";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "../../ui/form";
 import { CommentValidation } from "@/lib/validations/comment";
 import { addCommentToPost } from "@/lib/actions/post.actions";
 

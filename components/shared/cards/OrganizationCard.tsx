@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import Link from "next/link";
 import { deleteCommunity } from "@/lib/actions/community.actions";
 import { Pencil } from "lucide-react";
-import { CommunityMemberAvatars, DeleteConfirmationBox } from ".";
+import { CommunityMemberAvatars, DeleteConfirmationBox } from "..";
 
 interface Props {
 	isUserCommunityCreator: boolean;

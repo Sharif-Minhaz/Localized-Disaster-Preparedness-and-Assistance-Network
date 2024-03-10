@@ -1,12 +1,10 @@
 import { HeadingSection, Search, ShortListedOrgCards } from "@/components/shared";
-import MainPageFallback from "@/components/shared/MainPageFallback";
 import { Button } from "@/components/ui/button";
 import { fetchCommunities } from "@/lib/actions/community.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import { Plus } from "lucide-react";
 import Link from "next/link";
-import { Suspense } from "react";
 
 export default async function OrganizationsPage({
 	searchParams,
@@ -33,13 +31,7 @@ export default async function OrganizationsPage({
 						</Link>
 					))}
 			</div>
-			<Suspense fallback={<MainPageFallback />}>
-				<ShortListedOrgCards
-					userInfo={userInfo}
-					isNext={isNext}
-					communities={communities}
-				/>
-			</Suspense>
+			<ShortListedOrgCards userInfo={userInfo} isNext={isNext} communities={communities} />
 		</section>
 	);
 }

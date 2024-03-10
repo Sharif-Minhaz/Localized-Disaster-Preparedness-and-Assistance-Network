@@ -1,5 +1,5 @@
 import { IDonation } from "@/lib/models/DonationModel";
-import { DonationActivityCard } from ".";
+import { DonationActivityCard } from "..";
 
 interface Props {
 	donations: IDonation[];

@@ -1,9 +1,9 @@
 "use client";
 
 import * as z from "zod";
-import { ChangeEvent, useState } from "react";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+import { useState } from "react";
+import { Button } from "../../ui/button";
+import { Input } from "../../ui/input";
 import {
 	Form,
 	FormControl,
@@ -12,7 +12,7 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
-import { Textarea } from "../ui/textarea";
+import { Textarea } from "../../ui/textarea";
 import { CheckCircle, Plus } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { handleImage, isBase64Image } from "@/lib/utils";
@@ -20,22 +20,26 @@ import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
-import { useToast } from "../ui/use-toast";
-import { ToastAction } from "../ui/toast";
-import { ICommunity } from "@/lib/models/CommunityModel";
-import { CommunityValidation } from "@/lib/validations/community";
-import { createCommunity, updateCommunityInfo } from "@/lib/actions/community.actions";
+import { useToast } from "../../ui/use-toast";
+import { ToastAction } from "../../ui/toast";
+import { IPost } from "@/lib/models/PostModel";
+import { createPost, updatePostInfo } from "@/lib/actions/post.actions";
+import { PostValidation } from "@/lib/validations/post";
 
-export default function CommunityForm({
-	adminId,
-	community,
+export default function PostForm({
+	userId,
+	communityId,
+	communitySlug,
+	post,
 	update,
 }: {
-	adminId: string;
-	community?: ICommunity;
+	userId: string;
+	communityId: string;
+	communitySlug: string;
+	post?: IPost;
 	update?: boolean;
 }) {
-	const [key, setKey] = useState(Date.now());
+	const [key] = useState(Date.now());
 	const { toast } = useToast();
 	const router = useRouter();
 	const [files, setFiles] = useState<File[]>([]);
@@ -43,33 +47,31 @@ export default function CommunityForm({
 	const { startUpload } = useUploadThing("media");
 
 	const form = useForm({
-		resolver: zodResolver(CommunityValidation),
+		resolver: zodResolver(PostValidation),
 		defaultValues: {
-			name: community?.name || "",
-			bio: community?.bio || "",
-			image: community?.image || "",
+			description: post?.description || "",
+			image: post?.image || "",
 		},
 	});
 
-	async function onSubmit(values: z.infer<typeof CommunityValidation>) {
+	async function onSubmit(values: z.infer<typeof PostValidation>) {
 		const blobs = values.image;
 
-		const hasImageChanged = isBase64Image(blobs);
+		if (blobs) {
+			const hasImageChanged = isBase64Image(blobs);
 
-		if (hasImageChanged) {
-			const imgRes = await startUpload(files);
+			if (hasImageChanged) {
+				const imgRes = await startUpload(files);
 
-			if (imgRes && imgRes[0].url) {
-				values.image = imgRes[0].url;
+				values.image = imgRes && imgRes[0].url ? imgRes[0].url : "";
 			}
 		}
 
-		if (update && community) {
-			const res = await updateCommunityInfo({
-				name: values.name,
-				bio: values.bio,
+		if (update && post) {
+			const res = await updatePostInfo({
+				description: values.description,
 				image: values.image,
-				communityId: community._id,
+				postId: post._id,
 			});
 			if (res) {
 				toast({
@@ -77,7 +79,7 @@ export default function CommunityForm({
 					description: "Community updated successfully",
 					action: <ToastAction altText="OK">OK</ToastAction>,
 				});
-				return router.push("/communities");
+				return router.push(`/communities/${communitySlug}/post/${post._id}`);
 			}
 
 			return toast({
@@ -88,22 +90,12 @@ export default function CommunityForm({
 			});
 		}
 
-		const res = await createCommunity({
-			name: values.name,
-			bio: values.bio,
+		await createPost({
+			communityId,
+			description: values.description,
 			image: values.image,
-			createdBy: adminId,
+			createdBy: userId,
 		});
-
-		if (res) {
-			form.reset();
-			setKey(Date.now());
-			toast({
-				title: "Success: Community",
-				description: "Community added successfully",
-				action: <ToastAction altText="OK">OK</ToastAction>,
-			});
-		}
 	}
 
 	return (
@@ -111,33 +103,16 @@ export default function CommunityForm({
 			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5">
 				<FormField
 					control={form.control}
-					name="name"
+					name="description"
 					render={({ field }) => (
 						<FormItem className="flex gap-1 flex-col">
-							<FormLabel htmlFor="name">Name</FormLabel>
-							<FormControl>
-								<Input
-									{...field}
-									disabled={form.formState.isSubmitting}
-									placeholder="Enter community name"
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={form.control}
-					name="bio"
-					render={({ field }) => (
-						<FormItem className="flex gap-1 flex-col">
-							<FormLabel htmlFor="bio">Community Bio</FormLabel>
+							<FormLabel htmlFor="bio">Post Description</FormLabel>
 							<FormControl>
 								<Textarea
 									{...field}
 									disabled={form.formState.isSubmitting}
 									rows={6}
-									placeholder="Enter community bio"
+									placeholder="Enter post description"
 								/>
 							</FormControl>
 							<FormMessage />
@@ -150,7 +125,7 @@ export default function CommunityForm({
 					render={({ field }) => (
 						<>
 							<FormItem className="flex gap-1 flex-col">
-								<FormLabel htmlFor="image">Community Profile Picture</FormLabel>
+								<FormLabel htmlFor="image">Post image</FormLabel>
 								<FormControl>
 									<Input
 										key={key}
@@ -165,7 +140,7 @@ export default function CommunityForm({
 							</FormItem>
 							<div className="-mt-3">
 								{field.value && (
-									<div className="w-[115px] h-[115px] relative border rounded-md">
+									<div className="w-[200px] h-[115px] relative border rounded-md">
 										<Image
 											src={field.value}
 											priority
@@ -185,11 +160,11 @@ export default function CommunityForm({
 					<Button disabled={form.formState.isSubmitting} type="submit">
 						{update ? (
 							<>
-								<CheckCircle size={17} className="mr-2" /> Update Community
+								<CheckCircle size={17} className="mr-2" /> Update Post
 							</>
 						) : (
 							<>
-								<Plus size={17} className="mr-2" /> Add Community
+								<Plus size={17} className="mr-2" /> Add Post
 							</>
 						)}
 					</Button>

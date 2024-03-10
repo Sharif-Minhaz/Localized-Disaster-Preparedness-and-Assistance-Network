@@ -1,6 +1,6 @@
 "use server";
 
-import { Donation as DonationProps } from "@/components/shared/DonationForm";
+import { Donation as DonationProps } from "@/components/shared/forms/DonationForm";
 import { redirect } from "next/navigation";
 import Stripe from "stripe";
 import { connectToDB } from "../mongoose";
