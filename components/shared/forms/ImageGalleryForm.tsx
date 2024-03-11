@@ -13,46 +13,35 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "../../ui/textarea";
-import { CheckCircle, Plus } from "lucide-react";
+import { ImageUp } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { handleImage, isBase64Image } from "@/lib/utils";
 import { useUploadThing } from "@/lib/uploadthing";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useToast } from "../../ui/use-toast";
 import { ToastAction } from "../../ui/toast";
-import { ICommunity } from "@/lib/models/CommunityModel";
-import { CommunityValidation } from "@/lib/validations/community";
-import { createCommunity, updateCommunityInfo } from "@/lib/actions/community.actions";
+import { ImageGalleryValidation } from "@/lib/validations/imageGallery";
+import { addGalleyImage } from "@/lib/actions/gallery.actions";
 import { BackButton } from "..";
 
-export default function CommunityForm({
-	adminId,
-	community,
-	update,
-}: {
-	adminId: string;
-	community?: ICommunity;
-	update?: boolean;
-}) {
+export default function ImageGalleryForm({ userId }: { userId: string }) {
 	const [key, setKey] = useState(Date.now());
 	const { toast } = useToast();
-	const router = useRouter();
 	const [files, setFiles] = useState<File[]>([]);
 
 	const { startUpload } = useUploadThing("media");
 
 	const form = useForm({
-		resolver: zodResolver(CommunityValidation),
+		resolver: zodResolver(ImageGalleryValidation),
 		defaultValues: {
-			name: community?.name || "",
-			bio: community?.bio || "",
-			image: community?.image || "",
+			heading: "",
+			description: "",
+			image: "",
 		},
 	});
 
-	async function onSubmit(values: z.infer<typeof CommunityValidation>) {
+	async function onSubmit(values: z.infer<typeof ImageGalleryValidation>) {
 		const blobs = values.image;
 
 		const hasImageChanged = isBase64Image(blobs);
@@ -65,43 +54,18 @@ export default function CommunityForm({
 			}
 		}
 
-		if (update && community) {
-			const res = await updateCommunityInfo({
-				name: values.name,
-				bio: values.bio,
-				image: values.image,
-				communityId: community._id,
-			});
-			if (res) {
-				toast({
-					title: "Success: Community",
-					description: "Community updated successfully",
-					action: <ToastAction altText="OK">OK</ToastAction>,
-				});
-				return router.push("/communities");
-			}
-
-			return toast({
-				variant: "destructive",
-				title: "Failed: Community update",
-				description: "Community update failed",
-				action: <ToastAction altText="close">Close</ToastAction>,
-			});
-		}
-
-		const res = await createCommunity({
-			name: values.name,
-			bio: values.bio,
+		const res = await addGalleyImage(userId, {
+			heading: values.heading,
+			description: values.description,
 			image: values.image,
-			createdBy: adminId,
 		});
 
-		if (res) {
+		if (res.success) {
 			form.reset();
 			setKey(Date.now());
 			toast({
-				title: "Success: Community",
-				description: "Community added successfully",
+				title: "Submit: Image",
+				description: "New image has added to the gallery",
 				action: <ToastAction altText="OK">OK</ToastAction>,
 			});
 		}
@@ -112,15 +76,15 @@ export default function CommunityForm({
 			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5">
 				<FormField
 					control={form.control}
-					name="name"
+					name="heading"
 					render={({ field }) => (
 						<FormItem className="flex gap-1 flex-col">
-							<FormLabel htmlFor="name">Name</FormLabel>
+							<FormLabel htmlFor="heading">Heading</FormLabel>
 							<FormControl>
 								<Input
 									{...field}
 									disabled={form.formState.isSubmitting}
-									placeholder="Enter community name"
+									placeholder="Enter image heading"
 								/>
 							</FormControl>
 							<FormMessage />
@@ -129,16 +93,16 @@ export default function CommunityForm({
 				/>
 				<FormField
 					control={form.control}
-					name="bio"
+					name="description"
 					render={({ field }) => (
 						<FormItem className="flex gap-1 flex-col">
-							<FormLabel htmlFor="bio">Community Bio</FormLabel>
+							<FormLabel htmlFor="description">Image context</FormLabel>
 							<FormControl>
 								<Textarea
 									{...field}
 									disabled={form.formState.isSubmitting}
 									rows={6}
-									placeholder="Enter community bio"
+									placeholder="Enter image context"
 								/>
 							</FormControl>
 							<FormMessage />
@@ -151,7 +115,7 @@ export default function CommunityForm({
 					render={({ field }) => (
 						<>
 							<FormItem className="flex gap-1 flex-col">
-								<FormLabel htmlFor="image">Community Profile Picture</FormLabel>
+								<FormLabel htmlFor="documentImg">Upload image (2:1)</FormLabel>
 								<FormControl>
 									<Input
 										key={key}
@@ -166,11 +130,11 @@ export default function CommunityForm({
 							</FormItem>
 							<div className="-mt-3">
 								{field.value && (
-									<div className="w-[115px] h-[115px] relative border rounded-md">
+									<div className="w-[200px] h-[115px] relative border rounded-md">
 										<Image
 											src={field.value}
 											priority
-											alt="community photo"
+											alt="Gallery photo"
 											quality={100}
 											sizes="100vw"
 											fill
@@ -184,15 +148,7 @@ export default function CommunityForm({
 				/>
 				<div className="pb-5 space-x-3">
 					<Button disabled={form.formState.isSubmitting} type="submit">
-						{update ? (
-							<>
-								<CheckCircle size={17} className="mr-2" /> Update Community
-							</>
-						) : (
-							<>
-								<Plus size={17} className="mr-2" /> Add Community
-							</>
-						)}
+						<ImageUp size={17} className="mr-2" /> Upload
 					</Button>
 					<BackButton />
 				</div>

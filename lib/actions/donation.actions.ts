@@ -52,6 +52,7 @@ export const checkoutDonation = async (
 
 		redirect(session.url!);
 	} catch (error) {
+		console.error(error);
 		throw error;
 	}
 };

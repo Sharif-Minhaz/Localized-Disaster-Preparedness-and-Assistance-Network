@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { BackButton } from "@/components/shared";
 
 export async function generateStaticParams() {
 	return heroThreats.map((threat) => ({ slug: threat.slug }));
@@ -57,6 +58,9 @@ export default function SingleTreatPage({ params }: { params: { slug: string } }
 					<AwarenessSection threat={threat} type="after" />
 				</div>
 			</section>
+			<div className="mt-5">
+				<BackButton />
+			</div>
 		</section>
 	);
 }

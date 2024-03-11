@@ -16,7 +16,7 @@ import { Label } from "../../ui/label";
 import { Textarea } from "../../ui/textarea";
 import { addDays } from "date-fns";
 import { DateRange } from "react-day-picker";
-import { DatePickerWithRange, Tiptap } from "..";
+import { BackButton, DatePickerWithRange, Tiptap } from "..";
 import { CheckCircle, Plus } from "lucide-react";
 import { createProject, updateProject } from "@/lib/actions/project.actions";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -281,7 +281,7 @@ export default function ProjectForm({
 						</FormItem>
 					)}
 				/>
-				<div className="pb-5">
+				<div className="pb-5 space-x-3">
 					<Button disabled={form.formState.isSubmitting} type="submit">
 						{update ? (
 							<>
@@ -293,6 +293,7 @@ export default function ProjectForm({
 							</>
 						)}
 					</Button>
+					<BackButton />
 				</div>
 			</form>
 		</Form>

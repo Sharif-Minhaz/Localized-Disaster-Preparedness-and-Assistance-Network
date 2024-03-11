@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { Pencil, Plus, Users, View } from "lucide-react";
 import Link from "next/link";
-import { CommunityMemberAvatars, HeadingSection, Posts } from ".";
+import { BackButton, CommunityMemberAvatars, HeadingSection, Posts } from ".";
 import { currentUser } from "@clerk/nextjs";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
@@ -105,6 +105,9 @@ export default async function CommunityPage({ community }: { community: ICommuni
 			<section id="posts" className="shadow rounded-xl border mt-5">
 				<HeadingSection text="Available Posts" />
 				<Posts clerkId={user.id} communityId={community._id} />
+				<div className="p-5">
+					<BackButton />
+				</div>
 			</section>
 			{/* ------ create post -------- */}
 			{alreadyJoined && (

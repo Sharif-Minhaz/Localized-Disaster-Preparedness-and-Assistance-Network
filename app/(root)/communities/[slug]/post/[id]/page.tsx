@@ -1,6 +1,13 @@
 export const revalidate = 600; // revalidate in every 10 min
 
-import { Author, CommentBody, CommentForm, Like, PostActionButtons } from "@/components/shared";
+import {
+	Author,
+	BackButton,
+	CommentBody,
+	CommentForm,
+	Like,
+	PostActionButtons,
+} from "@/components/shared";
 import { fetchAllInAllPosts, fetchPost, fetchPostComments } from "@/lib/actions/post.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { IComment } from "@/lib/models/CommentModel";
@@ -63,13 +70,14 @@ export default async function SinglePostPage({ params }: { params: { slug: strin
 			</div>
 			<div className="p-4">{post.description}</div>
 			{/* --------------- like post -------------- */}
-			<div className="p-4">
+			<div className="p-4 flex gap-3 justify-between items-center">
 				<Like
 					postId={post._id}
 					likeable={likeable}
 					userId={userInfo._id}
 					likeCount={post.likes.length}
 				/>
+				<BackButton />
 			</div>
 			<div className="border-b border-slate-200 dark:border-slate-900" />
 			{/* -------------=- comment -=--------------- */}

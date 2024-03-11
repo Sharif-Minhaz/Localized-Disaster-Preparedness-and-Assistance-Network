@@ -13,11 +13,10 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "../../ui/textarea";
-import { Plus } from "lucide-react";
+import { SendHorizonal } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { handleImage, isBase64Image } from "@/lib/utils";
 import { useUploadThing } from "@/lib/uploadthing";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useToast } from "../../ui/use-toast";
@@ -30,7 +29,6 @@ export default function VolunteerForm() {
 	const { user } = useUser();
 	const [key, setKey] = useState(Date.now());
 	const { toast } = useToast();
-	const router = useRouter();
 	const [files, setFiles] = useState<File[]>([]);
 
 	const { startUpload } = useUploadThing("media");
@@ -154,7 +152,7 @@ export default function VolunteerForm() {
 				/>
 				<div className="pb-5">
 					<Button disabled={form.formState.isSubmitting} type="submit">
-						<Plus size={17} className="mr-2" /> Apply
+						<SendHorizonal size={17} className="mr-2" /> Apply
 					</Button>
 				</div>
 			</form>

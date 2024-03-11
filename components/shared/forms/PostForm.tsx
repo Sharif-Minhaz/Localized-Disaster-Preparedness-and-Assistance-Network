@@ -25,6 +25,7 @@ import { ToastAction } from "../../ui/toast";
 import { IPost } from "@/lib/models/PostModel";
 import { createPost, updatePostInfo } from "@/lib/actions/post.actions";
 import { PostValidation } from "@/lib/validations/post";
+import { BackButton } from "..";
 
 export default function PostForm({
 	userId,
@@ -156,7 +157,7 @@ export default function PostForm({
 						</>
 					)}
 				/>
-				<div className="pb-5">
+				<div className="pb-5 space-x-3">
 					<Button disabled={form.formState.isSubmitting} type="submit">
 						{update ? (
 							<>
@@ -168,6 +169,7 @@ export default function PostForm({
 							</>
 						)}
 					</Button>
+					<BackButton />
 				</div>
 			</form>
 		</Form>

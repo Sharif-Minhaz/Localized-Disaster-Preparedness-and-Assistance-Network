@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
 import { deleteProject } from "@/lib/actions/project.actions";
-import { DeleteConfirmationBox, ManageProjectButtons } from "@/components/shared";
+import { BackButton, DeleteConfirmationBox, ManageProjectButtons } from "@/components/shared";
 import { IProject } from "@/lib/models/ProjectModel";
 
 export default function SinglePageProject({
@@ -64,6 +64,9 @@ export default function SinglePageProject({
 					className="tiptap-result"
 					dangerouslySetInnerHTML={{ __html: project.details }}
 				/>
+				<div className="mt-6">
+					<BackButton />
+				</div>
 			</div>
 		</div>
 	);

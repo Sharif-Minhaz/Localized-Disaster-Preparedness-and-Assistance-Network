@@ -43,7 +43,7 @@ export default function Like({
 	return (
 		<div className="flex gap-1 items-center">
 			{optimisticLike.likeable ? (
-				<form action={handleLike}>
+				<form action={handleLike} className="flex">
 					<button type="submit">
 						<svg
 							width="24px"
@@ -69,7 +69,7 @@ export default function Like({
 					</button>
 				</form>
 			) : (
-				<form action={handleDislike}>
+				<form action={handleDislike} className="flex">
 					<button type="submit">
 						<svg
 							fill="#ff006f"

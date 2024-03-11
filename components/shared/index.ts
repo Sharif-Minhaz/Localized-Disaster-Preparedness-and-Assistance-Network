@@ -48,6 +48,9 @@ import ProjectSkeletons from "./skeletons/ProjectSkeletons";
 import CommunitySkeletons from "./skeletons/CommunitySkeletons";
 import DonationHistorySkeletons from "./skeletons/DonationHistorySkeletons";
 import PostSkeletons from "./skeletons/PostSkeletons";
+import ImageGallery from "./ImageGallery";
+import ImageGalleryForm from "./forms/ImageGalleryForm";
+import BackButton from "./BackButton";
 
 export {
 	Navbar,
@@ -100,4 +103,7 @@ export {
 	CommunitySkeletons,
 	DonationHistorySkeletons,
 	PostSkeletons,
+	ImageGallery,
+	ImageGalleryForm,
+	BackButton,
 };
