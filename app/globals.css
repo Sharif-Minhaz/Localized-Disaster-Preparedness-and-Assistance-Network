@@ -192,3 +192,36 @@ p:empty::before {
 	margin-block: 2.33em;
 	font-weight: bold;
 }
+
+/* image gallery */
+
+.main-gallery-img>img.image-gallery-image {
+	object-fit: cover;
+	height: 350px;
+}
+
+.main-gallery-img .image-gallery-description {
+	bottom: 55px !important;
+	font-size: 14px !important;
+	line-height: 1.25 !important;
+}
+
+.gallery-thumbnail>.image-gallery-thumbnail-inner {
+	height: 60px;
+	overflow: hidden;
+}
+
+.gallery-thumbnail .image-gallery-thumbnail-image {
+	height: 100%;
+	object-fit: cover;
+}
+
+@media screen and (max-width: 500px) {
+	.main-gallery-img>img.image-gallery-image {
+		height: 250px;
+	}
+}
+
+.main-gallery-img>img.image-gallery-image.full-screen {
+	height: auto;
+}

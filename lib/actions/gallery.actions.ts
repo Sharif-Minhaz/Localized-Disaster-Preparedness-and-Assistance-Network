@@ -5,6 +5,7 @@ import Gallery from "../models/GalleryModel";
 import { connectToDB } from "../mongoose";
 import { fetchUser } from "./user.actions";
 import { IUser } from "../models/UserModel";
+import { convertToPlainObj } from "../utils";
 
 interface IProps {
 	heading: string;
@@ -40,7 +41,7 @@ export const fetchImages = async () => {
 
 		const images = await Gallery.find().populate("addedBy").lean();
 
-		return images;
+		return convertToPlainObj(images);
 	} catch (error) {
 		console.error(error);
 		throw error;
