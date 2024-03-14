@@ -52,6 +52,9 @@ import GallerySkeletons from "./skeletons/GallerySkeletons";
 import ImageGallery from "./ImageGallery";
 import ImageGalleryForm from "./forms/ImageGalleryForm";
 import BackButton from "./BackButton";
+import ContactForm from "./forms/ContactForm";
+import ContactSection from "./ContactSection";
+import ContactLocation from "./ContactLocation";
 
 export {
 	Navbar,
@@ -108,4 +111,7 @@ export {
 	ImageGallery,
 	ImageGalleryForm,
 	BackButton,
+	ContactForm,
+	ContactSection,
+	ContactLocation,
 };

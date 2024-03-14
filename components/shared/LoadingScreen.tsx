@@ -1,3 +1,6 @@
+import Image from "next/image";
+import Loader from "../../public/assets/gifs/loading-animation.gif";
+
 export default function LoadingScreen({ height, width }: { height?: string; width?: string }) {
 	return (
 		<div
@@ -7,9 +10,11 @@ export default function LoadingScreen({ height, width }: { height?: string; widt
 				role="status"
 				className="absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2"
 			>
-				<div className="w-36 h-36 border-8 rounded-full border-t-blue-500 animate-spin" />
+				<div className="flex h-full items-center justify-center">
+					<Image unoptimized src={Loader} alt="loading..." />
+				</div>
 
-				<span className="sr-only">Loading...</span>
+				<span className="sr-only">Loading</span>
 			</div>
 		</div>
 	);

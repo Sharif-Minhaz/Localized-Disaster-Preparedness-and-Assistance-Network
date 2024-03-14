@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { twMerge } from "tailwind-merge";
+import emailjs from "@emailjs/browser";
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
@@ -78,4 +79,43 @@ export function handleImage(
 
 		fileReader.readAsDataURL(file);
 	}
+}
+
+interface IContactFormData {
+	firstName: string;
+	lastName: string;
+	contact?: string;
+	email: string;
+	message: string;
+}
+
+export async function receiveEmailFromUser(formData: IContactFormData) {
+	const serviceId = process.env.NEXT_PUBLIC_EMAIL_SERVICE_ID;
+	const templateId = process.env.NEXT_PUBLIC_EMAIL_TEMPLATE_ID;
+	const publicKey = process.env.NEXT_PUBLIC_EMAIL_PUBLIC_KEY;
+
+	if (!serviceId || !templateId || !publicKey) {
+		return { success: false, err: "ENV var missing!" };
+	}
+
+	return emailjs
+		.send(
+			serviceId,
+			templateId,
+			{
+				from_name: `${formData.firstName} ${formData.lastName}`,
+				to_name: "LDPAN",
+				from_email: formData.email,
+				to_email: "smmr.career@gmail.com",
+				message: `${formData.message}. Email: ${formData.email}. Contact No: ${formData.contact}`,
+			},
+			publicKey
+		)
+		.then(() => {
+			return { success: true, err: null };
+		})
+		.catch((err) => {
+			console.log(err);
+			return { success: false, err: err.message };
+		});
 }
