@@ -7,12 +7,12 @@ import {
 	Radar,
 	HeartHandshakeIcon,
 	BookImage,
-	ShoppingBasket,
 	Contact,
 	ShieldAlert,
 	History,
 	FilePenIcon,
 	PersonStanding,
+	LineChart,
 } from "lucide-react";
 
 import projectImage from "@/public/assets/images/project-1.jpg";
@@ -31,6 +31,11 @@ interface MenuItem {
 }
 
 export const sideMenuData: MenuItem[] = [
+	{
+		title: "dashboard",
+		url: "/dashboard",
+		Icon: LineChart,
+	},
 	{
 		title: "home",
 		url: "/",
@@ -91,11 +96,7 @@ export const sideMenuData: MenuItem[] = [
 		url: "/activity",
 		Icon: History,
 	},
-	{
-		title: "resources",
-		url: "/resources",
-		Icon: ShoppingBasket,
-	},
+
 	{
 		title: "contactUs",
 		url: "/contact",

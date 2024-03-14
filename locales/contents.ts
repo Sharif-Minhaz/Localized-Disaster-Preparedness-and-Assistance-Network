@@ -1,4 +1,5 @@
 interface DictionaryEntry {
+	dashboard: string;
 	home: string;
 	aboutUs: string;
 	projects: string;
@@ -11,7 +12,6 @@ interface DictionaryEntry {
 	voluntary: string;
 	gallery: string;
 	activity: string;
-	resources: string;
 	contactUs: string;
 	signout: string;
 	darkMode: string;
@@ -19,6 +19,7 @@ interface DictionaryEntry {
 
 export const dictionary: Record<string, DictionaryEntry> = {
 	en: {
+		dashboard: "Dashboard",
 		home: "Home",
 		aboutUs: "About us",
 		projects: "Projects",
@@ -31,12 +32,12 @@ export const dictionary: Record<string, DictionaryEntry> = {
 		voluntary: "Voluntary",
 		gallery: "Gallery",
 		activity: "Activity",
-		resources: "Resources",
 		contactUs: "Contact Us",
 		signout: "Sign out",
 		darkMode: "Dark Mode",
 	},
 	bn: {
+		dashboard: "ড্যাশবোর্ড",
 		home: "হোম",
 		aboutUs: "আমাদের বিষয়",
 		projects: "কার্যক্রমসমূহ",
@@ -49,7 +50,6 @@ export const dictionary: Record<string, DictionaryEntry> = {
 		voluntary: "স্বেচ্ছাসেবা",
 		gallery: "গ্যালারি",
 		activity: "কর্মকাণ্ড",
-		resources: "সম্পদ",
 		contactUs: "যোগাযোগ",
 		signout: "লগআউট",
 		darkMode: "কালো থিম",

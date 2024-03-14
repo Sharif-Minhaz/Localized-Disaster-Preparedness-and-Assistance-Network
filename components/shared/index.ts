@@ -55,6 +55,10 @@ import BackButton from "./BackButton";
 import ContactForm from "./forms/ContactForm";
 import ContactSection from "./ContactSection";
 import ContactLocation from "./ContactLocation";
+import DonationBarChart from "./charts/DonationBarChart";
+import DonationActivityPieChart from "./charts/DonationActivityPieChart";
+import AdminCards from "./cards/AdminCards";
+import InfoCard from "./cards/InfoCard";
 
 export {
 	Navbar,
@@ -114,4 +118,8 @@ export {
 	ContactForm,
 	ContactSection,
 	ContactLocation,
+	DonationBarChart,
+	DonationActivityPieChart,
+	AdminCards,
+	InfoCard,
 };
