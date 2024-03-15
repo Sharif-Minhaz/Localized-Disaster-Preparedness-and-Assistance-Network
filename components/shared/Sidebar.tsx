@@ -1,6 +1,6 @@
 "use client";
 
-import { sideMenuData } from "@/constants";
+import { adminSideMenuTitle, sideMenuData } from "@/constants";
 import { MainContext } from "@/contexts/MainContext";
 import { dictionary } from "@/locales/contents";
 import { SignOutButton, SignedIn, SignedOut } from "@clerk/nextjs";
@@ -30,10 +30,14 @@ const fadeInAnimationVariants = {
 	}),
 };
 
-export default function Sidebar() {
+export default function Sidebar({ isAdmin }: { isAdmin?: boolean }) {
 	const { lang, theme, sidebarOpen, closeSidebar, changeTheme } = useContext(MainContext);
 	const pathname = usePathname();
 	const router = useRouter();
+
+	const sidebarMenuForUser = !isAdmin
+		? sideMenuData.filter((data) => !adminSideMenuTitle.includes(data.title))
+		: sideMenuData;
 
 	return (
 		<OutsideClickHandler onOutsideClick={closeSidebar}>
@@ -76,7 +80,7 @@ export default function Sidebar() {
 					</div>
 
 					<ul className="mt-1">
-						{sideMenuData.map((menu, index) => {
+						{sidebarMenuForUser.map((menu, index) => {
 							const { Icon } = menu;
 							const selectedLangEntry = dictionary?.[lang];
 							const isActive =

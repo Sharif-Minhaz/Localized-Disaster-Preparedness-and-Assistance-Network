@@ -72,6 +72,7 @@ export const addDonation = async (donation: DonationProps, userId: string, proje
 		if (saveDonation) {
 			revalidatePath("/donation-history");
 			revalidatePath("/activity");
+			revalidatePath("/dashboard");
 			return { status: "OK", code: 201 };
 		}
 		return { status: "ERROR", code: 500 };

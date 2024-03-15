@@ -10,7 +10,18 @@ import {
 	Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { ChangeEvent, useEffect, useState } from "react";
+
+import {
+	Select,
+	SelectContent,
+	SelectGroup,
+	SelectItem,
+	SelectLabel,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { DataMap } from "@/lib/actions/dashboard.action";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -31,8 +42,8 @@ const initialData = {
 	labels,
 	datasets: [
 		{
-			label: "Donation Requests",
-			data: [12, 19, 3, 5, 2, 3],
+			label: "Donation Amounts (BDT)",
+			data: [0],
 			backgroundColor: [
 				"rgba(255, 99, 132, 0.2)",
 				"rgba(255, 159, 64, 0.2)",
@@ -56,23 +67,38 @@ const initialData = {
 	],
 };
 
-export default function DonationBarChart() {
-	const [data, setData] = useState(initialData);
-	const [key, setKey] = useState(0);
-	const [year, setYear] = useState(2023);
+export default function DonationBarChart({ donationBarData }: { donationBarData: DataMap }) {
+	const searchParams = useSearchParams();
+	const pathname = usePathname();
+	const { replace } = useRouter();
 
-	const handleChange = (event: ChangeEvent<HTMLFormElement>) => {
-		setYear(event.target.value);
+	const handleChange = (value: string) => {
+		const params = new URLSearchParams(searchParams);
+
+		params.set("query", value.toString());
+
+		replace(`${pathname}?${params}`);
 	};
 
-	useEffect(() => {
-		setKey((prev) => prev + 1);
-	}, []);
+	initialData.datasets[0].data = Object.values(donationBarData);
 
 	return (
 		<div className="shadow p-4 border rounded-xl">
+			<Select onValueChange={handleChange}>
+				<SelectTrigger className="w-[150px] rounded-tl-xl">
+					<SelectValue placeholder="Select a year" />
+				</SelectTrigger>
+				<SelectContent>
+					<SelectGroup>
+						<SelectLabel>Years</SelectLabel>
+						<SelectItem value="2023">2023</SelectItem>
+						<SelectItem value="2024">2024</SelectItem>
+						<SelectItem value="2025">2025</SelectItem>
+					</SelectGroup>
+				</SelectContent>
+			</Select>
 			{/* @ts-ignore */}
-			<Bar key={key} options={options} data={data} />
+			<Bar key={Date.now()} options={options} data={initialData} />
 		</div>
 	);
 }

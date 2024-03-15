@@ -30,6 +30,8 @@ interface MenuItem {
 	Icon: React.ElementType;
 }
 
+export const adminSideMenuTitle = ["dashboard", "activity"];
+
 export const sideMenuData: MenuItem[] = [
 	{
 		title: "dashboard",

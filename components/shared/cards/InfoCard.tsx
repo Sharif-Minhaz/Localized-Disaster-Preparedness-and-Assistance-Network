@@ -1,16 +1,9 @@
-import { InfoIcon, LucideIcon } from "lucide-react";
+import { InfoIcon } from "lucide-react";
 import Image from "next/image";
 import circleImg from "@/public/assets/images/circle.png";
+import { IInfo } from "./AdminCards";
 
-interface IProps {
-	title: string;
-	count: number;
-	bg: string;
-	des: string;
-	icon: LucideIcon;
-}
-
-export default function InfoCard({ data }: { data: IProps }) {
+export default function InfoCard({ data }: { data: IInfo }) {
 	return (
 		<article
 			className={`dashboard-card overflow-hidden card-img-holder ${data.bg} hover:shadow-[rgba(0,0,0,0.16)_0px_3px_8px]`}

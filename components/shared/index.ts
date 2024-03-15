@@ -59,6 +59,8 @@ import DonationBarChart from "./charts/DonationBarChart";
 import DonationActivityPieChart from "./charts/DonationActivityPieChart";
 import AdminCards from "./cards/AdminCards";
 import InfoCard from "./cards/InfoCard";
+import ResourceTable from "./ResourceTable";
+import SidebarHOC from "./SidebarHOC";
 
 export {
 	Navbar,
@@ -122,4 +124,6 @@ export {
 	DonationActivityPieChart,
 	AdminCards,
 	InfoCard,
+	ResourceTable,
+	SidebarHOC,
 };
