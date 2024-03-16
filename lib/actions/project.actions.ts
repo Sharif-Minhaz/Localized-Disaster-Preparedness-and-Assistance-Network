@@ -1,8 +1,8 @@
 "use server";
 
-import { FilterQuery, SortOrder } from "mongoose";
+import mongoose, { FilterQuery, SortOrder } from "mongoose";
 
-import Project from "../models/ProjectModel";
+import Project, { IProject } from "../models/ProjectModel";
 import { connectToDB } from "../mongoose";
 import slugify from "slugify";
 import { revalidatePath } from "next/cache";
@@ -10,6 +10,7 @@ import { deleteUTImage } from "./helpers.action";
 import { redirect } from "next/navigation";
 import { convertToPlainObj } from "../utils";
 import User from "../models/UserModel";
+import Donation from "../models/DonationModel";
 
 interface Props {
 	heading: string;
@@ -252,5 +253,64 @@ export async function resumeProject(slug: string) {
 	} catch (error) {
 		console.error("Error deleting projects:", error);
 		throw error;
+	}
+}
+
+export async function getProjectDonationInfo(projectId: string) {
+	try {
+		await connectToDB();
+
+		const [resources, amount] = await Promise.all([
+			Donation.aggregate([
+				{
+					$match: {
+						projectId: new mongoose.Types.ObjectId(projectId),
+						donationType: "resource",
+					},
+				},
+				{
+					$group: {
+						_id: "$resourceName",
+						totalDonation: { $sum: "$donationUnit" },
+					},
+				},
+				{
+					$project: {
+						_id: 0,
+						resourceName: "$_id",
+						totalDonation: 1,
+					},
+				},
+			]),
+			Donation.aggregate([
+				{
+					$match: {
+						projectId: new mongoose.Types.ObjectId(projectId),
+						donationType: "money",
+					},
+				},
+				{
+					$group: {
+						_id: null,
+						totalDonationAmount: { $sum: "$donationAmount" },
+					},
+				},
+			]),
+		]);
+
+		return { resources, amount: amount[0].totalDonationAmount };
+	} catch (error: any) {
+		console.error(error);
+		throw new Error(error.message);
+	}
+}
+
+export async function generateAuditReport({ project, values }: { project: IProject; values: any }) {
+	try {
+		await connectToDB();
+		console.log(project, values);
+	} catch (error: any) {
+		console.error(error);
+		throw new Error(error.message);
 	}
 }

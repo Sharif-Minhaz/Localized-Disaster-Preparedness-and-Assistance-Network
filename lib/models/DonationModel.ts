@@ -25,13 +25,11 @@ const donationSchema = new Schema(
 			type: Schema.Types.ObjectId,
 			ref: "User",
 			required: true,
-			immutable: true,
 		},
 		projectId: {
 			type: Schema.Types.ObjectId,
 			ref: "Project",
 			required: true,
-			immutable: true,
 		},
 		stripeId: String,
 		donationType: {

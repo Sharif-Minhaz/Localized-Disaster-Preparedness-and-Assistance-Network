@@ -2,11 +2,11 @@ import Image from "next/image";
 import { format } from "date-fns";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
-import { deleteProject } from "@/lib/actions/project.actions";
+import { deleteProject, getProjectDonationInfo } from "@/lib/actions/project.actions";
 import { BackButton, DeleteConfirmationBox, ManageProjectButtons } from "@/components/shared";
 import { IProject } from "@/lib/models/ProjectModel";
 
-export default function SinglePageProject({
+export default async function SinglePageProject({
 	userType,
 	project,
 }: {
@@ -15,6 +15,8 @@ export default function SinglePageProject({
 }) {
 	const dateTime = format(new Date(project.from), "yyyy-MM-dd");
 	const deleteProjectWithSlug = deleteProject.bind(null, project.slug);
+
+	const { resources, amount } = await getProjectDonationInfo(project._id);
 
 	return (
 		<div className="flex gap-3">
@@ -34,8 +36,12 @@ export default function SinglePageProject({
 								<Pencil size={17} className="text-purple-400" />
 							</Link>
 							<ManageProjectButtons
-								slug={project.slug}
+								project={project}
 								completed={project.completed}
+								resources={
+									resources as [{ totalDonation: number; resourceName: string }]
+								}
+								amount={amount}
 							/>
 							<DeleteConfirmationBox action={deleteProjectWithSlug} />
 						</div>

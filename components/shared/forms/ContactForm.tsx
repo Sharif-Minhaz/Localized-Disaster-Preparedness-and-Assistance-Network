@@ -31,8 +31,6 @@ export default function ContactForm() {
 	async function onSubmit(values: z.infer<typeof ContactValidation>) {
 		const res = await receiveEmailFromUser(values);
 
-		console.log(res);
-
 		if (res?.success) {
 			form.reset();
 			toast({

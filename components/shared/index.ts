@@ -61,6 +61,7 @@ import AdminCards from "./cards/AdminCards";
 import InfoCard from "./cards/InfoCard";
 import ResourceTable from "./ResourceTable";
 import SidebarHOC from "./SidebarHOC";
+import ProjectCompletionForm from "./forms/ProjectCompletionForm";
 
 export {
 	Navbar,
@@ -126,4 +127,5 @@ export {
 	InfoCard,
 	ResourceTable,
 	SidebarHOC,
+	ProjectCompletionForm,
 };
