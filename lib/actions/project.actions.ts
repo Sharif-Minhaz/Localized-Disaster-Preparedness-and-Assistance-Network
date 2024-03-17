@@ -11,6 +11,7 @@ import { redirect } from "next/navigation";
 import { convertToPlainObj } from "../utils";
 import User from "../models/UserModel";
 import Donation from "../models/DonationModel";
+import Report from "../models/ReportModel";
 
 interface Props {
 	heading: string;
@@ -244,6 +245,8 @@ export async function resumeProject(slug: string) {
 		);
 
 		if (!updatedProject.completed) {
+			// delete the existing report from DB
+			await Report.findOneAndDelete({ project: updatedProject._id });
 			revalidatePath("/");
 			revalidatePath("/projects");
 			revalidatePath(`/projects/${slug}`);
@@ -305,10 +308,44 @@ export async function getProjectDonationInfo(projectId: string) {
 	}
 }
 
-export async function generateAuditReport({ project, values }: { project: IProject; values: any }) {
+export async function generateAuditReport({
+	projectId,
+	values,
+}: {
+	projectId: string;
+	values: any;
+}) {
 	try {
 		await connectToDB();
-		console.log(project, values);
+		const { donatedAmount, ...rest } = values;
+
+		const { amount, resources } = await getProjectDonationInfo(projectId);
+
+		const newReport = await Report.create({
+			project: projectId,
+			donatedAmount,
+			donatedResource: rest,
+			totalAmount: amount,
+			totalResource: resources,
+		});
+
+		if (newReport) {
+			revalidatePath("/audit-reports");
+			return { success: true };
+		}
+		return { success: false };
+	} catch (error: any) {
+		console.error(error);
+		throw new Error(error.message);
+	}
+}
+
+export async function getAuditReports() {
+	try {
+		await connectToDB();
+		const reports = await Report.find().populate("project").lean();
+
+		return convertToPlainObj(reports);
 	} catch (error: any) {
 		console.error(error);
 		throw new Error(error.message);

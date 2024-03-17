@@ -1,12 +1,13 @@
 import { model, Schema, models } from "mongoose";
-import { IUser } from "./UserModel";
 import { IProject } from "./ProjectModel";
 
 export interface IReport {
 	_id: string;
 	project: string | IProject;
-	generatedBy: string | IUser;
-	report: string;
+	donatedResource: any;
+	donatedAmount: number;
+	totalAmount: number;
+	totalResource: any;
 	createdAt: string;
 	updatedAt: string;
 }
@@ -14,11 +15,10 @@ export interface IReport {
 const reportSchema = new Schema(
 	{
 		project: { type: Schema.Types.ObjectId, ref: "Project", required: true },
-		generatedBy: { type: Schema.Types.ObjectId, ref: "User", required: true },
-		report: {
-			type: String,
-			required: true,
-		},
+		donatedAmount: Number,
+		totalAmount: Number,
+		donatedResource: Schema.Types.Mixed,
+		totalResource: Schema.Types.Mixed,
 	},
 	{ timestamps: true }
 );

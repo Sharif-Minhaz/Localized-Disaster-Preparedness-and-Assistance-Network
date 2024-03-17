@@ -1,31 +1,101 @@
-import { Page, Text, View, Document, StyleSheet, Font } from "@react-pdf/renderer";
+"use client";
+
+import { Page, Text, Document, StyleSheet, Font } from "@react-pdf/renderer";
+import { Table, TR, TH, TD } from "@ag-media/react-pdf-table";
+import { IReport } from "@/lib/models/ReportModel";
+import { formatToShortDate } from "@/lib/utils";
 
 // Create Document Component
-export default function ReportPDF() {
+export default function ReportPDF({ report }: { report: IReport }) {
 	return (
 		<Document>
 			<Page style={styles.body}>
 				<Text style={styles.header} fixed>
-					~ Created with react-pdf ~
+					Localized Disaster Preparedness and Assistance Network (LDPAN)
 				</Text>
-				<Text style={styles.title}>Don Quijote de la Mancha</Text>
-				<Text style={styles.author}>Miguel de Cervantes</Text>
-				<Text style={styles.subtitle}>
-					Lalal Capítulo I: Que trata de la condición y ejercicio del famoso hidalgo D.
-					Quijote de la Mancha
+				<Text style={styles.title}>
+					{typeof report.project === "string" ? report.project : report.project.heading}
 				</Text>
-
+				<Text style={styles.location}>
+					{typeof report.project === "string" ? report.project : report.project.location}
+				</Text>
+				<Text style={styles.author}>
+					Report with financial statement and management reports
+				</Text>
+				<Text style={styles.author}>
+					For {formatToShortDate(new Date(report.createdAt))}
+				</Text>
 				<Text style={styles.text}>
-					En resolución, él se enfrascó tanto en su lectura, que se le pasaban las noches
-					leyendo de claro en claro, y los días de turbio en turbio, y así, del poco
-					dormir y del mucho leer, se le secó el cerebro, de manera que vino a perder el
-					juicio. Llenósele la fantasía de todo aquello que leía en los libros, aás cierta
-					en el mundo.
+					{typeof report.project === "string"
+						? report.project
+						: report.project.description}
 				</Text>
-				<Text style={styles.subtitle}>
-					Capítulo II: Que trata de la primera salida que de su tierra hizo el ingenioso
-					Don Quijote
+				<Text style={styles.date}>
+					Project start date:{" "}
+					{typeof report.project === "string"
+						? report.project
+						: formatToShortDate(new Date(report.project.from))}
 				</Text>
+				<Text style={styles.date}>
+					Expected project end date:{" "}
+					{typeof report.project === "string"
+						? report.project
+						: formatToShortDate(new Date(report.project.to))}
+				</Text>
+				<Text style={styles.tableHeading}>Resource distribution:</Text>
+				<Table style={{ fontSize: "12px" }}>
+					<TH>
+						<TD style={{ padding: "4px 8px", fontWeight: "bold" }}>Resource</TD>
+						<TD style={{ padding: "4px 8px", fontWeight: "bold" }}>Unit</TD>
+						<TD style={{ padding: "4px 8px", fontWeight: "bold" }}>Donated</TD>
+						<TD style={{ padding: "4px 8px", fontWeight: "bold" }}>Available</TD>
+					</TH>
+					{report.totalResource.map(
+						(
+							resource: { totalDonation: number; resourceName: string },
+							index: number
+						) => (
+							<TR key={index}>
+								<TD style={{ padding: "4px 8px" }}>{resource.resourceName}</TD>
+								<TD style={{ padding: "4px 8px" }}>{resource.totalDonation}x</TD>
+								<TD style={{ padding: "4px 8px" }}>
+									{report.donatedResource[resource.resourceName]}x
+								</TD>
+								<TD style={{ padding: "4px 8px" }}>
+									{resource.totalDonation -
+										Number(report.donatedResource[resource.resourceName])}
+									x
+								</TD>
+							</TR>
+						)
+					)}
+				</Table>
+				<Text style={styles.tableHeading}>Money distribution:</Text>
+				<Table style={{ fontSize: "12px" }}>
+					<TH>
+						<TD style={{ padding: "4px 8px", fontWeight: "bold" }}>Gateway</TD>
+						<TD style={{ padding: "4px 8px", fontWeight: "bold" }}>Amount</TD>
+					</TH>
+					<TR>
+						<TD style={{ padding: "4px 8px" }}>Stripe</TD>
+						<TD style={{ padding: "4px 8px" }}>{report.totalAmount}</TD>
+					</TR>
+					<TR>
+						<TD style={{ padding: "4px 8px" }}>Total</TD>
+						<TD style={{ padding: "4px 8px" }}>{report.totalAmount}</TD>
+					</TR>
+					<TR>
+						<TD style={{ padding: "4px 8px" }}>Donated</TD>
+						<TD style={{ padding: "4px 8px" }}>{report.donatedAmount}</TD>
+					</TR>
+					<TR>
+						<TD style={{ padding: "4px 8px" }}>Available</TD>
+						<TD style={{ padding: "4px 8px" }}>
+							{report.totalAmount - report.donatedAmount}
+						</TD>
+					</TR>
+				</Table>
+
 				<Text
 					style={styles.pageNumber}
 					render={({ pageNumber, totalPages }) => `${pageNumber} / ${totalPages}`}
@@ -52,18 +122,27 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		fontFamily: "Oswald",
 	},
+	location: {
+		fontSize: 12,
+		textAlign: "center",
+		marginVertical: 10,
+	},
 	author: {
 		fontSize: 12,
 		textAlign: "center",
-		marginBottom: 40,
+		marginBottom: 10,
 	},
-	subtitle: {
-		fontSize: 18,
-		margin: 12,
-		fontFamily: "Oswald",
+	tableHeading: {
+		fontSize: 17,
+		marginTop: 20,
+		marginBottom: 12,
+	},
+	date: {
+		fontSize: 12,
+		marginBottom: 13,
 	},
 	text: {
-		margin: 12,
+		marginVertical: 12,
 		fontSize: 14,
 		textAlign: "justify",
 		fontFamily: "Times-Roman",

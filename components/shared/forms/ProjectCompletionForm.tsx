@@ -36,21 +36,21 @@ export default function ProjectCompletionForm({
 	const form = useForm({ defaultValues: { donatedAmount: 0, ...convertedDonations } });
 
 	async function onSubmit(values: any) {
-		await generateAuditReport({ project, values });
-		// const { success } = await completeProject(slug);
-		// if (success) {
-		// 	return toast({
-		// 		title: "Success: Project",
-		// 		description: "Project completion success",
-		// 		action: <ToastAction altText="OK">OK</ToastAction>,
-		// 	});
-		// }
-		// toast({
-		// 	variant: "destructive",
-		// 	title: "Failed: Project",
-		// 	description: "Project completion failed",
-		// 	action: <ToastAction altText="OK">OK</ToastAction>,
-		// });
+		const { success } = await generateAuditReport({ projectId: project._id, values });
+		if (success) {
+			await completeProject(project.slug);
+			return toast({
+				title: "Success: Project",
+				description: "Project completion success",
+				action: <ToastAction altText="OK">OK</ToastAction>,
+			});
+		}
+		toast({
+			variant: "destructive",
+			title: "Failed: Project",
+			description: "Project completion failed",
+			action: <ToastAction altText="OK">OK</ToastAction>,
+		});
 	}
 
 	return (

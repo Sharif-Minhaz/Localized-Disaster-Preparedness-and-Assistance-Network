@@ -64,7 +64,7 @@ import ResourceTable from "./ResourceTable";
 import SidebarHOC from "./SidebarHOC";
 import ProjectCompletionForm from "./forms/ProjectCompletionForm";
 import ReportPDF from "./ReportPDF";
-import AuditReports from "./AuditReports";
+import AuditReport from "./AuditReport";
 
 export {
 	Navbar,
@@ -133,5 +133,5 @@ export {
 	SidebarHOC,
 	ProjectCompletionForm,
 	ReportPDF,
-	AuditReports,
+	AuditReport,
 };
