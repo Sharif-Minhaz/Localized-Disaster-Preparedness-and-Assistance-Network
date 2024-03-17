@@ -35,6 +35,7 @@ import Post from "./Post";
 import PostForm from "./forms/PostForm";
 import Author from "./Author";
 import Like from "./Like";
+import ErrorContent from "./ErrorContent";
 import CommentForm from "./forms/CommentForm";
 import CommentBody from "./CommentBody";
 import PostActionButtons from "./PostActionButtons";
@@ -62,6 +63,8 @@ import InfoCard from "./cards/InfoCard";
 import ResourceTable from "./ResourceTable";
 import SidebarHOC from "./SidebarHOC";
 import ProjectCompletionForm from "./forms/ProjectCompletionForm";
+import ReportPDF from "./ReportPDF";
+import AuditReports from "./AuditReports";
 
 export {
 	Navbar,
@@ -101,6 +104,7 @@ export {
 	PostForm,
 	Author,
 	Like,
+	ErrorContent,
 	CommentForm,
 	CommentBody,
 	PostActionButtons,
@@ -128,4 +132,6 @@ export {
 	ResourceTable,
 	SidebarHOC,
 	ProjectCompletionForm,
+	ReportPDF,
+	AuditReports,
 };

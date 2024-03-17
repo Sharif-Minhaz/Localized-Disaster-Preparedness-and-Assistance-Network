@@ -23,6 +23,7 @@
 		"@radix-ui/react-switch": "^1.0.3",
 		"@radix-ui/react-toast": "^1.1.5",
 		"@radix-ui/react-tooltip": "^1.0.7",
+		"@react-pdf/renderer": "^3.4.0",
 		"@stripe/stripe-js": "^3.0.6",
 		"@tiptap/extension-placeholder": "^2.1.16",
 		"@tiptap/pm": "^2.1.15",
