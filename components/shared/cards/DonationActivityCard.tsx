@@ -20,7 +20,7 @@ export default function DonationActivityCard({ history }: Props) {
 						})`,
 					}}
 					className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-					title="Mountain"
+					title="Project image"
 				/>
 				<div className="p-4 flex flex-col justify-between leading-normal">
 					<div className="mb-4">

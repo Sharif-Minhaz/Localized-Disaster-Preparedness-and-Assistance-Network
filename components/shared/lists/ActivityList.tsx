@@ -3,10 +3,9 @@ import { DonationActivityCard } from "..";
 
 interface Props {
 	donations: IDonation[];
-	isNext: boolean;
 }
 
-export default function ActivityList({ donations, isNext }: Props) {
+export default function ActivityList({ donations }: Props) {
 	return (
 		<>
 			{!donations.length && <p className="py-4">No donation activity available.</p>}

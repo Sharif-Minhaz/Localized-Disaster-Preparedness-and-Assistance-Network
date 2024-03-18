@@ -1,4 +1,4 @@
-import { ActivityList, HeadingSection, Search } from "@/components/shared";
+import { ActivityList, HeadingSection, Pagination, Search } from "@/components/shared";
 import { getDonationActivity } from "@/lib/actions/donation.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { IDonation } from "@/lib/models/DonationModel";
@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 export default async function DonationActivity({
 	searchParams,
 }: {
-	searchParams?: { query: string };
+	searchParams?: { query: string; page: string };
 }) {
 	const user = await currentUser();
 
@@ -20,8 +20,9 @@ export default async function DonationActivity({
 
 	if (userInfo.user_type !== "admin") return redirect("/");
 
-	const { donations, isNext } = await getDonationActivity({
+	const { donations, totalElements } = await getDonationActivity({
 		searchString: searchParams?.query || "",
+		pageNumber: Number(searchParams?.page),
 	});
 
 	return (
@@ -29,7 +30,10 @@ export default async function DonationActivity({
 			<HeadingSection text="Donation Activity" />
 			<div className="px-4 py-4 flex flex-col gap-4">
 				<Search placeholder="Search activity..." />
-				<ActivityList donations={donations as IDonation[]} isNext={isNext} />
+				<ActivityList donations={donations as IDonation[]} />
+				<div className="mt-5 flex w-full justify-center">
+					<Pagination totalPages={Math.ceil(totalElements / 5)} />
+				</div>
 			</div>
 		</div>
 	);

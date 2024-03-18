@@ -76,7 +76,7 @@ export async function fetchCommunity(slug: string) {
 export async function fetchCommunities({
 	searchString = "",
 	pageNumber = 1,
-	pageSize = 20,
+	pageSize = 6,
 	sortBy = "desc",
 }: {
 	searchString?: string;
@@ -105,7 +105,7 @@ export async function fetchCommunities({
 		const sortOptions = { createdAt: sortBy };
 
 		// Count the total number of communities that match the search criteria (without pagination).
-		const totalCommunitiesCount = await Community.countDocuments(query);
+		const totalElements = await Community.countDocuments(query);
 
 		// Create a query to fetch the communities based on the search and sort criteria.
 		const communities = await Community.find(query)
@@ -115,10 +115,7 @@ export async function fetchCommunities({
 			.populate("members")
 			.lean();
 
-		// Check if there are more communities beyond the current page.
-		const isNext = totalCommunitiesCount > skipAmount + communities.length;
-
-		return { communities: convertToPlainObj(communities), isNext };
+		return { communities: convertToPlainObj(communities), totalElements };
 	} catch (error) {
 		console.error("Error fetching communities:", error);
 		throw error;

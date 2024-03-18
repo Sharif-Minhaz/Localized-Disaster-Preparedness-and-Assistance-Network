@@ -65,6 +65,7 @@ import SidebarHOC from "./SidebarHOC";
 import ProjectCompletionForm from "./forms/ProjectCompletionForm";
 import ReportPDF from "./ReportPDF";
 import AuditReport from "./AuditReport";
+import Pagination from "./Pagination";
 
 export {
 	Navbar,
@@ -134,4 +135,5 @@ export {
 	ProjectCompletionForm,
 	ReportPDF,
 	AuditReport,
+	Pagination,
 };

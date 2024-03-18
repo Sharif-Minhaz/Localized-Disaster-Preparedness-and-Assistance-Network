@@ -132,7 +132,7 @@ export async function fetchProjectById(id: string) {
 export async function fetchProjects({
 	searchString = "",
 	pageNumber = 1,
-	pageSize = 20,
+	pageSize = 5,
 	sortBy = "desc",
 }: {
 	searchString?: string;
@@ -165,7 +165,7 @@ export async function fetchProjects({
 		const sortOptions = { createdAt: sortBy };
 
 		// Count the total number of projects that match the search criteria (without pagination).
-		const totalCommunitiesCount = await Project.countDocuments(query);
+		const totalElements = await Project.countDocuments(query);
 
 		// Create a query to fetch the projects based on the search and sort criteria.
 		const projects = await Project.find(query)
@@ -174,10 +174,7 @@ export async function fetchProjects({
 			.limit(pageSize)
 			.lean();
 
-		// Check if there are more projects beyond the current page.
-		const isNext = totalCommunitiesCount > skipAmount + projects.length;
-
-		return { projects: convertToPlainObj(projects), isNext };
+		return { projects: convertToPlainObj(projects), totalElements };
 	} catch (error) {
 		console.error("Error fetching projects:", error);
 		throw error;
@@ -340,12 +337,29 @@ export async function generateAuditReport({
 	}
 }
 
-export async function getAuditReports() {
+export async function getAuditReports({
+	pageNumber = 1,
+	pageSize = 8,
+	sortBy = "desc",
+}: {
+	pageNumber?: number;
+	pageSize?: number;
+	sortBy?: SortOrder;
+}) {
 	try {
 		await connectToDB();
-		const reports = await Report.find().populate("project").lean();
+		const skipAmount = (pageNumber - 1) * pageSize;
+		const sortOptions = { createdAt: sortBy };
+		const totalElements = await Report.countDocuments();
 
-		return convertToPlainObj(reports);
+		const reports = await Report.find()
+			.skip(skipAmount)
+			.limit(pageSize)
+			.populate("project")
+			.sort(sortOptions)
+			.lean();
+
+		return { reports: convertToPlainObj(reports), totalElements };
 	} catch (error: any) {
 		console.error(error);
 		throw new Error(error.message);

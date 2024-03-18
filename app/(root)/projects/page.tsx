@@ -1,4 +1,4 @@
-import { HeadingSection, ProjectsList, Search } from "@/components/shared";
+import { HeadingSection, Pagination, ProjectsList, Search } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Plus } from "lucide-react";
@@ -7,13 +7,20 @@ import { IProject } from "@/lib/models/ProjectModel";
 import { currentUser } from "@clerk/nextjs";
 import { fetchUser } from "@/lib/actions/user.actions";
 
-export default async function Projects({ searchParams }: { searchParams?: { query: string } }) {
+export default async function Projects({
+	searchParams,
+}: {
+	searchParams?: { query: string; page: string };
+}) {
 	const user = await currentUser();
 	let userInfo;
 	if (user) {
 		userInfo = await fetchUser(user?.id || "");
 	}
-	const { projects, isNext } = await fetchProjects({ searchString: searchParams?.query });
+	const { projects, totalElements } = await fetchProjects({
+		searchString: searchParams?.query,
+		pageNumber: Number(searchParams?.page),
+	});
 
 	return (
 		<div className="shadow rounded-xl border">
@@ -28,11 +35,10 @@ export default async function Projects({ searchParams }: { searchParams?: { quer
 					</Link>
 				)}
 			</div>
-			<ProjectsList
-				userType={userInfo.user_type}
-				projects={projects as IProject[]}
-				isNext={isNext}
-			/>
+			<ProjectsList userType={userInfo.user_type} projects={projects as IProject[]} />
+			<div className="mt-2 mb-5 flex w-full justify-center">
+				<Pagination totalPages={Math.ceil(totalElements / 5)} />
+			</div>
 		</div>
 	);
 }

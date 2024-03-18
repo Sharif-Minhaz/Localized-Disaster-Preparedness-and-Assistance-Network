@@ -8,14 +8,9 @@ import { IUser } from "@/lib/models/UserModel";
 interface ShortListedOrgCardsProps {
 	userInfo?: IUser;
 	communities: ICommunity[];
-	isNext: boolean;
 }
 
-export default function ShortListedOrgCards({
-	userInfo,
-	communities,
-	isNext,
-}: ShortListedOrgCardsProps) {
+export default function ShortListedOrgCards({ userInfo, communities }: ShortListedOrgCardsProps) {
 	if (!communities.length) {
 		return <div className="sm:p-5 p-4">No community found.</div>;
 	}

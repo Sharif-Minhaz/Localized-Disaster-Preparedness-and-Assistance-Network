@@ -1,4 +1,4 @@
-import { HeadingSection, Search, ShortListedOrgCards } from "@/components/shared";
+import { HeadingSection, Pagination, Search, ShortListedOrgCards } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { fetchCommunities } from "@/lib/actions/community.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
@@ -15,7 +15,9 @@ export default async function OrganizationsPage({
 }) {
 	const user = await currentUser();
 	const userInfo = await fetchUser(user?.id || "");
-	const { communities, isNext } = await fetchCommunities({ searchString: searchParams?.query });
+	const { communities, totalElements } = await fetchCommunities({
+		searchString: searchParams?.query,
+	});
 
 	return (
 		<section className="shadow rounded-xl border">
@@ -31,7 +33,10 @@ export default async function OrganizationsPage({
 						</Link>
 					))}
 			</div>
-			<ShortListedOrgCards userInfo={userInfo} isNext={isNext} communities={communities} />
+			<ShortListedOrgCards userInfo={userInfo} communities={communities} />
+			<div className="mt-2 mb-5 flex w-full justify-center">
+				<Pagination totalPages={Math.ceil(totalElements / 6)} />
+			</div>
 		</section>
 	);
 }

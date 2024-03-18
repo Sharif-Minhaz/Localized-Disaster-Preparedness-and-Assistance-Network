@@ -1,3 +1,7 @@
+import { ArrowLeft } from "lucide-react";
+import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
+
 export default function ErrorContent({
 	error,
 	reset,
@@ -5,19 +9,31 @@ export default function ErrorContent({
 	error: Error & { digest?: string };
 	reset: () => void;
 }) {
+	const router = useRouter();
+
 	return (
 		<div className="flex h-screen flex-col items-center justify-center p-5">
-			<h2 className="text-center text-2xl font-semibold mb-2">Something went wrong!</h2>
-			<h3 className="text-sm text-center">Reason: {error?.message}</h3>
-			<button
-				className="mt-4 rounded-lg bg-blue-500 px-4 py-2 text-sm text-white transition-colors hover:bg-blue-400"
-				onClick={
-					// Attempt to recover by trying to re-render the invoices route
-					() => reset()
-				}
-			>
-				Try again
-			</button>
+			<h2 className="text-center text-3xl font-semibold mb-3">Something went wrong!</h2>
+			<h3 className="text-sm text-center max-w-[500px]">Reason: {error?.message}</h3>
+			<div className="flex gap-4 justify-center mt-5 items-center">
+				<Button
+					className="rounded-lg text-sm"
+					onClick={
+						// Attempt to recover by trying to re-render the invoices route
+						() => reset()
+					}
+				>
+					Try again
+				</Button>
+				<Button
+					className="rounded-lg border text-sm"
+					type="button"
+					variant="secondary"
+					onClick={() => router.back()}
+				>
+					<ArrowLeft size={17} className="mr-2" /> Back
+				</Button>
+			</div>
 		</div>
 	);
 }

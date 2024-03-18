@@ -12,10 +12,9 @@ import { IProject } from "@/lib/models/ProjectModel";
 export interface ProjectProps {
 	userType: string;
 	projects: IProject[];
-	isNext: boolean;
 }
 
-export default function ProjectsList({ userType, projects, isNext }: ProjectProps) {
+export default function ProjectsList({ userType, projects }: ProjectProps) {
 	if (!projects.length) {
 		return <div className="sm:p-5 p-4">No project found.</div>;
 	}
