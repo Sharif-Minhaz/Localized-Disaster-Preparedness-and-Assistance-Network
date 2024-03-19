@@ -2,7 +2,7 @@ import HeadingSection from "./HeadingSection";
 
 export default function WeatherReport() {
 	return (
-		<div className="shadow rounded-xl border">
+		<div className="shadow-md dark:shadow-gray-900 rounded-xl border">
 			<HeadingSection text="Weather Reports" />
 
 			<div className="p-4 sm:p-5">

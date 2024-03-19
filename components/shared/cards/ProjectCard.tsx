@@ -25,7 +25,7 @@ export default function ProjectCard({
 	const deleteProjectWithSlug = deleteProject.bind(null, slug);
 
 	return (
-		<article className="group relative flex min-h-[300px] w-full max-w-[400px] flex-col overflow-hidden rounded-xl border shadow-md transition-all hover:shadow-lg md:min-h-[438px]">
+		<article className="group relative flex min-h-[300px] w-full max-w-[400px] flex-col overflow-hidden rounded-xl border dark:shadow-gray-900 shadow-md transition-all hover:shadow-lg md:min-h-[438px]">
 			<div className="h-[170px] w-full relative">
 				<Image
 					src={image}
@@ -45,21 +45,21 @@ export default function ProjectCard({
 					</div>
 				)}
 			</div>
-			<div className="flex min-h-[200px] flex-col gap-3 p-4 md:gap-3">
+			<div className="flex min-h-[200px] flex-col gap-3 p-4 md:gap-3 bg-cover dark:bg-none bg-[url(/assets/images/card-pat.png)]">
 				<h2 className="text-[16px] dark:text-white font-medium leading-[24px] line-clamp-2 flex-1 text-black">
 					{heading}
 				</h2>
 				{!completed ? (
 					<div className="flex gap-2">
-						<span className="text-[12px] font-semibold leading-[20px] w-min rounded-full bg-green-100 px-4 py-1 text-green-500">
+						<span className="text-[12px] font-semibold leading-[20px] dark:shadow-md dark:shadow-gray-700 w-min rounded-full bg-green-100 px-4 py-1 text-green-500">
 							OPEN
 						</span>
-						<span className="text-[12px] font-semibold leading-[20px] w-min rounded-full bg-blue-100 px-4 py-1 text-blue-500 line-clamp-1">
+						<span className="text-[12px] font-semibold leading-[20px] dark:shadow-md dark:shadow-gray-700 w-min rounded-full bg-blue-100 px-4 py-1 text-blue-500 line-clamp-1">
 							DONATABLE
 						</span>
 					</div>
 				) : (
-					<span className="text-[12px] font-semibold leading-[20px] w-min rounded-full bg-gray-200 px-4 py-1 text-gray-500 line-clamp-1">
+					<span className="text-[12px] font-semibold dark:shadow-md dark:shadow-gray-700 leading-[20px] w-min rounded-full bg-gray-200 px-4 py-1 text-gray-500 line-clamp-1">
 						CLOSED
 					</span>
 				)}
@@ -70,7 +70,7 @@ export default function ProjectCard({
 					<Link href={`/projects/${slug}`}>
 						<p className="inline-flex gap-1 text-[14px] items-center">
 							<span>More Info...</span>
-							<ChevronRight size={14} color="black" />
+							<ChevronRight size={14} />
 						</p>
 					</Link>
 				</div>

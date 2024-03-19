@@ -4,13 +4,13 @@ import { Suspense } from "react";
 import MainPageFallback from "./MainPageFallback";
 
 export default async function ShortListedOrganizations() {
-	const { communities, isNext } = await fetchCommunities({});
+	const { communities } = await fetchCommunities({});
 
 	return (
-		<div className="shadow rounded-xl border">
+		<div className="shadow-md dark:shadow-gray-900 rounded-xl border">
 			<HeadingSection text="Communities" link="/communities" linkText="View All" />
 			<Suspense fallback={<MainPageFallback />}>
-				<ShortListedOrgCards isNext={isNext} communities={[...communities].slice(0, 3)} />
+				<ShortListedOrgCards communities={[...communities].slice(0, 3)} />
 			</Suspense>
 		</div>
 	);

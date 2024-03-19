@@ -7,12 +7,11 @@ import { motion } from "framer-motion";
 interface ProjectProps {
 	userType: string;
 	projects: IProject[];
-	isNext: boolean;
 }
 
 export default function ShortListedProjects({ userType, projects }: ProjectProps) {
 	return (
-		<div className="shadow rounded-xl border">
+		<div className="dark:shadow-gray-900 shadow-md rounded-xl border">
 			<HeadingSection text="Projects" link="/projects" linkText="View All" />
 
 			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 p-4 sm:p-5 ">

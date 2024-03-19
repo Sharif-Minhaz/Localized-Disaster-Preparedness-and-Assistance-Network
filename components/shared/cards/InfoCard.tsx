@@ -6,7 +6,7 @@ import { IInfo } from "./AdminCards";
 export default function InfoCard({ data }: { data: IInfo }) {
 	return (
 		<article
-			className={`dashboard-card overflow-hidden card-img-holder ${data.bg} hover:shadow-[rgba(0,0,0,0.16)_0px_3px_8px]`}
+			className={`shadow-md dark:shadow-gray-900 dashboard-card overflow-hidden card-img-holder ${data.bg} hover:shadow-[rgba(0,0,0,0.16)_0px_3px_8px]`}
 		>
 			<Image
 				draggable={false}

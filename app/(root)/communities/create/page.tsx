@@ -10,7 +10,7 @@ export default async function CreateCommunityPage() {
 	}
 
 	return (
-		<div className="shadow rounded-xl border">
+		<div className="shadow-md dark:shadow-gray-900 rounded-xl border">
 			<HeadingSection text="Create New Community" />
 			<div className="px-4 sm:px-5 pt-4 sm:pt-5">
 				<CommunityForm adminId={user.id} />

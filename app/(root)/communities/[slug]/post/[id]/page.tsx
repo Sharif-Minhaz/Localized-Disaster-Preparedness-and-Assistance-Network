@@ -46,7 +46,7 @@ export default async function SinglePostPage({ params }: { params: { slug: strin
 	const likeable = userInfo ? !post.likes.includes(userInfo?._id) : true;
 
 	return (
-		<article className="max-w-[650px] mx-auto border rounded-xl shadow pb-5">
+		<article className="max-w-[650px] mx-auto border rounded-xl shadow-md dark:shadow-gray-900 pb-5">
 			<div className="flex justify-between p-4">
 				<Author creationDate={post.createdAt} imgSize={40} userInfo={post.createdBy} />
 				<PostActionButtons

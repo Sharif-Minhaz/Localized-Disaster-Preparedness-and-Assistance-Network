@@ -3,7 +3,7 @@ import {
 	fetchPosts,
 	fetchUserBookmarkedPosts,
 } from "@/lib/actions/post.actions";
-import { Post } from ".";
+import { PostCard } from ".";
 import { IPost } from "@/lib/models/PostModel";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { IUser } from "@/lib/models/UserModel";
@@ -43,7 +43,12 @@ export default async function Posts({
 			{posts.map((post: IPost) => {
 				const likeable = userInfo ? !post.likes.includes(userInfo?._id) : true;
 				return (
-					<Post likeable={likeable} userId={userInfo?._id} key={post._id} post={post} />
+					<PostCard
+						likeable={likeable}
+						userId={userInfo?._id}
+						key={post._id}
+						post={post}
+					/>
 				);
 			})}
 		</div>

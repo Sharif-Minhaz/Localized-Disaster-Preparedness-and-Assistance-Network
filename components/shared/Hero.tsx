@@ -3,13 +3,13 @@
 import { Button } from "../ui/button";
 import { Mail, Phone } from "lucide-react";
 import Link from "next/link";
-import { heroCounts, heroThreats } from "@/constants";
-import { Countup, HeroCarousel, ThreatCard } from ".";
+import { heroThreats } from "@/constants";
+import { HeroCarousel, ThreatCard } from ".";
 import { motion } from "framer-motion";
 
 export default function Hero() {
 	return (
-		<div className="bg-[url('/assets/images/wave.svg')] bg-cover bg-bottom bg-no-repeat shadow rounded-xl border">
+		<div className="bg-[url('/assets/images/wave.svg')] bg-cover bg-bottom bg-no-repeat dark:shadow-gray-900 shadow rounded-xl border">
 			<div className="flex md:flex-row flex-col gap-5 md:p-5 p-4 bg-[url('/assets/images/circle-scatter-2.svg')] bg-cover bg-top bg-no-repeat">
 				<div className="md:block hidden rounded-xl border-4 border-white dark:border-[#020817] bg-white dark:bg-[#020817]">
 					<motion.div
@@ -53,7 +53,8 @@ export default function Hero() {
 								transition={{ delay: 0.15, duration: 0.2 }}
 								className="text-[30px] sm:text-[32px] md:text-[35px] lg:text-[40px] text-slate-600/95 dark:text-slate-100 uppercase font-roboto font-medium tracking-normal leading-[45px] sm:leading-[53px]"
 							>
-								Together, We Build a <span className="text-bluish">Future</span>{" "}
+								Together, We Build a <span className="text-bluish">Future</span>
+								<br />
 								Rooted in Resilience
 							</motion.h1>
 							<motion.p
@@ -78,35 +79,14 @@ export default function Hero() {
 							>
 								<Button
 									asChild
-									className="text-xs rounded-xl px-8 h-[35px] bg-gradient-to-r from-blue-500 to-green-400 hover:from-green-400 hover:to-blue-500 transition-all"
+									className="text-xs shadow-md dark:shadow-gray-900 rounded-xl px-8 h-[35px] bg-gradient-to-r from-blue-500 to-green-400 hover:from-green-400 hover:to-blue-500 transition-all"
 								>
 									<Link href="/donate">Donate Now</Link>
 								</Button>
-								<Link
-									href="/about"
-									className="text-blue-600 text-sm bg-gradient-to-r from-blue-500 to-blue-900 text-transparent bg-clip-text"
-								>
+								<Link href="/about" className="text-sm text-blue-600">
 									Learn More {"->"}{" "}
 								</Link>
 							</motion.div>
-						</div>
-
-						<div className="sm:text-right text-center justify-center flex sm:flex-col flex-row gap-8 mt-10 sm:pl-6">
-							{heroCounts.map((data, index) => (
-								<motion.div
-									initial={{ x: 10, opacity: 0 }}
-									viewport={{ once: true }}
-									whileInView={{ x: 0, opacity: 1 }}
-									transition={{ delay: 0.22 * index }}
-									key={data.title}
-									className="flex flex-col gap-1.5 leading-none"
-								>
-									<h1 className="text-[30px] font-roboto font-medium text-bluish-inverse">
-										<Countup end={data.count} delay={index} />+
-									</h1>
-									<p className="text-[15px]">{data.title}</p>
-								</motion.div>
-							))}
 						</div>
 					</div>
 

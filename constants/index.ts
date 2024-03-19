@@ -106,17 +106,6 @@ export const sideMenuData: MenuItem[] = [
 	},
 ];
 
-interface HeroCounts {
-	title: string;
-	count: number;
-}
-
-export const heroCounts: HeroCounts[] = [
-	{ title: "Donors", count: 100 },
-	{ title: "Resources", count: 450 },
-	{ title: "Communities", count: 20 },
-];
-
 export interface HeroThreats {
 	slug: string;
 	title: string;

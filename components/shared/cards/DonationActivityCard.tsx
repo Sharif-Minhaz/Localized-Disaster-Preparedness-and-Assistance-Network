@@ -9,7 +9,7 @@ interface Props {
 
 export default function DonationActivityCard({ history }: Props) {
 	return (
-		<article className="shadow-md border rounded-xl overflow-hidden">
+		<article className="shadow-md dark:shadow-gray-900 border rounded-xl overflow-hidden">
 			<div className=" w-full lg:max-w-full lg:flex">
 				<div
 					style={{
@@ -22,11 +22,11 @@ export default function DonationActivityCard({ history }: Props) {
 					className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
 					title="Project image"
 				/>
-				<div className="p-4 flex flex-col justify-between leading-normal">
+				<div className="p-4 flex flex-col justify-between leading-normal dark:bg-none bg-[url(/assets/images/pat.png)]">
 					<div className="mb-4">
-						<p className="text-sm text-gray-600 dark:text-gray-200 flex items-center">
+						<p className="text-xs text-gray-600 dark:text-gray-200 flex items-center">
 							<svg
-								className="fill-current text-gray-500 dark:text-gray-300 w-3 h-3 mr-2"
+								className="fill-current text-gray-500 dark:text-gray-300 w-2.5 h-2.5 mr-1.5"
 								xmlns="http://www.w3.org/2000/svg"
 								viewBox="0 0 20 20"
 							>

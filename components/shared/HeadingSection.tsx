@@ -1,4 +1,4 @@
-import { ExternalLink } from "lucide-react";
+import { LayoutGrid } from "lucide-react";
 import Link from "next/link";
 
 interface Props {
@@ -15,8 +15,8 @@ export default function HeadingSection({ text, link, linkText }: Props) {
 			</h1>
 			{link && (
 				<Link href={link}>
-					<span className="flex gap-2 items-center text-blue-500 text-sm">
-						{linkText} <ExternalLink size={16} />
+					<span className="flex gap-2 items-center text-blue-500 text-[14px]">
+						<span>{linkText}</span> <LayoutGrid size={15} />
 					</span>
 				</Link>
 			)}

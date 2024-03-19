@@ -20,7 +20,7 @@ export default async function OrganizationsPage({
 	});
 
 	return (
-		<section className="shadow rounded-xl border">
+		<section className="shadow-md dark:shadow-gray-900 rounded-xl border">
 			<HeadingSection text="Communities" />
 			<div className="px-4 sm:px-5 pt-4 sm:pt-5 flex gap-2">
 				<Search placeholder="Search communities..." />

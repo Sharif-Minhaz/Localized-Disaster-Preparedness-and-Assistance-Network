@@ -20,7 +20,7 @@ export default async function VoluntaryPage() {
 	const applicationInfo = await fetchApplication(userInfo._id);
 
 	return (
-		<div className="shadow rounded-xl border">
+		<div className="shadow-md dark:shadow-gray-900 rounded-xl border">
 			<HeadingSection text="Voluntary" />
 			<div className="p-4">
 				{userInfo.user_type === "admin" && <VolunteerApplications />}

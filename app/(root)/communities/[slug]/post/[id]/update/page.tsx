@@ -33,7 +33,7 @@ export default async function UpdatePostPage({ params }: { params: { id: string;
 	}
 
 	return (
-		<div className="shadow rounded-xl border">
+		<div className="shadow-md dark:shadow-gray-900 rounded-xl border">
 			<HeadingSection text="Update Post" />
 			<div className="px-4 sm:px-5 pt-4 sm:pt-5">
 				<PostForm

@@ -12,7 +12,7 @@ export default async function AuditReportPage({
 	});
 
 	return (
-		<div className="shadow rounded-xl border">
+		<div className="shadow-md dark:shadow-gray-900 rounded-xl border">
 			<HeadingSection text="Audit Reports" />
 			<div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
 				{reports.map((report: IReport) => (

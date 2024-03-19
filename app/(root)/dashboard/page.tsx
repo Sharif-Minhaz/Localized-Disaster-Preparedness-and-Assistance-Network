@@ -39,7 +39,7 @@ export default async function ResourcesPage({ searchParams }: { searchParams: { 
 	]);
 
 	return (
-		<section className="shadow rounded-xl border">
+		<section className="shadow-md dark:shadow-gray-900 rounded-xl border">
 			<HeadingSection text="Dashboard" />
 			<div className="p-5">
 				<AdminCards
@@ -48,12 +48,12 @@ export default async function ResourcesPage({ searchParams }: { searchParams: { 
 					totalCommunities={totalCommunities}
 				/>
 			</div>
-			<div className="border-b" />
+			<div className="border-b shadow-md dark:shadow-gray-900" />
 			<div className="p-5 grid grid-cols-1 sm:grid-cols-3 sm:gap-x-4 gap-y-4">
 				<div className="col-span-2">
 					<DonationBarChart donationBarData={donationBarData} />
 				</div>
-				<div className="col-span-1 h-full shadow p-4 border rounded-xl">
+				<div className="col-span-1 h-full shadow-md dark:shadow-gray-900 p-4 border rounded-xl">
 					<DonationActivityPieChart
 						totalMoneyDonation={totalMoneyDonation}
 						totalResourceDonation={totalResourceDonation}

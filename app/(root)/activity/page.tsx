@@ -26,7 +26,7 @@ export default async function DonationActivity({
 	});
 
 	return (
-		<div className="shadow rounded-xl border">
+		<div className="shadow-md dark:shadow-gray-900 rounded-xl border">
 			<HeadingSection text="Donation Activity" />
 			<div className="px-4 py-4 flex flex-col gap-4">
 				<Search placeholder="Search activity..." />

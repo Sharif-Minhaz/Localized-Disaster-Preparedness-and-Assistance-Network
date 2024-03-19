@@ -16,7 +16,7 @@ export default async function HomePage() {
 	if (user) {
 		userInfo = await fetchUser(user?.id || "");
 	}
-	const { projects, isNext } = await fetchProjects({});
+	const { projects } = await fetchProjects({});
 
 	return (
 		<section className="flex flex-col gap-5">
@@ -27,7 +27,6 @@ export default async function HomePage() {
 				<ShortListedProjects
 					userType={userInfo?.user_type}
 					projects={projects as IProject[]}
-					isNext={isNext}
 				/>
 			</section>
 			<section className="py-3">

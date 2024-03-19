@@ -24,7 +24,7 @@ export default async function CommunityPage({ community }: { community: ICommuni
 
 	return (
 		<>
-			<section className="shadow rounded-xl border">
+			<section className="shadow-md dark:shadow-gray-900 rounded-xl border">
 				<div className="relative bg-[url('/assets/images/group-cover.jpg')] bg-cover w-full h-[250px] rounded-t-xl">
 					<Image
 						src={community.image || "/dummy.png"}

@@ -2,7 +2,6 @@ import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import SearchBar from "./SearchBar";
 import Hero from "./Hero";
-import Countup from "./Countup";
 import HeroCarousel from "./HeroCarousel";
 import ProjectCard from "./cards/ProjectCard";
 import ShortListedProjects from "./ShortListedProjects";
@@ -31,7 +30,7 @@ import ActivityList from "./lists/ActivityList";
 import CommunityForm from "./forms/CommunityForm";
 import CommunityPage from "./CommunityPage";
 import Posts from "./Posts";
-import Post from "./Post";
+import PostCard from "./cards/PostCard";
 import PostForm from "./forms/PostForm";
 import Author from "./Author";
 import Like from "./Like";
@@ -73,7 +72,6 @@ export {
 	SearchBar,
 	Hero,
 	HeadingSection,
-	Countup,
 	HeroCarousel,
 	ProjectCard,
 	ShortListedProjects,
@@ -101,7 +99,7 @@ export {
 	CommunityForm,
 	CommunityPage,
 	Posts,
-	Post,
+	PostCard,
 	PostForm,
 	Author,
 	Like,

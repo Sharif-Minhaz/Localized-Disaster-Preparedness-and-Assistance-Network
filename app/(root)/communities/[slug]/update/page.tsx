@@ -19,7 +19,7 @@ export default async function UpdateCommunityPage({ params }: { params: { slug: 
 	}
 
 	return (
-		<div className="shadow rounded-xl border">
+		<div className="shadow-md dark:shadow-gray-900 rounded-xl border">
 			<HeadingSection text="Update Community" />
 			<div className="px-4 sm:px-5 pt-4 sm:pt-5">
 				<CommunityForm adminId={user.id} community={community} update />

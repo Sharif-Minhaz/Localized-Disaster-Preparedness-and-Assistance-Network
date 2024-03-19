@@ -22,19 +22,10 @@ import {
 } from "@/components/ui/select";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { DataMap } from "@/lib/actions/dashboard.action";
+import { useContext } from "react";
+import { MainContext } from "@/contexts/MainContext";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
-
-const options = {
-	maintainAspectRatio: true,
-	responsive: true,
-	devicePixelRatio: 2,
-	plugins: {
-		legend: {
-			position: "top",
-		},
-	},
-};
 
 const labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -71,6 +62,30 @@ export default function DonationBarChart({ donationBarData }: { donationBarData:
 	const searchParams = useSearchParams();
 	const pathname = usePathname();
 	const { replace } = useRouter();
+	const { theme } = useContext(MainContext);
+
+	const options = {
+		maintainAspectRatio: true,
+		responsive: true,
+		devicePixelRatio: 2,
+		plugins: {
+			legend: {
+				position: "top",
+			},
+		},
+		scales: {
+			x: {
+				grid: {
+					color: theme === "dark" ? "#111827" : "#e2e8f0",
+				},
+			},
+			y: {
+				grid: {
+					color: theme === "dark" ? "#111827" : "#e2e8f0",
+				},
+			},
+		},
+	};
 
 	const handleChange = (value: string) => {
 		const params = new URLSearchParams(searchParams);
@@ -83,7 +98,7 @@ export default function DonationBarChart({ donationBarData }: { donationBarData:
 	initialData.datasets[0].data = Object.values(donationBarData);
 
 	return (
-		<div className="shadow p-4 border rounded-xl">
+		<div className="shadow-md dark:shadow-gray-900 p-4 border rounded-xl">
 			<Select onValueChange={handleChange}>
 				<SelectTrigger className="w-[150px] rounded-tl-xl">
 					<SelectValue placeholder="Select a year" />

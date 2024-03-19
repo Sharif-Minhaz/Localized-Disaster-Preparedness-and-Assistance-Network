@@ -8,11 +8,11 @@ export default async function MyPostPage() {
 
 	return (
 		<>
-			<section className="shadow rounded-xl border">
+			<section className="shadow-md dark:shadow-gray-900 rounded-xl border">
 				<HeadingSection text="My Posts" />
 				<Posts personal clerkId={user.id} />
 			</section>
-			<section className="shadow rounded-xl border mt-5">
+			<section className="shadow-md dark:shadow-gray-900 rounded-xl border mt-5">
 				<HeadingSection text="Bookmarked Posts" />
 				<Posts bookmarked clerkId={user.id} />
 			</section>

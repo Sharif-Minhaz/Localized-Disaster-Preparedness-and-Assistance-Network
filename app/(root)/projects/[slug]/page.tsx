@@ -22,7 +22,7 @@ export default async function SingleProjectPage({ params }: { params: { slug: st
 	return (
 		<div className="flex flex-col lg:flex-row gap-4 sm:gap-5">
 			<div
-				className={`shadow w-full ${
+				className={`shadow-md dark:shadow-gray-900 w-full ${
 					project.completed ? "" : "lg:w-[640px]"
 				} flex-grow rounded-xl border`}
 			>
@@ -35,7 +35,7 @@ export default async function SingleProjectPage({ params }: { params: { slug: st
 				</Suspense>
 			</div>
 			<div className="relative flex-grow">
-				<div className="shadow rounded-xl border w-full p-4">
+				<div className="shadow-md dark:shadow-gray-900 rounded-xl border w-full p-4">
 					<DonateSideBox project={project} />
 				</div>
 			</div>

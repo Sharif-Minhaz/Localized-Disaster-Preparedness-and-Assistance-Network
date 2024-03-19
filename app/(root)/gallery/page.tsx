@@ -29,10 +29,10 @@ export default async function GalleryPage() {
 	const isAdmin = userInfo.user_type === "admin";
 
 	return (
-		<section className="shadow rounded-xl border">
+		<section className="shadow-md dark:shadow-gray-900 rounded-xl border">
 			<HeadingSection text="Gallery" />
 			<div className="p-4">
-				<div className="max-w-full md:max-w-[700px] mx-auto p-4 border shadow rounded-xl">
+				<div className="max-w-full md:max-w-[700px] mx-auto p-4 border shadow-md dark:shadow-gray-900 rounded-xl">
 					<ImageGallery images={images} />
 				</div>
 			</div>

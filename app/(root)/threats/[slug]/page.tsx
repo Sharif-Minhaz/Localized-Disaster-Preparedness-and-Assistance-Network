@@ -19,7 +19,7 @@ export default function SingleTreatPage({ params }: { params: { slug: string } }
 
 	return (
 		<section>
-			<section className="shadow rounded-xl border">
+			<section className="shadow-md dark:shadow-gray-900 rounded-xl border">
 				<div className="sm:p-5 p-4 flex">
 					<div className="h-[450px] relative overflow-hidden">
 						<Image
@@ -50,7 +50,10 @@ export default function SingleTreatPage({ params }: { params: { slug: string } }
 					</div>
 				</div>
 			</section>
-			<section className="mt-4 sm:mt-5 shadow rounded-xl border" id="more">
+			<section
+				className="mt-4 sm:mt-5 shadow-md dark:shadow-gray-900 rounded-xl border"
+				id="more"
+			>
 				<div className="sm:p-5 p-4 flex flex-col gap-3">
 					<p>{threat?.details}</p>
 					<AwarenessSection threat={threat} type="before" />
