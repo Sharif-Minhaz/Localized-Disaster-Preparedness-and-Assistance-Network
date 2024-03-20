@@ -1,15 +1,14 @@
-import { currentUser } from "@clerk/nextjs";
-import { Sidebar } from ".";
-import { fetchUser } from "@/lib/actions/user.actions";
-import { IUser } from "@/lib/models/UserModel";
+"use client";
 
-export default async function SidebarHOC() {
-	const user = await currentUser();
-	if (user) {
-		const userInfo: IUser | null = await fetchUser(user.id);
-		if (userInfo && userInfo.user_type === "admin") {
-			return <Sidebar isAdmin />;
-		}
+import { useUser } from "@clerk/nextjs";
+import { Sidebar } from ".";
+
+export default function SidebarHOC() {
+	const { user } = useUser();
+	const userType = user?.publicMetadata?.userType || "";
+
+	if (userType === "admin") {
+		return <Sidebar isAdmin />;
 	}
 
 	return <Sidebar />;

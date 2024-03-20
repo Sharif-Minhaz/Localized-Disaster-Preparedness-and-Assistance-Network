@@ -77,6 +77,7 @@ export const POST = async (request: Request) => {
 				await clerkClient.users.updateUserMetadata(id.toString(), {
 					publicMetadata: {
 						userId: newUser._id,
+						userType: newUser.user_type,
 					},
 				});
 			}
