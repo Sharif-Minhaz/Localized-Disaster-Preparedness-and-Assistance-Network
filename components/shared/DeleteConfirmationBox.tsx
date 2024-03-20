@@ -17,7 +17,11 @@ export default function DeleteConfirmationBox({
 				description="This action cannot be undone. This will permanently delete this item."
 				action={action}
 			>
-				<Trash2 className={`text-red-500 ${iconSize}`} />
+				<Trash2
+					aria-label="Delete item"
+					role="button"
+					className={`text-red-500 ${iconSize}`}
+				/>
 			</ConfirmationDeleteBox>
 		</div>
 	);

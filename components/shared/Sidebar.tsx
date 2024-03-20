@@ -5,7 +5,7 @@ import { MainContext } from "@/contexts/MainContext";
 import { dictionary } from "@/locales/contents";
 import { SignOutButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import { Switch } from "../ui/switch";
-import { LogOut, Moon, AlignRight } from "lucide-react";
+import { LogOut, Moon, AlignRight, Sun } from "lucide-react";
 import { useContext } from "react";
 import { Label } from "../ui/label";
 import Link from "next/link";
@@ -49,13 +49,13 @@ export default function Sidebar({ isAdmin }: { isAdmin?: boolean }) {
 				<div className="flex flex-col dark:bg-black/75 bg-[#ffffffe0] pb-5">
 					<div className="px-4 pt-5 pb-3">
 						<div className="flex gap-3">
-							<Link href="/">
+							<Link aria-label="return to home" href="/">
 								<Image
 									draggable={false}
 									src="/assets/images/brand.png"
 									width={45}
 									height={45}
-									alt="brand"
+									alt="return to home"
 								/>
 							</Link>
 							<div className="flex flex-col gap-0">
@@ -124,13 +124,16 @@ export default function Sidebar({ isAdmin }: { isAdmin?: boolean }) {
 							</div>
 						</SignedIn>
 						<div className="flex gap-2 px-4 py-3 mb-10 border dark:bg-slate-900 bg-slate-100 rounded-xl">
-							<Moon />
+							{theme === "dark" ? <Moon /> : <Sun />}
 							<div className="flex items-center justify-between space-x-2 w-full">
 								<Label className="cursor-pointer" htmlFor="dark-mode">
-									{dictionary[lang]?.["darkMode"]}
+									{dictionary[lang]?.["changeMode"]}
 								</Label>
 								<Switch
+									aria-label="change mode"
+									role="switch"
 									id="dark-mode"
+									aria-checked={theme === "dark"}
 									checked={theme === "dark"}
 									onCheckedChange={changeTheme}
 								/>

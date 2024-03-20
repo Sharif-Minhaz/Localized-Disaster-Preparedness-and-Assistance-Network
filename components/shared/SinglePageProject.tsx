@@ -32,7 +32,10 @@ export default async function SinglePageProject({
 					/>
 					{userType === "admin" && (
 						<div className="absolute right-3 items-center top-3 flex flex-col gap-4 rounded-xl bg-white p-3 shadow-sm transition-all">
-							<Link href={`/projects/${project.slug}/update`}>
+							<Link
+								aria-label="update the project"
+								href={`/projects/${project.slug}/update`}
+							>
 								<Pencil size={17} className="text-purple-400" />
 							</Link>
 							<ManageProjectButtons

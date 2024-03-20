@@ -8,6 +8,7 @@ export default function ContactLocation() {
 				allowFullScreen={true}
 				loading="lazy"
 				referrerPolicy="no-referrer-when-downgrade"
+				title="Our organization location"
 			></iframe>
 		</div>
 	);

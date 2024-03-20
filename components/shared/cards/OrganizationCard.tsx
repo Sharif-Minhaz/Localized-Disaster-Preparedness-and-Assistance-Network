@@ -37,8 +37,8 @@ export default function OrganizationCard({
 						/>
 					</div>
 					<div>
-						<h3 className="text-lg line-clamp-1">{name}</h3>
-						<h5 className="text-sm">Visit to join us</h5>
+						<h1 className="text-lg line-clamp-1">{name}</h1>
+						<p className="text-sm">Visit to join us</p>
 					</div>
 				</div>
 				<Link href={`/communities/${slug}`}>
@@ -60,7 +60,10 @@ export default function OrganizationCard({
 					</div>
 					{isUserCommunityCreator && (
 						<div className="flex gap-2 rounded-xl bg-white shadow px-2 py-1 transition-all">
-							<Link href={`/communities/${slug}/update`}>
+							<Link
+								aria-label="update the community"
+								href={`/communities/${slug}/update`}
+							>
 								<Pencil className="text-purple-400 w-5 h-5" />
 							</Link>
 							<DeleteConfirmationBox action={deleteProjectWithSlug} />

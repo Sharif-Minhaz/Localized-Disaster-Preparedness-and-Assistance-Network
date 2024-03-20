@@ -45,7 +45,10 @@ export default function PostActionButtons({
 		<>
 			{userId === createdBy || userType === "admin" ? (
 				<div className="border px-2.5 py-1.5 rounded-xl flex items-center gap-2">
-					<Link href={`/communities/${communitySlug}/post/${postId}/update`}>
+					<Link
+						aria-label="update community"
+						href={`/communities/${communitySlug}/post/${postId}/update`}
+					>
 						<Pencil color="#4485ef" size={18} />
 					</Link>
 					<DeleteConfirmationBox action={deletePostWithId} iconSize="size-5" />

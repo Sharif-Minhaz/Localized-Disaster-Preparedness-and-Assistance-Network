@@ -31,7 +31,11 @@ export default function Navbar() {
 			<div className="flex gap-4 md:gap-5">
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
-						<span className="border bg-bluish-inverse text-white rounded-full inline-flex p-2 cursor-pointer">
+						<span
+							aria-label="Open language selection"
+							role="button"
+							className="border bg-bluish-inverse text-white rounded-full inline-flex p-2 cursor-pointer"
+						>
 							<Languages size={18} />
 						</span>
 					</DropdownMenuTrigger>

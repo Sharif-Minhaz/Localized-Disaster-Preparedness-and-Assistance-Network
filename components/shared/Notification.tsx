@@ -30,7 +30,11 @@ export default function Notification() {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger className="flex items-center">
-				<span className="inline-flex relative">
+				<span
+					aria-label="Open notification selection"
+					role="button"
+					className="inline-flex relative"
+				>
 					<Bell />
 					{notifications.length > 0 && (
 						<span className="absolute inline-flex items-center justify-center w-5 h-5 text-[9px] font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">

@@ -14,7 +14,7 @@ interface DictionaryEntry {
 	activity: string;
 	contactUs: string;
 	signout: string;
-	darkMode: string;
+	changeMode: string;
 }
 
 export const dictionary: Record<string, DictionaryEntry> = {
@@ -34,7 +34,7 @@ export const dictionary: Record<string, DictionaryEntry> = {
 		activity: "Activity",
 		contactUs: "Contact Us",
 		signout: "Sign out",
-		darkMode: "Dark Mode",
+		changeMode: "Change Mode",
 	},
 	bn: {
 		dashboard: "ড্যাশবোর্ড",
@@ -52,6 +52,6 @@ export const dictionary: Record<string, DictionaryEntry> = {
 		activity: "কর্মকাণ্ড",
 		contactUs: "যোগাযোগ",
 		signout: "লগআউট",
-		darkMode: "কালো থিম",
+		changeMode: "মোড পরিবর্তন",
 	},
 };

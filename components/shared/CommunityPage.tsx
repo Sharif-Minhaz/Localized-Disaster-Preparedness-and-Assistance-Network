@@ -87,7 +87,10 @@ export default async function CommunityPage({ community }: { community: ICommuni
 
 						{/* is the current user is admin or the creator of the community then this action will be visible */}
 						{(isAuthor || isAdmin) && (
-							<Link href={`/communities/${community.slug}/update`}>
+							<Link
+								aria-label="update community"
+								href={`/communities/${community.slug}/update`}
+							>
 								<Button className="flex gap-2 rounded-lg bg-slate-200 hover:bg-[#d8dadf] text-[#1c1e21]">
 									<Pencil size={15} />
 									<span>
