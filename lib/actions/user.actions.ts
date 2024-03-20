@@ -78,3 +78,14 @@ export async function deleteUser(clerkId: string) {
 		throw new Error(error.message);
 	}
 }
+
+export async function getAllVolunteers() {
+	try {
+		await connectToDB();
+		const volunteers = await User.find({ user_type: "volunteer" }).lean();
+		return convertToPlainObj(volunteers);
+	} catch (error: any) {
+		console.error(error);
+		throw new Error(error.message);
+	}
+}

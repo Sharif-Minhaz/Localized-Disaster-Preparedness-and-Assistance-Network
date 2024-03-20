@@ -147,7 +147,11 @@ export default function ImageGalleryForm({ userId }: { userId: string }) {
 					)}
 				/>
 				<div className="pb-5 space-x-3">
-					<Button disabled={form.formState.isSubmitting} type="submit">
+					<Button
+						className="shadow-md dark:shadow-gray-900"
+						disabled={form.formState.isSubmitting}
+						type="submit"
+					>
 						<ImageUp size={17} className="mr-2" /> Upload
 					</Button>
 					<BackButton />

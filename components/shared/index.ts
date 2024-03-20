@@ -65,6 +65,12 @@ import ProjectCompletionForm from "./forms/ProjectCompletionForm";
 import ReportPDF from "./ReportPDF";
 import AuditReport from "./AuditReport";
 import Pagination from "./Pagination";
+import TeamSection from "./TeamSection";
+import TeamCard from "./cards/TeamCard";
+import ContactAddress from "./ContactAddress";
+import Volunteers from "./Volunteers";
+import VolunteerCard from "./cards/VolunteerCard";
+import AboutOrganization from "./AboutOrganization";
 
 export {
 	Navbar,
@@ -134,4 +140,10 @@ export {
 	ReportPDF,
 	AuditReport,
 	Pagination,
+	TeamSection,
+	TeamCard,
+	ContactAddress,
+	Volunteers,
+	VolunteerCard,
+	AboutOrganization,
 };

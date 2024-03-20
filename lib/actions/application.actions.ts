@@ -106,6 +106,7 @@ export async function approveApplication(applicationId: string) {
 		}
 
 		revalidatePath("/voluntary");
+		revalidatePath("/about");
 		return convertToPlainObj(application);
 	} catch (error) {
 		console.error("Error approving application:", error);
