@@ -59,8 +59,10 @@ export default function Sidebar({ isAdmin }: { isAdmin?: boolean }) {
 								/>
 							</Link>
 							<div className="flex flex-col gap-0">
-								<h1>LDPAN</h1>
-								<small className="text-xs">We&apos;re with you</small>
+								<h1 className="font-montserrat font-bold text-slate-600 dark:text-slate-200">
+									LDPAN
+								</h1>
+								<small className="text-[11px]">We&apos;re with you</small>
 							</div>
 						</div>
 					</div>
@@ -97,13 +99,13 @@ export default function Sidebar({ isAdmin }: { isAdmin?: boolean }) {
 								>
 									<Link
 										href={menu.url}
-										className={`flex px-4 py-3 gap-2 rounded-[8px] dark:text-white ${
+										className={`flex items-center px-4 py-3 gap-2 rounded-[8px] dark:text-white ${
 											isActive
 												? "text-slate-100 bg-[#4485ef] shadow-md"
 												: "text-black"
 										}`}
 									>
-										<Icon />
+										<Icon size={20} />
 										{/* @ts-ignore */}
 										<span>{selectedLangEntry?.[menu?.title]}</span>
 									</Link>
@@ -116,15 +118,15 @@ export default function Sidebar({ isAdmin }: { isAdmin?: boolean }) {
 						<SignedIn>
 							<div className="mb-3">
 								<SignOutButton>
-									<div className="flex cursor-pointer px-4 py-3 gap-2">
-										<LogOut />
+									<div className="flex items-center cursor-pointer px-4 py-3 gap-2">
+										<LogOut size={20} />
 										<span>{dictionary[lang]?.["signout"]}</span>
 									</div>
 								</SignOutButton>
 							</div>
 						</SignedIn>
-						<div className="flex gap-2 px-4 py-3 mb-10 border dark:bg-slate-900 bg-slate-100 rounded-xl">
-							{theme === "dark" ? <Moon /> : <Sun />}
+						<div className="flex items-center gap-2 px-4 py-3 mb-10 border dark:bg-slate-900 bg-slate-100 rounded-xl">
+							{theme === "dark" ? <Moon size={20} /> : <Sun size={20} />}
 							<div className="flex items-center justify-between space-x-2 w-full">
 								<Label className="cursor-pointer" htmlFor="dark-mode">
 									{dictionary[lang]?.["changeMode"]}

@@ -38,7 +38,7 @@ export default function ThreatCard({ data, index }: Props) {
 					/>
 				</div>
 				<div className="flex justify-center flex-col gap-1.5">
-					<h1 className="font-roboto font-medium">{data.title}</h1>
+					<h1 className="font-medium">{data.title}</h1>
 					<p className="text-[13px] dark:text-slate-300 text-slate-800">
 						{data.description}
 					</p>

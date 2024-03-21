@@ -6,20 +6,20 @@ import Link from "next/link";
 export default function TeamCard({ member }: { member: ITeamData }) {
 	return (
 		<article className="border shadow-md dark:shadow-gray-900 rounded-xl p-4 bg-[url('/assets/images/pat.png')]">
-			<div className="relative flex justify-center">
+			<div className="flex justify-center">
 				<Image
 					width={200}
 					height={200}
 					loading="lazy"
 					src={member.image}
 					alt="card image"
-					className="rounded-full object-cover ring-4 ring-blue-500 h-[200px]"
+					className="rounded-full object-cover ring-4 ring-blue-500 lg:w-[180px] md:w-[150px] w-[200px] lg:h-[180px] md:h-[150px] h-[200px]"
 				/>
 			</div>
 
 			<div className="text-center">
 				<h1 className="text-xl mt-4">{member.name}</h1>
-				<p className="text-blue-700">{member.title}</p>
+				<p className="font-montserrat text-blue-700">{member.title}</p>
 				<p className="my-5 text-[15px]">
 					I&apos;m a skilled MERN stack developer with expertise in{" "}
 					<span className="bg-green-600 px-2 py-0.5 text-[11px] text-white rounded-full">

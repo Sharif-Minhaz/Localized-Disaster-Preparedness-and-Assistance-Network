@@ -50,7 +50,7 @@ export default function ProjectCard({
 					{heading}
 				</h2>
 				{!completed ? (
-					<div className="flex gap-2">
+					<div className="font-montserrat flex gap-2">
 						<span className="text-[12px] font-semibold leading-[20px] dark:shadow-md dark:shadow-gray-700 w-min rounded-full bg-green-100 px-4 py-1 text-green-500">
 							OPEN
 						</span>
@@ -59,7 +59,7 @@ export default function ProjectCard({
 						</span>
 					</div>
 				) : (
-					<span className="text-[12px] font-semibold dark:shadow-md dark:shadow-gray-700 leading-[20px] w-min rounded-full bg-gray-200 px-4 py-1 text-gray-500 line-clamp-1">
+					<span className="font-montserrat text-[12px] font-semibold dark:shadow-md dark:shadow-gray-700 leading-[20px] w-min rounded-full bg-gray-200 px-4 py-1 text-gray-500 line-clamp-1">
 						CLOSED
 					</span>
 				)}
@@ -68,7 +68,7 @@ export default function ProjectCard({
 				</p>
 				<div className="mt-2">
 					<Link href={`/projects/${slug}`}>
-						<p className="inline-flex gap-1 text-[14px] items-center">
+						<p className="font-montserrat inline-flex gap-1 text-[14px] items-center">
 							<span>More Info...</span>
 							<ChevronRight size={14} />
 						</p>

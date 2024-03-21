@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { MainContextProvider } from "@/contexts/MainContext";
 import ClerkThemeProvider from "@/lib/providers/ClerkThemeProvider";
 import { Suspense } from "react";
 import MainPageFallback from "@/components/shared/MainPageFallback";
 import { Toaster } from "@/components/ui/toaster";
-
-const inter = Inter({ subsets: ["latin"] });
+import { inter, montserrat } from "@/fonts";
 
 export const metadata: Metadata = {
 	title: "LDPAN",
@@ -18,7 +16,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en" className="scroll-smooth">
-			<body className={`${inter.className}`}>
+			<body className={`${inter.variable} ${montserrat.variable} font-inter`}>
 				<MainContextProvider>
 					<Suspense fallback={<MainPageFallback />}>
 						<ClerkThemeProvider>{children}</ClerkThemeProvider>

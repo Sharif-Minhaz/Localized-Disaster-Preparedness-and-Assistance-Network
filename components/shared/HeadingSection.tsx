@@ -9,8 +9,8 @@ interface Props {
 
 export default function HeadingSection({ text, link, linkText }: Props) {
 	return (
-		<div className="flex items-center font-roboto justify-between gap-2 p-4 sm:p-5 border-b-2 border-b-slate-100 dark:border-b-slate-800/90">
-			<h1 className="font-semibold text-slate-700 dark:text-white text-[22px] uppercase">
+		<div className="flex items-center justify-between gap-2 p-4 sm:p-5 border-b-2 border-b-slate-100 dark:border-b-slate-800/90">
+			<h1 className="font-montserrat font-semibold text-slate-700 dark:text-white text-[22px] uppercase">
 				{text}
 			</h1>
 			{link && (

@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "../ui/button";
-import { Mail, Phone } from "lucide-react";
+import { ArrowRight, Mail, Phone } from "lucide-react";
 import Link from "next/link";
 import { heroThreats } from "@/constants";
 import { HeroCarousel, ThreatCard } from ".";
@@ -51,11 +51,11 @@ export default function Hero() {
 								viewport={{ once: true }}
 								whileInView={{ y: 0, opacity: 1 }}
 								transition={{ delay: 0.15, duration: 0.2 }}
-								className="text-[30px] sm:text-[32px] md:text-[35px] lg:text-[40px] text-slate-600/95 dark:text-slate-100 uppercase font-roboto font-medium tracking-normal leading-[45px] sm:leading-[53px]"
+								className={`font-montserrat text-[30px] sm:text-[32px] md:text-[35px] lg:text-[40px] text-slate-600/95 dark:text-slate-100 font-medium tracking-normal leading-[40px] sm:leading-[50px]`}
 							>
-								Together, We Build a <span className="text-bluish">Future</span>
+								Together, we build a <span className="text-bluish">future</span>
 								<br />
-								Rooted in Resilience
+								rooted in resilience
 							</motion.h1>
 							<motion.p
 								initial={{ opacity: 0 }}
@@ -81,10 +81,15 @@ export default function Hero() {
 									asChild
 									className="text-xs shadow-md dark:shadow-gray-900 rounded-xl px-8 h-[35px] bg-gradient-to-r from-blue-500 to-green-400 hover:from-green-400 hover:to-blue-500 transition-all"
 								>
-									<Link href="/donate">Donate Now</Link>
+									<Link className="font-montserrat" href="/donate">
+										Donate Now
+									</Link>
 								</Button>
-								<Link href="/about" className="text-sm text-blue-600">
-									Learn More {"->"}{" "}
+								<Link
+									href="/about"
+									className="font-montserrat flex items-center gap-1 text-sm text-blue-600"
+								>
+									Learn More <ArrowRight size={14} />
 								</Link>
 							</motion.div>
 						</div>
@@ -97,7 +102,7 @@ export default function Hero() {
 							viewport={{ once: true }}
 							whileInView={{ y: 0, opacity: 1 }}
 							transition={{ delay: 0.1 }}
-							className="uppercase font-roboto font-medium mb-4"
+							className="uppercase font-medium mb-4"
 						>
 							Threats
 						</motion.h1>

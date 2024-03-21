@@ -74,7 +74,8 @@ module.exports = {
 				"accordion-up": "accordion-up 0.2s ease-out",
 			},
 			fontFamily: {
-				roboto: "'Roboto', sans-serif",
+				inter: ["var(--font-inter)"],
+				montserrat: ["var(--font-montserrat)"],
 			},
 		},
 	},

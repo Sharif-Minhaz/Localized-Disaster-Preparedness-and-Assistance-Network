@@ -59,7 +59,7 @@ export default function AboutOrganization() {
 					Dedicated to building a resilient future, our focus is on{" "}
 					<span className="text-bluish-inverse font-bold">Bangladesh</span>.
 				</h1>
-				<p className="first-letter:text-5xl first-letter:float-left first-letter:mr-2 first-letter:font-semibold">
+				<p className="first-letter:text-5xl first-letter:font-montserrat first-letter:float-left first-letter:mr-2 first-letter:font-semibold">
 					At the heart of our organization is a commitment to rapid and effective disaster
 					response. We understand the urgency of providing immediate aid, and through your
 					generous donations, we are able to mobilize quickly, offering vital resources,
