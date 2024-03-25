@@ -1,6 +1,6 @@
 import { InfoIcon } from "lucide-react";
 import Image from "next/image";
-import circleImg from "@/public/assets/images/circle.png";
+import circleImg from "@/public/images/circle.png";
 import { IInfo } from "./AdminCards";
 
 export default function InfoCard({ data }: { data: IInfo }) {

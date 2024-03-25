@@ -9,8 +9,8 @@ import { motion } from "framer-motion";
 
 export default function Hero() {
 	return (
-		<div className="bg-[url('/assets/images/wave.svg')] bg-cover bg-bottom bg-no-repeat dark:shadow-gray-900 shadow rounded-xl border">
-			<div className="flex md:flex-row flex-col gap-5 md:p-5 p-4 bg-[url('/assets/images/circle-scatter-2.svg')] bg-cover bg-top bg-no-repeat">
+		<div className="bg-[url('/images/wave.svg')] bg-cover bg-bottom bg-no-repeat dark:shadow-gray-900 shadow rounded-xl border">
+			<div className="flex md:flex-row flex-col gap-5 md:p-5 p-4 bg-[url('/images/circle-scatter-2.svg')] bg-cover bg-top bg-no-repeat">
 				<div className="md:block hidden rounded-xl border-4 border-white dark:border-[#020817] bg-white dark:bg-[#020817]">
 					<motion.div
 						initial={{ opacity: 0 }}
@@ -89,7 +89,7 @@ export default function Hero() {
 									href="/about"
 									className="font-montserrat flex items-center gap-1 text-sm text-blue-600"
 								>
-									Learn More <ArrowRight size={14} />
+									View More <ArrowRight size={14} />
 								</Link>
 							</motion.div>
 						</div>

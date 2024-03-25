@@ -28,7 +28,7 @@ export default function PostCard({
 					alt="post image"
 				/>
 			</div>
-			<div className="bg-cover dark:bg-none bg-[url(/assets/images/card-pat.png)]">
+			<div className="bg-cover dark:bg-none bg-[url(/images/card-pat.png)]">
 				<div className="p-3">
 					<Author imgSize={40} userInfo={post.createdBy} creationDate={post.createdAt} />
 				</div>

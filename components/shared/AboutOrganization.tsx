@@ -11,12 +11,12 @@ export default function AboutOrganization() {
 				viewport={{ once: true }}
 				whileInView={{ opacity: 1 }}
 				transition={{ delay: 0.3, duration: 0.2 }}
-				className="hidden sm:flex bg-[url(/assets/images/circle-scatter-about.svg)] bg-[right_10%] bg-no-repeat"
+				className="hidden sm:flex bg-[url(/images/circle-scatter-about.svg)] bg-[right_10%] bg-no-repeat"
 			>
 				<div className="flex flex-col justify-center">
 					<div className="w-[170px] h-[170px] relative">
 						<Image
-							src="/assets/images/about-1.png"
+							src="/images/about-1.png"
 							quality={100}
 							sizes="100vw"
 							fill
@@ -26,7 +26,7 @@ export default function AboutOrganization() {
 					</div>
 					<div className="w-[170px] h-[170px] relative">
 						<Image
-							src="/assets/images/about-3.png"
+							src="/images/about-3.png"
 							quality={100}
 							sizes="100vw"
 							fill
@@ -38,7 +38,7 @@ export default function AboutOrganization() {
 				<div className="flex items-center">
 					<div className="w-[170px] h-[170px] mt-7 relative">
 						<Image
-							src="/assets/images/about-2.png"
+							src="/images/about-2.png"
 							quality={100}
 							sizes="100vw"
 							fill

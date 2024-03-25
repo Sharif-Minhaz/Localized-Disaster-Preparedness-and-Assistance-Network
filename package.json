@@ -12,6 +12,7 @@
 		"@ag-media/react-pdf-table": "^1.0.1",
 		"@clerk/nextjs": "^4.29.9",
 		"@clerk/themes": "^1.7.10",
+		"@ducanh2912/next-pwa": "^10.2.5",
 		"@emailjs/browser": "^4.3.3",
 		"@hookform/resolvers": "^3.3.4",
 		"@radix-ui/react-alert-dialog": "^1.0.5",

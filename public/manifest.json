@@ -1,0 +1,87 @@
+{
+	"id": "/",
+	"name": "Localized Disaster Preparedness & Analysis Network",
+	"short_name": "LDPAN",
+	"description": "A localized web-based platform that serves as a disaster preparedness and assistance network. This platform will connect communities, local authorities, and volunteers, facilitating the sharing of critical information, resources, and assistance during emergencies.",
+	"icons": [
+		{
+			"src": "/icons/brand-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "maskable"
+		},
+		{
+			"src": "/icons/brand-384x384.png",
+			"sizes": "384x384",
+			"type": "image/png"
+		},
+		{
+			"src": "/icons/brand-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	],
+	"theme_color": "#FFFFFF",
+	"background_color": "#FFFFFF",
+	"start_url": "/",
+	"display": "standalone",
+	"orientation": "portrait",
+	"screenshots": [
+		{
+			"src": "/screenshots/home.webp",
+			"sizes": "1250x612",
+			"type": "image/webp",
+			"form_factor": "wide",
+			"label": "Wonder Widgets"
+		},
+		{
+			"src": "/screenshots/ss-home-sm.webp",
+			"sizes": "350x534",
+			"type": "image/webp",
+			"form_factor": "narrow",
+			"label": "Wonder Widgets"
+		},
+		{
+			"src": "/screenshots/dashboard.webp",
+			"sizes": "1250x612",
+			"type": "image/webp",
+			"form_factor": "wide",
+			"label": "Wonder Widgets"
+		},
+		{
+			"src": "/screenshots/ss-weather-sm.webp",
+			"sizes": "350x534",
+			"type": "image/webp",
+			"form_factor": "narrow",
+			"label": "Wonder Widgets"
+		},
+		{
+			"src": "/screenshots/communities.webp",
+			"sizes": "1250x612",
+			"type": "image/webp",
+			"form_factor": "wide",
+			"label": "Wonder Widgets"
+		},
+		{
+			"src": "/screenshots/community.webp",
+			"sizes": "1250x612",
+			"type": "image/webp",
+			"form_factor": "wide",
+			"label": "Wonder Widgets"
+		},
+		{
+			"src": "/screenshots/ss-communities-sm.webp",
+			"sizes": "350x534",
+			"type": "image/webp",
+			"form_factor": "narrow",
+			"label": "Wonder Widgets"
+		},
+		{
+			"src": "/screenshots/audit.webp",
+			"sizes": "1250x612",
+			"type": "image/webp",
+			"form_factor": "wide",
+			"label": "Wonder Widgets"
+		}
+	]
+}

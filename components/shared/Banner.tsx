@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 export default function Banner() {
 	return (
-		<div className="full-bleed banner-bg bg-[url('/assets/images/pat.png')] bg-center h-56 sm:h-52 flex justify-center items-center gap-5 sm:gap-10">
+		<div className="full-bleed banner-bg bg-[url('/images/pat.png')] bg-center h-56 sm:h-52 flex justify-center items-center gap-5 sm:gap-10">
 			<motion.div
 				initial={{ opacity: 0, y: -100 }}
 				viewport={{ once: true }}
@@ -32,7 +32,7 @@ export default function Banner() {
 			>
 				<Image
 					draggable={false}
-					src="/assets/images/banner-img.png"
+					src="/images/banner-img.png"
 					width={170}
 					height={170}
 					alt="image"

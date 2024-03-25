@@ -42,7 +42,7 @@ export default function Sidebar({ isAdmin }: { isAdmin?: boolean }) {
 	return (
 		<OutsideClickHandler onOutsideClick={closeSidebar}>
 			<aside
-				className={`fixed bg-cover bg-[url(/assets/images/sidebar-bg.webp)] ${
+				className={`fixed bg-cover bg-[url(/images/sidebar-bg.webp)] ${
 					sidebarOpen ? "left-0" : "lg:left-0 -left-[280px]"
 				} transition-all top-0 z-30 flex h-screen w-[255px] flex-col justify-between overflow-auto sm:overflow-hidden sm:hover:overflow-auto border-r`}
 			>
@@ -52,7 +52,7 @@ export default function Sidebar({ isAdmin }: { isAdmin?: boolean }) {
 							<Link aria-label="return to home" href="/">
 								<Image
 									draggable={false}
-									src="/assets/images/brand.png"
+									src="/images/brand.png"
 									width={45}
 									height={45}
 									alt="return to home"

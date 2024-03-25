@@ -47,7 +47,7 @@ export default function OrganizationCard({
 					</Button>
 				</Link>
 			</div>
-			<div className="bg-cover dark:bg-none bg-[url(/assets/images/card-pat.png)]">
+			<div className="bg-cover dark:bg-none bg-[url(/images/card-pat.png)]">
 				<div className="px-4">
 					<p className="line-clamp-4 my-4 text-sm">{bio}</p>
 				</div>

@@ -45,7 +45,7 @@ export default function ProjectCard({
 					</div>
 				)}
 			</div>
-			<div className="flex min-h-[200px] flex-col gap-3 p-4 md:gap-3 bg-cover dark:bg-none bg-[url(/assets/images/card-pat.png)]">
+			<div className="flex min-h-[200px] flex-col gap-3 p-4 md:gap-3 bg-cover dark:bg-none bg-[url(/images/card-pat.png)]">
 				<h2 className="text-[16px] dark:text-white font-medium leading-[24px] line-clamp-2 flex-1 text-black">
 					{heading}
 				</h2>

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function TeamCard({ member }: { member: ITeamData }) {
 	return (
-		<article className="border shadow-md dark:shadow-gray-900 rounded-xl p-4 bg-[url('/assets/images/pat.png')]">
+		<article className="border shadow-md dark:shadow-gray-900 rounded-xl p-4 bg-[url('/images/pat.png')]">
 			<div className="flex justify-center">
 				<Image
 					width={200}

@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function VolunteerCard({ volunteer }: { volunteer: IUser }) {
 	return (
-		<div className="mb-4 lg:mb-0 bg-[url(/assets/images/pat.png)]">
+		<div className="mb-4 lg:mb-0 bg-[url(/images/pat.png)]">
 			<div className="relative block rounded-lg p-4 shadow-lg dark:shadow-slate-900 border">
 				<div className="flex-col lg:flex-row items-center lg:justify-center flex">
 					<div className="w-full shrink-0 flex justify-center grow-0 basis-auto lg:w-5/12 lg:pr-4">

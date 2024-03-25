@@ -15,14 +15,20 @@ import {
 	LineChart,
 } from "lucide-react";
 
-import projectImage from "@/public/assets/images/project-1.jpg";
-import threatCyclone from "@/public/assets/images/threat-cyclone.jpg";
-import threatEarthquake from "@/public/assets/images/threat-earthquake.jpg";
-import threatFlood from "@/public/assets/images/threat-flood.jpg";
-import threatRiverbankErosion from "@/public/assets/images/threat-river-bank-erosion.jpg";
-import threatDrought from "@/public/assets/images/threat-drought.jpg";
-import threatTornado from "@/public/assets/images/threat-tornado.jpg";
-import threatLandslide from "@/public/assets/images/threat-landslide.jpg";
+import projectImage from "@/public/images/project-1.jpg";
+import threatCyclone from "@/public/images/threat-cyclone.jpg";
+import threatEarthquake from "@/public/images/threat-earthquake.jpg";
+import threatFlood from "@/public/images/threat-flood.jpg";
+import threatRiverbankErosion from "@/public/images/threat-river-bank-erosion.jpg";
+import threatDrought from "@/public/images/threat-drought.jpg";
+import threatTornado from "@/public/images/threat-tornado.jpg";
+import threatLandslide from "@/public/images/threat-landslide.jpg";
+
+export const APP_NAME = "Localized Disaster Preparedness & Assistance Network";
+export const APP_DEFAULT_TITLE = "LDPAN";
+export const APP_TITLE_TEMPLATE = "%s - LDPAN";
+export const APP_DESCRIPTION =
+	"A localized web-based platform that serves as a disaster preparedness and assistance network. This platform will connect communities, local authorities, and volunteers, facilitating the sharing of critical information, resources, and assistance during emergencies.";
 
 interface MenuItem {
 	title: string;
@@ -122,7 +128,7 @@ export const heroThreats: HeroThreats[] = [
 	{
 		title: "Cyclone",
 		description: "Rotating storm, powerful winds",
-		img: "/assets/images/cyclone.jpeg",
+		img: "/images/cyclone.jpeg",
 		coverImg: threatCyclone,
 		slug: "cyclone",
 		before: [
@@ -167,7 +173,7 @@ export const heroThreats: HeroThreats[] = [
 	{
 		title: "Earthquake",
 		description: "Sudden ground shaking event",
-		img: "/assets/images/earthquake.jpeg",
+		img: "/images/earthquake.jpeg",
 		coverImg: threatEarthquake,
 		slug: "earthquake",
 		before: [
@@ -207,7 +213,7 @@ export const heroThreats: HeroThreats[] = [
 	{
 		title: "Flood",
 		description: "Rising water engulfs areas",
-		img: "/assets/images/flood.jpeg",
+		img: "/images/flood.jpeg",
 		coverImg: threatFlood,
 		slug: "flood",
 		before: [
@@ -247,7 +253,7 @@ export const heroThreats: HeroThreats[] = [
 	{
 		title: "Riverbank Erosion",
 		description: "River erosion, displacement",
-		img: "/assets/images/river-erosion.jpeg",
+		img: "/images/river-erosion.jpeg",
 		coverImg: threatRiverbankErosion,
 		slug: "riverbank-erosion",
 		before: [
@@ -284,7 +290,7 @@ export const heroThreats: HeroThreats[] = [
 	{
 		title: "Drought",
 		description: "Water scarcity, agricultural impact",
-		img: "/assets/images/drought.jpeg",
+		img: "/images/drought.jpeg",
 		coverImg: threatDrought,
 		before: [
 			"Stay informed about drought conditions in your area through local weather forecasts, climate reports, and water agencies.",
@@ -319,7 +325,7 @@ export const heroThreats: HeroThreats[] = [
 	{
 		title: "Tornado",
 		description: "High winds, localized damage",
-		img: "/assets/images/tornado.jpeg",
+		img: "/images/tornado.jpeg",
 		coverImg: threatTornado,
 		before: [
 			"Stay informed about tornado risks in your area through local weather forecasts and alerts.",
@@ -356,7 +362,7 @@ export const heroThreats: HeroThreats[] = [
 	{
 		title: "Landslide",
 		description: "Slope failure, hilly terrain",
-		img: "/assets/images/landslide.jpeg",
+		img: "/images/landslide.jpeg",
 		coverImg: threatLandslide,
 		before: [
 			"Stay informed about landslide risks in your area through local geological reports, weather forecasts, and alerts.",
@@ -398,9 +404,9 @@ interface HeroCarousel {
 }
 
 export const heroCarousel: HeroCarousel[] = [
-	{ text: "tornado", img: "/assets/images/tornado.png" },
-	{ text: "wild-fire", img: "/assets/images/wild-fire.png" },
-	{ text: "cyclone", img: "/assets/images/cyclone.png" },
+	{ text: "tornado", img: "/images/tornado.png" },
+	{ text: "wild-fire", img: "/images/wild-fire.png" },
+	{ text: "cyclone", img: "/images/cyclone.png" },
 ];
 
 interface Card {
@@ -414,19 +420,19 @@ export const demoProjects: Card[] = [
 		heading: "Project-1",
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores velit, cumque expedita veniam tempora optio deleniti quam omnis, ut rerum voluptas nesciunt sit et quisquam enim amet sint laudantium id.",
-		img: "/assets/images/news.jpg",
+		img: "/images/news.jpg",
 	},
 	{
 		heading: "Project-2",
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores velit, cumque expedita veniam tempora optio deleniti quam omnis, ut rerum voluptas nesciunt sit et quisquam enim amet sint laudantium id.",
-		img: "/assets/images/news-2.png",
+		img: "/images/news-2.png",
 	},
 	{
 		heading: "Project-3",
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores velit, cumque expedita veniam tempora optio deleniti quam omnis, ut rerum voluptas nesciunt sit et quisquam enim amet sint laudantium id.",
-		img: "/assets/images/news-3.jpg",
+		img: "/images/news-3.jpg",
 	},
 ];
 
@@ -435,19 +441,19 @@ export const demoNews: Card[] = [
 		heading: "News-1",
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores velit, cumque expedita veniam tempora optio deleniti quam omnis, ut rerum voluptas nesciunt sit et quisquam enim amet sint laudantium id.",
-		img: "/assets/images/news-2.png",
+		img: "/images/news-2.png",
 	},
 	{
 		heading: "News-2",
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores velit, cumque expedita veniam tempora optio deleniti quam omnis, ut rerum voluptas nesciunt sit et quisquam enim amet sint laudantium id.",
-		img: "/assets/images/news-3.jpg",
+		img: "/images/news-3.jpg",
 	},
 	{
 		heading: "News-3",
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores velit, cumque expedita veniam tempora optio deleniti quam omnis, ut rerum voluptas nesciunt sit et quisquam enim amet sint laudantium id.",
-		img: "/assets/images/news.jpg",
+		img: "/images/news.jpg",
 	},
 ];
 
@@ -463,13 +469,13 @@ export const demoOrganizations: Org[] = [
 		name: "Org 1",
 		username: "org-1",
 		bio: "Your trusted source for disaster preparedness resources. We're committed to helping you prepare for, respond to, and recover from disasters and emergencies. Explore our guides and expert advice to build resilience and reduce the impact of crises. Join us in creating a safer, more secure future.",
-		image: "/assets/images/org.png",
+		image: "/images/org.png",
 	},
 	{
 		name: "Org 2",
 		username: "org-2",
 		bio: "Your trusted source for disaster preparedness resources. We're committed to helping you prepare for, respond to, and recover from disasters and emergencies. Explore our guides and expert advice to build resilience and reduce the impact of crises. Join us in creating a safer, more secure future.",
-		image: "/assets/images/org.png",
+		image: "/images/org.png",
 	},
 ];
 

@@ -10,7 +10,7 @@ export default function Footer() {
 						<Link href="/" className="flex items-center">
 							<div>
 								<Image
-									src="/assets/images/brand.png"
+									src="/images/brand.png"
 									className="me-3"
 									alt="ldpan Logo"
 									width={40}
@@ -35,7 +35,7 @@ export default function Footer() {
 								</li>
 								<li>
 									<Link href="/audit-reports" className="hover:underline">
-										Audit Reports
+										Audit reports
 									</Link>
 								</li>
 							</ul>
@@ -64,12 +64,12 @@ export default function Footer() {
 							<ul className="text-gray-700 dark:text-gray-400 font-medium">
 								<li className="mb-4">
 									<a href="#" className="hover:underline">
-										Privacy Policy
+										Privacy policy
 									</a>
 								</li>
 								<li>
 									<a href="#" className="hover:underline">
-										Terms &amp; Conditions
+										Terms &amp; conditions
 									</a>
 								</li>
 							</ul>

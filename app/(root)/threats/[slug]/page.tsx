@@ -33,7 +33,7 @@ export default function SingleTreatPage({ params }: { params: { slug: string } }
 									<h2 className="uppercase text-2xl sm:text-4xl">
 										{threat?.title}
 									</h2>
-									<p className="text-white mb-2.5 sm:mb-4">
+									<p className="font-montserrat text-white mb-2.5 sm:mb-4">
 										{threat?.description}
 									</p>
 									<Link href="#more">
@@ -77,16 +77,16 @@ function AwarenessSection({
 }) {
 	return (
 		<div className="border rounded-xl py-4">
-			<h2 className="font-bold border-b capitalize px-4 pb-3">
+			<h2 className="font-montserrat font-bold border-b capitalize px-4 pb-3">
 				{type} {threat?.title}
 			</h2>
 			<ul className="px-4 pt-4">
 				{threat?.[type].map((step, index) => (
 					<li key={index} className="mb-2">
-						<span className="inline-flex mr-2 text-sm font-semibold items-center justify-center size-[22px] rounded-full dark:border-slate-800 border-slate-300 border">
+						<span className="font-montserrat inline-flex mr-2 text-sm font-semibold items-center justify-center size-[22px] rounded-full dark:border-slate-800 border-slate-300 border">
 							{index + 1}
 						</span>
-						{step}
+						<span className="">{step}</span>
 					</li>
 				))}
 			</ul>

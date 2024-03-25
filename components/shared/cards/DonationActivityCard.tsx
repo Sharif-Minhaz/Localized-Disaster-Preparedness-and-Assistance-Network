@@ -22,7 +22,7 @@ export default function DonationActivityCard({ history }: Props) {
 					className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
 					title="Project image"
 				/>
-				<div className="p-4 flex flex-col justify-between leading-normal dark:bg-none bg-[url(/assets/images/pat.png)]">
+				<div className="p-4 flex flex-col justify-between leading-normal dark:bg-none bg-[url(/images/pat.png)]">
 					<div className="mb-4">
 						<p className="text-xs text-gray-600 dark:text-gray-200 flex items-center">
 							<svg
