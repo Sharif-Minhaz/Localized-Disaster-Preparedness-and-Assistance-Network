@@ -71,6 +71,7 @@ import ContactAddress from "./ContactAddress";
 import Volunteers from "./Volunteers";
 import VolunteerCard from "./cards/VolunteerCard";
 import AboutOrganization from "./AboutOrganization";
+import { MotionDiv } from "./motions";
 
 export {
 	Navbar,
@@ -146,4 +147,5 @@ export {
 	Volunteers,
 	VolunteerCard,
 	AboutOrganization,
+	MotionDiv,
 };

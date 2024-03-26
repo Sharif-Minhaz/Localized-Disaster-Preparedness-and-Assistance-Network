@@ -8,7 +8,9 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 	cacheStartUrl: true,
 	dynamicStartUrl: true,
 	dynamicStartUrlRedirect: "/sign-in",
-	fallbacks: ["/offline"],
+	fallbacks: {
+		document: "/~offline",
+	},
 	workboxOptions: {
 		disableDevLogs: true,
 	},
