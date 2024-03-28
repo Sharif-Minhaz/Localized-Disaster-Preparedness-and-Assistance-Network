@@ -6,9 +6,11 @@ import { Suspense } from "react";
 import MainPageFallback from "@/components/shared/MainPageFallback";
 import { Toaster } from "@/components/ui/toaster";
 import { inter, montserrat } from "@/fonts";
+import ogImg from "../assets/og-img.webp";
 import { APP_DEFAULT_TITLE, APP_DESCRIPTION, APP_NAME, APP_TITLE_TEMPLATE } from "@/constants";
 
 export const metadata: Metadata = {
+	metadataBase: new URL("https://ldpan.vercel.app/"),
 	applicationName: APP_NAME,
 	title: {
 		default: APP_DEFAULT_TITLE,
@@ -32,6 +34,13 @@ export const metadata: Metadata = {
 			default: APP_DEFAULT_TITLE,
 			template: APP_TITLE_TEMPLATE,
 		},
+		images: [
+			{
+				url: ogImg.src,
+				width: 800,
+				height: 600,
+			},
+		],
 		description: APP_DESCRIPTION,
 	},
 	twitter: {
@@ -40,6 +49,13 @@ export const metadata: Metadata = {
 			default: APP_DEFAULT_TITLE,
 			template: APP_TITLE_TEMPLATE,
 		},
+		images: [
+			{
+				url: ogImg.src,
+				width: 800,
+				height: 600,
+			},
+		],
 		description: APP_DESCRIPTION,
 	},
 };
