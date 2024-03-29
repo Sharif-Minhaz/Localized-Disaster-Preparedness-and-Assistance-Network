@@ -1,4 +1,4 @@
-import { HeadingSection, ImageGallery } from "@/components/shared";
+import { Container, ImageGallery } from "@/components/shared";
 import { ImageDist } from "@/components/shared/ImageGallery";
 import { fetchImages } from "@/lib/actions/gallery.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
@@ -8,6 +8,12 @@ import { currentUser } from "@clerk/nextjs";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Gallery",
+};
 
 export default async function GalleryPage() {
 	const user = await currentUser();
@@ -29,8 +35,7 @@ export default async function GalleryPage() {
 	const isAdmin = userInfo.user_type === "admin";
 
 	return (
-		<section className="shadow-md dark:shadow-gray-900 rounded-xl border">
-			<HeadingSection text="Gallery" />
+		<Container headingText="Gallery">
 			<div className="p-4">
 				<div className="max-w-full md:max-w-[700px] mx-auto p-4 border shadow-md dark:shadow-gray-900 rounded-xl">
 					<ImageGallery images={images} />
@@ -43,6 +48,6 @@ export default async function GalleryPage() {
 					</div>
 				</Link>
 			)}
-		</section>
+		</Container>
 	);
 }

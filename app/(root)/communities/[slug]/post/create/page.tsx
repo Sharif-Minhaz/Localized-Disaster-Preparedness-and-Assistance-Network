@@ -1,8 +1,14 @@
-import { HeadingSection, PostForm } from "@/components/shared";
+import { Container, PostForm } from "@/components/shared";
 import { fetchCommunities, fetchCommunity } from "@/lib/actions/community.actions";
 import { ICommunity } from "@/lib/models/CommunityModel";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Create Post",
+};
 
 export async function generateStaticParams() {
 	const { communities } = await fetchCommunities({});
@@ -17,8 +23,7 @@ export default async function CreateCommunityPage({ params }: { params: { slug: 
 	}
 
 	return (
-		<div className="shadow-md dark:shadow-gray-900 rounded-xl border">
-			<HeadingSection text="Create Post" />
+		<Container headingText="Create Post">
 			<div className="px-4 sm:px-5 pt-4 sm:pt-5">
 				<PostForm
 					userId={user.id}
@@ -26,6 +31,6 @@ export default async function CreateCommunityPage({ params }: { params: { slug: 
 					communityId={community._id}
 				/>
 			</div>
-		</div>
+		</Container>
 	);
 }

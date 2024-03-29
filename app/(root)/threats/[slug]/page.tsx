@@ -5,6 +5,12 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { BackButton } from "@/components/shared";
 
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+	return {
+		title: params.slug,
+	};
+}
+
 export async function generateStaticParams() {
 	return heroThreats.map((threat) => ({ slug: threat.slug }));
 }

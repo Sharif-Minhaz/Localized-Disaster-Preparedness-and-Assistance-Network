@@ -1,9 +1,15 @@
-import { HeadingSection, PostForm } from "@/components/shared";
+import { Container, PostForm } from "@/components/shared";
 import { fetchCommunity } from "@/lib/actions/community.actions";
 import { fetchAllInAllPosts, fetchPost } from "@/lib/actions/post.actions";
 import { IPost } from "@/lib/models/PostModel";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Post Update",
+};
 
 export async function generateStaticParams() {
 	try {
@@ -33,8 +39,7 @@ export default async function UpdatePostPage({ params }: { params: { id: string;
 	}
 
 	return (
-		<div className="shadow-md dark:shadow-gray-900 rounded-xl border">
-			<HeadingSection text="Update Post" />
+		<Container headingText="Update Post">
 			<div className="px-4 sm:px-5 pt-4 sm:pt-5">
 				<PostForm
 					update
@@ -44,6 +49,6 @@ export default async function UpdatePostPage({ params }: { params: { id: string;
 					communityId={community._id}
 				/>
 			</div>
-		</div>
+		</Container>
 	);
 }

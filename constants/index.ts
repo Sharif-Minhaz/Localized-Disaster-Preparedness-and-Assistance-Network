@@ -26,7 +26,7 @@ import threatLandslide from "@/public/images/threat-landslide.jpg";
 
 export const APP_NAME = "Localized Disaster Preparedness & Assistance Network";
 export const APP_DEFAULT_TITLE = "LDPAN";
-export const APP_TITLE_TEMPLATE = "%s - LDPAN";
+export const APP_TITLE_TEMPLATE = "LDPAN | %s";
 export const APP_DESCRIPTION =
 	"A localized web-based platform that serves as a disaster preparedness and assistance network. This platform will connect communities, local authorities, and volunteers, facilitating the sharing of critical information, resources, and assistance during emergencies.";
 

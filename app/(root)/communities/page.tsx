@@ -1,10 +1,16 @@
-import { HeadingSection, Pagination, Search, ShortListedOrgCards } from "@/components/shared";
+import { Container, Pagination, Search, ShortListedOrgCards } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { fetchCommunities } from "@/lib/actions/community.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import { Plus } from "lucide-react";
 import Link from "next/link";
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Communities",
+};
 
 export default async function OrganizationsPage({
 	searchParams,
@@ -20,8 +26,7 @@ export default async function OrganizationsPage({
 	});
 
 	return (
-		<section className="shadow-md dark:shadow-gray-900 rounded-xl border">
-			<HeadingSection text="Communities" />
+		<Container headingText="Communities">
 			<div className="px-4 sm:px-5 pt-4 sm:pt-5 flex gap-2">
 				<Search placeholder="Search communities..." />
 				{userInfo.user_type === "admin" ||
@@ -37,6 +42,6 @@ export default async function OrganizationsPage({
 			<div className="mt-2 mb-5 flex w-full justify-center">
 				<Pagination totalPages={Math.ceil(totalElements / 6)} />
 			</div>
-		</section>
+		</Container>
 	);
 }

@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 		type: "website",
 		siteName: APP_NAME,
 		title: {
-			default: APP_DEFAULT_TITLE,
+			default: `${APP_NAME} (${APP_DEFAULT_TITLE})`,
 			template: APP_TITLE_TEMPLATE,
 		},
 		images: [
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 	twitter: {
 		card: "summary",
 		title: {
-			default: APP_DEFAULT_TITLE,
+			default: `${APP_NAME} (${APP_DEFAULT_TITLE})`,
 			template: APP_TITLE_TEMPLATE,
 		},
 		images: [

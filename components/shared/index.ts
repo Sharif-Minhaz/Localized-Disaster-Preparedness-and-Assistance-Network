@@ -72,10 +72,12 @@ import Volunteers from "./Volunteers";
 import VolunteerCard from "./cards/VolunteerCard";
 import AboutOrganization from "./AboutOrganization";
 import { MotionDiv } from "./motions";
+import Container from "./Container";
 
 export {
 	Navbar,
 	Sidebar,
+	Container,
 	SearchBar,
 	Hero,
 	HeadingSection,

@@ -2,16 +2,21 @@ import {
 	AboutOrganization,
 	ContactAddress,
 	ContactLocation,
-	HeadingSection,
+	Container,
 	TeamSection,
 	Volunteers,
 } from "@/components/shared";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "About",
+};
+
 export default function AboutPage() {
 	return (
 		<section>
-			<div className="shadow-md dark:shadow-gray-900 rounded-xl border mb-4 sm:mb-5">
-				<HeadingSection text="About Us" />
+			<Container headingText="About us">
 				{/* about organization */}
 				<AboutOrganization />
 				<div className="border-b mt-5 px-5" />
@@ -22,17 +27,15 @@ export default function AboutPage() {
 					</div>
 					<ContactLocation />
 				</div>
-			</div>
-			<section className="shadow-md dark:shadow-gray-900 rounded-xl border mb-4 sm:mb-5">
-				<HeadingSection text="Our Team" />
+			</Container>
+			<Container headingText="Our Team">
 				{/* team member */}
 				<TeamSection />
-			</section>
-			<section className="shadow-md dark:shadow-gray-900 rounded-xl border">
-				<HeadingSection text="Our Volunteers" />
+			</Container>
+			<Container headingText="Our Volunteers">
 				{/* volunteers cards here */}
 				<Volunteers />
-			</section>
+			</Container>
 		</section>
 	);
 }

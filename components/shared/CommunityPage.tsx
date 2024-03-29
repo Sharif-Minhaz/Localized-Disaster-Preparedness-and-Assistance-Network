@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { Pencil, Plus, Users, View } from "lucide-react";
 import Link from "next/link";
-import { BackButton, CommunityMemberAvatars, HeadingSection, Posts } from ".";
+import { BackButton, CommunityMemberAvatars, Container, HeadingSection, Posts } from ".";
 import { currentUser } from "@clerk/nextjs";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
@@ -24,7 +24,7 @@ export default async function CommunityPage({ community }: { community: ICommuni
 
 	return (
 		<>
-			<section className="shadow-md dark:shadow-gray-900 rounded-xl border">
+			<Container>
 				<div className="relative bg-[url('/images/group-cover.jpg')] bg-cover w-full h-[250px] rounded-t-xl">
 					<Image
 						src={community.image || "/dummy.png"}
@@ -103,15 +103,14 @@ export default async function CommunityPage({ community }: { community: ICommuni
 				</div>
 				<hr />
 				<p className="text-center py-4 px-4 sm:px-8 md:px-16 text-sm">{community.bio}</p>
-			</section>
+			</Container>
 			{/* ----- available posts ----- */}
-			<section id="posts" className="shadow rounded-xl border mt-5">
-				<HeadingSection text="Available Posts" />
+			<Container id="posts" headingText="Available Posts" className="mt-5">
 				<Posts clerkId={user.id} communityId={community._id} />
 				<div className="p-5">
 					<BackButton />
 				</div>
-			</section>
+			</Container>
 			{/* ------ create post -------- */}
 			{alreadyJoined && (
 				<Link href={`/communities/${community.slug}/post/create`}>

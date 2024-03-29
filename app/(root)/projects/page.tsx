@@ -1,4 +1,4 @@
-import { HeadingSection, Pagination, ProjectsList, Search } from "@/components/shared";
+import { Container, Pagination, ProjectsList, Search } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Plus } from "lucide-react";
@@ -6,6 +6,12 @@ import { fetchProjects } from "@/lib/actions/project.actions";
 import { IProject } from "@/lib/models/ProjectModel";
 import { currentUser } from "@clerk/nextjs";
 import { fetchUser } from "@/lib/actions/user.actions";
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Projects",
+};
 
 export default async function Projects({
 	searchParams,
@@ -23,8 +29,7 @@ export default async function Projects({
 	});
 
 	return (
-		<div className="shadow-md dark:shadow-gray-900 rounded-xl border">
-			<HeadingSection text="Projects" />
+		<Container headingText="Projects">
 			<div className="px-4 sm:px-5 pt-4 sm:pt-5 flex gap-2">
 				<Search placeholder="Search projects..." />
 				{userInfo.user_type === "admin" && (
@@ -39,6 +44,6 @@ export default async function Projects({
 			<div className="mt-2 mb-5 flex w-full justify-center">
 				<Pagination totalPages={Math.ceil(totalElements / 5)} />
 			</div>
-		</div>
+		</Container>
 	);
 }

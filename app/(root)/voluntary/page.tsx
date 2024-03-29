@@ -1,5 +1,5 @@
 import {
-	HeadingSection,
+	Container,
 	SingleApplication,
 	VolunteerApplications,
 	VolunteerForm,
@@ -8,6 +8,12 @@ import { fetchApplication } from "@/lib/actions/application.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Voluntary",
+};
 
 export default async function VoluntaryPage() {
 	const user = await currentUser();
@@ -20,8 +26,7 @@ export default async function VoluntaryPage() {
 	const applicationInfo = await fetchApplication(userInfo._id);
 
 	return (
-		<div className="shadow-md dark:shadow-gray-900 rounded-xl border">
-			<HeadingSection text="Voluntary" />
+		<Container headingText="Voluntary">
 			<div className="p-4">
 				{userInfo.user_type === "admin" && <VolunteerApplications />}
 				{userInfo.user_type === "user" && !applicationInfo && <VolunteerForm />}
@@ -42,6 +47,6 @@ export default async function VoluntaryPage() {
 					</p>
 				)}
 			</div>
-		</div>
+		</Container>
 	);
 }

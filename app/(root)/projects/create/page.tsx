@@ -1,6 +1,12 @@
-import { HeadingSection, ProjectForm } from "@/components/shared";
+import { Container, ProjectForm } from "@/components/shared";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Create Project",
+};
 
 export default async function CreateProjectPage() {
 	const user = await currentUser();
@@ -8,11 +14,10 @@ export default async function CreateProjectPage() {
 	if (!user) return redirect("/");
 
 	return (
-		<div className="shadow-md dark:shadow-gray-900 rounded-xl border">
-			<HeadingSection text="Create New Project" />
+		<Container headingText="Create New Project">
 			<div className="px-4 sm:px-5 pt-4 sm:pt-5">
 				<ProjectForm adminId={user.id} />
 			</div>
-		</div>
+		</Container>
 	);
 }

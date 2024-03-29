@@ -1,7 +1,19 @@
-import { DonationActivityCard, HeadingSection, Pagination, Search } from "@/components/shared";
+import {
+	Container,
+	DonationActivityCard,
+	HeadingSection,
+	Pagination,
+	Search,
+} from "@/components/shared";
 import { getUserDonationHistory } from "@/lib/actions/donation.actions";
 import { IDonation } from "@/lib/models/DonationModel";
 import { currentUser } from "@clerk/nextjs";
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Donation History",
+};
 
 export default async function DonationHistory({
 	searchParams,
@@ -21,8 +33,7 @@ export default async function DonationHistory({
 	});
 
 	return (
-		<div className="shadow-md dark:shadow-gray-900 rounded-xl border">
-			<HeadingSection text="Donation History" />
+		<Container headingText="Donation History">
 			<div className="px-4 py-4 flex flex-col gap-4">
 				<Search placeholder="Search history..." />
 				{!donations.length && (
@@ -37,6 +48,6 @@ export default async function DonationHistory({
 			<div className="mt-2 mb-5 flex w-full justify-center">
 				<Pagination totalPages={Math.ceil(totalElements / 5)} />
 			</div>
-		</div>
+		</Container>
 	);
 }

@@ -1,6 +1,12 @@
-import { HeadingSection, Posts } from "@/components/shared";
+import { Container, Posts } from "@/components/shared";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "My Posts",
+};
 
 export default async function MyPostPage() {
 	const user = await currentUser();
@@ -8,14 +14,12 @@ export default async function MyPostPage() {
 
 	return (
 		<>
-			<section className="shadow-md dark:shadow-gray-900 rounded-xl border">
-				<HeadingSection text="My Posts" />
+			<Container headingText="My Posts">
 				<Posts personal clerkId={user.id} />
-			</section>
-			<section className="shadow-md dark:shadow-gray-900 rounded-xl border mt-5">
-				<HeadingSection text="Bookmarked Posts" />
+			</Container>
+			<Container headingText="Bookmarked Posts" className="mt-5">
 				<Posts bookmarked clerkId={user.id} />
-			</section>
+			</Container>
 		</>
 	);
 }

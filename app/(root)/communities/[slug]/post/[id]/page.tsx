@@ -16,6 +16,12 @@ import { currentUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+	return {
+		title: params.slug,
+	};
+}
+
 export async function generateStaticParams() {
 	try {
 		const allPosts = await fetchAllInAllPosts();

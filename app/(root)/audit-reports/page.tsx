@@ -1,6 +1,12 @@
-import { AuditReport, HeadingSection, Pagination } from "@/components/shared";
+import { AuditReport, Container, HeadingSection, Pagination } from "@/components/shared";
 import { getAuditReports } from "@/lib/actions/project.actions";
 import { IReport } from "@/lib/models/ReportModel";
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Audit Report",
+};
 
 export default async function AuditReportPage({
 	searchParams,
@@ -12,8 +18,7 @@ export default async function AuditReportPage({
 	});
 
 	return (
-		<div className="shadow-md dark:shadow-gray-900 rounded-xl border">
-			<HeadingSection text="Audit Reports" />
+		<Container headingText="Audit Reports">
 			<div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
 				{reports.map((report: IReport) => (
 					<AuditReport key={report._id} report={report as IReport} />
@@ -29,6 +34,6 @@ export default async function AuditReportPage({
 			<div className="my-5 flex w-full justify-center">
 				<Pagination totalPages={Math.ceil(totalElements / 8)} />
 			</div>
-		</div>
+		</Container>
 	);
 }

@@ -1,8 +1,8 @@
 import {
 	AdminCards,
+	Container,
 	DonationActivityPieChart,
 	DonationBarChart,
-	HeadingSection,
 	ResourceTable,
 } from "@/components/shared";
 import {
@@ -14,6 +14,12 @@ import {
 import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Dashboard",
+};
 
 export default async function ResourcesPage({ searchParams }: { searchParams: { query: string } }) {
 	const user = await currentUser();
@@ -39,8 +45,7 @@ export default async function ResourcesPage({ searchParams }: { searchParams: { 
 	]);
 
 	return (
-		<section className="shadow-md dark:shadow-gray-900 rounded-xl border">
-			<HeadingSection text="Dashboard" />
+		<Container headingText="Dashboard">
 			<div className="p-5">
 				<AdminCards
 					totalUsers={totalUsers}
@@ -64,6 +69,6 @@ export default async function ResourcesPage({ searchParams }: { searchParams: { 
 			<div className="p-5">
 				<ResourceTable data={resources} amount={total} />
 			</div>
-		</section>
+		</Container>
 	);
 }

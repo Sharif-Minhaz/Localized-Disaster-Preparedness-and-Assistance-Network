@@ -1,7 +1,12 @@
-import { ProjectForm } from "@/components/shared";
+import { Container, ProjectForm } from "@/components/shared";
 import { fetchProject, fetchProjects } from "@/lib/actions/project.actions";
-import { HeadingSection } from "@/components/shared";
 import { IProject } from "@/lib/models/ProjectModel";
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Update Project",
+};
 
 export async function generateStaticParams() {
 	const { projects } = await fetchProjects({});
@@ -12,11 +17,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
 	const project = await fetchProject(params.slug);
 
 	return (
-		<div className="shadow-md dark:shadow-gray-900 rounded-xl border">
-			<HeadingSection text="Update Project" />
+		<Container headingText="Update Project">
 			<div className="px-4 sm:px-5 pt-4 sm:pt-5">
 				<ProjectForm project={project} update />
 			</div>
-		</div>
+		</Container>
 	);
 }

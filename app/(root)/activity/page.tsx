@@ -1,9 +1,15 @@
-import { ActivityList, HeadingSection, Pagination, Search } from "@/components/shared";
+import { ActivityList, Container, Pagination, Search } from "@/components/shared";
 import { getDonationActivity } from "@/lib/actions/donation.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { IDonation } from "@/lib/models/DonationModel";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Activity",
+};
 
 export default async function DonationActivity({
 	searchParams,
@@ -26,8 +32,7 @@ export default async function DonationActivity({
 	});
 
 	return (
-		<div className="shadow-md dark:shadow-gray-900 rounded-xl border">
-			<HeadingSection text="Donation Activity" />
+		<Container headingText="Donation Activity">
 			<div className="px-4 py-4 flex flex-col gap-4">
 				<Search placeholder="Search activity..." />
 				<ActivityList donations={donations as IDonation[]} />
@@ -35,6 +40,6 @@ export default async function DonationActivity({
 					<Pagination totalPages={Math.ceil(totalElements / 5)} />
 				</div>
 			</div>
-		</div>
+		</Container>
 	);
 }

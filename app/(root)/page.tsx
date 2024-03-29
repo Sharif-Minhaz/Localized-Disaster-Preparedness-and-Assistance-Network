@@ -6,6 +6,12 @@ import {
 	WeatherReport,
 } from "@/components/shared";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Home",
+};
+
 export default function HomePage() {
 	return (
 		<section className="flex flex-col gap-5">

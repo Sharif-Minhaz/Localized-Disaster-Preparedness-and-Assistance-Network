@@ -1,6 +1,12 @@
-import { HeadingSection, ImageGalleryForm } from "@/components/shared";
+import { Container, ImageGalleryForm } from "@/components/shared";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Create Gallery",
+};
 
 export default async function GalleryCreatePage() {
 	const user = await currentUser();
@@ -9,11 +15,10 @@ export default async function GalleryCreatePage() {
 		return redirect("/");
 	}
 	return (
-		<div className="shadow-md dark:shadow-gray-900 rounded-xl border">
-			<HeadingSection text="Upload a new image" />
+		<Container headingText="Upload a new image">
 			<div className="px-4 sm:px-5 pt-4 sm:pt-5">
 				<ImageGalleryForm userId={user.id} />
 			</div>
-		</div>
+		</Container>
 	);
 }
