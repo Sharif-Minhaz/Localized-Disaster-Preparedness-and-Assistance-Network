@@ -4,7 +4,7 @@ import Loader from "../../public/icons/loading.svg";
 export default function LoadingScreen({ height, width }: { height?: string; width?: string }) {
 	return (
 		<div
-			className={`relative h-screen p-6 ${height} ${width} bg-white border border-gray-100 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-800 dark:hover:bg-gray-700`}
+			className={`relative p-6 ${height} ${width} bg-white border border-gray-100 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-800 dark:hover:bg-gray-700`}
 		>
 			<div
 				role="status"

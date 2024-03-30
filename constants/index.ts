@@ -541,3 +541,14 @@ export const teamData = [
 		email: "smmr.career@gamail.com",
 	},
 ];
+
+export const locations = [
+	"Dhaka",
+	"Cumilla",
+	"Barishal",
+	"Chittagong",
+	"Mymensingh",
+	"Khulna",
+	"Rangpur",
+	"Rajshahi",
+];

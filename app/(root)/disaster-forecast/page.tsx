@@ -1,4 +1,4 @@
-import { Container } from "@/components/shared";
+import { Container, PredictionResult } from "@/components/shared";
 
 import { Metadata } from "next";
 
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function DisasterForecastPage() {
 	return (
 		<Container headingText="Disaster Forecast">
-			<div>page</div>
+			<PredictionResult />
 		</Container>
 	);
 }

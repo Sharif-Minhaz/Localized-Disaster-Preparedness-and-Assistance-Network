@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 
 const PDFViewer = dynamic(() => import("@react-pdf/renderer").then((mod) => mod.PDFViewer), {
 	ssr: false,
-	loading: () => <p>Loading...</p>,
+	loading: () => <p className="px-2 pt-2">Loading...</p>,
 });
 
 export default function AuditReports({ report }: { report: IReport }) {
