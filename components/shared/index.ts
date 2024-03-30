@@ -49,6 +49,8 @@ import CommunitySkeletons from "./skeletons/CommunitySkeletons";
 import DonationHistorySkeletons from "./skeletons/DonationHistorySkeletons";
 import PostSkeletons from "./skeletons/PostSkeletons";
 import GallerySkeletons from "./skeletons/GallerySkeletons";
+import DashboardSkeletons from "./skeletons/DashboardSkeletons";
+import HomeSkeletons from "./skeletons/HomeSkeletons";
 import ImageGallery from "./ImageGallery";
 import ImageGalleryForm from "./forms/ImageGalleryForm";
 import BackButton from "./BackButton";
@@ -125,6 +127,8 @@ export {
 	ProjectSkeletons,
 	CommunitySkeletons,
 	DonationHistorySkeletons,
+	HomeSkeletons,
+	DashboardSkeletons,
 	PostSkeletons,
 	GallerySkeletons,
 	ImageGallery,

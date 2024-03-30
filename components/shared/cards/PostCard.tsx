@@ -42,14 +42,14 @@ export default function PostCard({
 							userId={userId}
 							likeCount={post.likes.length}
 						/>
-						<Link href={`/communities/${params.slug}/post/${post._id}`}>
+						<Link href={`/communities/${params.slug || "personal"}/post/${post._id}`}>
 							<MessageCircle color="#1c274c" size={24} />
 						</Link>
 					</div>
 					<span className="text-sm">
 						<Link
 							className="inline-flex gap-1 items-center"
-							href={`/communities/${params.slug}/post/${post._id}`}
+							href={`/communities/${params.slug || "personal"}/post/${post._id}`}
 						>
 							Read more <ChevronRight size={18} />
 						</Link>
