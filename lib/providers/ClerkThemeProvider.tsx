@@ -9,7 +9,14 @@ export default function ClerkThemeProvider({ children }: { children: React.React
 	const { theme } = useContext(MainContext);
 
 	return (
-		<ClerkProvider appearance={{ baseTheme: theme === "dark" ? dark : undefined }}>
+		<ClerkProvider
+			appearance={{
+				baseTheme: theme === "dark" ? dark : undefined,
+				layout: {
+					logoImageUrl: theme === "dark" ? "/icons/logo-2.png" : "/icons/logo.png",
+				},
+			}}
+		>
 			{children}
 		</ClerkProvider>
 	);

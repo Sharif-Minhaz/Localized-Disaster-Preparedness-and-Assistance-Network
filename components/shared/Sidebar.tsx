@@ -47,24 +47,23 @@ export default function Sidebar({ isAdmin }: { isAdmin?: boolean }) {
 				} transition-all top-0 z-30 flex h-screen w-[255px] flex-col justify-between overflow-auto sm:overflow-hidden sm:hover:overflow-auto border-r`}
 			>
 				<div className="flex flex-col dark:bg-black/75 bg-[#ffffffe0] pb-5">
-					<div className="px-4 pt-5 pb-3">
-						<div className="flex gap-3">
-							<Link aria-label="return to home" href="/">
-								<Image
-									draggable={false}
-									src="/images/brand.png"
-									width={45}
-									height={45}
-									alt="return to home"
-								/>
-							</Link>
-							<div className="flex flex-col gap-0">
-								<h1 className="font-montserrat font-bold text-slate-600 dark:text-slate-200">
-									LDPAN
-								</h1>
-								<small className="text-[11px]">We&apos;re with you</small>
-							</div>
-						</div>
+					<div className="px-4 pt-3 pb-2">
+						<Link
+							className="flex items-center gap-2"
+							aria-label="return to home"
+							href="/"
+						>
+							<Image
+								draggable={false}
+								src="/images/brand.png"
+								width={32}
+								height={32}
+								alt="return to home"
+							/>
+							<p className="select-none text-[26px] font-extrabold text-slate-600 dark:text-slate-200">
+								LDPAN
+							</p>
+						</Link>
 					</div>
 
 					<div className="px-4 py-2 h-[65px]">

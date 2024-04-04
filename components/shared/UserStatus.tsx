@@ -39,7 +39,7 @@ export default function UserStatus() {
 			</div>
 			<div className="font-medium dark:text-white">
 				<div className="text-sm">{userInfo.username}</div>
-				<div className="text-[12px] text-gray-700 dark:text-gray-400">
+				<div className="text-[10px] text-gray-700 dark:text-gray-400">
 					Joined in {formatToShortDate(userInfo.createdAt)}
 				</div>
 			</div>

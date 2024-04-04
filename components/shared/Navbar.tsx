@@ -73,7 +73,7 @@ export default function Navbar() {
 					</div>
 				</SignedIn>
 				<SignedOut>
-					<div className="flex items-center gap-2 text-blue-900">
+					<div className="flex items-center gap-2 text-blue-900 dark:text-blue-400">
 						<Link href="/sign-in">Sign in</Link>/<Link href="/sign-up">Sign up</Link>
 					</div>
 				</SignedOut>

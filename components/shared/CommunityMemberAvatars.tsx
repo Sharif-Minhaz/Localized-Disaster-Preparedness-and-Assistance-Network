@@ -17,12 +17,9 @@ export default function CommunityMemberAvatars({ members }: { members: IUser[] }
 				/>
 			))}
 			{members.length > 3 && (
-				<Link
-					className="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800"
-					href="#"
-				>
+				<span className="flex items-center justify-center w-[23px] h-[23px] text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800">
 					+{Math.min(99, members.length - 3)}
-				</Link>
+				</span>
 			)}
 		</div>
 	);
