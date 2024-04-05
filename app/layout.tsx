@@ -10,7 +10,7 @@ import ogImg from "../assets/og-img.webp";
 import { APP_DEFAULT_TITLE, APP_DESCRIPTION, APP_NAME, APP_TITLE_TEMPLATE } from "@/constants";
 
 export const metadata: Metadata = {
-	metadataBase: new URL("https://ldpan.vercel.app/"),
+	metadataBase: new URL("https://ldpan-v4.vercel.app/"),
 	applicationName: APP_NAME,
 	title: {
 		default: APP_DEFAULT_TITLE,

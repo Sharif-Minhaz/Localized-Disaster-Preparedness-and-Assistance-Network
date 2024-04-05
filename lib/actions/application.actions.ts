@@ -99,7 +99,7 @@ export async function approveApplication(applicationId: string) {
 					to: [typeof application.createdBy !== "string" && application.createdBy.email],
 					subject: "Volunteer Role",
 					html: `<p>Congratulations! Your request for volunteer role has been approved, login again into the system to get full access.</p>
-					    <p><a href='https://ldpan.vercel.app/voluntary'>Click to open site</a></p>
+					    <p><a href='https://ldpan-v4.vercel.app/voluntary'>Click to open site</a></p>
 					`,
 				}),
 			]);

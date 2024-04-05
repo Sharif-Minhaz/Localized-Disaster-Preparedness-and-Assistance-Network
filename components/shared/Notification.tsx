@@ -17,15 +17,17 @@ import { formatDate } from "@/lib/utils";
 
 export default function Notification() {
 	const [notifications, setNotifications] = useState<INotification[]>([]);
-	const { user } = useUser();
+	const { isSignedIn, user } = useUser();
 
 	useEffect(() => {
 		async function fetchData() {
 			const notificationData = await fetchAllNotifications(user?.id || "");
 			setNotifications(notificationData);
 		}
-		fetchData();
-	}, [user]);
+		if (isSignedIn) {
+			fetchData();
+		}
+	}, [user, isSignedIn]);
 
 	return (
 		<DropdownMenu>
