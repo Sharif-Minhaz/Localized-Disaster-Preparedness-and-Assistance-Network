@@ -24,7 +24,7 @@ export default function OrganizationCard({
 }: Props) {
 	const deleteProjectWithSlug = deleteCommunity.bind(null, slug);
 	return (
-		<article className="border relative flex w-full max-w-[400px] flex-col overflow-hidden rounded-xl dark:shadow-gray-900 shadow-md transition-all hover:shadow-lg">
+		<article className="border relative flex w-full sm:max-w-[400px] flex-col overflow-hidden rounded-xl dark:shadow-gray-900 shadow-md transition-all hover:shadow-lg">
 			<div className="flex pt-4 px-4 pb-4 gap-3 border-b justify-between items-center dark:bg-slate-900 bg-[#f9f9f9]">
 				<div className="flex gap-3 items-center">
 					<div>
@@ -37,8 +37,12 @@ export default function OrganizationCard({
 						/>
 					</div>
 					<div>
-						<h1 className="text-lg line-clamp-1">{name}</h1>
-						<p className="text-sm">Visit to join us</p>
+						<h1 title={name} className="text-lg line-clamp-1">
+							{name}
+						</h1>
+						<p title="Visit to joint us" className="text-sm line-clamp-1">
+							Visit to join us
+						</p>
 					</div>
 				</div>
 				<Link href={`/communities/${slug}`}>

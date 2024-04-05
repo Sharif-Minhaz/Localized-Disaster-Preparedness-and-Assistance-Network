@@ -1,4 +1,4 @@
-import { ArrowLeft } from "lucide-react";
+import { RefreshCcw } from "lucide-react";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 
@@ -29,9 +29,9 @@ export default function ErrorContent({
 					className="rounded-lg border text-sm"
 					type="button"
 					variant="secondary"
-					onClick={() => router.back()}
+					onClick={() => router.refresh()}
 				>
-					<ArrowLeft size={17} className="mr-2" /> Back
+					<RefreshCcw size={17} className="mr-2" /> Refresh
 				</Button>
 			</div>
 		</div>

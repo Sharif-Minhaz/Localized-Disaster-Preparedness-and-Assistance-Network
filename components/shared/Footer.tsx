@@ -77,7 +77,7 @@ export default function Footer() {
 					</div>
 				</div>
 				<hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-				<div className="sm:flex sm:items-center sm:justify-between">
+				<div className="flex sm:flex-row flex-col items-center justify-between">
 					<span className="text-sm text-gray-700 sm:text-center dark:text-gray-400">
 						© {new Date().getFullYear()}{" "}
 						<Link href="/" className="hover:underline">

@@ -25,7 +25,7 @@ export default function ProjectCard({
 	const deleteProjectWithSlug = deleteProject.bind(null, slug);
 
 	return (
-		<article className="group relative flex min-h-[300px] w-full max-w-[400px] flex-col overflow-hidden rounded-xl border dark:shadow-gray-900 shadow-md transition-all hover:shadow-lg md:min-h-[438px]">
+		<article className="group relative flex min-h-[300px] w-full sm:max-w-[400px] flex-col overflow-hidden rounded-xl border dark:shadow-gray-900 shadow-md transition-all hover:shadow-lg md:min-h-[438px]">
 			<div className="h-[170px] w-full relative">
 				<Image
 					src={image}
