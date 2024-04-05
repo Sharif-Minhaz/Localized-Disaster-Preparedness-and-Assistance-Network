@@ -1,15 +1,7 @@
 import { HeadingSection, MotionDiv, ProjectCard } from "@/components/shared";
 import { fetchProjects } from "@/lib/actions/project.actions";
-import { fetchUser } from "@/lib/actions/user.actions";
-import { IUser } from "@/lib/models/UserModel";
-import { currentUser } from "@clerk/nextjs";
 
 export default async function ShortListedProjects() {
-	const user = await currentUser();
-	let userInfo: IUser;
-	if (user) {
-		userInfo = await fetchUser(user?.id || "");
-	}
 	const { projects } = await fetchProjects({});
 
 	return (
@@ -26,7 +18,6 @@ export default async function ShortListedProjects() {
 						transition={{ duration: 0.4 * (index + 1) }}
 					>
 						<ProjectCard
-							userType={userInfo?.user_type}
 							heading={data.heading}
 							image={data.image}
 							description={data.description}

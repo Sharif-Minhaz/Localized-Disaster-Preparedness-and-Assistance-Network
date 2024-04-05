@@ -6,7 +6,6 @@ import { deleteProject } from "@/lib/actions/project.actions";
 import { DeleteConfirmationBox } from "@/components/shared";
 
 interface Props {
-	userType: string;
 	heading: string;
 	description: string;
 	image: string;
@@ -14,14 +13,7 @@ interface Props {
 	completed: boolean;
 }
 
-export default function ProjectCard({
-	userType,
-	heading,
-	description,
-	image,
-	slug,
-	completed,
-}: Props) {
+export default function ProjectCard({ heading, description, image, slug, completed }: Props) {
 	const deleteProjectWithSlug = deleteProject.bind(null, slug);
 
 	return (
@@ -36,14 +28,6 @@ export default function ProjectCard({
 					quality={100}
 					sizes="100vw"
 				/>
-				{userType === "admin" && (
-					<div className="absolute right-2 top-2 flex flex-col gap-4 rounded-xl bg-white p-3 shadow-sm transition-all">
-						<Link aria-label="update the project" href={`/projects/${slug}/update`}>
-							<Pencil className="text-purple-400 w-5 h-5" />
-						</Link>
-						<DeleteConfirmationBox action={deleteProjectWithSlug} />
-					</div>
-				)}
 			</div>
 			<div className="flex min-h-[200px] flex-col gap-3 p-4 md:gap-3 bg-cover dark:bg-none bg-[url(/images/card-pat.png)]">
 				<h2 className="text-[16px] dark:text-white font-medium leading-[24px] line-clamp-2 flex-1 text-black">
