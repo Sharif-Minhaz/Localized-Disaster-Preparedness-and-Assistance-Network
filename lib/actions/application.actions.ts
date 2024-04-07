@@ -1,13 +1,11 @@
 "use server";
 
-import { FilterQuery, SortOrder } from "mongoose";
-
 import User from "../models/UserModel";
 
 import { connectToDB } from "../mongoose";
 import { convertToPlainObj } from "../utils";
 import { revalidatePath } from "next/cache";
-import { deleteUTImage, sendMail } from "./helpers.action";
+import { sendMail } from "./helpers.action";
 import Application, { IApplication } from "../models/ApplicationModel";
 import Notification from "../models/NotificationModel";
 

@@ -24,6 +24,8 @@ import threatDrought from "@/public/images/threat-drought.jpg";
 import threatTornado from "@/public/images/threat-tornado.jpg";
 import threatLandslide from "@/public/images/threat-landslide.jpg";
 
+export const AUTHOR = "Sharif Md. Minhazur Rahman Rabbi";
+export const AUTHOR_WEBSITE = "https://dev-sharif-md-minhaz.netlify.app";
 export const APP_NAME = "Localized Disaster Preparedness & Assistance Network";
 export const APP_DEFAULT_TITLE = "LDPAN";
 export const APP_TITLE_TEMPLATE = "LDPAN | %s";

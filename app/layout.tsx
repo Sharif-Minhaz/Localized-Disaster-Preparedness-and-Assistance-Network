@@ -7,15 +7,37 @@ import MainPageFallback from "@/components/shared/MainPageFallback";
 import { Toaster } from "@/components/ui/toaster";
 import { inter, montserrat } from "@/fonts";
 import ogImg from "../assets/og-img.webp";
-import { APP_DEFAULT_TITLE, APP_DESCRIPTION, APP_NAME, APP_TITLE_TEMPLATE } from "@/constants";
+import {
+	APP_DEFAULT_TITLE,
+	APP_DESCRIPTION,
+	APP_NAME,
+	APP_TITLE_TEMPLATE,
+	AUTHOR,
+	AUTHOR_WEBSITE,
+} from "@/constants";
 
 export const metadata: Metadata = {
-	metadataBase: new URL("https://ldpan-v4.vercel.app/"),
+	metadataBase: new URL("https://ldpan-v4.vercel.app"),
 	applicationName: APP_NAME,
 	title: {
 		default: APP_DEFAULT_TITLE,
 		template: APP_TITLE_TEMPLATE,
 	},
+	keywords: [
+		"LDPAN",
+		"ldpan-v4",
+		"weather",
+		"localized",
+		"disaster",
+		"localized-disaster",
+		"preparedness",
+		"assistance-network",
+		"minhaz-final-year-project",
+		"Localized-Disaster-Preparedness-&-Assistance-Network",
+	],
+	authors: [{ name: AUTHOR, url: AUTHOR_WEBSITE }],
+	creator: AUTHOR,
+	publisher: AUTHOR,
 	description: APP_DESCRIPTION,
 	manifest: "/manifest.json",
 	appleWebApp: {
@@ -27,6 +49,20 @@ export const metadata: Metadata = {
 	formatDetection: {
 		telephone: false,
 	},
+	robots: {
+		index: false,
+		follow: true,
+		nocache: true,
+		googleBot: {
+			index: true,
+			follow: false,
+			noimageindex: true,
+			"max-video-preview": -1,
+			"max-image-preview": "large",
+			"max-snippet": -1,
+		},
+	},
+	category: "nature",
 	openGraph: {
 		type: "website",
 		siteName: APP_NAME,
