@@ -35,11 +35,18 @@ export const addGalleyImage = async (clerkId: string, gallery: IProps) => {
 	}
 };
 
-export const fetchImages = async () => {
+export const fetchImages = async (offset: number = 0) => {
+	const PAGE_SIZE = 6;
 	try {
 		await connectToDB();
 
-		const images = await Gallery.find().populate("addedBy").lean();
+		const skipAmount = offset ? (offset - 1) * PAGE_SIZE : 0;
+
+		const images = await Gallery.find()
+			.skip(skipAmount)
+			.limit(PAGE_SIZE)
+			.populate("addedBy")
+			.lean();
 
 		return convertToPlainObj(images);
 	} catch (error) {

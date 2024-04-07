@@ -1,73 +1,77 @@
 "use client";
 
-import "react-image-gallery/styles/css/image-gallery.css";
-import ReactImageGallery from "react-image-gallery";
-import { Button } from "../ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { MouseEventHandler } from "react";
+import { IGallery } from "@/lib/models/GalleryModel";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { fetchImages } from "@/lib/actions/gallery.actions";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { GalleryLoader } from "@/components/shared";
 
-export interface ImageDist {
-	original: string;
-	thumbnail: string;
-	loading: "lazy" | "eager";
-	description: string;
-	originalTitle: string;
-	thumbnailClass: string;
-	originalClass: string;
-}
+export default function ImageGallery() {
+	const [images, setImages] = useState<IGallery[]>([]);
+	const [hasMore, setHasMore] = useState(true);
+	const [offset, setOffset] = useState(2);
 
-function changeImgHeight(fullScreen: boolean) {
-	const elements = document.querySelectorAll(".main-gallery-img>img.image-gallery-image");
-	if (fullScreen) {
-		elements.forEach((element) => {
-			element?.classList.add("full-screen");
-		});
-	} else {
-		elements.forEach((element) => {
-			element?.classList.remove("full-screen");
-		});
-	}
-}
+	useEffect(() => {
+		async function fetchData() {
+			fetchImages()
+				.then((data) => {
+					setImages(data);
+				})
+				.catch((err) => console.error(err));
+		}
+		fetchData();
 
-export default function ImageGallery({ images }: { images: ImageDist[] }) {
-	function LeftNav(onClick: MouseEventHandler<HTMLElement>, disabled: boolean) {
-		return (
-			<Button
-				type="button"
-				className="image-gallery-icon image-gallery-left-nav !p-0 !bg-transparent hover:!text-blue-300"
-				variant="ghost"
-				onClick={onClick}
-				disabled={disabled}
-				aria-label="Previous Slide"
-			>
-				<ChevronLeft size={60} />
-			</Button>
-		);
-	}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
-	function RightNav(onClick: MouseEventHandler<HTMLElement>, disabled: boolean) {
-		return (
-			<Button
-				type="button"
-				variant="outline"
-				className="image-gallery-icon image-gallery-right-nav !p-0 !bg-transparent hover:!text-blue-300"
-				onClick={onClick}
-				disabled={disabled}
-				aria-label="Next Slide"
-			>
-				<ChevronRight size={60} />
-			</Button>
-		);
+	function fetchMoreData() {
+		fetchImages(offset)
+			.then((data) => {
+				setImages((prevItems) => [...prevItems, ...data]);
+
+				if (data.length === 0) {
+					setHasMore(false);
+				}
+			})
+			.catch((err) => console.error(err));
+
+		setOffset((prevIndex) => prevIndex + 1);
 	}
 
 	return (
-		<ReactImageGallery
-			showBullets
-			showIndex
-			items={images}
-			renderLeftNav={LeftNav}
-			renderRightNav={RightNav}
-			onScreenChange={changeImgHeight}
-		/>
+		<InfiniteScroll
+			dataLength={images.length}
+			next={fetchMoreData}
+			hasMore={hasMore}
+			loader={<GalleryLoader />}
+			endMessage={
+				<p className="text-center px-4 my-4 mt-8">
+					You have seen it all. Check again for more updates.
+				</p>
+			}
+		>
+			<div className="p-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+				{images.map((image) => (
+					<article
+						className="relative group w-full h-[240px] border shadow-md dark:shadow-gray-900 rounded-xl"
+						key={image._id}
+					>
+						<Image
+							fill
+							className="w-full h-full object-cover rounded-xl"
+							src={image.image}
+							alt={image.heading}
+						/>
+						<div className="group-hover:opacity-100 transition-all duration-500 opacity-0 top-0 text-[12px] w-full h-full rounded-b-xl rounded-t-xl absolute text-white text-center p-2 bg-black/50">
+							{image.description}
+						</div>
+						<div className="bottom-0 text-sm w-full rounded-b-xl absolute text-white text-center p-2 bg-black/50">
+							{image.heading}
+						</div>
+					</article>
+				))}
+			</div>
+		</InfiniteScroll>
 	);
 }
