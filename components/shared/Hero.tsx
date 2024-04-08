@@ -81,7 +81,7 @@ export default function Hero() {
 									asChild
 									className="text-xs shadow-md dark:shadow-gray-900 rounded-xl px-8 h-[35px] bg-gradient-to-r from-blue-500 to-green-400 hover:from-green-400 hover:to-blue-500 transition-all"
 								>
-									<Link className="font-montserrat" href="/donate">
+									<Link className="font-montserrat" href="/projects">
 										Donate Now
 									</Link>
 								</Button>

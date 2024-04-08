@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 export default function Banner() {
 	return (
-		<div className="full-bleed banner-bg bg-[url('/images/pat.png')] bg-center h-56 sm:h-52 flex justify-center items-center gap-5 sm:gap-10">
+		<div className="full-bleed banner-bg bg-[url('/images/pat.png')] bg-center h-56 sm:h-64 flex justify-center items-center gap-5 sm:gap-10">
 			<motion.div
 				initial={{ opacity: 0, y: -100 }}
 				viewport={{ once: true }}
@@ -15,13 +15,13 @@ export default function Banner() {
 				transition={{ duration: 0.4 }}
 				className="w-[400px]"
 			>
-				<h1 className="text-xl">Prepare. Respond. Thrive</h1>
+				<h1 className="text-3xl">Prepare. Respond. Thrive</h1>
 				<p className="py-2 text-sm mb-2 sm:mb-4">
 					Empower communities. Save lives. Be disaster-ready. Your support makes a
 					difference.
 				</p>
 				<Button className="rounded-xl text-sm bg-bluish hover:shadow-lg">
-					<Link href="/donate">Donate</Link>
+					<Link href="/projects">Donate</Link>
 				</Button>
 			</motion.div>
 			<motion.div

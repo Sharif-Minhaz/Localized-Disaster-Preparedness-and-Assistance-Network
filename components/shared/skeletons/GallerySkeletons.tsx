@@ -28,13 +28,13 @@ function SingleGallery() {
 
 export function GalleryLoader() {
 	return (
-		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 px-3 pb-3 pt-0">
+		<>
 			<SingleGallery />
 			<SingleGallery />
 			<SingleGallery />
 			<SingleGallery />
 			<SingleGallery />
 			<SingleGallery />
-		</div>
+		</>
 	);
 }

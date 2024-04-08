@@ -27,7 +27,7 @@ export default function SingleTreatPage({ params }: { params: { slug: string } }
 		<section>
 			<section className="shadow-md dark:shadow-gray-900 rounded-xl border">
 				<div className="sm:p-5 p-4 flex">
-					<div className="h-[450px] relative overflow-hidden">
+					<div className="h-[300px] sm:h-[450px] relative overflow-hidden">
 						<Image
 							src={threat?.coverImg}
 							className="h-full object-cover object-top rounded-xl"

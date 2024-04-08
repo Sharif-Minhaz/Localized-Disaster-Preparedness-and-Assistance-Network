@@ -21,7 +21,7 @@ const fadeInAnimationVariants = {
 		opacity: 0,
 		y: -20,
 	},
-	animate: (index: number) => ({
+	whileInView: (index: number) => ({
 		opacity: 1,
 		y: 0,
 		transition: {
@@ -91,7 +91,8 @@ export default function Sidebar({ isAdmin }: { isAdmin?: boolean }) {
 								<motion.li
 									variants={fadeInAnimationVariants}
 									initial="initial"
-									animate="animate"
+									whileInView="whileInView"
+									viewport={{ once: true }}
 									custom={index}
 									key={menu.title}
 									className="px-4 py-1"

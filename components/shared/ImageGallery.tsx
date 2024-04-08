@@ -40,18 +40,14 @@ export default function ImageGallery() {
 	}
 
 	return (
-		<InfiniteScroll
-			dataLength={images.length}
-			next={fetchMoreData}
-			hasMore={hasMore}
-			loader={<GalleryLoader />}
-			endMessage={
-				<p className="text-center px-4 my-4 mt-8">
-					You have seen it all. Check again for more updates.
-				</p>
-			}
-		>
-			<div className="p-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+		<section>
+			<InfiniteScroll
+				className="p-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"
+				dataLength={images.length}
+				next={fetchMoreData}
+				hasMore={hasMore}
+				loader={<GalleryLoader />}
+			>
 				{images.map((image) => (
 					<article
 						className="relative group w-full h-[240px] border shadow-md dark:shadow-gray-900 rounded-xl"
@@ -71,7 +67,12 @@ export default function ImageGallery() {
 						</div>
 					</article>
 				))}
-			</div>
-		</InfiniteScroll>
+			</InfiniteScroll>
+			{!hasMore && (
+				<p className="text-center px-4 my-4 mt-8">
+					You have seen it all. Check again for more updates.
+				</p>
+			)}
+		</section>
 	);
 }

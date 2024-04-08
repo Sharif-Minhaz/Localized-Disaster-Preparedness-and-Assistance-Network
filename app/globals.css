@@ -81,10 +81,6 @@ canvas {
 	height: 100% !important;
 }
 
-a {
-	transition: all 0.3s ease 0s;
-}
-
 /* -----------------scrollbar------------------ */
 /* width */
 ::-webkit-scrollbar {

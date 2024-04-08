@@ -25,7 +25,7 @@ export default function UserStatus() {
 	}
 
 	return (
-		<div className="flex items-center gap-4 rounded-[8px] dark:bg-slate-800 bg-slate-100 border px-3 py-2">
+		<div className="flex items-center gap-4 px-3 py-2 shadow-sm w-full rounded-xl border drop-shadow-md dark:bg-slate-900 bg-[#f7f7f7] dark:bg-opacity-40 backdrop-blur">
 			<div className="relative">
 				<Image
 					draggable={false}
