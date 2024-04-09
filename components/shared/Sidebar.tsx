@@ -42,12 +42,12 @@ export default function Sidebar({ isAdmin }: { isAdmin?: boolean }) {
 	return (
 		<OutsideClickHandler onOutsideClick={closeSidebar}>
 			<aside
-				className={`fixed bg-cover bg-[url(/images/sidebar-bg.webp)] ${
+				className={`fixed bg-cover bg-[url(/images/sidebar.webp)] ${
 					sidebarOpen ? "left-0" : "lg:left-0 -left-[280px]"
 				} transition-all top-0 z-30 flex h-screen w-[255px] flex-col justify-between overflow-auto sm:overflow-hidden sm:hover:overflow-auto border-r`}
 			>
-				<div className="flex flex-col dark:bg-black/75 bg-[#ffffffe0] pb-5">
-					<div className="px-4 pt-3 pb-2">
+				<div className="flex flex-col pb-5">
+					<div className="px-4 pt-3 pb-2 sm:pb-3 border-b border-b-slate-700">
 						<Link
 							className="flex items-center gap-2"
 							aria-label="return to home"
@@ -60,20 +60,20 @@ export default function Sidebar({ isAdmin }: { isAdmin?: boolean }) {
 								height={32}
 								alt="return to home"
 							/>
-							<p className="select-none text-[26px] font-extrabold text-slate-600 dark:text-slate-200">
+							<p className="select-none text-[26px] font-medium text-slate-200 dark:text-slate-200">
 								LDPAN
 							</p>
 						</Link>
 					</div>
 
-					<div className="px-4 py-2 h-[65px]">
+					<div className="px-4 py-2 mt-2 h-[65px]">
 						<SignedIn>
 							<UserStatus />
 						</SignedIn>
 						<SignedOut>
 							<Button
 								onClick={() => router.push("/sign-in")}
-								className="flex w-full dark:hover:bg-slate-900 hover:bg-slate-300 dark:text-slate-100 text-slate-800 h-full items-center gap-4 rounded-[8px] dark:bg-slate-800 bg-slate-100 border px-3 py-2"
+								className="flex w-full hover:bg-[#2a5177ca] bg-[#203e5cca] h-full items-center gap-4 rounded-[8px] border border-slate-900 px-3 py-2"
 							>
 								Sign in now
 							</Button>
@@ -99,10 +99,10 @@ export default function Sidebar({ isAdmin }: { isAdmin?: boolean }) {
 								>
 									<Link
 										href={menu.url}
-										className={`flex items-center px-4 py-3 gap-2 rounded-[8px] dark:text-white ${
+										className={`flex items-center px-4 py-3 gap-2 rounded-[8px] transition-all duration-200 hover:bg-[#203e5cca] ${
 											isActive
-												? "text-slate-100 bg-[#4485ef] shadow-md"
-												: "text-black"
+												? "text-[#669df6] font-bold bg-[#203e5cca]"
+												: "text-white/80"
 										}`}
 									>
 										<Icon size={20} />
@@ -113,19 +113,19 @@ export default function Sidebar({ isAdmin }: { isAdmin?: boolean }) {
 							);
 						})}
 					</ul>
-					<div className="my-3 border-b border-[#bed2ff] dark:border-slate-700" />
+					<div className="my-3 border-b border-slate-700" />
 					<div className="px-4">
 						<SignedIn>
 							<div className="mb-3">
 								<SignOutButton>
-									<div className="flex items-center cursor-pointer px-4 py-3 gap-2">
+									<div className="flex items-center text-white/80 cursor-pointer px-4 py-3 gap-2">
 										<LogOut size={20} />
 										<span>{dictionary[lang]?.["signout"]}</span>
 									</div>
 								</SignOutButton>
 							</div>
 						</SignedIn>
-						<div className="flex items-center gap-2 px-4 py-3 mb-10 border dark:bg-slate-900 bg-slate-100 rounded-xl">
+						<div className="flex items-center gap-2 px-4 py-3 mb-10 border border-slate-900 bg-[#325980ca] text-white/80 rounded-xl">
 							{theme === "dark" ? <Moon size={20} /> : <Sun size={20} />}
 							<div className="flex items-center justify-between space-x-2 w-full">
 								<Label className="cursor-pointer" htmlFor="dark-mode">
@@ -145,7 +145,7 @@ export default function Sidebar({ isAdmin }: { isAdmin?: boolean }) {
 				</div>
 				<span
 					onClick={closeSidebar}
-					className="absolute lg:hidden dark:bg-[#19191a] bg-white rounded-lg cursor-pointer right-4 top-4 inline-flex px-2 py-1"
+					className="absolute lg:hidden text-white/80 bg-[#203e5cca] rounded-lg cursor-pointer right-4 top-4 inline-flex px-2 py-1"
 				>
 					<AlignRight />
 				</span>

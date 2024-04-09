@@ -33,7 +33,7 @@ export default function Hero() {
 									className="flex items-center text-[14px] gap-1"
 								>
 									<Phone className="text-blue-400" size={16} />
-									<span>+880 1322-323264</span>
+									<span>+880 1308-673831</span>
 								</motion.small>
 								<motion.small
 									initial={{ y: -30, opacity: 0 }}
