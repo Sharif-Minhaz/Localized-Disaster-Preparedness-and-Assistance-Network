@@ -15,7 +15,7 @@ export default function Banner() {
 				transition={{ duration: 0.4 }}
 				className="w-[400px]"
 			>
-				<h1 className="text-3xl">Prepare. Respond. Thrive</h1>
+				<h1 className="sm:text-3xl text-2xl">Prepare. Respond. Thrive</h1>
 				<p className="py-2 text-sm mb-2 sm:mb-4">
 					Empower communities. Save lives. Be disaster-ready. Your support makes a
 					difference.

@@ -103,7 +103,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en" className="scroll-smooth">
-			<body className={`${inter.variable} ${montserrat.variable} font-inter`}>
+			<body
+				className={`${inter.variable} ${montserrat.variable} font-inter`}
+				suppressHydrationWarning={true}
+			>
 				<MainContextProvider>
 					<Suspense fallback={<MainPageFallback />}>
 						<ClerkThemeProvider>{children}</ClerkThemeProvider>

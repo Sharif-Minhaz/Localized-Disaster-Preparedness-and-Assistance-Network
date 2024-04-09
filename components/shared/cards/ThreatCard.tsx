@@ -4,6 +4,20 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
+const fadeInAnimationVariants = {
+	initial: {
+		opacity: 0,
+		y: -20,
+	},
+	whileInView: (index: number) => ({
+		opacity: 1,
+		y: 0,
+		transition: {
+			delay: 0.2 * index,
+		},
+	}),
+};
+
 interface DataProp {
 	title: string;
 	img: string;
@@ -21,11 +35,12 @@ export default function ThreatCard({ data, index }: Props) {
 	return (
 		<motion.article
 			key={data.slug}
-			initial={{ y: -20, opacity: 0 }}
+			variants={fadeInAnimationVariants}
+			initial="initial"
+			whileInView="whileInView"
 			viewport={{ once: true }}
-			whileInView={{ y: 0, opacity: 1 }}
-			transition={{ delay: 0.1 * (index + 1) }}
-			className="p-2 shadow-sm hover:shadow w-full rounded-xl border relative drop-shadow-lg dark:bg-slate-900 bg-white dark:bg-opacity-40 bg-opacity-50 backdrop-blur"
+			custom={index}
+			className="p-2 shadow-sm hover:shadow w-full rounded-xl border relative drop-shadow-lg dark:bg-slate-900 bg-white dark:bg-opacity-40 bg-opacity-50 transform-gpu sm:backdrop-blur"
 		>
 			<Link className="w-full flex gap-3" href={`/threats/${data.slug}`}>
 				<div className="flex items-center">
