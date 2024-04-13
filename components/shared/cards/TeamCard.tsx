@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ITeamData } from "@/constants";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function TeamCard({ member }: { member: ITeamData }) {
 	return (
@@ -52,7 +51,10 @@ export default function TeamCard({ member }: { member: ITeamData }) {
 					<div className="process-section flex justify-center">
 						<div className="social-bar">
 							<div className="social-icons">
-								<Link href={member.fb} className="slider-nav-item">
+								<a
+									href={member.fb}
+									className="slider-nav-item bg-white dark:bg-[#baddf7]"
+								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										width={24}
@@ -68,8 +70,11 @@ export default function TeamCard({ member }: { member: ITeamData }) {
 										<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 										<path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
 									</svg>
-								</Link>
-								<Link href={member.gh} className="slider-nav-item">
+								</a>
+								<a
+									href={member.gh}
+									className="slider-nav-item bg-white dark:bg-[#baddf7]"
+								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										width={24}
@@ -85,8 +90,11 @@ export default function TeamCard({ member }: { member: ITeamData }) {
 										<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 										<path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
 									</svg>
-								</Link>
-								<a href={member.wp} className="slider-nav-item">
+								</a>
+								<a
+									href={member.wp}
+									className="slider-nav-item bg-white dark:bg-[#baddf7]"
+								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										width={24}
