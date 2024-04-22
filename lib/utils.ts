@@ -2,6 +2,7 @@ import { type ClassValue, clsx } from "clsx";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { twMerge } from "tailwind-merge";
 import emailjs from "@emailjs/browser";
+import { addDays, format } from "date-fns";
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
@@ -26,7 +27,7 @@ export function convertToPlainObj(obj: any) {
 	return JSON.parse(JSON.stringify(obj));
 }
 
-export function formatDate(date?: string) {
+export function formatDate(date?: string | Date) {
 	const actualDate = new Date(date || Date.now());
 
 	const options = {
@@ -40,7 +41,7 @@ export function formatDate(date?: string) {
 		timeZone: "UTC",
 	};
 
-	const formattedDate = actualDate.toLocaleString("en-US", options);
+	const formattedDate = actualDate.toLocaleString("en-US", options); // Jan 01, 2024, 24:00:00
 
 	return formattedDate;
 }
@@ -53,8 +54,21 @@ export function formatToShortDate(msDate: number | Date | null | string) {
 		day: "numeric",
 	};
 	// @ts-ignore
-	const formatter = new Intl.DateTimeFormat("en-US", options);
+	const formatter = new Intl.DateTimeFormat("en-US", options); // Jan 1, 2024
 	return formatter.format(date);
+}
+
+export function formatDateToISO(inputDateString: string | Date) {
+	// Convert input string to a Date object
+	const inputDate = new Date(inputDateString);
+
+	// Add two days to the input date
+	const newDate = addDays(inputDate, 2);
+
+	// Format the new date as 'YYYY-MM-DD'
+	const formattedDate = format(newDate, "yyyy-MM-dd");
+
+	return formattedDate;
 }
 
 export function handleImage(

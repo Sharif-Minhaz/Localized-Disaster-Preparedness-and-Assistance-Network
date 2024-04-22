@@ -546,9 +546,9 @@ export const teamData = [
 
 export const locations = [
 	"Dhaka",
-	"Cumilla",
+	"Sylhet",
 	"Barishal",
-	"Chittagong",
+	"Chattogram",
 	"Mymensingh",
 	"Khulna",
 	"Rangpur",

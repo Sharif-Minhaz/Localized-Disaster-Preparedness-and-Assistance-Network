@@ -54,7 +54,18 @@ export default function SelectPredictionDate({
 						mode="single"
 						selected={value}
 						onSelect={handler}
-						disabled={(date) => date > new Date() || date < new Date("1900-01-01")}
+						disabled={(date) => {
+							// Create a new Date object for today's date with the time set to 00:00:00
+							const today = new Date();
+							today.setHours(0, 0, 0, 0);
+
+							// Create a new Date object for the date from the calendar with the time set to 00:00:00
+							const calendarDate = new Date(date);
+							calendarDate.setHours(0, 0, 0, 0);
+
+							// Compare the two dates
+							return calendarDate <= today;
+						}}
 						initialFocus
 					/>
 				</div>

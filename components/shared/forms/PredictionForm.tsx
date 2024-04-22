@@ -10,10 +10,9 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
-import { CheckCircle } from "lucide-react";
+import { Compass } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DisasterValidation } from "@/lib/validations/disaster";
-import Image from "next/image";
 import { useForm } from "react-hook-form";
 
 import {
@@ -36,7 +35,7 @@ export default function PredictionForm({
 	const form = useForm({
 		resolver: zodResolver(DisasterValidation),
 		defaultValues: {
-			date: new Date("2024-01-01"),
+			date: new Date(),
 			location: "",
 		},
 	});
@@ -63,7 +62,10 @@ export default function PredictionForm({
 											<SelectGroup>
 												<SelectLabel>Locations</SelectLabel>
 												{locations.map((location) => (
-													<SelectItem key={location} value={location}>
+													<SelectItem
+														key={location}
+														value={location.toLowerCase()}
+													>
 														{location}
 													</SelectItem>
 												))}
@@ -95,7 +97,7 @@ export default function PredictionForm({
 
 				<div className="pb-5 space-x-3">
 					<Button disabled={form.formState.isSubmitting} type="submit">
-						<CheckCircle size={17} className="mr-2" /> Get Prediction
+						<Compass size={17} className="mr-2" /> Get Prediction
 					</Button>
 				</div>
 			</form>

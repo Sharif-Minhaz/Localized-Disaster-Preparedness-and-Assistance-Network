@@ -7,33 +7,82 @@ import { getDisasterPredictionRes } from "@/lib/actions/disaster.action";
 import { useToast } from "../ui/use-toast";
 import { ToastAction } from "../ui/toast";
 import { useState } from "react";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { CloudSunRain, TriangleAlert } from "lucide-react";
+import Image from "next/image";
 
 export default function PredictionResult() {
 	const [results, setResults] = useState([]);
+	const [loading, setLoading] = useState(false);
 
 	const { toast } = useToast();
 
 	// form submitter
 	async function onSubmit(values: z.infer<typeof DisasterValidation>) {
-		const data = {
-			date: values.date,
-			location: values.location,
-		};
+		try {
+			setLoading(true);
 
-		const res = await getDisasterPredictionRes(data);
+			const data = {
+				date: values.date,
+				location: values.location,
+			};
 
-		if (res) {
-			toast({
-				title: "Success: Disaster prediction",
-				description: "Prediction generate successfully",
-				action: <ToastAction altText="OK">OK</ToastAction>,
-			});
+			const result = await getDisasterPredictionRes(data);
+
+			if (result.length) {
+				toast({
+					title: "Success: Disaster prediction",
+					description: "Prediction generate successfully",
+					action: <ToastAction altText="OK">OK</ToastAction>,
+				});
+				// updating the result
+				setResults(result);
+			}
+		} catch (error) {
+			console.error(error);
+			throw error;
+		} finally {
+			setLoading(false);
 		}
 	}
 
 	return (
 		<div className="p-4">
+			{/* prediction form */}
 			<PredictionForm onSubmit={onSubmit} />
+
+			{/* loading screen */}
+			{loading && (
+				<div className="px-3 py-6 mt-4 border grid place-content-center bg-[#3b82f60f]">
+					<Image src="/gifs/radar.gif" height={230} width={230} alt="" />
+				</div>
+			)}
+
+			{/* prediction response  */}
+			{results.length !== 0 && !loading && (
+				<div className="p-3 mt-4 border flex flex-col gap-3">
+					{results.map((line: string, index: number) => {
+						const isRisky = line.includes("Alert");
+						return (
+							<Alert
+								key={index}
+								className={isRisky ? "bg-red-100" : "text-green-600 bg-green-100"}
+								variant={isRisky ? "destructive" : "default"}
+							>
+								<div className={`flex gap-2`}>
+									{isRisky ? (
+										<TriangleAlert className="h-[18px] w-[18px]" />
+									) : (
+										<CloudSunRain className="h-[18px] w-[18px]" />
+									)}
+									<AlertTitle>{isRisky ? "Warning" : "No Risk"}</AlertTitle>
+								</div>
+								<AlertDescription className="pl-6">{line}</AlertDescription>
+							</Alert>
+						);
+					})}
+				</div>
+			)}
 		</div>
 	);
 }
