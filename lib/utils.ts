@@ -62,11 +62,8 @@ export function formatDateToISO(inputDateString: string | Date) {
 	// Convert input string to a Date object
 	const inputDate = new Date(inputDateString);
 
-	// Add two days to the input date
-	const newDate = addDays(inputDate, 2);
-
 	// Format the new date as 'YYYY-MM-DD'
-	const formattedDate = format(newDate, "yyyy-MM-dd");
+	const formattedDate = format(inputDate, "yyyy-MM-dd");
 
 	return formattedDate;
 }

@@ -63,8 +63,13 @@ export default function SelectPredictionDate({
 							const calendarDate = new Date(date);
 							calendarDate.setHours(0, 0, 0, 0);
 
-							// Compare the two dates
-							return calendarDate <= today;
+							// Calculate the date 10 days from today
+							const tenDaysFromToday = new Date();
+							tenDaysFromToday.setDate(today.getDate() + 10);
+							tenDaysFromToday.setHours(0, 0, 0, 0);
+
+							// Check if the calendar date is before today or after 10 days from today
+							return calendarDate < today || calendarDate > tenDaysFromToday;
 						}}
 						initialFocus
 					/>

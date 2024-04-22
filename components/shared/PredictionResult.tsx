@@ -10,6 +10,7 @@ import { useState } from "react";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { CloudSunRain, TriangleAlert } from "lucide-react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function PredictionResult() {
 	const [results, setResults] = useState([]);
@@ -39,8 +40,14 @@ export default function PredictionResult() {
 				setResults(result);
 			}
 		} catch (error) {
+			toast({
+				variant: "destructive",
+				title: "Failure: Disaster prediction",
+				description: "Range error or limit exceed",
+				action: <ToastAction altText="OK">OK</ToastAction>,
+			});
+			setResults([]); // reset the result in face error
 			console.error(error);
-			throw error;
 		} finally {
 			setLoading(false);
 		}
@@ -64,21 +71,32 @@ export default function PredictionResult() {
 					{results.map((line: string, index: number) => {
 						const isRisky = line.includes("Alert");
 						return (
-							<Alert
+							<motion.div
 								key={index}
-								className={isRisky ? "bg-red-100" : "text-green-600 bg-green-100"}
-								variant={isRisky ? "destructive" : "default"}
+								initial={{ opacity: 0, y: -100 }}
+								viewport={{ once: true }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ delay: 0.2 * (index + 1) }}
 							>
-								<div className={`flex gap-2`}>
-									{isRisky ? (
-										<TriangleAlert className="h-[18px] w-[18px]" />
-									) : (
-										<CloudSunRain className="h-[18px] w-[18px]" />
-									)}
-									<AlertTitle>{isRisky ? "Warning" : "No Risk"}</AlertTitle>
-								</div>
-								<AlertDescription className="pl-6">{line}</AlertDescription>
-							</Alert>
+								<Alert
+									className={
+										isRisky
+											? "!bg-[#e9b1b117]"
+											: "text-green-600 !bg-[#65d1a51a]"
+									}
+									variant={isRisky ? "destructive" : "default"}
+								>
+									<div className={`flex gap-2`}>
+										{isRisky ? (
+											<TriangleAlert className="h-[18px] w-[18px]" />
+										) : (
+											<CloudSunRain className="h-[18px] w-[18px]" />
+										)}
+										<AlertTitle>{isRisky ? "Warning" : "No Risk"}</AlertTitle>
+									</div>
+									<AlertDescription className="pl-6">{line}</AlertDescription>
+								</Alert>
+							</motion.div>
 						);
 					})}
 				</div>

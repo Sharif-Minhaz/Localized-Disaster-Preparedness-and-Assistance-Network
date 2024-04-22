@@ -97,7 +97,7 @@ export default function PredictionForm({
 
 				<div className="pb-5 space-x-3">
 					<Button disabled={form.formState.isSubmitting} type="submit">
-						<Compass size={17} className="mr-2" /> Get Prediction
+						<Compass size={17} className="mr-2" /> Get 7d Predictions
 					</Button>
 				</div>
 			</form>
