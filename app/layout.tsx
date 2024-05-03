@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { MainContextProvider } from "@/contexts/MainContext";
@@ -114,6 +115,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				</MainContextProvider>
 				<Toaster />
 			</body>
+			<GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS as string} />
 		</html>
 	);
 }
