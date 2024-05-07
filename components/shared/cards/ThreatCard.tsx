@@ -29,9 +29,10 @@ interface DataProp {
 interface Props {
 	data: DataProp;
 	index: number;
+	type?: string;
 }
 
-export default function ThreatCard({ data, index }: Props) {
+export default function ThreatCard({ data, index, type }: Props) {
 	return (
 		<motion.article
 			key={data.slug}
@@ -42,7 +43,12 @@ export default function ThreatCard({ data, index }: Props) {
 			custom={index}
 			className="p-2 shadow-sm hover:shadow w-full rounded-xl border relative drop-shadow-lg dark:bg-slate-900 bg-white dark:bg-opacity-40 bg-opacity-50 transform-gpu sm:backdrop-blur"
 		>
-			<Link className="w-full flex gap-3" href={`/threats/${data.slug}`}>
+			<Link
+				className={`w-full flex gap-3 ${
+					type === "home" && "xl:justify-start md:justify-center justify-start"
+				}`}
+				href={`/threats/${data.slug}`}
+			>
 				<div className="flex items-center">
 					<Image
 						src={data.img}
@@ -52,7 +58,11 @@ export default function ThreatCard({ data, index }: Props) {
 						alt={data.title}
 					/>
 				</div>
-				<div className="flex justify-center flex-col gap-1.5">
+				<div
+					className={`flex justify-center flex-col gap-1.5 ${
+						type === "home" && "xl:block md:hidden sm:block"
+					}`}
+				>
 					<h1 className="font-medium">{data.title}</h1>
 					<p className="text-[13px] dark:text-slate-300 text-slate-800">
 						{data.description}

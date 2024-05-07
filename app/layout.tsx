@@ -1,4 +1,4 @@
-// import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { MainContextProvider } from "@/contexts/MainContext";
@@ -16,7 +16,6 @@ import {
 	AUTHOR,
 	AUTHOR_WEBSITE,
 } from "@/constants";
-import { GoogleAnalytics } from "@/components/shared";
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://ldpan-v4.vercel.app"),
@@ -105,7 +104,6 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en" className="scroll-smooth">
-			<GoogleAnalytics />
 			<body
 				className={`${inter.variable} ${montserrat.variable} font-inter`}
 				suppressHydrationWarning={true}
@@ -116,6 +114,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					</Suspense>
 				</MainContextProvider>
 				<Toaster />
+				{/* ------ google analytics component to track the website properties ------ */}
+				<GoogleAnalytics gaId="G-MR2T9CC27W" />
 			</body>
 		</html>
 	);

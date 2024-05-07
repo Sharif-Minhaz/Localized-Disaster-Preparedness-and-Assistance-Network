@@ -25,7 +25,7 @@ export default function OrganizationCard({
 	const deleteProjectWithSlug = deleteCommunity.bind(null, slug);
 	return (
 		<article className="border relative flex w-full sm:max-w-[400px] flex-col overflow-hidden rounded-xl dark:shadow-gray-900 shadow-md transition-all hover:shadow-lg">
-			<div className="flex pt-4 px-4 pb-4 gap-3 border-b justify-between items-center dark:bg-slate-900 bg-[#f9f9f9]">
+			<div className="flex flex-col xl:flex-row pt-4 px-4 pb-4 gap-3 border-b justify-between items-center dark:bg-slate-900 bg-[#f9f9f9]">
 				<div className="flex gap-3 items-center">
 					<div>
 						<Image
@@ -45,9 +45,13 @@ export default function OrganizationCard({
 						</p>
 					</div>
 				</div>
-				<Link href={`/communities/${slug}`}>
-					<Button className="text-sm shadow-md dark:shadow-gray-900 rounded-lg bg-bluish-inverse h-8">
-						Visit
+				<Link
+					className="xl:w-auto w-full inline-flex md:mt-1"
+					href={`/communities/${slug}`}
+				>
+					<Button className="text-sm w-full shadow-md dark:shadow-gray-900 rounded-full xl:rounded-lg bg-bluish-inverse h-8">
+						<span className="xl:inline hidden">Visit</span>
+						<span className="xl:hidden inline">View group</span>
 					</Button>
 				</Link>
 			</div>

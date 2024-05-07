@@ -77,6 +77,9 @@ module.exports = {
 				inter: ["var(--font-inter)"],
 				montserrat: ["var(--font-montserrat)"],
 			},
+			backgroundImage: {
+				"blue-gradient": "linear-gradient(90deg, #0179FE 0%, #4893FF 100%)",
+			},
 		},
 	},
 	plugins: [require("tailwindcss-animate")],

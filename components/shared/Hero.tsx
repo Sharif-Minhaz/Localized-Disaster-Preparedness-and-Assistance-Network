@@ -108,7 +108,12 @@ export default function Hero() {
 						</motion.h1>
 						<div className="flex sm:flex-row flex-col gap-4">
 							{[...heroThreats].slice(0, 3).map((data, index) => (
-								<ThreatCard key={data.title} data={data} index={index} />
+								<ThreatCard
+									key={data.title}
+									type="home"
+									data={data}
+									index={index}
+								/>
 							))}
 						</div>
 					</div>
