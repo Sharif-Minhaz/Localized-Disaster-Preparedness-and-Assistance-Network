@@ -13,6 +13,7 @@ export default authMiddleware({
 		"/gallery",
 		"/api/webhooks(.*)",
 		"/api/uploadthing",
+		"/api/sentry-example-api",
 	],
 
 	// An array of routes to be ignored by the authentication middleware.
