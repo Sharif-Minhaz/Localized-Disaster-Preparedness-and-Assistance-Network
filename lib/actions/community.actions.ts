@@ -38,7 +38,7 @@ export async function createCommunity({
 				lower: true,
 				strict: true,
 				remove: /[*+~.()'"!:@]/g,
-			})}-${Date.now()}`,
+			})}-${crypto.randomUUID()}`,
 			image,
 			bio,
 			createdBy: user._id,

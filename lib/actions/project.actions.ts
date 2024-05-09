@@ -2,7 +2,7 @@
 
 import mongoose, { FilterQuery, SortOrder } from "mongoose";
 
-import Project, { IProject } from "../models/ProjectModel";
+import Project from "../models/ProjectModel";
 import { connectToDB } from "../mongoose";
 import slugify from "slugify";
 import { revalidatePath } from "next/cache";
@@ -52,7 +52,7 @@ export async function createProject(data: Props) {
 				lower: true,
 				strict: true,
 				remove: /[*+~.()'"!:@]/g,
-			})}-${Date.now()}`,
+			})}-${crypto.randomUUID()}`,
 			heading,
 			from,
 			to,

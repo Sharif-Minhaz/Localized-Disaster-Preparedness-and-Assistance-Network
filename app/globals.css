@@ -234,6 +234,24 @@ p:empty::before {
 }
 
 /* team card */
+.profile-blob {
+	box-shadow: 0 5px 5px 5px rgba(13, 110, 253, 0.2);
+	animation: blob-animation 5s ease-in-out infinite;
+	transition: all 1s ease-in-out;
+}
+
+@keyframes blob-animation {
+
+	0%,
+	100% {
+		border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+	}
+
+	50% {
+		border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+	}
+}
+
 .social-bar {
 	display: flex;
 	margin-bottom: 20px;
@@ -263,7 +281,6 @@ p:empty::before {
 	margin: 15px 15px;
 	font-size: 22px;
 }
-
 
 .slider-nav-item:before {
 	position: absolute;

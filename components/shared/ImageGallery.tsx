@@ -3,9 +3,8 @@
 import { IGallery } from "@/lib/models/GalleryModel";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchImages } from "@/lib/actions/gallery.actions";
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import { GalleryLoader } from "@/components/shared";
+import { GalleryImage, GalleryLoader } from "@/components/shared";
 
 export default function ImageGallery() {
 	const [images, setImages] = useState<IGallery[]>([]);
@@ -48,24 +47,8 @@ export default function ImageGallery() {
 				hasMore={hasMore}
 				loader={<GalleryLoader />}
 			>
-				{images.map((image) => (
-					<article
-						className="relative group w-full h-[240px] border shadow-md dark:shadow-gray-900 rounded-xl"
-						key={image._id}
-					>
-						<Image
-							fill
-							className="w-full h-full object-cover rounded-xl"
-							src={image.image}
-							alt={image.heading}
-						/>
-						<div className="group-hover:opacity-100 transition-all duration-500 opacity-0 top-0 text-[12px] w-full h-full rounded-b-xl rounded-t-xl absolute text-white text-center p-2 bg-black/50">
-							{image.description}
-						</div>
-						<div className="bottom-0 text-sm w-full rounded-b-xl absolute text-white text-center p-2 bg-black/50">
-							{image.heading}
-						</div>
-					</article>
+				{images.map((image, index) => (
+					<GalleryImage index={index} image={image} key={index} />
 				))}
 			</InfiniteScroll>
 			{!hasMore && (

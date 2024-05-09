@@ -80,6 +80,7 @@ import Container from "./Container";
 import PredictionForm from "./forms/PredictionForm";
 import PredictionResult from "./PredictionResult";
 import SelectPredictionDate from "./SelectPredictionDate";
+import GalleryImage from "./GalleryImage";
 
 export {
 	Navbar,
@@ -164,4 +165,5 @@ export {
 	SelectPredictionDate,
 	GalleryLoader,
 	MotionDiv,
+	GalleryImage,
 };

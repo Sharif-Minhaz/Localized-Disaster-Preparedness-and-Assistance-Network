@@ -12,8 +12,12 @@ export default function TeamCard({ member }: { member: ITeamData }) {
 					loading="lazy"
 					src={member.image}
 					alt="card image"
-					className="rounded-full object-cover ring-4 ring-blue-500 lg:w-[180px] md:w-[150px] w-[200px] lg:h-[180px] md:h-[150px] h-[200px]"
+					className="rounded-full border-dashed border-teal-500 border-[3px] object-cover lg:w-[180px] md:w-[150px] w-[200px] lg:h-[180px] md:h-[150px] h-[200px]"
 				/>
+				{/* <div
+					style={{ backgroundImage: `url(${member.image})` }}
+					className="w-[200px] h-[200px] profile-blob bg-center bg-cover"
+				/> */}
 			</div>
 
 			<div className="text-center">
