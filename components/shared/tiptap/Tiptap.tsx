@@ -36,7 +36,7 @@ const Tiptap = ({
 		},
 	});
 
-	editor && editor.setEditable(editable);
+	// editor && editor.setEditable(editable);
 
 	return (
 		<div>

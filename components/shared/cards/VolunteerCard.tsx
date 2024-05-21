@@ -5,27 +5,32 @@ import Image from "next/image";
 
 export default function VolunteerCard({ volunteer }: { volunteer: IUser }) {
 	return (
-		<div className="mb-4 lg:mb-0 bg-[url(/images/pat.png)]">
+		<div className="mb-4 lg:mb-0 bg-[url(/images/pat.png)] w-full">
 			<div className="relative block rounded-lg p-4 shadow-lg dark:shadow-slate-900 border">
-				<div className="flex-col lg:flex-row items-center lg:justify-center flex">
-					<div className="w-full shrink-0 flex justify-center grow-0 basis-auto lg:w-5/12 lg:pr-4">
+				<div className="items-center flex">
+					<div className={`w-max shrink-1 flex grow-0 basis-auto pr-4 justify-start`}>
 						<Image
 							src={volunteer.imageUrl}
-							alt="Trendy Pants and Shoes"
-							height={150}
-							width={150}
-							className="mb-4 object-cover rounded-md lg:mb-0"
+							alt="volunteer"
+							height={100}
+							width={100}
+							className="object-cover w-full h-full rounded-md"
 						/>
 					</div>
-					<div className="w-full text-center lg:text-left shrink-0 grow-0 basis-auto lg:w-7/12">
-						<h1 className="lg:text-lg font-bold md:text-xl">{volunteer.name}</h1>
+					<div className={`text-left shrink-1 grow-1 basis-auto w-full`}>
+						<h1
+							title={volunteer.name}
+							className="lg:text-lg font-bold md:text-xl line-clamp-1"
+						>
+							{volunteer.name}
+						</h1>
 						<p className="text-sm text-neutral-500 -mt-1 dark:text-neutral-300">
 							@{volunteer.username}
 						</p>
 						<p className="font-montserrat text-[12px] text-neutral-500 dark:text-neutral-300">
 							{formatToShortDate(volunteer.createdAt)}
 						</p>
-						<ul className="mx-auto flex list-inside justify-center lg:justify-start mt-1">
+						<ul className="flex list-inside mt-1">
 							<a
 								href={`mailto:${volunteer.email}`}
 								className="text-blue-400 text-[20px] lg:text-[16px]"

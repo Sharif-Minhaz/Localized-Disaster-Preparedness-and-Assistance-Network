@@ -60,7 +60,7 @@ export default async function SinglePageProject({
 					<strong>Courier Address:</strong> {project.courierAddress}
 				</p>
 				<p>Commenced in {dateTime}</p>
-				<p>
+				<p className="mb-4">
 					<strong>Partner organization: </strong>
 					{project.partnerOrganizations ? (
 						project.partnerOrganizations

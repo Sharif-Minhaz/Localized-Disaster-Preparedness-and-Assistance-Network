@@ -1,5 +1,6 @@
 import { Schema, model, models } from "mongoose";
 import { IUser } from "./UserModel";
+import { Option } from "@/components/ui/multiple-selector";
 
 export interface IProject {
 	_id: string;
@@ -15,6 +16,7 @@ export interface IProject {
 	location: string;
 	courierAddress: string;
 	completed: boolean;
+	volunteers: Option[];
 }
 
 const projectSchema = new Schema(
@@ -67,6 +69,7 @@ const projectSchema = new Schema(
 			type: Boolean,
 			default: false,
 		},
+		volunteers: [{ type: Schema.Types.ObjectId, ref: "User" }],
 	},
 	{ timestamps: true }
 );

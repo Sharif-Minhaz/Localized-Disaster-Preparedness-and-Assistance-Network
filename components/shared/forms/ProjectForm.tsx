@@ -4,6 +4,7 @@ import * as z from "zod";
 import { useState } from "react";
 import { Button } from "../../ui/button";
 import { Input } from "../../ui/input";
+import { Option, Option as TOption } from "@/components/ui/multiple-selector";
 import {
 	Form,
 	FormControl,
@@ -16,7 +17,7 @@ import { Label } from "../../ui/label";
 import { Textarea } from "../../ui/textarea";
 import { addDays } from "date-fns";
 import { DateRange } from "react-day-picker";
-import { BackButton, DatePickerWithRange, Tiptap } from "..";
+import { BackButton, DatePickerWithRange, SelectVolunteers, Tiptap } from "..";
 import { CheckCircle, Plus } from "lucide-react";
 import { createProject, updateProject } from "@/lib/actions/project.actions";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -29,23 +30,31 @@ import { useForm } from "react-hook-form";
 import { useToast } from "../../ui/use-toast";
 import { ToastAction } from "../../ui/toast";
 import { IProject } from "@/lib/models/ProjectModel";
+import { IUser } from "@/lib/models/UserModel";
 
 export default function ProjectForm({
 	adminId,
 	project,
 	update,
+	volunteers,
+	selectedVolunteers,
 }: {
 	adminId?: string;
 	project?: IProject;
 	update?: boolean;
+	volunteers: IUser[];
+	selectedVolunteers?: Option[];
 }) {
+	// set volunteers as a option format [{value: "", label: ""}]
+	const options = volunteers?.map((data: IUser) => ({ value: data._id, label: data.name }));
+
 	const [key, setKey] = useState(Date.now());
 	const { toast } = useToast();
 	const router = useRouter();
 	const [files, setFiles] = useState<File[]>([]);
 
-	const projectStartDate = project?.from ? new Date(project.from) : new Date(2024, 0, 20);
-	const projectEndDate = project?.to ? new Date(project.to) : addDays(new Date(2024, 0, 20), 20);
+	const projectStartDate = project?.from ? new Date(project.from) : new Date();
+	const projectEndDate = project?.to ? new Date(project.to) : addDays(new Date(), 30);
 
 	const [date, setDate] = useState<DateRange | undefined>({
 		from: projectStartDate,
@@ -66,6 +75,7 @@ export default function ProjectForm({
 			location: project?.location || "",
 			courierAddress: project?.courierAddress || "",
 			image: project?.image || "",
+			volunteers: selectedVolunteers || null,
 		},
 	});
 
@@ -94,6 +104,7 @@ export default function ProjectForm({
 			courierAddress: values.courierAddress,
 			image: values.image,
 			slug: project?.slug,
+			volunteers: values?.volunteers,
 		};
 
 		if (update) {
@@ -132,6 +143,7 @@ export default function ProjectForm({
 
 	return (
 		<Form {...form}>
+			{/* @ts-ignore */}
 			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5">
 				<FormField
 					control={form.control}
@@ -277,6 +289,22 @@ export default function ProjectForm({
 									editable={!form.formState.isSubmitting}
 								/>
 							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="volunteers"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>Assign Volunteers</FormLabel>
+							<SelectVolunteers
+								name={field.name}
+								value={field.value as Option[]}
+								onChange={field.onChange}
+								options={options as TOption[]}
+							/>
 							<FormMessage />
 						</FormItem>
 					)}

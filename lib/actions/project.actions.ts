@@ -12,6 +12,7 @@ import { convertToPlainObj } from "../utils";
 import User from "../models/UserModel";
 import Donation from "../models/DonationModel";
 import Report from "../models/ReportModel";
+import { Option } from "@/components/ui/multiple-selector";
 
 interface Props {
 	heading: string;
@@ -25,6 +26,7 @@ interface Props {
 	createdBy?: string;
 	courierAddress: string;
 	location: string;
+	volunteers: Option[];
 }
 
 export async function createProject(data: Props) {
@@ -42,9 +44,14 @@ export async function createProject(data: Props) {
 			to,
 			details,
 			image,
+			volunteers,
 		} = data;
 
 		const user = await User.findOne({ clerkId: createdBy }).select("_id");
+
+		if (!user) throw new Error("User id is not found!, try again");
+
+		const transformedVolunteers = volunteers.map((data: Option) => data.value);
 
 		const res = await Project.create({
 			createdBy: user._id,
@@ -62,6 +69,7 @@ export async function createProject(data: Props) {
 			image,
 			location,
 			courierAddress,
+			volunteers: transformedVolunteers,
 		});
 
 		revalidatePath("/projects");
@@ -86,10 +94,15 @@ export async function updateProject(data: Props) {
 			}
 		}
 
-		const updateProject = await Project.findOneAndUpdate({ slug: data.slug }, data);
+		const transformedVolunteers = data.volunteers?.map((data: Option) => data.value);
+
+		const updateProject = await Project.findOneAndUpdate(
+			{ slug: data.slug },
+			{ ...data, volunteers: transformedVolunteers }
+		);
 
 		if (!updateProject) {
-			throw new Error("Project not found");
+			throw new Error("Project not updated");
 		}
 
 		revalidatePath("/projects");
@@ -105,7 +118,7 @@ export async function fetchProject(slug: string) {
 	try {
 		await connectToDB();
 
-		const projectDetails = await Project.findOne({ slug }).lean();
+		const projectDetails = await Project.findOne({ slug }).populate("volunteers").lean();
 
 		return convertToPlainObj(projectDetails);
 	} catch (error) {
@@ -298,7 +311,7 @@ export async function getProjectDonationInfo(projectId: string) {
 			]),
 		]);
 
-		return { resources, amount: amount[0].totalDonationAmount };
+		return { resources, amount: amount[0]?.totalDonationAmount || 0 };
 	} catch (error: any) {
 		console.error(error);
 		throw new Error(error.message);

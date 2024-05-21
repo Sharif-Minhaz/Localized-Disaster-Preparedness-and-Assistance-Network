@@ -81,6 +81,8 @@ import PredictionForm from "./forms/PredictionForm";
 import PredictionResult from "./PredictionResult";
 import SelectPredictionDate from "./SelectPredictionDate";
 import GalleryImage from "./GalleryImage";
+import SelectVolunteers from "./SelectVolunteers";
+import AssignedVolunteers from "./AssignedVolunteers";
 
 export {
 	Navbar,
@@ -166,4 +168,6 @@ export {
 	GalleryLoader,
 	MotionDiv,
 	GalleryImage,
+	SelectVolunteers,
+	AssignedVolunteers,
 };

@@ -1,7 +1,12 @@
 import { Suspense } from "react";
 import { fetchProject, fetchProjects } from "@/lib/actions/project.actions";
 import MainPageFallback from "@/components/shared/MainPageFallback";
-import { SinglePageProject, DonateSideBox, Container } from "@/components/shared";
+import {
+	SinglePageProject,
+	DonateSideBox,
+	Container,
+	AssignedVolunteers,
+} from "@/components/shared";
 import { IProject } from "@/lib/models/ProjectModel";
 import { currentUser } from "@clerk/nextjs";
 import { fetchUser } from "@/lib/actions/user.actions";
@@ -43,6 +48,10 @@ export default async function SingleProjectPage({ params }: { params: { slug: st
 			<div className="relative flex-grow">
 				<div className="shadow-md dark:shadow-gray-900 rounded-xl border w-full p-4">
 					<DonateSideBox project={project} />
+				</div>
+				{/* ------------- volunteers information --------------- */}
+				<div className="shadow-md dark:shadow-gray-900 rounded-xl border mt-4 md:mt-5 w-full p-4">
+					<AssignedVolunteers slug={project.slug} volunteers={project.volunteers} />
 				</div>
 			</div>
 		</div>
