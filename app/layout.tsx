@@ -107,6 +107,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			<body
 				className={`${inter.variable} ${montserrat.variable} font-inter`}
 				suppressHydrationWarning={true}
+				style={{ maxWidth: "1800px", marginInline: "auto" }}
 			>
 				<MainContextProvider>
 					<Suspense fallback={<MainPageFallback />}>

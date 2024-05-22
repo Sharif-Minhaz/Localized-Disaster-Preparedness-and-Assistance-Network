@@ -254,7 +254,7 @@ export default function DonationForm({ project }: { project: IProject }) {
 					disabled={form.formState.isSubmitting}
 					type="submit"
 				>
-					Submit
+					Donate now
 				</Button>
 			</form>
 		</Form>

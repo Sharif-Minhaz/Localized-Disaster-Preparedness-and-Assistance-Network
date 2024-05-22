@@ -51,7 +51,11 @@ export default async function SingleProjectPage({ params }: { params: { slug: st
 				</div>
 				{/* ------------- volunteers information --------------- */}
 				<div className="shadow-md dark:shadow-gray-900 rounded-xl border mt-4 md:mt-5 w-full p-4">
-					<AssignedVolunteers slug={project.slug} volunteers={project.volunteers} />
+					<AssignedVolunteers
+						userType={userInfo.user_type}
+						slug={project.slug}
+						volunteers={project.volunteers}
+					/>
 				</div>
 			</div>
 		</div>
