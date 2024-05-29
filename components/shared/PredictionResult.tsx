@@ -28,6 +28,17 @@ export default function PredictionResult() {
 				location: values.location,
 			};
 
+			// if (!executeRecaptcha) {
+			// 	return toast({
+			// 		variant: "destructive",
+			// 		title: "Failure occurred",
+			// 		description: "ReCaptcha did't loaded",
+			// 		action: <ToastAction altText="OK">OK</ToastAction>,
+			// 	});
+			// }
+
+			// generate the execution of the recaptcha
+
 			const result = await getDisasterPredictionRes(data);
 
 			if (result.length) {
