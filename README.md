@@ -16,11 +16,22 @@
     <img src="./public/screenshots/audit.webp" />
     <img src="./public/screenshots/dashboard.webp" />
 </div>
+
+---
+
 <div style="display: flex; gap: 10px; margin-top: 12px">
     <img style="width: 33%" src="./public/screenshots/ss-communities-sm.webp" />
     <img style="width: 32%" src="./public/screenshots/ss-home-sm.webp" />
     <img style="width: 32%" src="./public/screenshots/ss-weather-sm.webp" />
 </div>
+
+---
+
+<div style="display: flex; gap: 10px; margin-block: 10px">
+    <img style="width: 50%" src="./public/screenshots/predictions.webp" />
+    <img style="width: 49%" src="./public/screenshots/donation.webp" />
+</div>
+<img src="./public/screenshots/checkout.webp" />
 
 ### **Key Features:**
 
