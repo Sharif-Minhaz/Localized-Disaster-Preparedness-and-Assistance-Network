@@ -4,6 +4,24 @@
 
 **Project Description:** It will be a localized web-based platform that serves as a disaster preparedness and assistance network. This platform will connect communities, local authorities, and volunteers, facilitating the sharing of critical information, resources, and assistance during emergencies.
 
+<img src="./public/screenshots/home.webp" />
+<div style="display: flex; gap: 10px;">
+    <img style="width: 50%" src="./public/screenshots/communities.webp" />
+    <img style="width: 49%" src="./public/screenshots/community.webp" />
+</div>
+
+---
+
+<div>
+    <img src="./public/screenshots/audit.webp" />
+    <img src="./public/screenshots/dashboard.webp" />
+</div>
+<div style="display: flex; gap: 10px; margin-top: 12px">
+    <img style="width: 33%" src="./public/screenshots/ss-communities-sm.webp" />
+    <img style="width: 32%" src="./public/screenshots/ss-home-sm.webp" />
+    <img style="width: 32%" src="./public/screenshots/ss-weather-sm.webp" />
+</div>
+
 ### **Key Features:**
 
 **Emergency Alerts:** Provide alerts and notifications about impending disasters, weather conditions, and safety instructions.
