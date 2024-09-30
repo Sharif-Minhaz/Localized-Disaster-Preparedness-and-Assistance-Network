@@ -103,7 +103,7 @@ export const POST = async (request: Request) => {
 
 			return NextResponse.json({ message: "User updated" }, { status: 200 });
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 			return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
 		}
 	}
@@ -119,7 +119,7 @@ export const POST = async (request: Request) => {
 
 			return NextResponse.json({ message: "User deleted" }, { status: 200 });
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 			return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
 		}
 	}

@@ -1,6 +1,7 @@
 "use client";
 
 import { ReportPDF } from "@/components/shared";
+import { IProject } from "@/lib/models/ProjectModel";
 import { IReport } from "@/lib/models/ReportModel";
 import dynamic from "next/dynamic";
 
@@ -16,7 +17,7 @@ export default function AuditReports({ report }: { report: IReport }) {
 				<ReportPDF report={report} />
 			</PDFViewer>
 			<p className="text-[12px] leading-[18px] my-2 line-clamp-2 px-2">
-				File: {typeof report.project === "string" ? report.project : report.project.heading}
+				File: {(report.project as IProject)?.heading}
 			</p>
 		</div>
 	);

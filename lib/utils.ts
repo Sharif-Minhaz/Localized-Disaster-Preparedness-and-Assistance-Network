@@ -126,7 +126,7 @@ export async function receiveEmailFromUser(formData: IContactFormData) {
 			return { success: true, err: null };
 		})
 		.catch((err) => {
-			console.log(err);
+			console.error(err);
 			return { success: false, err: err.message };
 		});
 }

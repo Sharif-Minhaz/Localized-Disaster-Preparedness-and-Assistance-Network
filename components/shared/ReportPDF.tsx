@@ -4,6 +4,7 @@ import { Page, Text, Document, StyleSheet, Font } from "@react-pdf/renderer";
 import { Table, TR, TH, TD } from "@ag-media/react-pdf-table";
 import { IReport } from "@/lib/models/ReportModel";
 import { formatToShortDate } from "@/lib/utils";
+import { IProject } from "@/lib/models/ProjectModel";
 
 // Create Document Component
 export default function ReportPDF({ report }: { report: IReport }) {
@@ -13,34 +14,22 @@ export default function ReportPDF({ report }: { report: IReport }) {
 				<Text style={styles.header} fixed>
 					Localized Disaster Preparedness and Assistance Network (LDPAN)
 				</Text>
-				<Text style={styles.title}>
-					{typeof report.project === "string" ? report.project : report.project.heading}
-				</Text>
-				<Text style={styles.location}>
-					{typeof report.project === "string" ? report.project : report.project.location}
-				</Text>
+				<Text style={styles.title}>{(report?.project as IProject)?.heading}</Text>
+				<Text style={styles.location}>{(report?.project as IProject)?.location}</Text>
 				<Text style={styles.author}>
 					Report with financial statement and management reports
 				</Text>
 				<Text style={styles.author}>
-					For {formatToShortDate(new Date(report.createdAt))}
+					For {formatToShortDate(new Date(report?.createdAt || Date.now()))}
 				</Text>
-				<Text style={styles.text}>
-					{typeof report.project === "string"
-						? report.project
-						: report.project.description}
-				</Text>
+				<Text style={styles.text}>{(report.project as IProject)?.description}</Text>
 				<Text style={styles.date}>
 					Project start date:{" "}
-					{typeof report.project === "string"
-						? report.project
-						: formatToShortDate(new Date(report.project.from))}
+					{formatToShortDate(new Date((report.project as IProject)?.from || Date.now()))}
 				</Text>
 				<Text style={styles.date}>
 					Expected project end date:{" "}
-					{typeof report.project === "string"
-						? report.project
-						: formatToShortDate(new Date(report.project.to))}
+					{formatToShortDate(new Date((report.project as IProject)?.to || Date.now()))}
 				</Text>
 				<Text style={styles.tableHeading}>Resource distribution:</Text>
 				<Table style={{ fontSize: "12px" }}>
@@ -50,7 +39,7 @@ export default function ReportPDF({ report }: { report: IReport }) {
 						<TD style={{ padding: "4px 8px", fontWeight: "bold" }}>Donated</TD>
 						<TD style={{ padding: "4px 8px", fontWeight: "bold" }}>Available</TD>
 					</TH>
-					{report.totalResource.map(
+					{report.totalResource?.map(
 						(
 							resource: { totalDonation: number; resourceName: string },
 							index: number

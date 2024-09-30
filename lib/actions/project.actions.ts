@@ -213,6 +213,8 @@ export async function deleteProject(slug: string) {
 			throw new Error("Project not found");
 		}
 
+		await Report.findOneAndDelete({ project: deletedProject._id });
+
 		revalidatePath("/projects");
 		redirect("/projects");
 	} catch (error) {
@@ -371,7 +373,6 @@ export async function getAuditReports({
 			.populate("project")
 			.sort(sortOptions)
 			.lean();
-
 		return { reports: convertToPlainObj(reports), totalElements };
 	} catch (error: any) {
 		console.error(error);
