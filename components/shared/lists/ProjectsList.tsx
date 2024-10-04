@@ -52,11 +52,11 @@ export default function ProjectsList({ userType, projects }: ProjectProps) {
 						</div>
 					</div>
 					<div>
-						<h2 className="text-[20px] font-semibold line-clamp-1 mb-2 leading-[1.2]">
-							{project.heading}
+						<h2 className="hover:underline hover:decoration-dotted transition-all text-[20px] font-semibold line-clamp-1 mb-2 leading-[1.2]">
+							<Link href={`/projects/${project.slug}`}>{project.heading}</Link>
 						</h2>
 						<div className="my-3">
-							{!project.completed ? (
+							{!project?.completed ? (
 								<div className="flex gap-2">
 									<span className="text-[12px] font-semibold leading-[20px] w-min rounded-full bg-green-100 px-4 py-1 text-green-500">
 										OPEN
