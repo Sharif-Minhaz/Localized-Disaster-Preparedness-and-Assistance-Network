@@ -9,13 +9,17 @@ import { IProject } from "../models/ProjectModel";
 import User, { IUser } from "../models/UserModel";
 import { convertToPlainObj } from "../utils";
 import { revalidatePath } from "next/cache";
-import mongoose, { FilterQuery, SortOrder } from "mongoose";
+import { FilterQuery, SortOrder } from "mongoose";
+import { currentUser } from "@clerk/nextjs";
+import { fetchUser } from "./user.actions";
 
 export const checkoutDonation = async (
 	donation: DonationProps,
 	userId: string,
 	project: IProject
 ) => {
+	const user = await currentUser();
+	const userInfo = await fetchUser(user?.id);
 	const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 	const price = Number(donation?.donationAmount) * 100; // paisa to taka
@@ -35,7 +39,7 @@ export const checkoutDonation = async (
 				},
 			],
 			metadata: {
-				donatedBy: userId,
+				donatedBy: userId || userInfo._id,
 				projectId: project._id,
 				mobile: donation.mobile,
 				note: donation.note || "",
