@@ -15,18 +15,18 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useContext } from "react";
 import { MainContext } from "@/contexts/MainContext";
-import { Notification, SearchBar } from ".";
+import { Notification, Breadcrumb } from ".";
 
 export default function Navbar() {
 	const { handleLang, lang, openSidebar } = useContext(MainContext);
 
 	return (
-		<nav className="sticky z-20 flex top-0 w-full bg-opacity-30 dark:bg-opacity-40 backdrop-filter backdrop-blur-sm items-center justify-between lg:pl-1 pl-4 py-3 sm:py-1 lg:pr-5 pr-4 bg-white dark:bg-slate-950 shadow dark:shadow-slate-900">
+		<nav className="sticky z-20 h-16 flex top-0 w-full bg-opacity-30 dark:bg-opacity-40 backdrop-filter backdrop-blur-sm items-center justify-between lg:pl-1 pl-4 py-3 sm:py-1 lg:pr-5 pr-4 bg-white dark:bg-slate-950 shadow dark:shadow-slate-900">
 			<div className="flex gap-2 items-center">
 				<span className="cursor-pointer lg:hidden inline-flex" onClick={openSidebar}>
 					<AlignLeft />
 				</span>
-				<SearchBar routeType="" />
+				<Breadcrumb />
 			</div>
 			<div className="flex gap-4 md:gap-5">
 				<DropdownMenu>

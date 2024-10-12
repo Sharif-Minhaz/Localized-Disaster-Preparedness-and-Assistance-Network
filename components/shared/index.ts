@@ -83,7 +83,7 @@ import SelectPredictionDate from "./SelectPredictionDate";
 import GalleryImage from "./GalleryImage";
 import SelectVolunteers from "./SelectVolunteers";
 import AssignedVolunteers from "./AssignedVolunteers";
-
+import Breadcrumb from "./Breadcrumb";
 export {
 	Navbar,
 	Sidebar,
@@ -170,4 +170,5 @@ export {
 	GalleryImage,
 	SelectVolunteers,
 	AssignedVolunteers,
+	Breadcrumb,
 };
