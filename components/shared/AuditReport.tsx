@@ -1,6 +1,6 @@
 "use client";
 
-import { ReportPDF } from "@/components/shared";
+import ReportPDF from "./ReportPDF";
 import { IProject } from "@/lib/models/ProjectModel";
 import { IReport } from "@/lib/models/ReportModel";
 import dynamic from "next/dynamic";

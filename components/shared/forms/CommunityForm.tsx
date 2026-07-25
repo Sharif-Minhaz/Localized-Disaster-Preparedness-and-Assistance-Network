@@ -25,7 +25,7 @@ import { ToastAction } from "../../ui/toast";
 import { ICommunity } from "@/lib/models/CommunityModel";
 import { CommunityValidation } from "@/lib/validations/community";
 import { createCommunity, updateCommunityInfo } from "@/lib/actions/community.actions";
-import { BackButton } from "..";
+import BackButton from "../BackButton";
 
 export default function CommunityForm({
 	adminId,

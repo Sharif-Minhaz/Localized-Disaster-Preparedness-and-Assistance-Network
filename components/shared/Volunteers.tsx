@@ -1,5 +1,5 @@
 import { getAllVolunteers } from "@/lib/actions/user.actions";
-import { VolunteerCard } from ".";
+import VolunteerCard from "./cards/VolunteerCard";
 import { IUser } from "@/lib/models/UserModel";
 
 export default async function Volunteers() {

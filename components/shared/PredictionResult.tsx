@@ -1,7 +1,7 @@
 "use client";
 
 import { DisasterValidation } from "@/lib/validations/disaster";
-import { PredictionForm } from ".";
+import PredictionForm from "./forms/PredictionForm";
 import * as z from "zod";
 import { getDisasterPredictionRes } from "@/lib/actions/disaster.action";
 import { useToast } from "../ui/use-toast";

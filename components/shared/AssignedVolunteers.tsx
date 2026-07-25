@@ -1,5 +1,5 @@
 import { IUser } from "@/lib/models/UserModel";
-import { VolunteerCard } from "@/components/shared";
+import VolunteerCard from "./cards/VolunteerCard";
 import { UserPlus } from "lucide-react";
 import Link from "next/link";
 

@@ -10,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useToast } from "../../ui/use-toast";
 import { ToastAction } from "../../ui/toast";
-import { BackButton } from "..";
+import BackButton from "../BackButton";
 import { ContactValidation } from "@/lib/validations/contact";
 import { receiveEmailFromUser } from "@/lib/utils";
 

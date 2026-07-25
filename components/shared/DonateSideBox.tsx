@@ -1,4 +1,4 @@
-import { DonationForm } from "@/components/shared";
+import DonationForm from "./forms/DonationForm";
 import { IProject } from "@/lib/models/ProjectModel";
 import { Info } from "lucide-react";
 import Link from "next/link";

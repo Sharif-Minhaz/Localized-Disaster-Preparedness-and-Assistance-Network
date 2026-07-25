@@ -25,7 +25,7 @@ import { ToastAction } from "../../ui/toast";
 import { IPost } from "@/lib/models/PostModel";
 import { createPost, updatePostInfo } from "@/lib/actions/post.actions";
 import { PostValidation } from "@/lib/validations/post";
-import { BackButton } from "..";
+import BackButton from "../BackButton";
 
 export default function PostForm({
 	userId,

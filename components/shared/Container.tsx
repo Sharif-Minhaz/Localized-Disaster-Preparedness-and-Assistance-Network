@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { HeadingSection } from ".";
+import HeadingSection from "./HeadingSection";
 import { cn } from "@/lib/utils";
 
 interface Props {

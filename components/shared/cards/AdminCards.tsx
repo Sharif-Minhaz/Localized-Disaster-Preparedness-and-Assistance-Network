@@ -1,7 +1,7 @@
 "use client";
 
 import { Users, UserRoundCog, Globe, LucideIcon } from "lucide-react";
-import { InfoCard } from "..";
+import InfoCard from "./InfoCard";
 
 export interface IInfo {
 	title: string;

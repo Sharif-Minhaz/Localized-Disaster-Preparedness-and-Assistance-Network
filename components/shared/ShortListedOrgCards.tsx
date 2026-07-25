@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { OrganizationCard } from ".";
+import OrganizationCard from "./cards/OrganizationCard";
 import { ICommunity } from "@/lib/models/CommunityModel";
 import { IUser } from "@/lib/models/UserModel";
 

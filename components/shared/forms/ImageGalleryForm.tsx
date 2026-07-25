@@ -23,7 +23,7 @@ import { useToast } from "../../ui/use-toast";
 import { ToastAction } from "../../ui/toast";
 import { ImageGalleryValidation } from "@/lib/validations/imageGallery";
 import { addGalleyImage } from "@/lib/actions/gallery.actions";
-import { BackButton } from "..";
+import BackButton from "../BackButton";
 
 export default function ImageGalleryForm({ userId }: { userId: string }) {
 	const [key, setKey] = useState(Date.now());

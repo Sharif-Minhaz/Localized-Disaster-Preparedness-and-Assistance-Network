@@ -4,7 +4,8 @@ import { IGallery } from "@/lib/models/GalleryModel";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchImages } from "@/lib/actions/gallery.actions";
 import { useEffect, useState } from "react";
-import { GalleryImage, GalleryLoader } from "@/components/shared";
+import GalleryImage from "./GalleryImage";
+import { GalleryLoader } from "./skeletons/GallerySkeletons";
 
 export default function ImageGallery() {
 	const [images, setImages] = useState<IGallery[]>([]);

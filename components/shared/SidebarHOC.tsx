@@ -1,7 +1,7 @@
 "use client";
 
 import { useUser } from "@clerk/nextjs";
-import { Sidebar } from ".";
+import Sidebar from "./Sidebar";
 
 export default function SidebarHOC() {
 	const { user } = useUser();

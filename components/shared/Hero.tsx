@@ -4,7 +4,8 @@ import { Button } from "../ui/button";
 import { ArrowRight, Mail, Phone } from "lucide-react";
 import Link from "next/link";
 import { heroThreats } from "@/constants";
-import { HeroCarousel, ThreatCard } from ".";
+import HeroCarousel from "./HeroCarousel";
+import ThreatCard from "./cards/ThreatCard";
 import { motion } from "framer-motion";
 
 export default function Hero() {

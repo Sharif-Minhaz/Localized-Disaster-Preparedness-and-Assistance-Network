@@ -1,6 +1,6 @@
 import { fetchAllApplications } from "@/lib/actions/application.actions";
 import { IApplication } from "@/lib/models/ApplicationModel";
-import { SingleApplication } from ".";
+import SingleApplication from "./SingleApplication";
 
 export default async function VolunteerApplications() {
 	const applications: IApplication[] = await fetchAllApplications();

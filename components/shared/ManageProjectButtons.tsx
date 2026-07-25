@@ -13,7 +13,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
-import { ProjectCompletionForm } from ".";
+import ProjectCompletionForm from "./forms/ProjectCompletionForm";
 import { IProject } from "@/lib/models/ProjectModel";
 
 export default function ManageProjectButtons({

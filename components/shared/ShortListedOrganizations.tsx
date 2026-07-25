@@ -1,4 +1,5 @@
-import { HeadingSection, ShortListedOrgCards } from "@/components/shared";
+import HeadingSection from "./HeadingSection";
+import ShortListedOrgCards from "./ShortListedOrgCards";
 import { fetchCommunities } from "@/lib/actions/community.actions";
 import { Suspense } from "react";
 import MainPageFallback from "./MainPageFallback";

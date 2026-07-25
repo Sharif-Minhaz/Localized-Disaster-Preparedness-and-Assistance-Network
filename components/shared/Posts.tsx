@@ -3,7 +3,7 @@ import {
 	fetchPosts,
 	fetchUserBookmarkedPosts,
 } from "@/lib/actions/post.actions";
-import { PostCard } from ".";
+import PostCard from "./cards/PostCard";
 import { IPost } from "@/lib/models/PostModel";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { IUser } from "@/lib/models/UserModel";

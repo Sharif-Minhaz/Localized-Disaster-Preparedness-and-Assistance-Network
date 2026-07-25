@@ -1,4 +1,6 @@
-import { HeadingSection, MotionDiv, ProjectCard } from "@/components/shared";
+import HeadingSection from "./HeadingSection";
+import { MotionDiv } from "./motions";
+import ProjectCard from "./cards/ProjectCard";
 import { fetchProjects } from "@/lib/actions/project.actions";
 
 export default async function ShortListedProjects() {

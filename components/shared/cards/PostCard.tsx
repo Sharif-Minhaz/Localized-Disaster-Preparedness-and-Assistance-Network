@@ -2,7 +2,8 @@
 
 import { IPost } from "@/lib/models/PostModel";
 import Image from "next/image";
-import { Author, Like } from "..";
+import Author from "../Author";
+import Like from "../Like";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { ChevronRight, MessageCircle } from "lucide-react";

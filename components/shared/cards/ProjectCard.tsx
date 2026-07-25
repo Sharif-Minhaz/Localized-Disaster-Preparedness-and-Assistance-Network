@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
 import { deleteProject } from "@/lib/actions/project.actions";
-import { DeleteConfirmationBox } from "@/components/shared";
+import DeleteConfirmationBox from "../DeleteConfirmationBox";
 
 interface Props {
 	heading: string;

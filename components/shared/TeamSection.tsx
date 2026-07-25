@@ -1,5 +1,5 @@
 import { teamData } from "@/constants";
-import { TeamCard } from ".";
+import TeamCard from "./cards/TeamCard";
 
 export default function TeamSection() {
 	return (
