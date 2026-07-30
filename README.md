@@ -39,7 +39,7 @@
 
 **Community Network:** Create a network of local communities, volunteers, and authorities who can share information and collaborate during emergencies.
 
-**Resource Mapping:** Map local resources such as shelters, medical facilities, relief centers, and emergency supply stocks.
+**Resource Mapping:** Map local resources like shelters, medical facilities, relief centers, and emergency supply stocks.
 
 **Communication Channels:** Enable instant communication through text, voice, and video messages for effective coordination.
 
