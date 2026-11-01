@@ -1,41 +1,41 @@
 /** @type {import('next').NextConfig} */
 const withPWA = require("@ducanh2912/next-pwa").default({
-	dest: "public",
-	disable: process.env.NODE_ENV === "development",
-	cacheOnFrontEndNav: true,
-	aggressiveFrontEndNavCaching: true,
-	reloadOnOnline: true,
-	cacheStartUrl: true,
-	dynamicStartUrl: true,
-	dynamicStartUrlRedirect: "/sign-in",
-	workboxOptions: {
-		disableDevLogs: true,
-	},
+  dest: "public",
+  disable: process.env.NODE_ENV === "development",
+  cacheOnFrontEndNav: true,
+  aggressiveFrontEndNavCaching: true,
+  reloadOnOnline: true,
+  cacheStartUrl: true,
+  dynamicStartUrl: true,
+  dynamicStartUrlRedirect: "/sign-in",
+  workboxOptions: {
+    disableDevLogs: true,
+  },
 });
 
 module.exports = withPWA({
-	images: {
-		remotePatterns: [
-			{
-				protocol: "https",
-				hostname: "images.clerk.dev",
-				port: "",
-				pathname: "/**",
-			},
-			{
-				protocol: "https",
-				hostname: "img.clerk.com",
-				port: "",
-				pathname: "/**",
-			},
-			{
-				protocol: "https",
-				hostname: "utfs.io",
-				port: "",
-				pathname: "/**",
-			},
-		],
-	},
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.clerk.dev",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "img.clerk.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "utfs.io",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
 });
 
 // Injected content via Sentry wizard below
@@ -43,42 +43,46 @@ module.exports = withPWA({
 const { withSentryConfig } = require("@sentry/nextjs");
 
 module.exports = withSentryConfig(
-	module.exports,
-	{
-		// For all available options, see:
-		// https://github.com/getsentry/sentry-webpack-plugin#options
+  module.exports,
+  {
+    // For all available options, see:
+    // https://github.com/getsentry/sentry-webpack-plugin#options
 
-		// Suppresses source map uploading logs during build
-		silent: true,
-		org: "delta-warriors",
-		project: "ldpan_sentry",
-	},
-	{
-		// For all available options, see:
-		// https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
+    // Suppresses source map uploading logs during build
+    silent: true,
+    org: "delta-warriors",
+    project: "ldpan_sentry",
+  },
+  {
+    // For all available options, see:
+    // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
 
-		// Upload a larger set of source maps for prettier stack traces (increases build time)
-		widenClientFileUpload: true,
+    // Upload a larger set of source maps for prettier stack traces (increases build time)
+    widenClientFileUpload: true,
 
-		// Transpiles SDK to be compatible with IE11 (increases bundle size)
-		transpileClientSDK: true,
+    // Transpiles SDK to be compatible with IE11 (increases bundle size)
+    transpileClientSDK: true,
 
-		// Uncomment to route browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers.
-		// This can increase your server load as well as your hosting bill.
-		// Note: Check that the configured route will not match with your Next.js middleware, otherwise reporting of client-
-		// side errors will fail.
-		// tunnelRoute: "/monitoring",
+    // Uncomment to route browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers.
+    // This can increase your server load as well as your hosting bill.
+    // Note: Check that the configured route will not match with your Next.js middleware, otherwise reporting of client-
+    // side errors will fail.
+    // tunnelRoute: "/monitoring",
 
-		// Hides source maps from generated client bundles
-		hideSourceMaps: true,
+    // Hides source maps from generated client bundles
+    hideSourceMaps: true,
 
-		// Automatically tree-shake Sentry logger statements to reduce bundle size
-		disableLogger: true,
+    // Automatically tree-shake Sentry logger statements to reduce bundle size
+    disableLogger: true,
 
-		// Enables automatic instrumentation of Vercel Cron Monitors.
-		// See the following for more information:
-		// https://docs.sentry.io/product/crons/
-		// https://vercel.com/docs/cron-jobs
-		automaticVercelMonitors: true,
-	}
+    // Only upload source maps when SENTRY_AUTH_TOKEN is present (e.g. in CI/production).
+    // This prevents build failures when there is no network access to sentry.io.
+    disableSourceMapUpload: !process.env.SENTRY_AUTH_TOKEN,
+
+    // Enables automatic instrumentation of Vercel Cron Monitors.
+    // See the following for more information:
+    // https://docs.sentry.io/product/crons/
+    // https://vercel.com/docs/cron-jobs
+    automaticVercelMonitors: true,
+  },
 );
