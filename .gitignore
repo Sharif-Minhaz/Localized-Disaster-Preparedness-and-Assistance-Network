@@ -38,3 +38,5 @@ test
 
 # Sentry Config File
 .sentryclirc
+
+yarn.lock
