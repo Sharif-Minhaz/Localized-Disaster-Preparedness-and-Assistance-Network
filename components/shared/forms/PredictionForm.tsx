@@ -27,7 +27,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { locations } from "@/constants";
-import { SelectPredictionDate } from "..";
+import SelectPredictionDate from "../SelectPredictionDate";
 import { MainContext } from "@/contexts/MainContext";
 import { toast } from "@/components/ui/use-toast";
 

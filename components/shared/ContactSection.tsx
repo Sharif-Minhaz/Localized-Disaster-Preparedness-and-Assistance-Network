@@ -1,4 +1,6 @@
-import { ContactAddress, ContactForm, ContactLocation } from ".";
+import ContactAddress from "./ContactAddress";
+import ContactForm from "./forms/ContactForm";
+import ContactLocation from "./ContactLocation";
 
 export default function ContactSection() {
 	return (

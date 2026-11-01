@@ -2,7 +2,7 @@
 
 import { Bookmark, BookmarkCheck, Pencil } from "lucide-react";
 import Link from "next/link";
-import { DeleteConfirmationBox } from ".";
+import DeleteConfirmationBox from "./DeleteConfirmationBox";
 import { addBookmarkToPost, deletePost, removeBookmarkFromPost } from "@/lib/actions/post.actions";
 import { Button } from "../ui/button";
 import { useOptimistic, useState } from "react";

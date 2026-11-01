@@ -3,7 +3,9 @@ import { format } from "date-fns";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
 import { deleteProject, getProjectDonationInfo } from "@/lib/actions/project.actions";
-import { BackButton, DeleteConfirmationBox, ManageProjectButtons } from "@/components/shared";
+import BackButton from "./BackButton";
+import DeleteConfirmationBox from "./DeleteConfirmationBox";
+import ManageProjectButtons from "./ManageProjectButtons";
 import { IProject } from "@/lib/models/ProjectModel";
 
 export default async function SinglePageProject({

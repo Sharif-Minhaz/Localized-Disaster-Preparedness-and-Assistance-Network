@@ -1,7 +1,7 @@
 "use client";
 
 import { Trash2 } from "lucide-react";
-import { ConfirmationDeleteBox } from "@/components/shared";
+import ConfirmationDeleteBox from "./ConfirmationDeleteBox";
 
 export default function DeleteConfirmationBox({
 	iconSize = "size-5",

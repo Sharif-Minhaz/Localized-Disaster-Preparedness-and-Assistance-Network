@@ -14,7 +14,7 @@ import { usePathname, useRouter } from "next/navigation";
 import OutsideClickHandler from "react-outside-click-handler";
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
-import { UserStatus } from ".";
+import UserStatus from "./UserStatus";
 import { cn } from "@/lib/utils";
 
 const fadeInAnimationVariants = {

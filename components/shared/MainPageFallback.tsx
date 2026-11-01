@@ -1,4 +1,4 @@
-import { LoadingScreen } from ".";
+import LoadingScreen from "./LoadingScreen";
 
 export default function MainPageFallback() {
 	return (

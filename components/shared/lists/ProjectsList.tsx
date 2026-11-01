@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
 import { deleteProject } from "@/lib/actions/project.actions";
-import { DeleteConfirmationBox } from "@/components/shared";
+import DeleteConfirmationBox from "../DeleteConfirmationBox";
 import { IProject } from "@/lib/models/ProjectModel";
 
 export interface ProjectProps {

@@ -1,5 +1,5 @@
 import { IComment } from "@/lib/models/CommentModel";
-import { Author } from ".";
+import Author from "./Author";
 
 export default function CommentBody({ comment }: { comment: IComment }) {
 	return (

@@ -15,7 +15,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useContext } from "react";
 import { MainContext } from "@/contexts/MainContext";
-import { Notification, Breadcrumb } from ".";
+import Notification from "./Notification";
+import Breadcrumb from "./Breadcrumb";
 
 export default function Navbar() {
 	const { handleLang, lang, openSidebar } = useContext(MainContext);
