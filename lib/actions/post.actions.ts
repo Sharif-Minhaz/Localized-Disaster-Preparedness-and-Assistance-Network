@@ -12,346 +12,359 @@ import Comment from "../models/CommentModel";
 import { deleteUTImage } from "./helpers.action";
 
 export async function createPost({
-	communityId,
-	image,
-	description,
-	createdBy,
+  communityId,
+  image,
+  description,
+  createdBy,
 }: {
-	communityId: string;
-	image?: string;
-	description: string;
-	createdBy: string;
+  communityId: string;
+  image?: string;
+  description: string;
+  createdBy: string;
 }) {
-	try {
-		await connectToDB();
+  try {
+    await connectToDB();
 
-		// Find the user with the provided unique id
-		const [user, community] = await Promise.all([
-			User.findOne({ clerkId: createdBy }),
-			Community.findById(communityId),
-		]);
+    // Find the user with the provided unique id
+    const [user, community] = await Promise.all([
+      User.findOne({ clerkId: createdBy }),
+      Community.findById(communityId),
+    ]);
 
-		if (!user) {
-			throw new Error("User not found"); // Handle the case if the user with the id is not found
-		}
+    if (!user) {
+      throw new Error("User not found"); // Handle the case if the user with the id is not found
+    }
 
-		const newPost = new Post({
-			communityId,
-			description,
-			image,
-			createdBy: user._id,
-		});
+    const newPost = new Post({
+      communityId,
+      description,
+      image,
+      createdBy: user._id,
+    });
 
-		await newPost.save();
+    await newPost.save();
 
-		revalidatePath(`/communities/${community.slug}`);
-		revalidatePath("/my_posts");
+    revalidatePath(`/communities/${community.slug}`);
+    revalidatePath("/my_posts");
 
-		redirect(`/communities/${community.slug}`);
-	} catch (error) {
-		// Handle any errors
-		console.error("Error creating community:", error);
-		throw error;
-	}
+    redirect(`/communities/${community.slug}`);
+  } catch (error) {
+    // Handle any errors
+    console.error("Error creating community:", error);
+    throw error;
+  }
 }
 
 export async function fetchPost(id: string) {
-	try {
-		await connectToDB();
+  try {
+    await connectToDB();
 
-		const post = await Post.findById(id).populate("createdBy").lean();
+    const post = await Post.findById(id).populate("createdBy").lean();
 
-		return convertToPlainObj(post);
-	} catch (error) {
-		console.error("Error fetching post:", error);
-		throw error;
-	}
+    return convertToPlainObj(post);
+  } catch (error) {
+    console.error("Error fetching post:", error);
+    throw error;
+  }
 }
 
 export async function fetchAllUserPosts(clerkId?: string) {
-	if (!clerkId) throw new Error("UserId required");
+  if (!clerkId) throw new Error("UserId required");
 
-	try {
-		await connectToDB();
+  try {
+    await connectToDB();
 
-		const userInfo: IUser | null = await User.findOne({ clerkId }).select("_id").lean();
-		if (!userInfo) {
-			throw new Error("user not found");
-		}
-		const posts = await Post.find({ createdBy: userInfo._id })
-			.populate("createdBy communityId")
-			.lean();
+    const userInfo = (await User.findOne({ clerkId })
+      .select("_id")
+      .lean()) as IUser | null;
+    if (!userInfo) {
+      throw new Error("user not found");
+    }
+    const posts = await Post.find({ createdBy: userInfo._id })
+      .populate("createdBy communityId")
+      .lean();
 
-		return convertToPlainObj(posts);
-	} catch (error) {
-		console.error("Error fetching posts:", error);
-		throw error;
-	}
+    return convertToPlainObj(posts);
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    throw error;
+  }
 }
 
 export async function fetchAllInAllPosts() {
-	try {
-		await connectToDB();
+  try {
+    await connectToDB();
 
-		const posts = await Post.find().populate("createdBy communityId").lean();
+    const posts = await Post.find().populate("createdBy communityId").lean();
 
-		return convertToPlainObj(posts);
-	} catch (error) {
-		console.error("Error fetching posts:", error);
-		throw error;
-	}
+    return convertToPlainObj(posts);
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    throw error;
+  }
 }
 
 export async function fetchPosts({ communityId }: { communityId?: string }) {
-	if (!communityId) throw new Error("CommunityId required");
+  if (!communityId) throw new Error("CommunityId required");
 
-	try {
-		await connectToDB();
+  try {
+    await connectToDB();
 
-		const posts = await Post.find({ communityId }).populate("createdBy communityId").lean();
+    const posts = await Post.find({ communityId })
+      .populate("createdBy communityId")
+      .lean();
 
-		return convertToPlainObj(posts);
-	} catch (error) {
-		console.error("Error fetching posts:", error);
-		throw error;
-	}
+    return convertToPlainObj(posts);
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    throw error;
+  }
 }
 
 interface IUpdatePostProps {
-	postId: string;
-	description: string;
-	image?: string;
+  postId: string;
+  description: string;
+  image?: string;
 }
 
-export async function updatePostInfo({ postId, description, image }: IUpdatePostProps) {
-	try {
-		await connectToDB();
+export async function updatePostInfo({
+  postId,
+  description,
+  image,
+}: IUpdatePostProps) {
+  try {
+    await connectToDB();
 
-		const postDetails: IPost | null = await Post.findById(postId).select("image").lean();
+    const postDetails = (await Post.findById(postId)
+      .select("image")
+      .lean()) as IPost | null;
 
-		if (postDetails?.image) {
-			if (image !== postDetails.image) {
-				await deleteUTImage(postDetails.image);
-			}
-		}
+    if (postDetails?.image) {
+      if (image !== postDetails.image) {
+        await deleteUTImage(postDetails.image);
+      }
+    }
 
-		// Find the community by its _id and update the information
-		const updatedPost: IPost | null = await Post.findOneAndUpdate(
-			{ _id: postId },
-			{
-				description,
-				image,
-			},
-			{ new: true }
-		);
+    // Find the community by its _id and update the information
+    const updatedPost = (await Post.findOneAndUpdate(
+      { _id: postId },
+      {
+        description,
+        image,
+      },
+      { new: true },
+    )) as IPost | null;
 
-		if (!updatedPost) {
-			throw new Error("Post not found");
-		}
+    if (!updatedPost) {
+      throw new Error("Post not found");
+    }
 
-		revalidatePath(`/communities/${updatedPost.communityId}`);
-		revalidatePath(`/communities/${updatedPost.communityId}/post/${postId}`);
-		revalidatePath("/my_posts");
-		return convertToPlainObj(updatedPost);
-	} catch (error) {
-		// Handle any errors
-		console.error("Error updating community information:", error);
-		throw error;
-	}
+    revalidatePath(`/communities/${updatedPost.communityId}`);
+    revalidatePath(`/communities/${updatedPost.communityId}/post/${postId}`);
+    revalidatePath("/my_posts");
+    return convertToPlainObj(updatedPost);
+  } catch (error) {
+    // Handle any errors
+    console.error("Error updating community information:", error);
+    throw error;
+  }
 }
 
 export async function deletePost(id: string, communitySlug: string) {
-	try {
-		await connectToDB();
+  try {
+    await connectToDB();
 
-		const community = await Community.findOne({ slug: communitySlug }).select("_id");
+    const community = await Community.findOne({ slug: communitySlug }).select(
+      "_id",
+    );
 
-		const deletedPost = await Post.findOneAndDelete({
-			_id: id,
-			communityId: community._id,
-		});
+    const deletedPost = await Post.findOneAndDelete({
+      _id: id,
+      communityId: community._id,
+    });
 
-		if (!deletedPost) {
-			throw new Error("Post not found");
-		}
+    if (!deletedPost) {
+      throw new Error("Post not found");
+    }
 
-		if (deletedPost.image) {
-			await deleteUTImage(deletedPost.image);
-		}
+    if (deletedPost.image) {
+      await deleteUTImage(deletedPost.image);
+    }
 
-		revalidatePath(`/communities/${communitySlug}`);
-		revalidatePath("/my_posts");
-		redirect(`/communities/${communitySlug}`);
-	} catch (error) {
-		console.error("Error deleting post: ", error);
-		throw error;
-	}
+    revalidatePath(`/communities/${communitySlug}`);
+    revalidatePath("/my_posts");
+    redirect(`/communities/${communitySlug}`);
+  } catch (error) {
+    console.error("Error deleting post: ", error);
+    throw error;
+  }
 }
 
 export async function addCommentToPost({
-	postId,
-	commentedBy,
-	comment,
-	communitySlug,
+  postId,
+  commentedBy,
+  comment,
+  communitySlug,
 }: {
-	postId: string;
-	commentedBy: string;
-	comment: string;
-	communitySlug: string;
+  postId: string;
+  commentedBy: string;
+  comment: string;
+  communitySlug: string;
 }) {
-	try {
-		await connectToDB();
-		const newComment = await Comment.create({ postId, commentedBy, comment });
+  try {
+    await connectToDB();
+    const newComment = await Comment.create({ postId, commentedBy, comment });
 
-		revalidatePath(`/communities/${communitySlug}/post/${postId}`);
-		return convertToPlainObj(newComment);
-	} catch (error) {
-		console.error("Error commenting post: ", error);
-		throw error;
-	}
+    revalidatePath(`/communities/${communitySlug}/post/${postId}`);
+    return convertToPlainObj(newComment);
+  } catch (error) {
+    console.error("Error commenting post: ", error);
+    throw error;
+  }
 }
 
 export async function fetchPostComments(postId: string) {
-	try {
-		await connectToDB();
-		const comments = await Comment.find({ postId }).populate("commentedBy");
-		return convertToPlainObj(comments);
-	} catch (error) {
-		console.error("Error fetching comments: ", error);
-		throw error;
-	}
+  try {
+    await connectToDB();
+    const comments = await Comment.find({ postId }).populate("commentedBy");
+    return convertToPlainObj(comments);
+  } catch (error) {
+    console.error("Error fetching comments: ", error);
+    throw error;
+  }
 }
 
 export async function removeLikeFromPost(userId?: string, postId?: string) {
-	try {
-		await connectToDB();
+  try {
+    await connectToDB();
 
-		if (!userId || !postId) throw new Error("User Id and Post Id both required");
+    if (!userId || !postId)
+      throw new Error("User Id and Post Id both required");
 
-		const post: IPost | null = await Post.findById(postId).lean();
+    const post = (await Post.findById(postId).lean()) as IPost | null;
 
-		if (!post) {
-			throw new Error("Post not found");
-		}
+    if (!post) {
+      throw new Error("Post not found");
+    }
 
-		const postInfo = await Post.findByIdAndUpdate(
-			postId,
-			{ $pull: { likes: userId } },
-			{ new: true }
-		);
+    const postInfo = await Post.findByIdAndUpdate(
+      postId,
+      { $pull: { likes: userId } },
+      { new: true },
+    );
 
-		return postInfo ? { success: true } : { success: false };
-	} catch (error) {
-		console.error("Error disliking post: ", error);
-		throw error;
-	}
+    return postInfo ? { success: true } : { success: false };
+  } catch (error) {
+    console.error("Error disliking post: ", error);
+    throw error;
+  }
 }
 
 export async function addLikeToPost(userId?: string, postId?: string) {
-	try {
-		await connectToDB();
+  try {
+    await connectToDB();
 
-		const post: IPost | null = await Post.findById(postId).lean();
+    const post = (await Post.findById(postId).lean()) as IPost | null;
 
-		if (!post) {
-			throw new Error("Post not found");
-		}
+    if (!post) {
+      throw new Error("Post not found");
+    }
 
-		if (!userId) throw new Error("User id required");
+    if (!userId) throw new Error("User id required");
 
-		const isAlreadyLiked = post.likes.includes(userId);
+    const isAlreadyLiked = post.likes.includes(userId);
 
-		if (isAlreadyLiked) {
-			throw new Error("Already liked by the user.");
-		}
+    if (isAlreadyLiked) {
+      throw new Error("Already liked by the user.");
+    }
 
-		const postInfo = await Post.findByIdAndUpdate(
-			postId,
-			{ $addToSet: { likes: userId } },
-			{ new: true }
-		);
+    const postInfo = await Post.findByIdAndUpdate(
+      postId,
+      { $addToSet: { likes: userId } },
+      { new: true },
+    );
 
-		return postInfo ? { success: true } : { success: false };
-	} catch (error) {
-		console.error("Error liking the post: ", error);
-		throw error;
-	}
+    return postInfo ? { success: true } : { success: false };
+  } catch (error) {
+    console.error("Error liking the post: ", error);
+    throw error;
+  }
 }
 
 export async function addBookmarkToPost(userId: string, postId: string) {
-	try {
-		await connectToDB();
+  try {
+    await connectToDB();
 
-		const post: IPost | null = await Post.findById(postId).lean();
+    const post = (await Post.findById(postId).lean()) as IPost | null;
 
-		if (!post) {
-			throw new Error("Post not found");
-		}
+    if (!post) {
+      throw new Error("Post not found");
+    }
 
-		const isAlreadyBookmarked = post.bookmarked.includes(userId);
+    const isAlreadyBookmarked = post.bookmarked.includes(userId);
 
-		if (isAlreadyBookmarked) {
-			throw new Error("Already bookmarked by the user.");
-		}
+    if (isAlreadyBookmarked) {
+      throw new Error("Already bookmarked by the user.");
+    }
 
-		const postInfo = await Post.findByIdAndUpdate(
-			postId,
-			{ $addToSet: { bookmarked: userId } },
-			{ new: true }
-		);
+    const postInfo = await Post.findByIdAndUpdate(
+      postId,
+      { $addToSet: { bookmarked: userId } },
+      { new: true },
+    );
 
-		if (postInfo) {
-			revalidatePath("/my_posts");
-			return { success: true };
-		}
-		return { success: false };
-	} catch (error) {
-		console.error("Error bookmarking post: ", error);
-		throw error;
-	}
+    if (postInfo) {
+      revalidatePath("/my_posts");
+      return { success: true };
+    }
+    return { success: false };
+  } catch (error) {
+    console.error("Error bookmarking post: ", error);
+    throw error;
+  }
 }
 
 export async function removeBookmarkFromPost(userId: string, postId: string) {
-	try {
-		await connectToDB();
+  try {
+    await connectToDB();
 
-		const post: IPost | null = await Post.findById(postId).lean();
+    const post = (await Post.findById(postId).lean()) as IPost | null;
 
-		if (!post) {
-			throw new Error("Post not found");
-		}
+    if (!post) {
+      throw new Error("Post not found");
+    }
 
-		const postInfo = await Post.findByIdAndUpdate(
-			postId,
-			{ $pull: { bookmarked: userId } },
-			{ new: true }
-		);
+    const postInfo = await Post.findByIdAndUpdate(
+      postId,
+      { $pull: { bookmarked: userId } },
+      { new: true },
+    );
 
-		if (postInfo) {
-			revalidatePath("/my_posts");
-			return { success: true };
-		}
-		return { success: false };
-	} catch (error) {
-		console.error("Error removing bookmarking post: ", error);
-		throw error;
-	}
+    if (postInfo) {
+      revalidatePath("/my_posts");
+      return { success: true };
+    }
+    return { success: false };
+  } catch (error) {
+    console.error("Error removing bookmarking post: ", error);
+    throw error;
+  }
 }
 
 export async function fetchUserBookmarkedPosts(clerkId?: string) {
-	try {
-		await connectToDB();
-		const user: IUser | null = await User.findOne({ clerkId }).lean();
+  try {
+    await connectToDB();
+    const user = (await User.findOne({ clerkId }).lean()) as IUser | null;
 
-		if (!user) throw new Error("User not found");
+    if (!user) throw new Error("User not found");
 
-		const posts: IPost[] | null = await Post.find({ bookmarked: { $in: [user._id] } }).populate(
-			"createdBy communityId"
-		);
+    const posts = await Post.find({
+      bookmarked: { $in: [user._id] },
+    }).populate("createdBy communityId");
 
-		return convertToPlainObj(posts);
-	} catch (error) {
-		console.error("Error fetching posts: ", error);
-		throw error;
-	}
+    return convertToPlainObj(posts);
+  } catch (error) {
+    console.error("Error fetching posts: ", error);
+    throw error;
+  }
 }
