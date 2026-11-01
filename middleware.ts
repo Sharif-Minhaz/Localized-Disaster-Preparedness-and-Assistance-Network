@@ -4,22 +4,23 @@
 import { authMiddleware } from "@clerk/nextjs";
 
 export default authMiddleware({
-	// An array of public routes that don't require authentication.
-	publicRoutes: [
-		"/",
-		"/about",
-		"/contact",
-		"/threats",
-		"/gallery",
-		"/api/webhooks(.*)",
-		"/api/uploadthing",
-		"/api/sentry-example-api",
-	],
+  // An array of public routes that don't require authentication.
+  publicRoutes: [
+    "/",
+    "/about",
+    "/contact",
+    "/threats",
+    "/gallery",
+    "/api/webhooks(.*)",
+    "/api/uploadthing",
+    "/api/sentry-example-api",
+    "/api/ping",
+  ],
 
-	// An array of routes to be ignored by the authentication middleware.
-	ignoredRoutes: ["/api/webhooks(.*)"],
+  // An array of routes to be ignored by the authentication middleware.
+  ignoredRoutes: ["/api/webhooks(.*)"],
 });
 
 export const config = {
-	matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
+  matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
 };
